@@ -1,0 +1,10 @@
+node_modules
+app/bower_components
+test/bower_components/
+.sass-cache
+dist
+results
+.tmp
+tmp
+test/temp
+.idea
