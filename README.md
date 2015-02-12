@@ -1,8 +1,8 @@
 # WorldOrchestra
 
-[ ![Codeship Status for SeashellHandtowels/EdLnkr](https://codeship.com/projects/be3539f0-87ec-0132-09c5-16b8ca61b731/status?branch=master)](https://codeship.com/projects/59298)
+[ ![Codeship Status for WorldOrchestra/WorldOrchestra](https://codeship.com/projects/3eb4b8d0-9521-0132-ffbf-466960a0e7d2/status?branch=master)](https://codeship.com/projects/62739)
 
-[![Code Climate](https://codeclimate.com/github/SeashellHandtowels/edlnkr/badges/gpa.svg)](https://codeclimate.com/github/SeashellHandtowels/edlnkr)
+[![Code Climate](https://codeclimate.com/github/WorldOrchestra/WorldOrchestra/badges/gpa.svg)](https://codeclimate.com/github/WorldOrchestra/WorldOrchestra)
 
 Bringing the world together - one track at a time.
 
