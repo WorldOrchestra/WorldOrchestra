@@ -251,6 +251,15 @@ module.exports = function (grunt) {
                 }
             }
         },
+        // configure casperjs
+        casperjs: {
+            options: {},
+            e2e: {
+                files: {
+                   'results/casper': 'test/needtochange/**/*.js'
+                }
+            }
+        },
         bower: {
             all: {
                 rjsConfig: '<%= yeoman.app %>/scripts/main.js'
