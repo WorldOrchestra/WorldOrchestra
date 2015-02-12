@@ -54,7 +54,7 @@ module.exports = function (grunt) {
             test: {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
                 tasks: ['test:true']
-            }
+            },
         },
         connect: {
             options: {
@@ -225,6 +225,39 @@ module.exports = function (grunt) {
                     src: 'node_modules/apache-server-configs/dist/.htaccess',
                     dest: '<%= yeoman.dist %>/.htaccess'
                 }]
+            }
+        },
+        // configure karma ***
+        karma: {
+            options: {
+                configFile: 'karma.conf.js',
+                reporters: ['progress', 'coverage']
+            },
+            // Watch configuration
+            watch: {
+               background: true,
+               reporters: ['progress']
+            },
+            // Single-run configuration for development
+            single: {
+               singleRun: true,
+            },
+            // Single-run configuration for CI
+            ci: {
+                singleRun: true,
+                coverageReporter: {
+                   type: 'lcov',
+                   dir: 'results/coverage/'
+                }
+            }
+        },
+        // configure casperjs
+        casperjs: {
+            options: {},
+            e2e: {
+                files: {
+                   'results/casper': 'test/needtochange/**/*.js'
+                }
             }
         },
         bower: {
