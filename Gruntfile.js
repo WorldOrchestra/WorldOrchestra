@@ -140,6 +140,8 @@ module.exports = function (grunt) {
                         'underscore': '../../<%= yeoman.app %>/bower_components/lodash/dist/lodash',
                         'backbone': '../../<%= yeoman.app %>/bower_components/backbone/backbone'
                     },
+                    name :'main',
+                    mainConfigFile: '<%= yeoman.app %>/scripts/main.js',
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
                     //generateSourceMaps: true,
@@ -147,7 +149,8 @@ module.exports = function (grunt) {
                     // http://requirejs.org/docs/errors.html#sourcemapcomments
                     preserveLicenseComments: false,
                     useStrict: true,
-                    wrap: true
+                    wrap: true,
+                    out : 'tmp/concat/scripts/main.js'
                     //uglify2: {} // https://github.com/mishoo/UglifyJS2
                 }
             }
@@ -312,7 +315,7 @@ module.exports = function (grunt) {
         'createDefaultTemplate',
         'jst',
         'useminPrepare',
-        'requirejs',
+        'requirejs:dist',
         'imagemin',
         'htmlmin',
         'concat',
