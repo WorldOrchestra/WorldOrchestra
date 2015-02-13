@@ -8,9 +8,11 @@ Bringing the world together - one track at a time.
 
 ## Team
 
-  - __Product Owner__: 
-  - __Scrum Master__: 
-  - __Development Team Members__: 
+  - __Product Owner__: Dave Fedele
+  - __Scrum Master__: Albert Lee
+  - __Development Team Members__: Domen Vajevec, Tyler Davis
+  - __Key Master__: Tyler Davis
+  - __CDN__: Domen Vajavec
 
 ## Table of Contents
 
@@ -76,3 +78,7 @@ View the project roadmap [here](https://github.com/WorldOrchestra/WorldOrchestra
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+## Resources
+
+http://blog.dirk-eisenberg.de/2014/12/21/deploy-angularjs-apps-to-azure-websites-with-codeship/
