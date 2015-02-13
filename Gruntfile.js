@@ -8,9 +8,9 @@ var mountFolder = function (connect, dir) {
 
 // # Globbing
 // for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
+// 'test/unit/{,*/}*.js'
 // use this if you want to match all subfolders:
-// 'test/spec/**/*.js'
+// 'test/unit/**/*.js'
 // templateFramework: 'lodash'
 
 module.exports = function (grunt) {
@@ -42,7 +42,7 @@ module.exports = function (grunt) {
                     '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                     '<%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}',
-                    'test/spec/**/*.js'
+                    'test/unit/**/*.js'
                 ]
             },
             jst: {
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
                 tasks: ['jst']
             },
             test: {
-                files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
+                files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/unit/**/*.js'],
                 tasks: ['test:true']
             },
         },
@@ -117,7 +117,7 @@ module.exports = function (grunt) {
                 'Gruntfile.js',
                 '<%= yeoman.app %>/scripts/{,*/}*.js',
                 '!<%= yeoman.app %>/scripts/vendor/*',
-                'test/spec/{,*/}*.js'
+                'test/unit/{,*/}*.js'
             ]
         },
         mocha: {
@@ -256,7 +256,7 @@ module.exports = function (grunt) {
             options: {},
             e2e: {
                 files: {
-                   'results/casper': 'test/needtochange/**/*.js'
+                   'results/casper': 'test/e2e/*.js'
                 }
             }
         },
