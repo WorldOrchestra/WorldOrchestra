@@ -106,7 +106,8 @@ module.exports = function (grunt) {
         },
         clean: {
             dist: ['.tmp', '<%= yeoman.dist %>/*'],
-            server: '.tmp'
+            server: '.tmp',
+            results: 'results/*'
         },
         jshint: {
             options: {
@@ -328,10 +329,10 @@ module.exports = function (grunt) {
         isConnected = Boolean(isConnected);
         var testTasks = [
                 'clean:server',
+                'clean:results',
                 'createDefaultTemplate',
                 'jst',
                 'connect:test',
-                'mocha',
                 'karma',
                 'casperjs'
             ];
