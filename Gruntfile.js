@@ -332,6 +332,8 @@ module.exports = function (grunt) {
                 'jst',
                 'connect:test',
                 'mocha',
+                'karma',
+                'casperjs'
             ];
 
         if(!isConnected) {
