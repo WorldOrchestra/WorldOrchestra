@@ -64,8 +64,10 @@
     "karma-chrome-launcher": "^0.1.7",
     "karma-coverage": "^0.2.7",
     "karma-mocha": "^0.1.10",
+    "karma-sinon": "^1.0.4",
     "load-grunt-tasks": "^0.6.0",
     "mocha": "^2.1.0",
+    "sinon": "^1.12.2",
     "time-grunt": "^1.0.0"
   },
   "engines": {
