@@ -1,3 +1,3 @@
 module.exports = [
-  'app/scripts/*.js'
+  'app/scripts/fail.js'
 ];

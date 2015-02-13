@@ -4,12 +4,13 @@ module.exports = function(config) {
     basePath: './',
 
     frameworks: [
-      'mocha', 'chai'
+      'mocha', 'chai', 'sinon'
     ],
 
     // list of files / patterns to load in the browser
     files: require('./include.conf.js').concat([
-      'test/spec/*.js'
+      'test/unit/**/*.js',
+      'test/integration/**/*.js'
     ]),
 
     // list of files to exclude
@@ -66,6 +67,7 @@ module.exports = function(config) {
       'karma-coverage',
       'karma-mocha',
       'karma-chai',
+      'karma-sinon',
       'karma-chrome-launcher'
     ]
   });
