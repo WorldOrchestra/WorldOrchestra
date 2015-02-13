@@ -65,7 +65,6 @@ module.exports = function(config) {
       'karma-coverage',
       'karma-mocha',
       'karma-chai',
- 
       'karma-chrome-launcher'
     ]
   });
