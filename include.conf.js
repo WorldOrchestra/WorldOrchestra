@@ -1,3 +1,3 @@
 module.exports = [
-  'app/scripts/includefileshere.js'
+  'app/scripts/*.js'
 ];

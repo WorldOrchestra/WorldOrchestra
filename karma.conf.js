@@ -3,8 +3,9 @@ module.exports = function(config) {
     // base path, that will be used to resolve files and exclude
     basePath: './',
 
-    frameworks: ['mocha', 'chai'
-],
+    frameworks: [
+      'mocha', 'chai'
+    ],
 
     // list of files / patterns to load in the browser
     files: require('./include.conf.js').concat([
@@ -52,7 +53,7 @@ module.exports = function(config) {
     },
 
     // If browser does not capture in given timeout [ms], kill it
-    captureTimeout: 20000,
+    captureTimeout: 30000,
 
     // Auto run tests on start (when browsers are captured) and exit
     singleRun: false,
@@ -65,7 +66,6 @@ module.exports = function(config) {
       'karma-coverage',
       'karma-mocha',
       'karma-chai',
- 
       'karma-chrome-launcher'
     ]
   });
