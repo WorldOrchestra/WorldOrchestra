@@ -1,4 +1,4 @@
-describe('Backbone app', function() {
+describe('Backbone server', function() {
   var track;
   var song;
 
