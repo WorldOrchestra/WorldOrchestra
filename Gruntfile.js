@@ -14,14 +14,20 @@ module.exports = function (grunt) {
   //al Library - replaces grunt.loadNpmTasks()
   require('load-grunt-tasks')(grunt);
 
+  var worldConfig = {
+    app: 'public',
+    dist: 'dist'
+  }
+
   var reloadPort = 35729, files;
 
   grunt.initConfig({
     //al ? how to set variables in package.json
+    world: worldConfig,
     pkg: grunt.file.readJSON('package.json'),
     //al grunt-develop
     clean: {
-      dist: ['.tmp', 'dist'],
+      dist: ['.tmp', '<%= world.dist %>/*'],
       server: '.tmp',
       results: 'results/*'
     },
@@ -37,7 +43,7 @@ module.exports = function (grunt) {
             return [
               lrSnippet,
               mountFolder(connect, '.tmp'),
-              mountFolder(connect, yeomanConfig.app)
+              mountFolder(connect, worldConfig.app)
             ];
           }
         }
@@ -50,7 +56,7 @@ module.exports = function (grunt) {
               lrSnippet,
               mountFolder(connect, '.tmp'),
               mountFolder(connect, 'test'),
-              mountFolder(connect, yeomanConfig.app)
+              mountFolder(connect, worldConfig.app)
             ];
           }
         }
@@ -59,7 +65,7 @@ module.exports = function (grunt) {
         options: {
           middleware: function (connect) {
             return [
-              mountFolder(connect, yeomanConfig.dist)
+              mountFolder(connect, worldConfig.dist)
             ];
           }
         }
@@ -82,7 +88,7 @@ module.exports = function (grunt) {
         'Gruntfile.js',
         'public/js/**/*.js',
         'test/unit/**/*.js',
-          '!test/unit/lib/**/*.js'
+        '!test/unit/lib/**/*.js'
       ]
     },
     watch: {
