@@ -1,3 +1,4 @@
 module.exports = [
-  'app/scripts/fail.js'
+  'app/index.html',
+  'app/scripts/main.js'
 ];
