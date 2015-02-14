@@ -333,8 +333,8 @@ module.exports = function (grunt) {
                 'createDefaultTemplate',
                 'jst',
                 'connect:test',
-                'karma',
-                'casperjs'
+                'karma'
+                //'casperjs'
             ];
 
         if(!isConnected) {

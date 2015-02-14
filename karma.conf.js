@@ -10,7 +10,12 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: require('./include.conf.js').concat([
       'test/unit/**/*.js',
-      'test/integration/**/*.js'
+      'test/integration/**/*.js',
+      'app/bower_components/backbone/backbone.js',
+      'app/bower_components/requirejs/require.js',
+      'app/bower_components/modernizr/modernizr.js',
+      'app/index.html',
+      'app/styles/main.css'
     ]),
 
     // list of files to exclude
