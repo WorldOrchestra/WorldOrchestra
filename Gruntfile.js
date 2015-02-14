@@ -1,5 +1,10 @@
 'use strict';
-
+var LIVERELOAD_PORT = 35729;
+var SERVER_PORT = 9000;
+var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
+var mountFolder = function (connect, dir) {
+    return connect.static(require('path').resolve(dir));
+};
 var request = require('request');
 
 module.exports = function (grunt) {
@@ -15,6 +20,51 @@ module.exports = function (grunt) {
     //al ? how to set variables in package.json
     pkg: grunt.file.readJSON('package.json'),
     //al grunt-develop
+    clean: {
+      dist: ['.tmp', 'dist'],
+      server: '.tmp',
+      results: 'results/*'
+    },
+    connect: {
+      options: {
+        port: grunt.option('port') || SERVER_PORT,
+        // change this to '0.0.0.0' to access the server from outside
+        hostname: 'localhost'
+      },
+      livereload: {
+        options: {
+          middleware: function (connect) {
+            return [
+              lrSnippet,
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, yeomanConfig.app)
+            ];
+          }
+        }
+      },
+      test: {
+        options: {
+          port: 9001,
+          middleware: function (connect) {
+            return [
+              lrSnippet,
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, 'test'),
+              mountFolder(connect, yeomanConfig.app)
+            ];
+          }
+        }
+      },
+      dist: {
+        options: {
+          middleware: function (connect) {
+            return [
+              mountFolder(connect, yeomanConfig.dist)
+            ];
+          }
+        }
+      }
+    },
     develop: {
       server: {
         file: 'app.js'
@@ -96,7 +146,8 @@ module.exports = function (grunt) {
       'clean:server',
       'clean:results',
       'createDefaultTemplate',
-      'jst',
+      //al Do we need jst?  Is anyone going to use .ejs?
+      //'jst',
       'connect:test',
       'karma',
       'casperjs'
