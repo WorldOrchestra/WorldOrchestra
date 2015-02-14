@@ -15,7 +15,8 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      'karma.conf.js'
+      'karma.conf.js',
+      'app/**/Gruntfile.js'
     ],
 
     // progress reporter: lists each test run and whether they pass/fail

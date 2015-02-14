@@ -141,7 +141,7 @@ module.exports = function (grunt) {
                         'underscore': '../../<%= yeoman.app %>/bower_components/lodash/dist/lodash',
                         'backbone': '../../<%= yeoman.app %>/bower_components/backbone/backbone'
                     },
-                    name :'main',
+                    name :'../bower_components/almond/almond',
                     mainConfigFile: '<%= yeoman.app %>/scripts/main.js',
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
@@ -151,7 +151,8 @@ module.exports = function (grunt) {
                     preserveLicenseComments: false,
                     useStrict: true,
                     wrap: true,
-                    out : 'tmp/concat/scripts/main.js'
+                    out : 'tmp/concat/scripts/main.js',
+                    include: ['main']
                     //uglify2: {} // https://github.com/mishoo/UglifyJS2
                 }
             }
@@ -241,7 +242,7 @@ module.exports = function (grunt) {
             },
             // Single-run configuration for development
             single: {
-               singleRun: true,
+               singleRun: true
             },
             // Single-run configuration for CI
             ci: {
