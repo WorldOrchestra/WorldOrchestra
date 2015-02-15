@@ -105,14 +105,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    develop: {
-      server: {
-        file: 'app.js'
-        //al , nodeArgs: ['--debug'],
-        //al args: ['appArg1', 'appArg2'],
-        //al env: { NODE_ENV: 'development'}
-      }
-    },
     htmlmin: {
       dist: {
         options: {
@@ -180,6 +172,14 @@ module.exports = function (grunt) {
         }
       }
     },
+    open: {
+      server: {
+        path: 'http://localhost:<%= connect.options.port %>'
+      },
+      test: {
+        path: 'http://localhost:<%= connect.test.options.port %>'
+      }
+    },
     rev: {
       dist: {
         files: {
@@ -215,7 +215,20 @@ module.exports = function (grunt) {
     watch: {
       options: {
         nospawn: true,
-        livereload: reloadPort
+        livereload: true
+      },
+      livereload: {
+        options: {
+          livereload: grunt.option('livereloadport') || LIVERELOAD_PORT
+        },
+        files: [
+          '<%= world.app %>/*.html',
+          '{.tmp,<%= world.app %>}/styles/{,*/}*.css',
+          '{.tmp,<%= world.app %>}/scripts/{,*/}*.js',
+          '<%= world.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
+          '<%= world.app %>/scripts/templates/*.{ejs,mustache,hbs}',
+          'test/unit/**/*.js'
+        ]
       },
       casperjs: {
         options: {},
@@ -267,7 +280,7 @@ module.exports = function (grunt) {
           'public/css/*.css'
         ],
         options: {
-          livereload: reloadPort
+          livereload: true
         }
       },
       views: {
@@ -276,7 +289,7 @@ module.exports = function (grunt) {
           'server/views/**/*.ejs'
         ],
         options: {
-          livereload: reloadPort
+          livereload: true
         }
       }
     }
@@ -342,10 +355,29 @@ module.exports = function (grunt) {
     'usemin'
   ]);
 
-  grunt.registerTask('defaultOld', [
-    'develop',
-    'watch'
-  ]);
+  grunt.registerTask('serve', function (target) {
+    if (target === 'dist') {
+      return grunt.task.run(['build', 'open:server', 'connect:dist:keepalive']);
+    }
+
+    if (target === 'test') {
+      return grunt.task.run([
+        'clean:server',
+        'createDefaultTemplate',
+        'connect:test',
+        'open:test',
+        'watch'
+      ]);
+    }
+
+    grunt.task.run([
+      'clean:server',
+      'createDefaultTemplate',
+      'connect:livereload',
+      'open:server',
+      'watch'
+    ]);
+  });
 
   grunt.registerTask('default', [
     'jshint',
