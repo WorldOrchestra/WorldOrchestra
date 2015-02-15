@@ -31,6 +31,12 @@ module.exports = function (grunt) {
       server: '.tmp',
       results: 'results/*'
     },
+    concat: {
+      dist: {
+        src: ['<%= world.app %>/**/*.js'],
+        dest: '.tmp/js/main.js'
+      }
+    },
     connect: {
       options: {
         port: grunt.option('port') || SERVER_PORT,
@@ -71,12 +77,71 @@ module.exports = function (grunt) {
         }
       }
     },
+    copy: {
+      dist: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= world.app %>',
+          dest: '<%= world.dist %>',
+          src: [
+            '*.{ico,txt}',
+            'images/{,*/}*.{webp,gif}',
+            'styles/fonts/{,*/}*.*',
+          ]
+        }, {
+          src: 'node_modules/apache-server-configs/dist/.htaccess',
+          dest: '<%= world.dist %>/.htaccess'
+        }]
+      }
+    },
+    cssmin: {
+      dist: {
+        files: {
+          '<%= world.dist %>/styles/main.css': [
+            '.tmp/styles/{,*/}*.css',
+            '<%= world.app %>/styles/{,*/}*.css'
+          ]
+        }
+      }
+    },
     develop: {
       server: {
         file: 'app.js'
         //al , nodeArgs: ['--debug'],
         //al args: ['appArg1', 'appArg2'],
         //al env: { NODE_ENV: 'development'}
+      }
+    },
+    htmlmin: {
+      dist: {
+        options: {
+          /*removeCommentsFromCDATA: true,
+           // https://github.com/yeoman/grunt-usemin/issues/44
+           //collapseWhitespace: true,
+           collapseBooleanAttributes: true,
+           removeAttributeQuotes: true,
+           removeRedundantAttributes: true,
+           useShortDoctype: true,
+           removeEmptyAttributes: true,
+           removeOptionalTags: true*/
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= world.app %>',
+          src: '*.html',
+          dest: '<%= world.dist %>'
+        }]
+      }
+    },
+    imagemin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= world.app %>/images',
+          src: '{,*/}*.{png,jpg,jpeg}',
+          dest: '<%= world.dist %>/images'
+        }]
       }
     },
     jshint: {
@@ -115,6 +180,38 @@ module.exports = function (grunt) {
         }
       }
     },
+    rev: {
+      dist: {
+        files: {
+          src: [
+            '<%= world.dist %>/scripts/{,*/}*.js',
+            '<%= world.dist %>/styles/{,*/}*.css',
+            '<%= world.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
+            '/styles/fonts/{,*/}*.*'
+          ]
+        }
+      }
+    },
+    uglify: {
+      my_target: {
+        files: {
+          'dist/main.min.js': ['.tmp/js/**/*.js']
+        }
+      }
+    },
+    useminPrepare: {
+      html: '<%= world.app %>/index.html',
+      options: {
+        dest: '<%= world.dist %>'
+      }
+    },
+    usemin: {
+      html: ['<%= world.dist %>/{,*/}*.html'],
+      css: ['<%= world.dist %>/styles/{,*/}*.css'],
+      options: {
+        dirs: ['<%= world.dist %>']
+      }
+    },
     watch: {
       options: {
         nospawn: true,
@@ -140,12 +237,12 @@ module.exports = function (grunt) {
         files: 'Gruntfile.js',
         tasks: 'jshint:gruntfile'
       },
-      //al TODO finish task build, casperjs
+      //al TODO finish task build,
       client: {
         files: [ 'client/**' ],
         tasks: [ 'build', 'karma:watch:run', 'casperjs' ]
       },
-      //al TODO review server: express:dev, casperjs
+      //al TODO review server: express:dev,
       server: {
         files: [ 'server/**' ],
         tasks: [ 'build', 'express:dev', 'casperjs' ],
@@ -161,7 +258,6 @@ module.exports = function (grunt) {
         files: [ 'test/integration/**/*.js' ],
         tasks: [ 'karma:watch:run' ]
       },
-      //al TODO review casperjs
       e2eTests: {
         files: [ 'test/e2e/**/*.js' ],
         tasks: [ 'casperjs' ]
@@ -172,7 +268,7 @@ module.exports = function (grunt) {
         ],
         options: {
           livereload: reloadPort
-        },
+        }
       },
       views: {
         files: [
@@ -230,6 +326,22 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.registerTask('build', [
+    'clean:dist',
+    'createDefaultTemplate',
+    //'jst',
+    'useminPrepare',
+    //'requirejs:dist',
+    'imagemin',
+    'htmlmin',
+    'concat',
+    'cssmin',
+    'uglify',
+    'copy',
+    'rev',
+    'usemin'
+  ]);
+
   grunt.registerTask('defaultOld', [
     'develop',
     'watch'
@@ -238,6 +350,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'jshint',
     'test',
-    //'build'
+    'build'
+      //al TODO add develop and watch tasks?
   ]);
 };
