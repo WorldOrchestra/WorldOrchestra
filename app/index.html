@@ -198,7 +198,7 @@
                    }
                    console.log('notes->', notes);
                    console.log(notes.length);
-                   return notes;indyFull
+                   return notes;
                };
 
         // Tone.Note.daveScore(indyFull, {
@@ -238,16 +238,28 @@
         // Tone.Transport.loop = true;
 
         // Tone.Transport.setTransportTime("4:0:0");
+        var notes = [];
+        var recording = false;
         
+        var recordNotes = function(note, time, velocity){
+            notes.push([time, note, velocity]);
+            console.log(notes);
+        };
+
         $('#keys').on('mousedown','button', function(){
             var note = $(this).attr("id");
-            console.log(note);
-            sampler.triggerAttack(note)
+            sampler.triggerAttack(note);
+            if (recording){
+                recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
+            }
         });
 
         $('#keys').on('mouseup','button', function(){
             var note = $(this).attr("id");
-            sampler.triggerRelease(note)
+            sampler.triggerRelease(note);
+            if (recording){
+                recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
+            }
         })
 
         $('#rewind').on('click', function(){
@@ -255,7 +267,9 @@
             $('#transportTime').text(Tone.Transport.getTransportTime());
         })
 
+
         $('#stop').on('click', function(){
+            recording = false;
             $('#play').css("background-color", "white");
             $('#record').css("background-color", "white");
             Tone.Transport.stop();
@@ -268,10 +282,19 @@
             Tone.Transport.setInterval(function(time){
                 $('#transportTime').text(Tone.Transport.getTransportTime());
             }, "16n");
+
+            Tone.Note.parseScore({
+                "sampler" : notes
+            });
+            
+            Tone.Note.route("sampler", function(time, note){
+                sampler.triggerAttackRelease(note, "8n", time);
+            });
+
         })
 
-
         $('#record').on('click', function(){
+            recording = true;
             $(this).css("background-color", "red");
             Tone.Transport.setTransportTime("0:0:0");
             Tone.Transport.start();
@@ -280,12 +303,7 @@
             }, "16n");
         })
 
-        keyboard.keyDown = function(note, freq){
-            sampler.triggerAttack(freq);
-        };
-        keyboard.keyUp = function(){
-            sampler.triggerRelease();
-        };
+
 
         //TURN ON TO HEAR MUSIC!!!!!
         Tone.Transport.start();
