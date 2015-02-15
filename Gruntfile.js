@@ -120,6 +120,14 @@ module.exports = function (grunt) {
         nospawn: true,
         livereload: reloadPort
       },
+      casperjs: {
+        options: {},
+        e2e: {
+          files: {
+            'results/casper': 'test/e2e/*.js'
+          }
+        }
+      },
       js: {
         files: [
           'app.js',
