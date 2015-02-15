@@ -1,3 +1,4 @@
+/* jshint quotmark: false */
 <!doctype html>
 <html class="no-js">
     <head>
@@ -33,18 +34,38 @@
             <li>RequireJS</li>
             <li>Marionette</li>
           </ul>
-        
+        </div>
         <div>
-            <button id="rewind"> <-- </button>
-            <button id="stop">Stop</button>
-            <button id="play"> > </button>
-            <button id="forward"> --> </button>
-            <button id="record">Record</button>
+            <button id="rewind"><i class="fa fa-fast-backward"></i></button>
+            <button id="skipBack"><i class="fa fa-backward"></i></button>
+            <button id="stop"><i class="fa fa-stop"></i></button>
+            <button id="play"><i class="fa fa-play"></i></button>
+            <button id="record"><i class="fa fa-play-circle" style="color:red"></i></button>
+            <button id="skipForward"><i class="fa fa-forward"></i></button>
+            <button id="forward"><i class="fa fa-fast-forward"></i></button>
             <span>Transport Time </span><span id="transportTime">0:0:0</span>
         <div>
         <div id="keys">
-        <button id="C4">Middle C</button>
-        <button id="G4">Middle G</button>
+            <span>Octave </span><span id="octave">4</span>
+            <button id="C4">C</button>
+            <button id="Db4" style="background-color:black;color:white">Db</button>
+            <button id="D4">D</button>
+            <button id="Eb4" style="background-color:black;color:white">Eb</button>
+            <button id="E4">E</button>
+            <button id="F4">F</button>
+            <button id="Gb4" style="background-color:black;color:white">Gb</button>
+            <button id="G4">G</button>
+            <button id="Ab4" style="background-color:black;color:white">Ab</button>
+            <button id="A4">A</button>
+            <button id="Bb4" style="background-color:black;color:white">Bb</button>
+            <button id="B4">B</button>
+            <button id="C5">C</button>
+            <button id="Db5" style="background-color:black;color:white">Db</button>
+            <button id="D5">D</button>
+            <button id="Eb5" style="background-color:black;color:white">Eb</button>
+            <button id="E5">E</button>
+            <button id="F5">F</button>
+
         </div>
         <script type="text/template" id="sample-template">
             put some content <%= contentPlacement %>.
@@ -53,14 +74,14 @@
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 
-        <script>
+<!--         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
             function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
             e=o.createElement(i);r=o.getElementsByTagName(i)[0];
             e.src='//www.google-analytics.com/analytics.js';
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X');ga('send','pageview');
-        </script>
+        </script> -->
         
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/tone/build/Tone.js"></script>
@@ -153,7 +174,44 @@
             "G4" : "soundfont/acoustic_grand_piano-mp3/G4.mp3",
             "G5" : "soundfont/acoustic_grand_piano-mp3/G5.mp3",
             "G6" : "soundfont/acoustic_grand_piano-mp3/G6.mp3",
-            "G7" : "soundfont/acoustic_grand_piano-mp3/G7.mp3"
+            "Ab1" : "soundfont/acoustic_grand_piano-mp3/Ab1.mp3",
+            "Ab2" : "soundfont/acoustic_grand_piano-mp3/Ab2.mp3",
+            "Ab3" : "soundfont/acoustic_grand_piano-mp3/Ab3.mp3",
+            "Ab4" : "soundfont/acoustic_grand_piano-mp3/Ab4.mp3",
+            "Ab5" : "soundfont/acoustic_grand_piano-mp3/Ab5.mp3",
+            "Ab6" : "soundfont/acoustic_grand_piano-mp3/Ab6.mp3",
+            "Ab7" : "soundfont/acoustic_grand_piano-mp3/Ab7.mp3",
+            "Bb0" : "soundfont/acoustic_grand_piano-mp3/Bb0.mp3",
+            "Bb1" : "soundfont/acoustic_grand_piano-mp3/Bb1.mp3",
+            "Bb2" : "soundfont/acoustic_grand_piano-mp3/Bb2.mp3",
+            "Bb3" : "soundfont/acoustic_grand_piano-mp3/Bb3.mp3",
+            "Bb4" : "soundfont/acoustic_grand_piano-mp3/Bb4.mp3",
+            "Bb5" : "soundfont/acoustic_grand_piano-mp3/Bb5.mp3",
+            "Bb6" : "soundfont/acoustic_grand_piano-mp3/Bb6.mp3",
+            "Bb7" : "soundfont/acoustic_grand_piano-mp3/Bb7.mp3",
+            "Bb0" : "soundfont/acoustic_grand_piano-mp3/Bb0.mp3",
+            "Db1" : "soundfont/acoustic_grand_piano-mp3/Db1.mp3",
+            "Db2" : "soundfont/acoustic_grand_piano-mp3/Db2.mp3",
+            "Db3" : "soundfont/acoustic_grand_piano-mp3/Db3.mp3",
+            "Db4" : "soundfont/acoustic_grand_piano-mp3/Db4.mp3",
+            "Db5" : "soundfont/acoustic_grand_piano-mp3/Db5.mp3",
+            "Db6" : "soundfont/acoustic_grand_piano-mp3/Db6.mp3",
+            "Db7" : "soundfont/acoustic_grand_piano-mp3/Db7.mp3",
+            "Db8" : "soundfont/acoustic_grand_piano-mp3/Db8.mp3",
+            "Eb1" : "soundfont/acoustic_grand_piano-mp3/Eb1.mp3",
+            "Eb2" : "soundfont/acoustic_grand_piano-mp3/Eb2.mp3",
+            "Eb3" : "soundfont/acoustic_grand_piano-mp3/Eb3.mp3",
+            "Eb4" : "soundfont/acoustic_grand_piano-mp3/Eb4.mp3",
+            "Eb5" : "soundfont/acoustic_grand_piano-mp3/Eb5.mp3",
+            "Eb6" : "soundfont/acoustic_grand_piano-mp3/Eb6.mp3",
+            "Eb7" : "soundfont/acoustic_grand_piano-mp3/Eb7.mp3",
+            "Gb1" : "soundfont/acoustic_grand_piano-mp3/Gb1.mp3",
+            "Gb2" : "soundfont/acoustic_grand_piano-mp3/Gb2.mp3",
+            "Gb3" : "soundfont/acoustic_grand_piano-mp3/Gb3.mp3",
+            "Gb4" : "soundfont/acoustic_grand_piano-mp3/Gb4.mp3",
+            "Gb5" : "soundfont/acoustic_grand_piano-mp3/Gb5.mp3",
+            "Gb6" : "soundfont/acoustic_grand_piano-mp3/Gb6.mp3",
+            "Gb7" : "soundfont/acoustic_grand_piano-mp3/Gb7.mp3"
          }, onload);
          //once loaded..
         synth.setVolume(-25);
@@ -164,7 +222,7 @@
 
         
                          //[time,               note, velocity]
-        Tone.Note.daveScore = function (song, score){
+        Tone.Note.daveScore = function (score){
                    var notes = [];
                    for (var inst in score){
                        var part = score[inst];
@@ -172,15 +230,15 @@
                            Tone.Transport.setBpm(part);
                        } else if (inst === "timeSignature"){
                            Tone.Transport.setTimeSignature(part[0], part[1]);
-                       } else if (Array.isArray(song[part])){
-                           for (var i = 0; i < song[part].length; i+=2){
-                               var noteDescription = song[part][i];
+                       } else if (Array.isArray(part)){
+                           for (var i = 0; i < part.length; i+=2){
+                               var noteDescription = part[i];
                                var note;
                                if (Array.isArray(noteDescription)){
                                    var time = noteDescription[0];
                                    var value = noteDescription.slice(1);
                                    var dur_time1=time;
-                                   var dur_time2 = song[part][i+1][0];
+                                   var dur_time2 = part[i+1][0];
                                    var duration = function(start, end){
                                         var duration = Math.abs(Tone.Transport.toSeconds(end) - Tone.Transport.toSeconds(start));
                                         return duration
@@ -239,12 +297,104 @@
 
         // Tone.Transport.setTransportTime("4:0:0");
         var notes = [];
+        var octave = 4;
         var recording = false;
         
         var recordNotes = function(note, time, velocity){
             notes.push([time, note, velocity]);
             console.log(notes);
         };
+
+
+        $(document).on('keydown', function(e){
+            var note = getKey(e);
+
+            sampler.triggerAttack(note);
+            if (recording){
+                recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
+            }
+        });
+
+        
+        $(document).on('keyup', function(e){
+            var note = getKey(e);
+
+            sampler.triggerRelease(note);
+            if (recording){
+                recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
+            }
+        });
+
+        var getKey = function(event){
+            switch (event.which){
+                case 65 :
+                    note = "C" + octave;
+                    break;
+                case 87 :
+                    note = "Db" + octave;
+                    break;
+                case 83 :
+                    note = "D" + octave;
+                    break;
+                case 69 :
+                    note = "Eb" + octave;
+                    break;
+                case 68 :
+                    note = "E" + octave;
+                    break;
+                case 70 :
+                    note = "F" + octave;
+                    break;
+                case 84 :
+                    note = "Gb" + octave;
+                    break;
+                case 71 :
+                    note = "G" + octave;
+                    break;
+                case 89 :
+                    note = "Ab" + octave;
+                    break;
+                case 72 :
+                    note = "A" + octave;
+                    break;
+                case 85 :
+                    note = "Bb" + octave;
+                    break;
+                case 74 :
+                    note = "B" + octave;
+                    break;
+                case 75 :
+                    note = "C" + (octave+1);
+                    break;
+                case 79 :
+                    note = "Db" + (octave+1);
+                    break;
+                case 76 :
+                    note = "D" + (octave+1);
+                    break;
+                case 80 :
+                    note = "Eb" + (octave+1);
+                    break;
+                case 186 :
+                    note = "E" + (octave+1);
+                    break;
+                case 222 :
+                    note = "F" + (octave+1);
+                    break;
+            }
+
+
+            //octave
+            if(event.keyCode === 90){
+                octave === 0 ? octave : octave--;
+                $('#octave').html(octave);
+            }
+            if(event.keyCode === 88){
+                octave >=7 ? octave: octave++;
+                $('#octave').html(octave);
+            }
+            return note;
+        }
 
         $('#keys').on('mousedown','button', function(){
             var note = $(this).attr("id");
@@ -271,7 +421,7 @@
         $('#stop').on('click', function(){
             recording = false;
             $('#play').css("background-color", "white");
-            $('#record').css("background-color", "white");
+            $('#record').css({"background-color": "white", "color" : "red"});
             Tone.Transport.stop();
             Tone.Transport.clearIntervals();
         })
@@ -283,19 +433,18 @@
                 $('#transportTime').text(Tone.Transport.getTransportTime());
             }, "16n");
 
-            Tone.Note.parseScore({
+            Tone.Note.daveScore({
                 "sampler" : notes
             });
             
-            Tone.Note.route("sampler", function(time, note){
-                sampler.triggerAttackRelease(note, "8n", time);
+            Tone.Note.route("sampler", function(time, note, velocity, duration){
+                sampler.triggerAttackRelease(note, duration, time, 1);
             });
-
         })
 
         $('#record').on('click', function(){
             recording = true;
-            $(this).css("background-color", "red");
+            $(this).css({"background-color": "red", "color" : "white"});
             Tone.Transport.setTransportTime("0:0:0");
             Tone.Transport.start();
             Tone.Transport.setInterval(function(time){
@@ -306,7 +455,7 @@
 
 
         //TURN ON TO HEAR MUSIC!!!!!
-        Tone.Transport.start();
+        // Tone.Transport.start();
 
 
         // window.onload = function () {
