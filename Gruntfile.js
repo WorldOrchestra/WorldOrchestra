@@ -91,6 +91,30 @@ module.exports = function (grunt) {
         '!test/unit/lib/**/*.js'
       ]
     },
+    // configure karma ***
+    karma: {
+      options: {
+        configFile: 'karma.conf.js',
+        reporters: ['progress', 'coverage']
+      },
+      // Watch configuration
+      watch: {
+        background: true,
+        reporters: ['progress']
+      },
+      // Single-run configuration for development
+      single: {
+        singleRun: true
+      },
+      // Single-run configuration for CI
+      ci: {
+        singleRun: true,
+        coverageReporter: {
+          type: 'lcov',
+          dir: 'results/coverage/'
+        }
+      }
+    },
     watch: {
       options: {
         nospawn: true,
@@ -104,13 +128,43 @@ module.exports = function (grunt) {
         ],
         tasks: ['develop', 'delayed-livereload']
       },
+      gruntfile: {
+        files: 'Gruntfile.js',
+        tasks: 'jshint:gruntfile'
+      },
+      //al TODO finish task build, casperjs
+      client: {
+        files: [ 'client/**' ],
+        tasks: [ 'build', 'karma:watch:run', 'casperjs' ]
+      },
+      //al TODO review server: express:dev, casperjs
+      server: {
+        files: [ 'server/**' ],
+        tasks: [ 'build', 'express:dev', 'casperjs' ],
+        options: {
+          spawn: false // Restart server
+        }
+      },
+      unitTests: {
+        files: [ 'test/unit/**/*.js' ],
+        tasks: [ 'karma:watch:run' ]
+      },
+      integrationTests: {
+        files: [ 'test/integration/**/*.js' ],
+        tasks: [ 'karma:watch:run' ]
+      },
+      //al TODO review casperjs
+      e2eTests: {
+        files: [ 'test/e2e/**/*.js' ],
+        tasks: [ 'casperjs' ]
+      },
       css: {
         files: [
           'public/css/*.css'
         ],
         options: {
           livereload: reloadPort
-        }
+        },
       },
       views: {
         files: [
@@ -132,13 +186,13 @@ module.exports = function (grunt) {
     var done = this.async();
     setTimeout(function () {
       request.get('http://localhost:' + reloadPort + '/changed?files=' + files.join(','),  function(err, res) {
-          var reloaded = !err && res.statusCode === 200;
-          if (reloaded)
-            grunt.log.ok('Delayed live reload successful.');
-          else
-            grunt.log.error('Unable to make a delayed live reload.');
-          done(reloaded);
-        });
+        var reloaded = !err && res.statusCode === 200;
+        if (reloaded)
+          grunt.log.ok('Delayed live reload successful.');
+        else
+          grunt.log.error('Unable to make a delayed live reload.');
+        done(reloaded);
+      });
     }, 500);
   });
 
