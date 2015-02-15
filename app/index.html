@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
         <!-- build:js scripts/vendor/modernizr.js -->
@@ -32,7 +33,15 @@
             <li>RequireJS</li>
             <li>Marionette</li>
           </ul>
-        </div>
+        
+        <div>
+            <button id="rewind"> <-- </button>
+            <button id="stop">Stop</button>
+            <button id="play"> > </button>
+            <button id="forward"> --> </button>
+            <button id="record">Record</button>
+            <span>Transport Time </span><span id="transportTime">0:0:0</span>
+        <div>
         <div id="keys">
         <button id="C4">Middle C</button>
         <button id="G4">Middle G</button>
@@ -228,7 +237,7 @@
         // Tone.Transport.setLoopEnd("1:0");
         // Tone.Transport.loop = true;
 
-        Tone.Transport.setTransportTime("4:0:0");
+        // Tone.Transport.setTransportTime("4:0:0");
         
         $('#keys').on('mousedown','button', function(){
             var note = $(this).attr("id");
@@ -239,6 +248,36 @@
         $('#keys').on('mouseup','button', function(){
             var note = $(this).attr("id");
             sampler.triggerRelease(note)
+        })
+
+        $('#rewind').on('click', function(){
+            Tone.Transport.setTransportTime("0:0:0");
+            $('#transportTime').text(Tone.Transport.getTransportTime());
+        })
+
+        $('#stop').on('click', function(){
+            $('#play').css("background-color", "white");
+            $('#record').css("background-color", "white");
+            Tone.Transport.stop();
+            Tone.Transport.clearIntervals();
+        })
+
+        $('#play').on('click', function(){
+            $('#play').css("background-color", "green");
+            Tone.Transport.start();
+            Tone.Transport.setInterval(function(time){
+                $('#transportTime').text(Tone.Transport.getTransportTime());
+            }, "16n");
+        })
+
+
+        $('#record').on('click', function(){
+            $(this).css("background-color", "red");
+            Tone.Transport.setTransportTime("0:0:0");
+            Tone.Transport.start();
+            Tone.Transport.setInterval(function(time){
+                $('#transportTime').text(Tone.Transport.getTransportTime());
+            }, "16n");
         })
 
         keyboard.keyDown = function(note, freq){
