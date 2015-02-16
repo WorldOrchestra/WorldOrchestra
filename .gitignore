@@ -9,3 +9,4 @@ tmp
 test/temp
 .idea
 server/config/local.env.js
+.floo*
