@@ -1,30 +1,30 @@
-describe('Backbone server', function() {
-  var track;
-  var song;
-
+describe('WorldOrchestra framework', function() {
   describe('Track model', function() {
-    beforeEach(function() {
-      track = new WO.Track();
-    });
-
     it('should contain a track model', function() {
-      expect(track).to.be.an("object");
+      expect(typeof WO.Track).to.be('function');
     });
   });
 
   describe('Song collection', function() {
-    beforeEach(function() {
-      track = new WO.Track();
-      song = new WO.Song();
+    it('should contain a song collection', function() {
+      expect(typeof WO.Song).to.be('function');
     });
-
-      it('should contain a song collection', function() {
-          expect(song).to.be.an("object");
-      });
-
     it('should be able to add a track', function() {
-       song.add(new WO.Track());
+      var song = new WO.Song();
+      song.add(new WO.Track());
       expect(song.at(0) instanceof WO.Track).to.equal(true);
+    });
+  });
+
+  describe('The main application', function() {
+    it('should contain a container named WO', function() {
+      expect(typeof WO).to.be('object');
+    });
+    it('should have a master model', function() {
+        expect(WO.WOModel).not.to.be(undefined);
+    });
+    it('should have a master view', function() {
+      expect(WO.WOView).not.to.be(undefined);
     });
   });
 });
