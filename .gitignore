@@ -1,8 +1,8 @@
 public/components
+public/bower_components
+test/bower_components
 .sass-cache
 node_modules
-app/bower_components
-test/bower_components
 dist
 results
 .tmp

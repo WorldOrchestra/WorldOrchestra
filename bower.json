@@ -4,6 +4,18 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "components"
-  ]
+    "components",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "homepage": "https://github.com/monsterblader/worldorchestra",
+  "authors": [
+    "Monsterblader <Monsterblader@gmail.com>"
+  ],
+  "description": "Connecting the world - one track at a time",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT"
 }

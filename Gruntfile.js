@@ -148,7 +148,6 @@ module.exports = function (grunt) {
         '!test/unit/lib/**/*.js'
       ]
     },
-    // configure karma ***
     karma: {
       options: {
         configFile: 'karma.conf.js',
@@ -195,7 +194,7 @@ module.exports = function (grunt) {
     uglify: {
       my_target: {
         files: {
-          'dist/main.min.js': ['.tmp/js/**/*.js']
+          'dist/main.min.js': ['.tmp/js/*.js']
         }
       }
     },
