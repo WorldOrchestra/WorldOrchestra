@@ -299,6 +299,7 @@
         var notes = [];
         var octave = 4;
         var recording = false;
+        var down = {};
         
         var recordNotes = function(note, time, velocity){
             notes.push([time, note, velocity]);
@@ -309,9 +310,19 @@
         $(document).on('keydown', function(e){
             var note = getKey(e);
 
-            sampler.triggerAttack(note);
-            if (recording){
-                recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
+            if( e.which === 88 || e.which === 90 ){
+                setOctave(e.which);
+                down[e.which] = true;
+            }
+
+            if( note !== null ){
+                if( down[note] === null || down[note] === undefined){
+                    sampler.triggerAttack(note);
+                    if (recording){
+                        recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
+                    }
+                    down[note] = true;
+                }
             }
         });
 
@@ -319,9 +330,16 @@
         $(document).on('keyup', function(e){
             var note = getKey(e);
 
-            sampler.triggerRelease(note);
-            if (recording){
-                recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
+            if( e.which === 88 || e.which === 90 ){
+                down[e.which] = null;
+            }
+
+            if( note !== null ){
+                sampler.triggerRelease(note);
+                if (recording){
+                    recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
+                }
+                down[note] = null;
             }
         });
 
@@ -381,20 +399,25 @@
                 case 222 :
                     note = "F" + (octave+1);
                     break;
+                default:
+                    note = null;
+                    break;
             }
 
-
-            //octave
-            if(event.keyCode === 90){
-                octave === 0 ? octave : octave--;
-                $('#octave').html(octave);
-            }
-            if(event.keyCode === 88){
-                octave >=7 ? octave: octave++;
-                $('#octave').html(octave);
-            }
             return note;
         }
+
+            
+        var setOctave = function( key ){
+            if( down[key] === null || down[key] === undefined){
+                if( key === 90 ){
+                    octave === 0 ? octave : octave--;
+                }else if(key === 88 ){
+                    octave >=7 ? octave: octave++;
+                }
+                $('#octave').html(octave);
+            }
+        };
 
         $('#keys').on('mousedown','button', function(){
             var note = $(this).attr("id");
