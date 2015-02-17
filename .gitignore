@@ -1,7 +1,6 @@
-node_modules
-app/bower_components
-test/bower_components/
+public/components
 .sass-cache
+node_modules
 dist
 results
 .tmp
@@ -11,3 +10,5 @@ test/temp
 server/config/local.env.js
 .floo
 .flooignore
+app/tylersDrumkit
+bower_components
