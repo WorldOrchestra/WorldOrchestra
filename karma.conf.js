@@ -3,12 +3,15 @@ module.exports = function(config) {
     // base path, that will be used to resolve files and exclude
     basePath: './',
 
-    frameworks: ['mocha', 'chai'
-],
+    frameworks: [
+      'mocha', 'chai', 'sinon'
+    ],
 
     // list of files / patterns to load in the browser
     files: require('./include.conf.js').concat([
-      'test/spec/*.js'
+      //'test/bower_components/**/*.js',
+      //'test/unit/**/*.js',
+      'test/integration/**/*.js'
     ]),
 
     // list of files to exclude
@@ -42,7 +45,7 @@ module.exports = function(config) {
       // Source files you want to generate coverage reports for
       // This should not include tests or libraries
       // These files will be instrumented by Istanbul
-      'app/scripts/**/*.js': ['coverage']
+      'public/js/**/*.js': ['coverage']
     },
 
     // Configure the reporter
@@ -52,12 +55,12 @@ module.exports = function(config) {
     },
 
     // If browser does not capture in given timeout [ms], kill it
-    captureTimeout: 20000,
+    captureTimeout: 30000,
 
     // Auto run tests on start (when browsers are captured) and exit
     singleRun: false,
 
-    // report which specs run too slow
+    // report which specs run too slowly
     reportSlowerThan: 500,
 
     // any additional plugins needed for testing
@@ -65,7 +68,7 @@ module.exports = function(config) {
       'karma-coverage',
       'karma-mocha',
       'karma-chai',
- 
+      'karma-sinon',
       'karma-chrome-launcher'
     ]
   });

@@ -13,7 +13,7 @@ require.config({
 });
 
 require([
-    'backbone', 'marionette'
-], function (Backbone, Marionette) {
-    Backbone.history.start();
+    'app',
+], function (App) {
+    App.initialize();
 });
