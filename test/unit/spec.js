@@ -75,4 +75,14 @@ describe('WorldOrchestra framework', function() {
       expect(typeof WO.Track).to.be('function');
     });
   });
+
+  describe('drumPad model', function() {
+    var drumPad = new WO.Drumpad();
+    it('should be a Backbone model', function() {
+      expect(typeof drumPad).to.be('object');
+    });
+    it('should have initialize method', function() {
+      expect(typeof drumPad.initialize).to.be('function');
+    });
+  });
 });
