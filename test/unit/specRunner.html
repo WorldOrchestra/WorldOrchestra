@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WorldOrchestra Test Suite [Mocha]</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="lib/css/mocha.css" />
+    <script src="lib/jquery.js"></script>
+    <script src="lib/picomodal.js"></script>
+    <script src="lib/expect.js"></script>
+    <script src="lib/mocha.js"></script>
+    <script src="lib/sinon.js"></script>
+      <script src="../bower_components/chai/chai.js"></script>
+    <script src="../../server/bower_components/jquery/dist/jquery.js"></script>
+    <script src="../../server/bower_components/underscore/underscore.js"></script>
+    <script src="../../server/bower_components/backbone/backbone.js"></script>
+      <!--<script src="../../server/bower_components/requirejs/require.js"></script>-->
+
+    <script>
+      // Tell mocha to use bdd-style expects
+      mocha.setup('bdd');
+    </script>
+      <!-- build:js scripts/main.js -->
+
+      <!--<script src="../../server/scripts/main.js"></script>-->
+      <!-- endbuild -->
+
+    <!-- Load tests and helpers here -->
+    <script src="../../server/scripts/models/trackModel.js"></script>
+    <script src="../../server/scripts/collections/songCollection.js"></script>
+    <script src="spec.js"></script>
+
+    <script>
+      // Mocha expects a global onload var here and automagically executes it on pageload
+      onload = function(){
+        var runner = window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
+      };
+    </script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+  </body>
+</html>
