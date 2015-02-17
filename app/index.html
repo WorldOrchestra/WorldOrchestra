@@ -1,29 +1,72 @@
+/* jshint quotmark: false */
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
     <title>STEP SEQUENCER</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
 
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"> -->
 
     <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="./bower_components/jquery-ui/jquery-ui.js"></script>
-    <script type="text/javascript" src="./bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
-    <script type="text/javascript" src="./bower_components/tone/build/Tone.js"></script>
-    <script type="text/javascript" src="./scripts/Widgets.js"></script>
-    <script type="text/javascript" src="./scripts/ExampleList.js"></script>
-    <link rel="stylesheet" type="text/css" href="./styles/widgets.css">
-    <link rel="stylesheet" type="text/css" href="./styles/jquery-ui.css">
-
-</head>
-<body>
-    <div id="Container">
+            <li>RequireJS</li>
+            <li>Marionette</li>
+          </ul>
+        </div>
+        <div>
+            <button id="rewind"><i class="fa fa-fast-backward"></i></button>
+            <button id="skipBack"><i class="fa fa-backward"></i></button>
+            <button id="stop"><i class="fa fa-stop"></i></button>
+            <button id="play"><i class="fa fa-play"></i></button>
+            <button id="record"><i class="fa fa-play-circle" style="color:red"></i></button>
+            <button id="skipForward"><i class="fa fa-forward"></i></button>
+            <button id="forward"><i class="fa fa-fast-forward"></i></button>
+            <span>Transport Time </span><span id="transportTime">0:0:0</span>
+        <div>
+        <div id="keys">
+            <span>Octave </span><span id="octave">4</span>
+            <button id="C4">C</button>
+            <button id="Db4" style="background-color:black;color:white">Db</button>
+            <button id="D4">D</button>
+            <button id="Eb4" style="background-color:black;color:white">Eb</button>
+            <button id="E4">E</button>
+            <button id="F4">F</button>
+            <button id="Gb4" style="background-color:black;color:white">Gb</button>
+            <button id="G4">G</button>
+            <button id="Ab4" style="background-color:black;color:white">Ab</button>
+            <button id="A4">A</button>
+            <button id="Bb4" style="background-color:black;color:white">Bb</button>
+            <button id="B4">B</button>
+            <button id="C5">C</button>
+            <button id="Db5" style="background-color:black;color:white">Db</button>
+            <button id="D5">D</button>
+            <button id="Eb5" style="background-color:black;color:white">Eb</button>
+            <button id="E5">E</button>
+            <button id="F5">F</button>
 
         <div id="Content">
             <div id="Loading">LOADING...</div>
             <div id = "StartButton"></div>
             <div id = "Sequencer"></div>
         </div>
+        <script type="text/template" id="sample-template">
+            put some content <%= contentPlacement %>.
+        </script>
 
     <script type="text/javascript">
         /* globals Tone, GUI */
@@ -34,124 +77,35 @@
             "F#" : "./tylersDrumkit/acoustic-kit/tom2.wav",
             "G" : "./tylersDrumkit/acoustic-kit/tom3.wav",
             "D" : "./tylersDrumkit/acoustic-kit/kick.wav"
-        }, function(){
-            $("#Loading").remove();
-            startCheckbox.enable();
-        });
-        keys.toMaster();
-        var stepNumber = 0;
-        var noteNames = ["A", "C#", "E", "F#", "G", "D"];
-        var checkboxes = [];
-        var indicators = [];
-        Tone.Transport.setLoopEnd("1m");
-        Tone.Transport.loop = true;
-        Tone.Transport.setInterval(function(time){
-            //remove the old indicator
-            $(".Lit").removeClass("Lit");
-            //light up the new one
-            indicators[stepNumber].addClass("Lit");
-            stepNumber++;
-            stepNumber = stepNumber % 16;
-            //get the current column
-            for (var i = 0; i < checkboxes.length; i++){
-                var box = checkboxes[i][stepNumber];
-                if (box.isChecked()){
-                    keys.triggerAttack(noteNames[i], time);
-                }
-            }
-        }, "16n");
-        // GUI //
-        var sequencer = $("#Sequencer");
-        var slider = $(".Slider");
-        //the indicator of the beat
-        function makeIndicator(){
-            for (var beat = 0; beat < 16; beat++){
-                var indicator = $("<div>", {"class" : "Indicator"}).appendTo(slider);
-                indicators.push(indicator);
-            }
-            slider.append("<br><br>");
-        }
-        //1 row for each instrument
-        //16 beats in each row
-        function makeCheckboxes(){
-            for (var row = 0; row < 6; row++){
-                checkboxes[row] = [];
-                for (var beat = 0; beat < 16; beat++){
-                    var checkbox = new GUI.Checkbox(sequencer, function(){}, "", "");
-                    checkboxes[row].push(checkbox);
-                    //randomly set some as checked initially
-                    if (Math.random() < 0.25){
-                        checkbox.check(true);
-                    }
-                }
-                sequencer.append("<br>");
-            }
-        }
-        new GUI.TopBar(Tone);
-        var startButton = $("#StartButton");
-        var startCheckbox = new GUI.Checkbox(startButton, function(on){
-            if (on){
-                Tone.Transport.start();
-            } else {
-                Tone.Transport.stop();
-            }
-        }, "start", "stop");
-        startCheckbox.disable();
-    
-        makeIndicator();
-        makeCheckboxes();
-        var slider = new GUI.Slider($("#Content"), function(val){
-            var scaled = val * 30 + 100;
-            Tone.Transport.setBpm(scaled);
-            return scaled;
-        }, 120, "tempo");
-        slider.render(20/30);
-    </script>
 
-    <style type="text/css">
-    #userInput{
-        background-image: url("./InstrumentImages/drumPad.png");
-        height: 500px;
-        width: 1400px;
-        position: relative;
-        margin: auto;
-        margin-top: 60px;
-        margin-bottom: 20px;
-    }
-    #Content {
-        width: 1400px;
-        height: 500px;
-        background-image: url("./InstrumentImages/drumPad.png");
-    }
-    #Content #Sequencer .Checkbox{
-        margin-top: 0px;
-        padding: 4px;
-        left: 70px;
-        top: 40px;
-        width: 70px;
-        height: 58px;
-        background-color: transparent;
-    }
-    #Content #Sequencer .Checkbox .ui-button-text {
-        height: 100%;
-        width: 100%;
-        padding: 0px;
-    }
-    #Content #Sequencer .Indicator{
-        position: relative;
-        float: left;
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        margin: 1.5px;
-        background-color: yellow;
-        opacity: 0;
-        transition: opacity 0.1s;
-    }
-    #Content #Sequencer .Indicator.Lit{
-        opacity: 1;
-    }
-    .Slider {
+<!--         <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script> -->
+        
+
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/tone/build/Tone.js"></script>
+        <script src="scripts/instruments/acousticPiano.js"></script>
+        <script>
+            var instrument = acousticPiano;
+        </script>
+        <script src="scripts/instruments/synth.js"></script>
+        <script src="scripts/parseScore.js"></script>
+        <script src="scripts/pianoKeyHandler.js"></script>
+        <script src="scripts/transport.js"></script>
+        
+
+
+
+    
+        <!-- build:js scripts/main.js -->
+
+        <script src="scripts/main.js"></script>
         margin-top: 200px;
         width: 60%;
         margin-left: 20%;

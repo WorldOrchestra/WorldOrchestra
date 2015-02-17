@@ -17,9 +17,21 @@
     </script>
 
     <!-- include source files here... -->
+    <script src="../app/bower_components/jquery/dist/jquery.js"></script>
+    <script src="../app/bower_components/tone/build/Tone.js"></script>
+    <script src="../app/scripts/instruments/acousticPiano.js"></script>
+    <script>
+        var instrument = acousticPiano;
+    </script>
+    <script src="../app/scripts/instruments/synth.js"></script>
+    <script src="../app/scripts/parseScore.js"></script>
+    <script src="../app/scripts/pianoKeyHandler.js"></script>
+    <script src="../app/scripts/transport.js"></script>
+    
 
     <!-- include unit files here... -->
     <script src="unit/test.js"></script>
+    <script src="unit/transportSpec.js"></script>
 
     <script>mocha.run()</script>
 </body>
