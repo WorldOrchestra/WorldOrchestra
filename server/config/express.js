@@ -38,7 +38,8 @@ module.exports = function(app) {
     secret: config.secrets.session,
     resave: true,
     saveUninitialized: true,
-    store: new mongoStore({ mongoose_connection: mongoose.connection })
+    //orig mongoose_connection
+    store: new mongoStore({ mongooseConnection: mongoose.connection })
   }));
   
   if ('production' === env) {
@@ -51,8 +52,8 @@ module.exports = function(app) {
   if ('development' === env || 'test' === env) {
     app.use(require('connect-livereload')());
     app.use(express.static(path.join(config.root, '.tmp')));
-    app.use(express.static(path.join(config.root, 'app')));
-    app.set('appPath', 'app');
+    app.use(express.static(path.join(config.root, 'public')));
+    app.set('appPath', 'public');
     app.use(morgan('dev'));
     app.use(errorHandler()); // Error handler - has to be last
   }

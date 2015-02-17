@@ -4,7 +4,10 @@
     <title>WorldOrchestra Test Suite [Mocha]</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="lib/css/mocha.css" />
-    <script src="lib/jquery.js"></script>
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <div class="appBody" style="display: none; visibility: hidden"></div>
     <script src="lib/picomodal.js"></script>
     <script src="lib/expect.js"></script>
     <script src="lib/mocha.js"></script>
@@ -16,8 +19,8 @@
     <!--<script src="../../server/bower_components/requirejs/require.js"></script>-->
 
     <script>
-      // Tell mocha to use bdd-style expects
-      mocha.setup('bdd');
+        // Tell mocha to use bdd-style expects
+        mocha.setup('bdd');
     </script>
     <!-- build:js scripts/main.js -->
 
@@ -26,14 +29,15 @@
 
     <!-- Load tests and helpers here -->
     <script src="../../public/js/models/trackModel.js"></script>
-      <script src="../../public/js/models/WOModel.js"></script>
-    <script src="../../bower_components/tone/build/Tone.js"></script>
-    <script src="../../public/js/instruments/drumPad.js"></script>
+    <script src="../../public/js/models/WOModel.js"></script>
     <script src="../../public/js/collections/songCollection.js"></script>
     <script src="../../public/js/views/songView.js"></script>
-      <script src="../../public/js/views/WOView.js"></script>
+    <script src="../../public/js/views/transportView.js"></script>
+    <script src="../../public/js/views/userInputView.js"></script>
+    <script src="../../public/js/views/WOView.js"></script>
     <script src="../../public/js/index.js"></script>
     <script src="spec.js"></script>
+    <script src="transportSpec.js"></script>
 
     <script>
       // Mocha expects a global onload var here and automagically executes it on pageload
@@ -41,8 +45,5 @@
         var runner = window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
       };
     </script>
-  </head>
-  <body>
-    <div id="mocha"></div>
   </body>
 </html>
