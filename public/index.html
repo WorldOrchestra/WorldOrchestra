@@ -6,9 +6,10 @@
     <title>WorldOrchestra</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="css/style.css">
     <!-- endbuild -->
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
@@ -19,34 +20,72 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-
-<div class="hero-unit">
-    <h1>'Allo, 'Allo!</h1>
-    <p>You now have</p>
-    <ul>
-        <li>HTML5 Boilerplate</li>
-        <li>jQuery</li>
-        <li>Backbone.js</li>
-        <li>Underscore.js</li>
-        <li>Modernizr</li>
-        <li>RequireJS</li>
-        <li>Marionette</li>
-    </ul>
+<div>
+  <button id="rewind"><i class="fa fa-fast-backward"></i></button>
+  <button id="skipBack"><i class="fa fa-backward"></i></button>
+  <button id="stop"><i class="fa fa-stop"></i></button>
+  <button id="play"><i class="fa fa-play"></i></button>
+  <button id="record"><i class="fa fa-play-circle" style="color:red"></i></button>
+  <button id="skipForward"><i class="fa fa-forward"></i></button>
+  <button id="forward"><i class="fa fa-fast-forward"></i></button>
+  <span>Transport Time </span><span id="transportTime">0:0:0</span>
+<div>
+<div id="keys">
+    <span>Octave </span><span id="octave">4</span>
+    <button id="C4">C</button>
+    <button id="Db4" style="background-color:black;color:white">Db</button>
+    <button id="D4">D</button>
+    <button id="Eb4" style="background-color:black;color:white">Eb</button>
+    <button id="E4">E</button>
+    <button id="F4">F</button>
+    <button id="Gb4" style="background-color:black;color:white">Gb</button>
+    <button id="G4">G</button>
+    <button id="Ab4" style="background-color:black;color:white">Ab</button>
+    <button id="A4">A</button>
+    <button id="Bb4" style="background-color:black;color:white">Bb</button>
+    <button id="B4">B</button>
+    <button id="C5">C</button>
+    <button id="Db5" style="background-color:black;color:white">Db</button>
+    <button id="D5">D</button>
+    <button id="Eb5" style="background-color:black;color:white">Eb</button>
+    <button id="E5">E</button>
+    <button id="F5">F</button>
 </div>
 
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 
-<script>
+<!-- <script>
     (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
         function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
         e=o.createElement(i);r=o.getElementsByTagName(i)[0];
         e.src='//www.google-analytics.com/analytics.js';
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
     ga('create','UA-XXXXX-X');ga('send','pageview');
-</script>
+</script> -->
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/backbone/backbone.js"></script>
+  <script src="bower_components/tone/build/Tone.js"></script>
+  <script src="js/instruments/acousticPiano.js"></script>
+  <script>
+      var instrument = acousticPiano;
+  </script>
+  <script src="js/instruments/synth.js"></script>
+  <script src="js/parseScore.js"></script>
+  <script src="js/pianoKeyHandler.js"></script>
+  <script src="js/transport.js"></script>
+
+  <script src="js/collections/songCollection.js"></script>
+  <script src="js/models/trackModel.js"></script>
+  <script src="js/models/WOModel.js"></script>
+  <script src="js/views/songView.js"></script>
+  <script src="js/views/userInputView.js"></script>
+  <script src="js/views/WOView.js"></script>
+  <script src="js/trackd3.js"></script>
 <!-- build:js scripts/main.js -->
-<script src="scripts/main.js"></script>
+  <script src="js/index.js"></script>
 <!-- endbuild -->
 </body>
 </html>
