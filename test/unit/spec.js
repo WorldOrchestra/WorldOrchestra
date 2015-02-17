@@ -12,6 +12,9 @@ describe('WorldOrchestra framework', function() {
   });
 
   describe('The main model', function() {
+    it('should have a method initialize', function() {
+      expect(typeof WO.appModel.initialize).to.be('function');
+    });
     it('should do something', function() {
       expect(false).to.equal(true);
     });
@@ -19,13 +22,19 @@ describe('WorldOrchestra framework', function() {
 
   describe('The main view', function() {
     it('should have a song view', function() {
-      expect(false).to.equal(true);
+      expect(WO.appView.songView).not.to.be(undefined);
     });
     it('should have a transport view', function() {
-      expect(false).to.equal(true);
+      expect(WO.appView.transportView).not.to.be(undefined);
     });
     it('should have a userInput view', function() {
-      expect(false).to.equal(true);
+      expect(WO.appView.userInputView).not.to.be(undefined);
+    });
+    it('should have a initialize method', function() {
+      expect(typeof WO.appView.initialize).to.be('function');
+    });
+    it('should have a render method', function() {
+      expect(typeof WO.appView.render).to.be('function');
     });
   });
 

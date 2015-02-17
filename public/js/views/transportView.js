@@ -1,5 +1,5 @@
 var WO = WO || {};
-WO.SongView = Backbone.View.extend({
+WO.TransportView = Backbone.View.extend({
   //tagname: "",
   //className: 'songView',
   //events: {},
