@@ -6,7 +6,6 @@ WO.WOView = Backbone.View.extend({
     this.transportView = new WO.TransportView();
     this.userInputView = new WO.userInputView();
     this.render();
-      //debugger;
   },
 
   render: function(){
