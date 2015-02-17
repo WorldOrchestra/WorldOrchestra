@@ -4,7 +4,7 @@ WO.SongView = Backbone.View.extend({
   //className: 'songView',
   //events: {},
   initialize: function(params) {
-
+    this.render();
   },
   render: function() {
     return this.$el;
