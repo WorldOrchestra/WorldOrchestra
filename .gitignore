@@ -1,7 +1,8 @@
-node_modules
-app/bower_components
-test/bower_components/
+public/components
+public/bower_components
+test/bower_components
 .sass-cache
+node_modules
 dist
 results
 .tmp
@@ -11,3 +12,4 @@ test/temp
 server/config/local.env.js
 .floo
 .flooignore
+

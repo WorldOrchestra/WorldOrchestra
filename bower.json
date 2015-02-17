@@ -1,14 +1,21 @@
 {
-  "name": "worldorchestra",
-  "version": "0.0.0",
-  "dependencies": {
-    "jquery": "~2.1.0",
-    "lodash": "~2.4.1",
-    "backbone": "~1.1.0",
-    "requirejs": "~2.1.10",
-    "requirejs-text": "~2.0.10",
-    "modernizr": "~2.7.1",
-    "marionette": "~2.3.2"
-  },
-  "devDependencies": {}
+  "name": "WorldOrchestra",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "homepage": "https://github.com/monsterblader/worldorchestra",
+  "authors": [
+    "Monsterblader <Monsterblader@gmail.com>"
+  ],
+  "description": "Connecting the world - one track at a time",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT"
 }

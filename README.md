@@ -83,3 +83,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 http://blog.dirk-eisenberg.de/2014/12/21/deploy-angularjs-apps-to-azure-websites-with-codeship/
 http://stackoverflow.com/questions/18924263/how-to-fix-error-please-set-env-variable-chrome-bin-when-running-angular-js-wi
+http://backbonetutorials.com/organizing-backbone-using-modules/

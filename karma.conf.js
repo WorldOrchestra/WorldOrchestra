@@ -9,7 +9,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: require('./include.conf.js').concat([
-      'test/unit/**/*.js',
+      //'test/bower_components/**/*.js',
+      //'test/unit/**/*.js',
       'test/integration/**/*.js'
     ]),
 
@@ -44,7 +45,7 @@ module.exports = function(config) {
       // Source files you want to generate coverage reports for
       // This should not include tests or libraries
       // These files will be instrumented by Istanbul
-      'app/scripts/**/*.js': ['coverage']
+      'public/js/**/*.js': ['coverage']
     },
 
     // Configure the reporter
@@ -59,7 +60,7 @@ module.exports = function(config) {
     // Auto run tests on start (when browsers are captured) and exit
     singleRun: false,
 
-    // report which specs run too slow
+    // report which specs run too slowly
     reportSlowerThan: 500,
 
     // any additional plugins needed for testing
