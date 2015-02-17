@@ -1,11 +1,11 @@
-/*var WO = WO || {};
+var WO = WO || {};
 WO.userInputView = Backbone.View.extend({
 
-    initialize: function(params){
-    },
+  initialize: function(params){
+  },
 
-    render: function(){
-        return this.$el.html([]);
-    }
+  render: function(){
+    return this.$el.html([]);
+  }
 
-});*/
+});
