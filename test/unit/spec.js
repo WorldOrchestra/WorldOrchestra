@@ -1,6 +1,6 @@
 describe('WorldOrchestra framework', function() {
   describe('The main application', function() {
-    it('should contain a container named WO', function() {
+    it('should have a container named WO', function() {
       expect(typeof WO).to.be('object');
     });
     it('should have a master model', function() {
@@ -26,6 +26,7 @@ describe('WorldOrchestra framework', function() {
     });
     it('should have a transport view', function() {
       expect(WO.appView.transportView).not.to.be(undefined);
+      expect($('.transportView').prop('tagName')).to.be('DIV');
     });
     it('should have a userInput view', function() {
       expect(WO.appView.userInputView).not.to.be(undefined);
@@ -39,31 +40,13 @@ describe('WorldOrchestra framework', function() {
   });
 
   describe('The userInput view', function() {
-    it('should exist', function() {
-      expect(false).to.equal(true);
+    it('should have tabs for different instruments/views', function() {
+        expect(false).to.equal(true);
     });
     it('should display a instrument', function() {
       expect(false).to.equal(true);
     });
     it('should display toggle buttons for instrument', function() {
-      expect(false).to.equal(true);
-    });
-  });
-
-  describe('The transport view', function() {
-    it('should have a forward button', function() {
-      expect(false).to.equal(true);
-    });
-    it('should have a back button', function() {
-      expect(false).to.equal(true);
-    });
-    it('should have a play button', function() {
-      expect(false).to.equal(true);
-    });
-    it('should have a stop button', function() {
-      expect(false).to.equal(true);
-    });
-    it('should have a record button', function() {
       expect(false).to.equal(true);
     });
   });
