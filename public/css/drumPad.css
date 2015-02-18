@@ -1,0 +1,55 @@
+#userInput{
+/*    background-image: url("../img/drummachinecompressed.png");*/
+    height: 500px;
+    width: 1400px;
+    position: relative;
+    margin: auto;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+#Content {
+    width: 1400px;
+    height: 500px;
+    background-image: url("../img/drummachinecompressed.png");
+}
+#Content #Sequencer .Checkbox{
+    margin-top: 0px;
+    padding: 4px;
+    left: 70px;
+    top: 40px;
+    width: 70px;
+    height: 58px;
+    background-color: transparent;
+}
+#Content #Sequencer .Checkbox .ui-button-text {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+}
+#Content #Sequencer .Indicator{
+    position: relative;
+    float: left;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin: 1.5px;
+    background-color: yellow;
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+#Content #Sequencer .Indicator.Lit{
+    opacity: 1;
+}
+.Slider {
+    margin-top: 200px;
+    width: 60%;
+    margin-left: 20%;
+}
+#Content #StartButton {
+    margin-bottom: 10px;
+    width: 60%;
+    margin-left: 20%;
+}
+#Content #StartButton .Checkbox{
+    width: 100%;
+}
