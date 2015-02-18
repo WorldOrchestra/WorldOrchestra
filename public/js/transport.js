@@ -6,6 +6,27 @@ Tone.Transport.setBpm(120);
 
 var recording = false;
 
+var playSong = function(song){
+    _.each(song.models, function(track){
+        // console.log("track->", track);
+        var notes = track.get('notes');
+        var instrument = track.get('instrument');
+        _.each(notes, function(note){
+            // console.log("note->", note);
+            if ( note[2] === 0.00 || note[2] === "0.00"){
+                Tone.Transport.setTimeout(function(time){
+                    instrument.triggerRelease(note[1]);
+                }, note[0]);
+            }else{
+                Tone.Transport.setTimeout(function(time){
+                    instrument.triggerAttack(note[1]);
+                }, note[0]);
+            }
+        });
+    });
+    
+    Tone.Transport.start();
+};
 
 var recordNotes = function(note, time, velocity){
     notes.push([time, note, velocity]);
@@ -28,18 +49,12 @@ $('#stop').on('click', function(){
 
 $('#play').on('click', function(){
     $('#play').css("background-color", "green");
-    Tone.Transport.start();
     Tone.Transport.setInterval(function(time){
         $('#transportTime').text(Tone.Transport.getTransportTime());
-    }, "16n");
+    }, "16n"); 
 
-    parseScore({
-        "instrument" : notes
-    });
-    
-    Tone.Note.route("instrument", function(time, note, velocity, duration){
-        instrument.triggerAttackRelease(note, duration, time, 1);
-    });
+    //TO DO: need to get the song!    
+    playSong(song);
 })
 
 $('#record').on('click', function(){
