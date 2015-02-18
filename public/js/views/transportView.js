@@ -1,10 +1,11 @@
 var WO = WO || {};
 WO.TransportView = Backbone.View.extend({
   //tagname: "",
-  //className: 'songView',
+  className: 'transportView',
   //events: {},
   template: _.template(
-    '<div>' +
+    '<div class="transportEl"><span>Transport Time </span><span id="transportTime"><span class="tBar">0</span>:<span class="tBeats">0</span>:<span class="tSixt">0</span></span></div>' +
+    '<div class="transportControls">' +
       '<button id="rewind"><i class="fa fa-fast-backward"></i></button>' +
       '<button id="skipBack"><i class="fa fa-backward"></i></button>' +
       '<button id="stop"><i class="fa fa-stop"></i></button>' +
@@ -12,10 +13,9 @@ WO.TransportView = Backbone.View.extend({
       '<button id="record"><i class="fa fa-play-circle" style="color:red"></i></button>' +
       '<button id="skipForward"><i class="fa fa-forward"></i></button>' +
       '<button id="forward"><i class="fa fa-fast-forward"></i></button>' +
-      '<span>Transport Time </span><span id="transportTime">0:0:0</span>' +
     '</div>' +
     '<div id="keys">' +
-      '<span>Octave </span><span id="octave">4</span>' +
+      '<button class="octave"><span>Octave </span><span id="octave">4</span></button>' +
       '<button id="C4">C</button>' +
       '<button id="Db4" style="background-color:black;color:white">Db</button>' +
       '<button id="D4">D</button>' +

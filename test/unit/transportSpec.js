@@ -6,37 +6,40 @@
   describe('The transport', function () {
     describe('the view', function() {
       it('should have the transport buttons', function() {
-        expect($('button#rewind').prop('tagName')).to.be('BUTTON');
-        expect($('button#skipBack').prop('tagName')).to.be('BUTTON');
-        expect($('button#stop').prop('tagName')).to.be('BUTTON');
-        expect($('button#play').prop('tagName')).to.be('BUTTON');
-        expect($('button#record').prop('tagName')).to.be('BUTTON');
-        expect($('button#skipForward').prop('tagName')).to.be('BUTTON');
-        expect($('button#forward').prop('tagName')).to.be('BUTTON');
+        expect($('#rewind').prop('tagName')).to.be('BUTTON');
+        expect($('#skipBack').prop('tagName')).to.be('BUTTON');
+        expect($('#stop').prop('tagName')).to.be('BUTTON');
+        expect($('#play').prop('tagName')).to.be('BUTTON');
+        expect($('#record').prop('tagName')).to.be('BUTTON');
+        expect($('#skipForward').prop('tagName')).to.be('BUTTON');
+        expect($('#forward').prop('tagName')).to.be('BUTTON');
       });
       it('should have a transport time node', function() {
         expect($('#transportTime').length).not.to.be(0);
       });
+      it('should have an octave button', function() {
+        expect($('.octave').prop('tagName')).to.be('BUTTON');
+      });
       describe('the keys', function() {
         it('should have the note buttons', function() {
-          expect($('button#C4').prop('tagName')).to.be('BUTTON');
-          expect($('button#Db4').prop('tagName')).to.be('BUTTON');
-          expect($('button#D4').prop('tagName')).to.be('BUTTON');
-          expect($('button#Eb4').prop('tagName')).to.be('BUTTON');
-          expect($('button#E4').prop('tagName')).to.be('BUTTON');
-          expect($('button#F4').prop('tagName')).to.be('BUTTON');
-          expect($('button#Gb4').prop('tagName')).to.be('BUTTON');
-          expect($('button#G4').prop('tagName')).to.be('BUTTON');
-          expect($('button#Ab4').prop('tagName')).to.be('BUTTON');
-          expect($('button#A4').prop('tagName')).to.be('BUTTON');
-          expect($('button#Bb4').prop('tagName')).to.be('BUTTON');
-          expect($('button#B4').prop('tagName')).to.be('BUTTON');
-          expect($('button#C5').prop('tagName')).to.be('BUTTON');
-          expect($('button#Db5').prop('tagName')).to.be('BUTTON');
-          expect($('button#D5').prop('tagName')).to.be('BUTTON');
-          expect($('button#Eb5').prop('tagName')).to.be('BUTTON');
-          expect($('button#E5').prop('tagName')).to.be('BUTTON');
-          expect($('button#F5').prop('tagName')).to.be('BUTTON');
+          expect($('#C4').prop('tagName')).to.be('BUTTON');
+          expect($('#Db4').prop('tagName')).to.be('BUTTON');
+          expect($('#D4').prop('tagName')).to.be('BUTTON');
+          expect($('#Eb4').prop('tagName')).to.be('BUTTON');
+          expect($('#E4').prop('tagName')).to.be('BUTTON');
+          expect($('#F4').prop('tagName')).to.be('BUTTON');
+          expect($('#Gb4').prop('tagName')).to.be('BUTTON');
+          expect($('#G4').prop('tagName')).to.be('BUTTON');
+          expect($('#Ab4').prop('tagName')).to.be('BUTTON');
+          expect($('#A4').prop('tagName')).to.be('BUTTON');
+          expect($('#Bb4').prop('tagName')).to.be('BUTTON');
+          expect($('#B4').prop('tagName')).to.be('BUTTON');
+          expect($('#C5').prop('tagName')).to.be('BUTTON');
+          expect($('#Db5').prop('tagName')).to.be('BUTTON');
+          expect($('#D5').prop('tagName')).to.be('BUTTON');
+          expect($('#Eb5').prop('tagName')).to.be('BUTTON');
+          expect($('#E5').prop('tagName')).to.be('BUTTON');
+          expect($('#F5').prop('tagName')).to.be('BUTTON');
         });
         it('should have black keys', function() {
           expect($('#Db4').css('background-color')).to.be('rgb(0, 0, 0)');

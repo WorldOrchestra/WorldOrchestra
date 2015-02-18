@@ -6,3 +6,33 @@ body {
 a {
   color: #00B7FF;
 }
+
+/*------ Transport view ------*/
+
+#keys {
+    margin: 0 auto;
+    padding-right: 69px;
+    width: 546px;
+}
+
+.octave {
+    margin-right: 5px;
+    width: 64px;
+}
+
+.transportEl, .transportControls {
+  margin: 0 auto;
+  width: 182px;
+}
+
+.transportEl {
+  border: 1px solid darkgray;
+  border-radius: 14px;
+  box-shadow: inset 2px 2px 12px 3px lightgray;
+  padding: 4px;
+  text-align: center;
+}
+
+.transportControls {
+  margin-bottom: 10px;
+}
