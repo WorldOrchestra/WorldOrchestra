@@ -10,6 +10,7 @@ WO.WOView = Backbone.View.extend({
 
   render: function(){
     this.$el.append(this.transportView.$el);
+    this.$el.append(this.userInputView.$el);
     //this.$el.show();
     $('.appBody').append(this.$el);
     return this.$el;//.html([
