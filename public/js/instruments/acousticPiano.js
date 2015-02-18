@@ -1,3 +1,29 @@
+var acousticPianoOptions = {
+      "portamento" : 0.0,
+      "oscillator" : {
+            "type" : "square"
+      },
+      "filter" : {
+            "Q" : 6,
+            "type" : "lowpass",
+            "rolloff" : -24 
+      },
+      "envelope" : {
+            "attack" : 0.005,
+            "decay" : 3,
+            "sustain" : 0,
+            "release" : 0.45
+      },
+      "filterEnvelope" : {
+            "attack" : 0.001,
+            "decay" : 0.32,
+            "sustain" : 0.9,
+            "release" : 3,
+            "min" : 700,
+            "max" : 3500
+      }
+};
+
 var acousticPiano = new Tone.MultiSampler({
             "A0" : "soundfont/acoustic_grand_piano-mp3/A0.mp3",
             "A1" : "soundfont/acoustic_grand_piano-mp3/A1.mp3",
@@ -99,5 +125,6 @@ var onload = function(){
       console.log('piano loaded');
 };
 
+acousticPiano.set(acousticPianoOptions);
 acousticPiano.setVolume(0);
 acousticPiano.toMaster();
