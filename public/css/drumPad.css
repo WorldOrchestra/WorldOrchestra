@@ -45,11 +45,9 @@
     width: 60%;
     margin-left: 20%;
 }
-#Content #StartButton {
-    margin-bottom: 10px;
-    width: 60%;
-    margin-left: 20%;
+#Sequencer{
+    padding-top: 2.5%;
 }
-#Content #StartButton .Checkbox{
-    width: 100%;
+.Checkbox{
+    border-color: transparent;
 }
