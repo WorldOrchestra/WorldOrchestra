@@ -1,38 +1,25 @@
 /* globals Tone, GUI */
 var drumPadHandler = function() {
-		//try this out?
-	var keys = new Tone.MultiSampler({
-    "A" : "../soundfont/acoustic_grand_piano-mp3/A4.mp3",
-/*    "C#" : "./tylersDrumkit/acoustic-kit/snare.wav",
-    "E" : "./tylersDrumkit/acoustic-kit/tom1.wav",
-    "F#" : "./tylersDrumkit/acoustic-kit/tom2.wav",
-    "G" : "./tylersDrumkit/acoustic-kit/tom3.wav",
-    "D" : "./tylersDrumkit/acoustic-kit/kick.wav"*/
-}, function(){
-    $("#Loading").remove();
-    startCheckbox.enable();
-});
-keys.toMaster();
 
 	var stepNumber = 0;
-	var noteNames = ["A", "C#", "E", "F#", "G", "D"];
+	var noteNames = ["Gb4", "D4", "A4", "G4", "F4", "C4"];
 	var checkboxes = [];
 	var indicators = [];
 
-	Tone.Transport.setLoopEnd("1m");
-	Tone.Transport.loop = true;
+	// Tone.Transport.setLoopEnd("1m");
+	// Tone.Transport.loop = true;
 	Tone.Transport.setInterval(function(time){
 	    //remove the old indicator
 	    $(".Lit").removeClass("Lit");
 	    //light up the new one
-	    indicators[stepNumber].addClass("Lit");
+	    // indicators[stepNumber].addClass("Lit");
 	    stepNumber++;
 	    stepNumber = stepNumber % 16;
 	    //get the current column
 	    for (var i = 0; i < checkboxes.length; i++){
 	        var box = checkboxes[i][stepNumber];
 	        if (box.isChecked()){
-	            keys.triggerAttack(noteNames[i], time);
+	            drumPad.triggerAttack(noteNames[i], time);
 	        }
 	    }
 	}, "16n");
@@ -63,16 +50,17 @@ keys.toMaster();
 	        sequencer.append("<div></div>");
 	    }
 	}
-	new GUI.TopBar(Tone);
-	var startButton = $("#StartButton");
-	var startCheckbox = new GUI.Checkbox(startButton, function(on){
-	    if (on){
-	        Tone.Transport.start();
-	    } else {
-	        Tone.Transport.stop();
-	    }
-	}, "start", "stop");
-	startCheckbox.disable();
+	
+	// new GUI.TopBar(Tone);
+	// var startButton = $("#StartButton");
+	// var startCheckbox = new GUI.Checkbox(startButton, function(on){
+	//     if (on){
+	//         Tone.Transport.start();
+	//     } else {
+	//         Tone.Transport.stop();
+	//     }
+	// }, "start", "stop");
+	// startCheckbox.disable();
 
 	/*makeIndicator();*/
 	makeCheckboxes();

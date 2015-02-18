@@ -1,9 +1,10 @@
+/* global _,$,Tone */
 Tone.Transport.setBpm(120);
 // Tone.Transport.setLoopEnd("1:0");
 // Tone.Transport.loop = true;
 
 // Tone.Transport.setTransportTime("4:0:0");
-
+var song; //temp
 var recording = false;
 
 var playSong = function(song){
@@ -31,6 +32,7 @@ var playSong = function(song){
 var recordNotes = function(note, time, velocity){
     notes.push([time, note, velocity]);
     console.log(notes);
+    // song = notes; //temp
 };
 
 $('#rewind').on('click', function(){
@@ -38,6 +40,20 @@ $('#rewind').on('click', function(){
     $('#transportTime').text(Tone.Transport.getTransportTime());
 })
 
+$('#skipBack').on('click', function(){
+    Tone.Transport.setTransportTime(Tone.Transport.getTransportTime() + "-1m");
+    $('#transportTime').text(Tone.Transport.getTransportTime());
+});
+
+$('#skipForward').on('click', function(){
+    Tone.Transport.setTransportTime(Tone.Transport.getTransportTime() + "+1m");
+    $('#transportTime').text(Tone.Transport.getTransportTime());
+});
+
+$('#forward').on('click', function(){
+    Tone.Transport.setTransportTime(Tone.Transport.getTransportTime() + "+8m");
+    $('#transportTime').text(Tone.Transport.getTransportTime());
+});
 
 $('#stop').on('click', function(){
     recording = false;
@@ -51,6 +67,7 @@ $('#play').on('click', function(){
     $('#play').css("background-color", "green");
     Tone.Transport.setInterval(function(time){
         $('#transportTime').text(Tone.Transport.getTransportTime());
+        console.log(Tone.Transport.getTransportTime());
     }, "16n"); 
 
     //TO DO: need to get the song!    
@@ -61,8 +78,8 @@ $('#record').on('click', function(){
     recording = true;
     $(this).css({"background-color": "red", "color" : "white"});
     Tone.Transport.setTransportTime("0:0:0");
-    Tone.Transport.start();
     Tone.Transport.setInterval(function(time){
         $('#transportTime').text(Tone.Transport.getTransportTime());
     }, "16n");
+    Tone.Transport.start();
 })

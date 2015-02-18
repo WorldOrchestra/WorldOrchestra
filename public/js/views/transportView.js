@@ -5,6 +5,7 @@ WO.TransportView = Backbone.View.extend({
   //events: {},
   template: _.template(
     '<div class="transportEl"><span>Transport Time </span><span id="transportTime"><span class="tBar">0</span>:<span class="tBeats">0</span>:<span class="tSixt">0</span></span></div>' +
+    '<button id="metronome"><i class="fa fa-heartbeat"></i></button>' +
     '<div class="transportControls">' +
       '<button id="rewind"><i class="fa fa-fast-backward"></i></button>' +
       '<button id="skipBack"><i class="fa fa-backward"></i></button>' +
