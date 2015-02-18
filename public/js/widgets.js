@@ -7,7 +7,7 @@ var GUI = GUI || {};
  */
 GUI.StartButton = function(callback){
 	this.element = $("<div>", {"class" : "StartButton"})
-		.appendTo("#Container");
+		.appendTo("#SubContainer");
 	this.button = $("<button>")
 		.button({label: "\u25B6"})
 		.click(this.buttonClicked.bind(this))
@@ -29,7 +29,7 @@ GUI.StartButton.prototype.buttonClicked = function(){
 GUI.MobileStart = function(callback){
 	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		this.element = $("<div>", {"class" : "StartButton"})
-			.appendTo("#Container");
+			.appendTo("#SubContainer");
 		this.button = $("<button>")
 			.button({label: "\u25B6"})
 			.click(this.buttonClicked.bind(this))
@@ -247,7 +247,7 @@ GUI.ValueMeter.prototype.update = function(){
  */
 GUI.TopBar = function(Tone){
 	this.element = $("<div>", {"id" : "TopBar"})
-		.appendTo("#Container");
+		.appendTo("#SubContainer");
 	this.hompage = $("<div>", {"id" : "HomePage"})
 		.appendTo(this.element)
 		.append($("<a>").attr("href", "https://github.com/TONEnoTONE/Tone.js").text("WorldOrchestra"));

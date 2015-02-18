@@ -1,6 +1,6 @@
 
 var ExampleList = {
-/*	"Sources" : {
+	"Sources" : {
 		"Oscillators" : "oscillator",
 		"Noise" : "noises",
 		"Player" : "player"
@@ -31,5 +31,5 @@ var ExampleList = {
 		"JSON Sandbox" : "json",
 		"Dots" : "interaction",
 		"Play Along" : "shiny"
-	},*/
+	},
 };

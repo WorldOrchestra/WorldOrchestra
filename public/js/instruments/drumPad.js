@@ -1,5 +1,5 @@
-var keys = new Tone.MultiSampler({
-    "A" : "./tylersDrumkit/acoustic-kit/hihat.wav",
+/*var keys = new Tone.MultiSampler({
+    "A" : "../soundfont/acoustic_grand_piano-mp3/A4.mp3",
     "C#" : "./tylersDrumkit/acoustic-kit/snare.wav",
     "E" : "./tylersDrumkit/acoustic-kit/tom1.wav",
     "F#" : "./tylersDrumkit/acoustic-kit/tom2.wav",
@@ -9,4 +9,4 @@ var keys = new Tone.MultiSampler({
     $("#Loading").remove();
     startCheckbox.enable();
 });
-keys.toMaster();
+keys.toMaster();*/

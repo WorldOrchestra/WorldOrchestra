@@ -14,8 +14,8 @@ textarea {
 	text-size-adjust: none;
 	-webkit-text-size-adjust: none;
 	width: 100%;
-	height: 100%;
-	position: absolute;
+	height: 70%;
+	position: relative;
 	left: 0px;
 	top: 0px;
 	overflow-x: hidden;
