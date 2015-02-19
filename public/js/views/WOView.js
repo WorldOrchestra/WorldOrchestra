@@ -2,10 +2,10 @@ var WO = WO || {};
 WO.WOView = Backbone.View.extend({
 
   initialize: function(params){
-    var track = new WO.Track();
-    var trackView = new WO.TrackView({model: track});
-    var song = new WO.Song([track]);
-    this.songView = new WO.SongView({collection: song});
+    WO.track = new WO.Track();
+    WO.trackView = new WO.TrackView({model: WO.track});
+    WO.song = new WO.Song([WO.track]);
+    this.songView = new WO.SongView({collection: WO.song});
     this.transportView = new WO.TransportView();
     this.userInputView = new WO.userInputView();
     this.render();
