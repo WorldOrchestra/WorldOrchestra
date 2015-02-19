@@ -21,7 +21,7 @@ var down = {};
       }
   });
 
-          
+
   $(document).on('keyup', function(e){
       var note = getKey(e);
 
@@ -101,7 +101,7 @@ var down = {};
 
       return note;
   }
-      
+
   var setOctave = function( key ){
       if( down[key] === null || down[key] === undefined){
           if( key === 90 ){

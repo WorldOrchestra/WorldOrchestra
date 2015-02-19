@@ -26,7 +26,7 @@ WO.playSong = function(song){
             }
         });
     });
-    
+
     Tone.Transport.start();
 };
 
@@ -63,6 +63,8 @@ $('#stop').on('click', function(){
     $('#record').css({"background-color": "white", "color" : "red"});
     Tone.Transport.stop();
     Tone.Transport.clearIntervals();
+    $('.track-notes').html("");
+    WO.showTrack(WO.track.get('notes'));
 })
 
 $('#play').on('click', function(){
@@ -70,10 +72,10 @@ $('#play').on('click', function(){
     Tone.Transport.setInterval(function(time){
         $('#transportTime').text(Tone.Transport.getTransportTime());
         console.log(Tone.Transport.getTransportTime());
-    }, "16n"); 
+    }, "16n");
 
     playDrumPad();
-    //TO DO: need to get the song!    
+    //TO DO: need to get the song!
     WO.playSong(WO.song);
 })
 
