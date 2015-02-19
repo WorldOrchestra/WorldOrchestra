@@ -31,8 +31,10 @@ WO.playSong = function(song){
 };
 
 WO.recordNotes = function(note, time, velocity){
+    //hard code for track 1
+    var notes = WO.track.get('notes');
     notes.push([time, note, velocity]);
-    console.log(notes);
+    // console.log(notes);
 };
 
 $('#rewind').on('click', function(){
