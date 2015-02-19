@@ -8,6 +8,7 @@ Tone.Transport.setBpm(120);
 WO.recording = false;
 
 WO.playSong = function(song){
+    // debugger;
     _.each(song.models, function(track){
         // console.log("track->", track);
         var notes = track.get('notes');
@@ -30,8 +31,10 @@ WO.playSong = function(song){
 };
 
 WO.recordNotes = function(note, time, velocity){
+    //hard code for track 1
+    var notes = WO.track.get('notes');
     notes.push([time, note, velocity]);
-    console.log(notes);
+    // console.log(notes);
 };
 
 $('#rewind').on('click', function(){
@@ -69,6 +72,7 @@ $('#play').on('click', function(){
         console.log(Tone.Transport.getTransportTime());
     }, "16n"); 
 
+    playDrumPad();
     //TO DO: need to get the song!    
     WO.playSong(WO.song);
 })
@@ -80,5 +84,6 @@ $('#record').on('click', function(){
     Tone.Transport.setInterval(function(time){
         $('#transportTime').text(Tone.Transport.getTransportTime());
     }, "16n");
-    Tone.Transport.start();
+    // Tone.Transport.start();
+    $('#play').click();
 })

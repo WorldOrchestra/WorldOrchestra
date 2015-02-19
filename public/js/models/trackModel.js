@@ -6,7 +6,8 @@ WO.Track = Backbone.Model.extend({
     title: 'Acoustic Piano',
     isMuted: false,
     solo: false,
-    octave: 4
+    octave: 4,
+    volume: 0.75
   }
 });
 
