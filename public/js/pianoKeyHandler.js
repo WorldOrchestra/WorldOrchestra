@@ -13,8 +13,8 @@ var down = {};
       if( note !== null ){
           if( down[note] === null || down[note] === undefined){
               instrument.triggerAttack(note);
-              if (recording){
-                  recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
+              if (WO.recording){
+                  WO.recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
               }
               down[note] = true;
           }
@@ -31,8 +31,8 @@ var down = {};
 
       if( note !== null ){
           instrument.triggerRelease(note);
-          if (recording){
-              recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
+          if (WO.recording){
+              WO.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
           }
           down[note] = null;
       }
@@ -116,16 +116,16 @@ var down = {};
   $('#keys').on('mousedown','button', function(){
       var note = $(this).attr("id");
       instrument.triggerAttack(note);
-      if (recording){
-          recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
+      if (WO.recording){
+          WO.recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
       }
   });
 
   $('#keys').on('mouseup','button', function(){
       var note = $(this).attr("id");
       instrument.triggerRelease(note);
-      if (recording){
-          recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
+      if (WO.recording){
+          WO.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
       }
   })
 })(instrument)

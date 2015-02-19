@@ -2,13 +2,9 @@ var WO = WO || {};
 WO.SongView = Backbone.View.extend({
   id: 'songView',
   
-  events: {
-    'click .add-track-button' : 'addTrack'
-  },
-  
   initialize: function(params) {    
     this.render();
-    
+    WO.vent.on('click:addTrack', this.addTrack, this);
     this.collection.on("add remove", this.render, this);
   },
 
