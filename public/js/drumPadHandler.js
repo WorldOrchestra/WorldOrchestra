@@ -38,7 +38,7 @@ var drumPadHandler = function() {
 	/*makeIndicator();*/
 	makeCheckboxes();
 	var slider = new GUI.Slider($(".transportView"), function(val){
-	    var scaled = val * 30 + 100;
+	    var scaled = parseInt(val * 30 + 100).toFixed(0);
 	    Tone.Transport.setBpm(scaled);
 	    return scaled;
 	}, 120, "tempo");
