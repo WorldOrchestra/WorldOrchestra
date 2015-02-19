@@ -1,24 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Mocha Spec Runner</title>
-    <link rel="stylesheet" href="bower_components/mocha/mocha.css">
-</head>
-<body>
+  <head>
+    <title>WorldOrchestra Test Suite [Mocha]</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="unit/lib/css/mocha.css" />
+  </head>
+  <body>
     <div id="mocha"></div>
     <div class="appBody" style="display: none; visibility: hidden"></div>
-    <script src="bower_components/mocha/mocha.js"></script>
-    <script>mocha.setup('bdd')</script>
+    <script src="unit/lib/picomodal.js"></script>
+    <script src="unit/lib/expect.js"></script>
+    <script src="unit/lib/mocha.js"></script>
+    <script src="unit/lib/sinon.js"></script>
     <script src="bower_components/chai/chai.js"></script>
-    <script src="bower_components/sinon/index.js"></script>
-    <script>
-        var assert = chai.assert;
-        var expect = chai.expect;
-        var should = chai.should();
-    </script>
-
-    <!-- include source files here... -->
     <script src="../public/bower_components/jquery/dist/jquery.js"></script>
     <script src="../public/bower_components/underscore/underscore.js"></script>
     <script src="../public/bower_components/backbone/backbone.js"></script>
@@ -26,13 +20,24 @@
     <script src="../public/js/instruments/acousticPiano.js"></script>
     <script>
         var instrument = acousticPiano;
+    </script>
+    <!--<script src="../../server/bower_components/requirejs/require.js"></script>-->
+
+    <script>
+        // Tell mocha to use bdd-style expects
         mocha.setup('bdd');
     </script>
+    <!-- build:js scripts/main.js -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"> </script>
+    <!--<script src="../../server/scripts/main.js"></script>-->
+    <!-- endbuild -->
+
+    <!-- Load tests and helpers here -->
+    <script src="../public/bower_components/jquery-ui/jquery-ui.js"> </script>
     <script src="../public/js/ExampleList.js"></script>
     <script src="../public/js/widgets.js"></script>
     <script src="../public/js/drumPadHandler.js"></script>
+    <script src="../public/js/transport.js"></script>
     <script src="../public/js/models/trackModel.js"></script>
     <script src="../public/js/models/WOModel.js"></script>
     <script src="../public/js/collections/songCollection.js"></script>
@@ -40,26 +45,15 @@
     <script src="../public/js/views/transportView.js"></script>
     <script src="../public/js/views/userInputView.js"></script>
     <script src="../public/js/views/WOView.js"></script>
-    <script src="../public/js/trackd3.js"></script>
     <script src="../public/js/index.js"></script>
-
-    <script src="../public/js/instruments/synth.js"></script>
-    <script src="../public/js/parseScore.js"></script>
-    <script src="../public/js/pianoKeyHandler.js"></script>
-    <script src="../public/js/transport.js"></script>
-
-
-    <!-- include unit files here... -->
-    <script src="unit/models/trackModelSpec.js"></script>
-    <script src="unit/collections/songCollectionSpec.js"></script>
     <script src="unit/spec.js"></script>
     <script src="unit/transportSpec.js"></script>
 
     <script>
-        // Mocha expects a global onload var here and automagically executes it on pageload
-        onload = function(){
-            var runner = window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
-        };
+      // Mocha expects a global onload var here and automagically executes it on pageload
+      onload = function(){
+        var runner = window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
+      };
     </script>
-</body>
+  </body>
 </html>

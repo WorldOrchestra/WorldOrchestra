@@ -13,7 +13,31 @@ module.exports = function(app) {
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth'));
-  
+
+  app.route('/specRunner')
+    .get(function(req, res) {
+      res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test/unit/specRunner.html');
+    });
+  app.route('/lib/*')
+    .get(function(req, res) {
+      res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test/unit' + req.originalUrl);
+    });
+  app.route('/public/*')
+    .get(function(req, res) {
+      res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra' + req.originalUrl);
+    });
+  app.route('/bower_components/*')
+    .get(function(req, res) {
+      res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test' + req.originalUrl);
+    });
+  app.route('/spec.js')
+    .get(function(req, res) {
+      res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test/unit/spec.js');
+    });
+  app.route('/transportSpec.js')
+    .get(function(req, res) {
+      res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test/unit/transportSpec.js');
+    });
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
@@ -21,6 +45,6 @@ module.exports = function(app) {
   // All other routes should redirect to the index.html
   app.route('/*')
     .get(function(req, res) {
-      res.sendfile(app.get('appPath') + '/index.html');
+      res.sendFile(app.get('appPath') + '/index.html');
     });
 };
