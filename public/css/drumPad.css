@@ -41,7 +41,8 @@
     opacity: 1;
 }
 .Slider {
-    margin-top: 200px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: 60%;
     margin-left: 20%;
 }
