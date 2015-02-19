@@ -1,3 +1,8 @@
+/* global describe, it */
+
+(function () {
+    'use strict';
+
 describe('WorldOrchestra framework', function() {
   describe('The main application', function() {
     it('should have a container named WO', function() {

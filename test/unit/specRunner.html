@@ -16,7 +16,12 @@
     <script src="../../public/bower_components/jquery/dist/jquery.js"></script>
     <script src="../../public/bower_components/underscore/underscore.js"></script>
     <script src="../../public/bower_components/backbone/backbone.js"></script>
-    <!--<script src="../../server/bower_components/requirejs/require.js"></script>-->
+    <script src="../../public/bower_components/tone/build/Tone.js"></script>
+    <script src="../../public/js/instruments/acousticPiano.js"></script>
+    <script>
+        var instrument = acousticPiano;
+    </script>
+    <script src="../../server/bower_components/requirejs/require.js"></script>
 
     <script>
         // Tell mocha to use bdd-style expects
@@ -24,10 +29,15 @@
     </script>
     <!-- build:js scripts/main.js -->
 
-    <!--<script src="../../server/scripts/main.js"></script>-->
+    <script src="../../server/scripts/main.js"></script>
     <!-- endbuild -->
 
     <!-- Load tests and helpers here -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"> </script>
+    <script src="../../public/js/ExampleList.js"></script>
+    <script src="../../public/js/widgets.js"></script>
+    <script src="../../public/js/drumPadHandler.js"></script>
+    <script src="../../public/js/transport.js"></script>
     <script src="../../public/js/models/trackModel.js"></script>
     <script src="../../public/js/models/WOModel.js"></script>
     <script src="../../public/js/collections/songCollection.js"></script>
@@ -42,6 +52,7 @@
     <script>
       // Mocha expects a global onload var here and automagically executes it on pageload
       onload = function(){
+//          mocha.run();
         var runner = window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
       };
     </script>

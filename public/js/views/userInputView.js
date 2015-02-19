@@ -18,7 +18,6 @@ WO.userInputView = Backbone.View.extend({
     },
     render: function() {
         var myTemplate = this.$el.append(this.template);
-  
         // drumPadHandler();
         return myTemplate;
     }
