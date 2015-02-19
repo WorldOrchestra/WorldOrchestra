@@ -113,7 +113,7 @@ var down = {};
       }
   };
 
-  $('#keys').on('mousedown','button', function(){
+  $('#Container').on('mousedown','.anchor', function(){
       var note = $(this).attr("id");
       instrument.triggerAttack(note);
       if (WO.recording){
@@ -121,7 +121,7 @@ var down = {};
       }
   });
 
-  $('#keys').on('mouseup','button', function(){
+  $('#Container').on('mouseup','.anchor', function(){
       var note = $(this).attr("id");
       instrument.triggerRelease(note);
       if (WO.recording){
