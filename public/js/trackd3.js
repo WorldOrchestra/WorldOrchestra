@@ -26,7 +26,6 @@ var parseTrack = function(track) {
             for (j = stack.length - 1; stack[j][1] !== track[i][1]; j -= 1) {
             }
             start = stack.splice(j, 1)[0];
-            console.log(Tone.prototype.toSeconds(track[i][0])-Tone.prototype.toSeconds(start[0]));
             result.push({offset: Tone.prototype.toSeconds(start[0]) * 16,
                 duration: (Tone.prototype.toSeconds(track[i][0]) - Tone.prototype.toSeconds(start[0])) * 16,
                 pitch: altPitch[start[1]],
@@ -47,7 +46,6 @@ var showTrack = function(dataset) {
     var zoomFn = function(d) {
         var col = Math.min(255, Math.floor(Math.pow(10, d3.event.scale)));
         d.volume = col;
-        console.log(d);
         d3.select(this).attr('fill', 'rgb(' + col+ ',' +  col+','+ col+')');
     };
     var svg = d3.select('body')
@@ -60,7 +58,6 @@ var showTrack = function(dataset) {
     var zoom = d3.behavior.zoom()
         //.scaleExtent([0, 255])
         .on('zoom', zoomFn);
-    var radius = 25;
 
     svg.selectAll("rect")
         .data(dataset)
