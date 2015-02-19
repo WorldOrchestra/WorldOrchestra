@@ -1,0 +1,47 @@
+<html>
+<style>
+body {
+  box-sizing: border-box;
+}
+  .track-container{
+    border: 1px solid black;
+    padding: 10px;
+    height: 115px;
+    position: relative;
+  }
+
+  .track-controls {
+    border: 1px solid grey;
+    padding: 10px;
+    width: 22%;
+    float: left;
+  }
+
+  .track-notes {
+   border: 1px solid grey;
+   padding: 10px;
+   width: 70%; 
+   height: 82%;
+   float: right;
+  }
+
+</style>
+<body>
+  <div class="track-container">
+    <div class="track-controls">
+      <h3>Acoustic Piano</h3><br>
+      <button class="solo-button" id='solo'>S</button>
+      <button class="mute-button" id='mute' >M</button>
+      <input type="range" min="0.00" max="1.00" step="0.01" value="0.75">
+    </div>
+    <div class="track-notes">
+      
+    </div>
+  </div>
+
+  <script>
+
+
+  </script>
+</body>
+</html>
