@@ -13,9 +13,11 @@ WO.TrackView = Backbone.View.extend({
         '<button class="delete-track-button" id="delete"><i class="fa fa-trash-o"></i></button><br>' +
         '<button class="solo-track-button" id="solo">S</button>' +
         '<button class="mute-track-button" id="mute" >M</button>' +
-        '&nbsp;<i class="fa fa-volume-down"></i>' +
-        '<input class="track-volume-slider" type="range" min="0.00" max="1.00" step="0.01" value="0.75">' +
-        '<i class="fa fa-volume-up"></i>' +
+        '<div class="track-volume-slider-group">' +
+          '<i class="fa fa-volume-down"></i>' +
+          '<input class="track-volume-slider" type="range" min="0.00" max="1.00" step="0.01" value="0.75">' +
+          '<i class="fa fa-volume-up"></i>' +
+        '</div>' +
       '</div>' +
       '<div class="track-notes">' +
       '</div>' +
