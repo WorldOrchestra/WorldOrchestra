@@ -38,8 +38,6 @@ textarea {
 	font-family: monospace;
 	position: relative;
 	margin: auto;
-	margin-top: 60px;
-	margin-bottom: 120px;
 	width: 200px;
 	height: auto;
 	z-index: 0;
@@ -336,6 +334,6 @@ textarea {
 
 .Checkbox.pressed {
 	border: 1px solid black;
-	background: rgba(255, 255, 255, 0.26)!important;
+	background: rgba(255, 255, 255, 0.1)!important;
 	color: black;
 }
