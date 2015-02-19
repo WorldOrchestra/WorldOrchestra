@@ -8,17 +8,17 @@
     margin-bottom: 20px;
 }
 #Content {
-    width: 1400px;
-    height: 500px;
-    background-image: url("../img/drummachinecompressed.png");
+    width: 1120px;
+    height: 400px;
+    background-image: url("../img/drumpad001.png");
 }
 #Content #Sequencer .Checkbox{
     margin-top: 0px;
-    padding: 4px;
-    left: 70px;
-    top: 40px;
-    width: 70px;
-    height: 58px;
+    padding: 3px;
+    left: 56px;
+    top: 32px;
+    width: 55.5px;
+    height: 47px;
     background-color: transparent;
 }
 #Content #Sequencer .Checkbox .ui-button-text {
