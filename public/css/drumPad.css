@@ -11,6 +11,9 @@
     width: 1120px;
     height: 400px;
     background-image: url("../img/drumpad001.png");
+    -webkit-animation:taufik 2s; 
+    -moz-animation:taufik 2s; 
+    animation:taufik 2s; 
 }
 #Content #Sequencer .Checkbox{
     margin-top: 0px;

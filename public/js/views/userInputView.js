@@ -12,6 +12,13 @@ WO.userInputView = Backbone.View.extend({
             '<li><a href="#tabs-2">Piano</a></li>'+
           '</ul>'+
           '<div id="tabs-1">'+
+            '<div id=drumpPadPresets">' +
+              '<button class="clear-drumPad-button" onClick="clearDrumPad();">Reset</button>' +
+              '<select id="drumpPadPreset-dropdown-list" onchange=setDrumPadPreset(drumPadPresetRock)>' +
+                '<option value="">Preset</option>' +
+                '<option value="drumpPadPresetRock">Rock</option>' +
+              '</select>' + 
+            '</div>' +
             '<div id="Content">'+
               '<div id="Sequencer"></div>'+
             '</div>'+
