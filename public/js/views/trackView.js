@@ -25,6 +25,14 @@ WO.TrackView = Backbone.View.extend({
     '</div>'
   ),
   initialize: function(){
+
+      //this.track.on('change:currentSong', function(model){
+      this.model.on('change:notes', function(model) {
+          debugger;
+          $('.track-notes').html('');
+          WO.showTrack(this.model.get('notes'));
+          //this.playerView.setSong(model.get('currentSong'));
+      }, this);
   },
   render: function(){
     this.$el.html( this.template(this.model.toJSON()));

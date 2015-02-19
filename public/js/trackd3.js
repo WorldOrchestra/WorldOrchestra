@@ -14,23 +14,23 @@ WO.showTrack = function(track) {
     7: 'violet'
   };
   //dataset = dataset || [{offset: 10, duration: 10, pitch: 8, volume: 28, octave: 4}, {offset: 200, duration: 10, pitch: 8, volume: 28, octave: 4}];
-    track = track || [["0:0:0","C4",1],["0:0:2","Ab4",1],["0:0:3","C4",0],["10:0:4","Ab4",0]];
+    track = track ? track.slice() : [["0:0:0","C4",1],["0:0:2","Ab4",1],["0:0:3","C4",0],["10:0:4","Ab4",0]];
     var parseTrack = function(track) {
         var altPitch, result, stack, i, l, j, start;
         altPitch = {
-            A4: 5,
-            Bb4: 10,
-            B4: 15,
-            C4: 20,
-            Db4: 25,
-            E4: 30,
+            A4: 65,
+            Bb4: 60,
+            B4: 55,
+            C4: 50,
+            Db4: 45,
+            E4: 40,
             F4: 35,
-            Gb4: 40,
-            G4: 45,
-            Ab4: 50,
-            A5: 55,
-            Bb5: 60,
-            B5: 65
+            Gb4: 30,
+            G4: 25,
+            Ab4: 20,
+            A5: 15,
+            Bb5: 10,
+            B5: 5
         };
         result = [];
         stack = [track.shift()];

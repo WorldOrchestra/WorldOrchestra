@@ -1,8 +1,8 @@
 var WO = WO || {};
 WO.SongView = Backbone.View.extend({
   id: 'songView',
-  
-  initialize: function(params) {    
+
+  initialize: function(params) {
     this.render();
     WO.vent.on('click:addTrack', this.addTrack, this);
     this.collection.on("add remove", this.render, this);
@@ -15,7 +15,7 @@ WO.SongView = Backbone.View.extend({
     this.collection.add(newTrack);
   },
   removeTrack: function(){
-    
+
   },
   render: function() {
     this.$el.children().detach();
