@@ -19,10 +19,10 @@ WO.TrackView = Backbone.View.extend({
       '</div>' +
       '<div class="track-notes">' +
       '</div>' +
+      '<script>showTrack(parseTrack(<%= notes %>))</script>' +
     '</div>'
   ),
   initialize: function(){
-    // this.render();
   },
   render: function(){
     this.$el.html( this.template(this.model.toJSON()));

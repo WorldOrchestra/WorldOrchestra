@@ -48,7 +48,7 @@ var showTrack = function(dataset) {
         d.volume = col;
         d3.select(this).attr('fill', 'rgb(' + col+ ',' +  col+','+ col+')');
     };
-    var svg = d3.select('body')
+    var svg = d3.select('.track-notes')
         .append('svg')
         .attr('width', w + 'px')
         .attr('height', h + 'px');
