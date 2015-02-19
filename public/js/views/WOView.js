@@ -15,7 +15,7 @@ WO.WOView = Backbone.View.extend({
     this.$el.append(this.transportView.$el);
     this.$el.append(this.userInputView.render());
     $('.appBody').append(this.$el);
-    drumPadHandler();
+    WO.drumPadHandler();
     return this.$el;//.html([
       //this.playerView.$el,
       //this.libraryView.$el,

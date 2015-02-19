@@ -1,4 +1,6 @@
 /* global _,$,Tone */
+var WO = WO || {};
+
 Tone.Transport.setBpm(120);
 // Tone.Transport.setLoopEnd("1:0");
 // Tone.Transport.loop = true;
@@ -74,7 +76,7 @@ $('#play').on('click', function(){
         console.log(Tone.Transport.getTransportTime());
     }, "16n");
 
-    playDrumPad();
+    WO.playDrumPad();
     //TO DO: need to get the song!
     WO.playSong(WO.song);
 })

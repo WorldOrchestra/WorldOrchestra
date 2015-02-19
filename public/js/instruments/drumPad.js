@@ -1,4 +1,6 @@
-var drumPad = new Tone.MultiSampler({
+var WO = WO || {};
+
+WO.drumPad = new Tone.MultiSampler({
     "Gb4" : "soundfont/acoustic-kit/hihat.wav",
     "D4" : "soundfont/acoustic-kit/snare.wav",
     "A4" : "soundfont/acoustic-kit/tom1.wav",
@@ -10,10 +12,10 @@ var drumPad = new Tone.MultiSampler({
     // startCheckbox.enable();
 });
 
-drumPad.setVolume(-15);
-drumPad.toMaster();
+WO.drumPad.setVolume(-15);
+WO.drumPad.toMaster();
 
-var playDrumPad = function(){
+WO.playDrumPad = function(){
   var stepNumber = 0;
   // var indicators = [];
 
@@ -28,13 +30,13 @@ var playDrumPad = function(){
       for (var i = 0; i < WO.drumPadCheckboxes.length; i++){
           var box = WO.drumPadCheckboxes[i][stepNumber];
           if (box.isChecked()){
-              drumPad.triggerAttack(WO.drumPadNoteNames[i], time);
+              WO.drumPad.triggerAttack(WO.drumPadNoteNames[i], time);
           }
       }
   }, "16n");
 };
 
-var clearDrumPad = function(){
+WO.clearDrumPad = function(){
   for( var i=0; i<WO.drumPadCheckboxes.length; i++ ){
     _.each(WO.drumPadCheckboxes[i], function(checkbox){
       checkbox.check(false);
@@ -42,7 +44,7 @@ var clearDrumPad = function(){
   }
 };
 
-var saveDrumpad = function(){
+WO.saveDrumpad = function(){
   var checked = [];
   for (var row = 0; row < 6; row++){
     var temp = [];
@@ -54,7 +56,7 @@ var saveDrumpad = function(){
   return checked;
 };
 
-var setDrumPadPreset = function(preset){
+WO.setDrumPadPreset = function(preset){
   for (var row = 0; row < 6; row++){
     for (var beat = 0; beat < 16; beat++){
       WO.drumPadCheckboxes[row][beat].check(preset[row][beat]);
@@ -62,5 +64,5 @@ var setDrumPadPreset = function(preset){
   }
 };
 
-var drumPadPresetRock = [[true,false,true,false,true,false,true,false,true,false,true,false,true,false,true,false],[false,false,false,false,true,false,false,false,false,false,false,false,true,false,false,false],[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],[true,false,false,false,false,false,true,false,true,false,false,false,false,false,false,false]];
+WO.drumPadPresetRock = [[true,false,true,false,true,false,true,false,true,false,true,false,true,false,true,false],[false,false,false,false,true,false,false,false,false,false,false,false,true,false,false,false],[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],[true,false,false,false,false,false,true,false,true,false,false,false,false,false,false,false]];
 
