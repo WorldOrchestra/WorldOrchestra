@@ -1,67 +1,36 @@
 <div id="p-wrapper"> 
     <ul id="piano"> 
-        
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div><span></span></li> 
-        <li><div class="anchor"></div></li> 
+        <li><div class="anchor" id="C3"></div></li> 
+        <li><div class="anchor" id="D3"></div><span id="Db3"></span></li> 
+        <li><div class="anchor" id="E3"></div><span id="Eb3"></span></li> 
+        <li><div class="anchor" id="F3"></div></li> 
+        <li><div class="anchor" id="G3"></div><span id="Gb3"></span></li> 
+        <li><div class="anchor" id="A3"></div><span id="Ab3"></span></li> 
+        <li><div class="anchor" id="B3"></div><span id="Bb3"></span></li> 
+        <li><div class="anchor" id="C3"></div></li> 
+        <li><div class="anchor" id="D4"></div><span id="Db4"></span></li> 
+        <li><div class="anchor" id="E4"></div><span id="Eb4"></span></li> 
+        <li><div class="anchor" id="F4"></div></li> 
+        <li><div class="anchor" id="G4"></div><span id="Gb4"></span></li> 
+        <li><div class="anchor" id="A4"></div><span id="Ab4"></span></li> 
+        <li><div class="anchor" id="B4"></div><span id="Bb4"></span></li> 
+        <li><div class="anchor" id="C5"></div></li>  
+        <li><div class="anchor" id="D5"></div><span id="Db5"></span></li> 
+        <li><div class="anchor" id="E5"></div><span id="Eb5"></span></li> 
+        <li><div class="anchor" id="F5"></div></li>  
+        <li><div class="anchor" id="G5"></div><span id="Gb5"></span></li> 
+        <li><div class="anchor" id="A5"></div><span id="Ab5"></span></li> 
+        <li><div class="anchor" id="B5"></div><span id="Bb4"></span></li> 
+        <li><div class="anchor" id="C6"></div></li> 
     </ul> 
 </div> 
 
 
 <style>
- * { 
-  margin:0px; 
-  padding:0px; 
-  list-style:none; 
-} 
 
 :focus { 
   outline:none !important; 
 } 
-
-body { 
-  background:#666; 
-  background:-webkit-radial-gradient(bottom left,cover,#999,#666); 
-  background:-moz-radial-gradient(bottom left,cover,#999,#666); 
-  background:-ms-radial-gradient(bottom left,cover,#999,#666); 
-  background:-o-radial-gradient(bottom left,cover,#999,#666); 
-  background:radial-gradient(bottom left,cover,#999,#666); 
-  height:500px; 
-} 
-
-a { 
-  color:indigo; 
-  text-decoration:none; 
-} 
-
 
 /* Piano Wrapper */ 
 #p-wrapper { 
@@ -71,7 +40,7 @@ a {
   background:-ms-linear-gradient(-60deg,#000,#333,#000,#666,#333 70%); 
   background:-o-linear-gradient(-60deg,#000,#333,#000,#666,#333 70%); 
   background:linear-gradient(-60deg,#000,#333,#000,#666,#333 70%); 
-  width:1300px;  // set the width of piano here
+  width:960px;  // set the width of piano here
   position:relative; 
   left:-20px; 
   -webkit-box-shadow:0 2px 0px #666,0 3px 0px #555,0 4px 0px #444,0 6px 6px #000,inset 0 -1px 1px rgba(255,255,255,0.5),inset 0 -4px 5px #000; 
@@ -84,12 +53,15 @@ a {
   -webkit-animation:taufik 2s; 
   -moz-animation:taufik 2s; 
   animation:taufik 2s; 
+    margin:0px; 
+  padding:0px; 
+  list-style:none; 
 } 
 
 /* Tuts */ 
 ul#piano { 
   display:block; 
-  width:100%; 
+  /*width:100%; */
   height:240px; 
   border-top:2px solid #222; 
 } 

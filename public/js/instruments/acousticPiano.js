@@ -3,25 +3,25 @@ var acousticPianoOptions = {
       "oscillator" : {
             "type" : "square"
       },
-      "filter" : {
-            "Q" : 6,
-            "type" : "lowpass",
-            "rolloff" : -24 
-      },
+      // "filter" : {
+      //       "Q" : 6,
+      //       "type" : "lowpass",
+      //       "rolloff" : -24 
+      // },
       "envelope" : {
             "attack" : 0.005,
             "decay" : 3,
             "sustain" : 0,
             "release" : 0.45
       },
-      "filterEnvelope" : {
-            "attack" : 0.001,
-            "decay" : 0.32,
-            "sustain" : 0.9,
-            "release" : 3,
-            "min" : 700,
-            "max" : 3500
-      }
+      // "filterEnvelope" : {
+      //       "attack" : 0.001,
+      //       "decay" : 0.32,
+      //       "sustain" : 0.9,
+      //       "release" : 3,
+      //       "min" : 700,
+      //       "max" : 3500
+      // }
 };
 
 var acousticPiano = new Tone.MultiSampler({
