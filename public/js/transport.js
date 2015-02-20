@@ -10,13 +10,10 @@ Tone.Transport.setBpm(120);
 WO.recording = false;
 
 WO.playSong = function(song){
-    // debugger;
     _.each(song.models, function(track){
-        // console.log("track->", track);
         var notes = track.get('notes');
         var instrument = track.get('instrument');
         _.each(notes, function(note){
-            // console.log("note->", note);
             if ( note[2] === 0.00 || note[2] === "0.00"){
                 Tone.Transport.setTimeout(function(time){
                     instrument.triggerRelease(note[1]);

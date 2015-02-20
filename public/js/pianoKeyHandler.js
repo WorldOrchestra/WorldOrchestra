@@ -1,3 +1,4 @@
+var WO = WO || {};
 var octave = 4;
 var down = {};
 

@@ -1,4 +1,6 @@
-var synthOptions = {
+var WO = WO || {};
+
+WO.synthOptions = {
     "portamento" : 0.05,
     "oscillator" : {
         "type" : "square"
@@ -24,7 +26,7 @@ var synthOptions = {
     }
 };
 
-var synth = new Tone.MonoSynth(synthOptions);
+WO.synth = new Tone.MonoSynth(WO.synthOptions);
 
-synth.setVolume(-25);
-synth.toMaster();
+WO.synth.setVolume(-25);
+WO.synth.toMaster();
