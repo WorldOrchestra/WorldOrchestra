@@ -19,7 +19,7 @@ WO.TrackView = Backbone.View.extend({
           '<i class="fa fa-volume-up"></i>' +
         '</div>' +
       '</div>' +
-      '<svg class="track-notes"></svg>' +
+      '<div class="track-notes"></div>' +
       '<script>' +
         'var mRender = new WO.midiRender("track-notes");' +
         'mRender.showTrack(<%= notes %>)</script>' +
