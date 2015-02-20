@@ -5,36 +5,38 @@ var midiRender = function(clas) {
   this.h = 95;
   this.w = 1000;
   this.factor = 10;
+
   this.svg = d3.select('.' + clas)
       .append('svg')
       .attr('width', this.w + 'px')
       .attr('height', this.h + 'px');
+
+  this.xScale = d3.scale.linear()
+      .domain([0, this.w])
+      .range([0, this.w]);
+
+  this.yScale = d3.scale.linear()
+      .domain([0, this.h])
+      .range([this.h, 0]);
+
+  this.xAxis = d3.svg.axis()
+      .scale(xScale)
+      .orient("bottom")
+      .innerTickSize(-this.h)
+      .outerTickSize(0)
+      .tickPadding(10);
+
+  this.yAxis = d3.svg.axis()
+      .scale(yScale)
+      .orient("left")
+      .innerTickSize(-this.w)
+      .outerTickSize(0)
+      .tickPadding(10);
+
   this.drawGrid();
 };
 
 midiRender.prototype.drawGrid = function() {
-    var xScale = d3.scale.linear()
-        .domain([0, this.w])
-        .range([0, this.w]);
-
-    var yScale = d3.scale.linear()
-        .domain([0, this.h])
-        .range([this.h, 0]);
-
-    var xAxis = d3.svg.axis()
-        .scale(xScale)
-        .orient("bottom")
-        .innerTickSize(-this.h)
-        .outerTickSize(0)
-        .tickPadding(10);
-
-    var yAxis = d3.svg.axis()
-        .scale(yScale)
-        .orient("left")
-        .innerTickSize(-this.w)
-        .outerTickSize(0)
-        .tickPadding(10);
-
     this.svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + this.h + ")")
