@@ -121,11 +121,7 @@ WO.acousticPiano = new Tone.MultiSampler({
             "Gb5" : "soundfont/acoustic_grand_piano-mp3/Gb5.mp3",
             "Gb6" : "soundfont/acoustic_grand_piano-mp3/Gb6.mp3",
             "Gb7" : "soundfont/acoustic_grand_piano-mp3/Gb7.mp3"
-}, onload);
-      
-WO.onload = function(){
-      console.log('piano loaded');
-};
+}, function(){console.log('piano loaded')});
 
 WO.acousticPiano.set(WO.acousticPianoOptions);
 WO.acousticPiano.setVolume(0);

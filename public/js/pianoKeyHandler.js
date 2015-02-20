@@ -1,3 +1,5 @@
+/* global WO, $, Tone */
+
 var WO = WO || {};
 var octave = 4;
 var down = {};
@@ -46,67 +48,34 @@ var down = {};
       $('body').trigger('pianoKeyOff', [note]);
   });
 
-  var getKey = function(event){
-      switch (event.which){
-          case 65 :
-              note = "C" + octave;
-              break;
-          case 87 :
-              note = "Db" + octave;
-              break;
-          case 83 :
-              note = "D" + octave;
-              break;
-          case 69 :
-              note = "Eb" + octave;
-              break;
-          case 68 :
-              note = "E" + octave;
-              break;
-          case 70 :
-              note = "F" + octave;
-              break;
-          case 84 :
-              note = "Gb" + octave;
-              break;
-          case 71 :
-              note = "G" + octave;
-              break;
-          case 89 :
-              note = "Ab" + octave;
-              break;
-          case 72 :
-              note = "A" + octave;
-              break;
-          case 85 :
-              note = "Bb" + octave;
-              break;
-          case 74 :
-              note = "B" + octave;
-              break;
-          case 75 :
-              note = "C" + (octave+1);
-              break;
-          case 79 :
-              note = "Db" + (octave+1);
-              break;
-          case 76 :
-              note = "D" + (octave+1);
-              break;
-          case 80 :
-              note = "Eb" + (octave+1);
-              break;
-          case 186 :
-              note = "E" + (octave+1);
-              break;
-          case 222 :
-              note = "F" + (octave+1);
-              break;
-          default:
-              note = null;
-              break;
-      }
+  var keyMap = {
+     65 : ["C",  0],
+     87 : ["Db", 0],
+     83 : ["D",  0],
+     69 : ["Eb", 0],
+     68 : ["E",  0],
+     70 : ["F",  0],
+     84 : ["Gb", 0],
+     71 : ["G",  0],
+     89 : ["Ab", 0],
+     72 : ["A",  0],
+     85 : ["Bb", 0],
+     74 : ["B",  0],
+     75 : ["C",  1],
+     79 : ["Db", 1],
+     76 : ["D",  1],
+     80 : ["Eb", 1],
+    186 : ["E",  1],
+    222 : ["F",  1]
+  };
 
+  var getKey = function(event){
+      var note;
+      if( keyMap[event.which] ){
+        note = keyMap[event.which][0] + (octave +keyMap[event.which][1]);
+      }else{
+        note = null;
+      }
       return note;
   }
 
