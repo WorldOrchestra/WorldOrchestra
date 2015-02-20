@@ -25,7 +25,7 @@ WO.userInputView = Backbone.View.extend({
           '</div>'+
           '<div id="tabs-2">'+
             '<div id="keys">'+
-            '<button class="octave"><span>Octave </span><span id="octave">3</span></button>' +
+            '<button class="octave"><span>Octave </span><span id="octave">4</span></button>' +
               '<div id="p-wrapper">'+ 
                 '<ul id="piano">'+ 
                   '<li><div class="anchor" id="C3"></div></li>'+ 
@@ -35,7 +35,7 @@ WO.userInputView = Backbone.View.extend({
                   '<li><div class="anchor" id="G3"></div><span id="Gb3" class="anchor"></span></li>'+
                   '<li><div class="anchor" id="A3"></div><span id="Ab3" class="anchor"></span></li>'+
                   '<li><div class="anchor" id="B3"></div><span id="Bb3" class="anchor"></span></li>'+ 
-                  '<li><div class="anchor" id="C3"></div></li>'+  
+                  '<li><div class="anchor" id="C4"></div></li>'+  
                   '<li><div class="anchor" id="D4"></div><span id="Db4" class="anchor"></span></li>'+
                   '<li><div class="anchor" id="E4"></div><span id="Eb4" class="anchor"></span></li>'+
                   '<li><div class="anchor" id="F4"></div></li>'+ 
@@ -58,6 +58,26 @@ WO.userInputView = Backbone.View.extend({
     '</div>'
   ),
   initialize: function(params) {
+    $('body').on('pianoKeyOn', function(e, note){
+      var noteId = '#' + note;
+      console.log("note triggeredon", noteId.length);
+     if (noteId.length === 4){
+       $('#piano').find(noteId).addClass("keyboardPressBlackKey");
+       console.log( $('#piano').find(noteId));
+     } else {
+       $('#piano').find(noteId).addClass("keyboardPress");
+     }
+    });
+
+    $('body').on('pianoKeyOff', function(e, note){
+      var noteId = '#' + note;
+      console.log("note triggeredoff", noteId.length);
+      if (noteId.length === 4){
+        $('#piano').find(noteId).removeClass("keyboardPressBlackKey");
+      } else {
+        $('#piano').find(noteId).removeClass("keyboardPress");
+      }
+    });
       // this.render();
   },
   render: function() {
