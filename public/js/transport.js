@@ -34,7 +34,9 @@ WO.recordNotes = function(note, time, velocity){
     //hard code for track 1
     var notes = WO.track.get('notes');
     notes.push([time, note, velocity]);
-    // console.log(notes);
+    // TODO split showTrack into initialize and render rectangles.
+    //$('.track-notes').html("");
+    mRender.showTrack(WO.track.get('notes'));
 };
 
 $('#rewind').on('click', function(){
@@ -63,9 +65,7 @@ $('#stop').on('click', function(){
     $('#record').css({"background-color": "white", "color" : "red"});
     Tone.Transport.stop();
     Tone.Transport.clearIntervals();
-    $('.track-notes').html("");
-    WO.showTrack(WO.track.get('notes'));
-})
+});
 
 $('#play').on('click', function(){
     $('#play').css("background-color", "green");

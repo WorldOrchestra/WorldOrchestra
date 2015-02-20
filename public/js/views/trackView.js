@@ -19,20 +19,18 @@ WO.TrackView = Backbone.View.extend({
           '<i class="fa fa-volume-up"></i>' +
         '</div>' +
       '</div>' +
-      '<div class="track-notes">' +
-      '</div>' +
-      '<script>WO.showTrack(<%= notes %>)</script>' +
+      '<svg class="track-notes"></svg>' +
+      '<script>' +
+        'var mRender = new WO.midiRender("track-notes");' +
+        'mRender.showTrack(<%= notes %>)</script>' +
+      '</script>' +
     '</div>'
   ),
   initialize: function(){
-
-      //this.track.on('change:currentSong', function(model){
-      this.model.on('change:notes', function(model) {
-          debugger;
-          $('.track-notes').html('');
-          WO.showTrack(this.model.get('notes'));
-          //this.playerView.setSong(model.get('currentSong'));
-      }, this);
+    this.model.on('change:notes', function(model) {
+      $('.track-notes').html('');
+      WO.showTrack(this.model.get('notes'));
+    }, this);
   },
   render: function(){
     this.$el.html( this.template(this.model.toJSON()));
