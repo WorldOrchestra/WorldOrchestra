@@ -1,12 +1,14 @@
 /* globals Tone, GUI */
-var drumPadHandler = function() {
+var WO = WO || {};
+
+WO.drumPadHandler = function() {
 
 	var stepNumber = 0;
 	WO.drumPadNoteNames = ["Gb4", "D4", "A4", "G4", "F4", "C4"];
 	WO.drumPadCheckboxes = [];
 	var indicators = [];
 
-	playDrumPad();
+	WO.playDrumPad();
 
 	var sequencer = $("#Sequencer");
 	var slider = $(".Slider");
@@ -37,11 +39,5 @@ var drumPadHandler = function() {
 
 	/*makeIndicator();*/
 	makeCheckboxes();
-	var slider = new GUI.Slider($(".transportView"), function(val){
-	    var scaled = parseInt(val * 30 + 100).toFixed(0);
-	    Tone.Transport.setBpm(scaled);
-	    return scaled;
-	}, 120, "tempo");
-	slider.render(20/30);
-
+	
 };

@@ -1,4 +1,6 @@
-var acousticPianoOptions = {
+var WO = WO || {};
+
+WO.acousticPianoOptions = {
       "portamento" : 0.0,
       "oscillator" : {
             "type" : "square"
@@ -24,7 +26,7 @@ var acousticPianoOptions = {
       // }
 };
 
-var acousticPiano = new Tone.MultiSampler({
+WO.acousticPiano = new Tone.MultiSampler({
             "A0" : "soundfont/acoustic_grand_piano-mp3/A0.mp3",
             "A1" : "soundfont/acoustic_grand_piano-mp3/A1.mp3",
             "A2" : "soundfont/acoustic_grand_piano-mp3/A2.mp3",
@@ -121,10 +123,10 @@ var acousticPiano = new Tone.MultiSampler({
             "Gb7" : "soundfont/acoustic_grand_piano-mp3/Gb7.mp3"
 }, onload);
       
-var onload = function(){
+WO.onload = function(){
       console.log('piano loaded');
 };
 
-acousticPiano.set(acousticPianoOptions);
-acousticPiano.setVolume(0);
-acousticPiano.toMaster();
+WO.acousticPiano.set(WO.acousticPianoOptions);
+WO.acousticPiano.setVolume(0);
+WO.acousticPiano.toMaster();

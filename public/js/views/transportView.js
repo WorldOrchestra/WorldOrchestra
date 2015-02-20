@@ -14,7 +14,15 @@ WO.TransportView = Backbone.View.extend({
       '<button id="record"><i class="fa fa-play-circle" style="color:red"></i></button>' +
       '<button id="skipForward"><i class="fa fa-forward"></i></button>' +
       '<button id="forward"><i class="fa fa-fast-forward"></i></button>' +
-    '</div>'
+    '</div>' +
+    '<script>' +
+      'var slider = new GUI.Slider($(".transportView"), function(val){' +
+          'var scaled = parseInt(val * 30 + 100).toFixed(0);' +
+          'Tone.Transport.setBpm(scaled);' +
+          'return scaled;' +
+      '}, 120, "tempo");' +
+      'slider.render(20/30);' +
+    '</script>'
   ),
   initialize: function(params) {
     this.render();
