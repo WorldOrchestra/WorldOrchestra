@@ -20,6 +20,10 @@ var down = {};
               down[note] = true;
           }
       }
+
+      //trigger pianoKeyOn on piano keyboard
+      $('body').trigger('pianoKeyOn', [note]);
+
   });
 
 
@@ -37,6 +41,9 @@ var down = {};
           }
           down[note] = null;
       }
+
+      //trigger pianoKeyOff on piano keyboard
+      $('body').trigger('pianoKeyOff', [note]);
   });
 
   var getKey = function(event){
