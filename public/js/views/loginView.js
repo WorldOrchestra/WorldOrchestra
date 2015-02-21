@@ -64,8 +64,8 @@ WO.loginView = Backbone.View.extend({
   ),
 
   render: function() {
-    signupTemplate = this.$el.append(this.template());
-    return signupTemplate;
+    loginTemplate = this.$el.append(this.template());
+    return loginTemplate;
   },
 
   loginUser: function(e){
