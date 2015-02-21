@@ -11,6 +11,7 @@ WO.WOView = Backbone.View.extend({
     this.transportView = new WO.TransportView();
     this.userInputView = new WO.userInputView();
     this.songView = new WO.SongView({collection: new WO.Song()});
+    this.loginView = new WO.loginView();
     this.render();
   },
 
@@ -18,6 +19,7 @@ WO.WOView = Backbone.View.extend({
     this.$el.append(this.template);
     this.$el.append(this.transportView.$el);
     this.$el.append(this.userInputView.render());
+    this.$el.append(this.loginView.render());
     $('.appBody').append(this.$el);
     return this.$el;
   }
