@@ -20,14 +20,14 @@ var midiRender = function(clas) {
       .range([this.h, 0]);
 
   this.xAxis = d3.svg.axis()
-      .scale(xScale)
+      .scale(this.xScale)
       .orient("bottom")
       .innerTickSize(-this.h)
       .outerTickSize(0)
       .tickPadding(10);
 
   this.yAxis = d3.svg.axis()
-      .scale(yScale)
+      .scale(this.yScale)
       .orient("left")
       .innerTickSize(-this.w)
       .outerTickSize(0)
@@ -40,12 +40,11 @@ midiRender.prototype.drawGrid = function() {
     this.svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + this.h + ")")
-        .call(xAxis);
+        .call(this.xAxis);
     this.svg.append("g")
         .attr("class", "y axis")
-        .call(yAxis);
+        .call(this.yAxis);
 };
-
 
 midiRender.prototype.octaveMap = function(o) {
   var octave = {

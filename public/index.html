@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="css/widgets.css">
     <link rel="stylesheet" href="css/drumPad.css">
     <!-- endbuild -->
-    <!-- build:js scripts/vendor/modernizr.js -->
-    <script src="bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild -->
 </head>
 <body>
   <!--[if lt IE 10]>
@@ -42,18 +39,18 @@
     ga('create','UA-XXXXX-X');ga('send','pageview');
   </script> -->
 
+<!-- build:js scripts/vendor.js -->
+  <script src="bower_components/modernizr/modernizr.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/underscore/underscore.js"></script>
   <script src="bower_components/backbone/backbone.js"></script>
   <script src="bower_components/tone/build/Tone.js"></script>
   <script src="bower_components/d3/d3.min.js"></script>
+<!-- endbuild -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+<!-- build:js scripts/main.js -->
   <script src="js/instruments/acousticPiano.js"></script>
   <script src="js/instruments/synth.js"></script>
-  <script>
-    instrument = WO.acousticPiano;
-  </script>
-<!-- build:js scripts/main.js -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
   <script src="js/widgets.js"></script>
   <script src="js/drumPadHandler.js"></script>
   <script src="js/instruments/drumPad.js"></script>

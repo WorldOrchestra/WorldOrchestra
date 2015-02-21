@@ -1,4 +1,10 @@
 'use strict';
+var LIVERELOAD_PORT = 35729;
+var SERVER_PORT = 9000;
+var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
+var mountFolder = function (connect, dir) {
+  return connect.static(require('path').resolve(dir));
+};
 var request = require('request');
 
 module.exports = function (grunt) {
@@ -11,7 +17,7 @@ module.exports = function (grunt) {
   var worldConfig = {
     app: 'public',
     dist: 'dist'
-  }
+  };
 
   var reloadPort = 35729, files;
 
@@ -50,11 +56,11 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
+          base: ".",
           port: 9001,
           middleware: function (connect) {
             return [
               lrSnippet,
-              mountFolder(connect, '.tmp'),
               mountFolder(connect, 'test'),
               mountFolder(connect, worldConfig.app)
             ];
@@ -135,6 +141,7 @@ module.exports = function (grunt) {
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
       },
+      gruntfile: ['Gruntfile.js'],
       all: [
         'Gruntfile.js',
         'public/js/**/*.js',
@@ -224,6 +231,9 @@ module.exports = function (grunt) {
         ]
       },
       casperjs: {
+        files: [
+          'test/e2e/*.js'
+        ],
         options: {},
         e2e: {
           files: {
@@ -251,7 +261,7 @@ module.exports = function (grunt) {
       //al TODO review server: express:dev,
       server: {
         files: [ 'server/**' ],
-        tasks: [ 'build', 'express:dev', 'casperjs' ],
+        tasks: [ 'build', /*'express:dev',*/ 'casperjs' ],
         options: {
           spawn: false // Restart server
         }
