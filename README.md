@@ -13,6 +13,8 @@ Bringing the world together - one track at a time.
   - __Development Team Members__: Domen Vajevec, Tyler Davis
   - __Key Master__: Tyler Davis
   - __CDN__: Domen Vajavec
+  - __Eastern European__: Domen Vajavec
+  - __The Fonz__: Dave Fedele
 
 ## Table of Contents
 
@@ -29,6 +31,7 @@ Bringing the world together - one track at a time.
 - Node 0.10.x
 - MongoDB
 - Grunt
+- Bower
 
 ### Installing Dependencies
 
@@ -43,16 +46,17 @@ bower install
 
 From the root directory run: 
 
-TODO
 - `grunt` : Runs jshint, tests and builds the project.
 - `grunt build` : Builds the project. All production ready files are stored in the `dist` directory.
-- `grunt serve` : Builds the project and runs a server locally for a preview of the site. 
+- `grunt serve` : Runs a local server for a preview of the site using the original files. 
+- `grunt serve:dist` : Builds the project and runs a server locally for a preview of the site using the concatenated and uglified files. 
+- `grunt serve:test` : Runs a local server and opens the test file for Mocha, Chai, and Sinon.
 
 ## Development
 
-TODO
-All development is done in folders outside of root. Running `grunt` will build your project into the `dist` folder. Use the `dist` folder for pushing to a production server. You can find instructions for how to do so on the yeoman generator [site](https://github.com/DaftMonk/generator-angular-fullstack#heroku).
+All development is done in the public or server folders.  Running `grunt` or `grunt build` will build your project into the `dist` folder.  Use the `dist` folder for pushing to a production server.
 
+TODO
 An example client component in `client/app`
 
     main
@@ -84,3 +88,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 http://blog.dirk-eisenberg.de/2014/12/21/deploy-angularjs-apps-to-azure-websites-with-codeship/
 http://stackoverflow.com/questions/18924263/how-to-fix-error-please-set-env-variable-chrome-bin-when-running-angular-js-wi
 http://backbonetutorials.com/organizing-backbone-using-modules/
+http://bl.ocks.org/hunzy/11110940
