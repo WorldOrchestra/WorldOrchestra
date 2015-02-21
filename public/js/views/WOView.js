@@ -8,12 +8,14 @@ WO.WOView = Backbone.View.extend({
     this.songView = new WO.SongView({collection: WO.song});
     this.transportView = new WO.TransportView();
     this.userInputView = new WO.userInputView();
+    this.loginView = new WO.loginView();
     this.render();
   },
 
   render: function(){
     this.$el.append(this.transportView.$el);
     this.$el.append(this.userInputView.render());
+    this.$el.append(this.loginView.render());
     $('.appBody').append(this.$el);
     WO.drumPadHandler();
     return this.$el;//.html([
