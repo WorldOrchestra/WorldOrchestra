@@ -35,10 +35,9 @@ WO.TrackView = Backbone.View.extend({
     '</div>'
   ),
   initialize: function(){
-    var mRender = $(document).ready((function(){
-        return new WO.midiRender(this.model.cid+ ' .track-notes');
+    $(document).ready((function(){
+        this.model.set('mRender', new WO.midiRender(this.model.cid+ ' .track-notes'));
       }).bind(this));
-    this.model.set('mRender', mRender);
     this.model.on('change:notes', function(model) {
       $('.active-track').html('');
       // WO.showTrack(this.model.get('notes'));

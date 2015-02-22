@@ -32,10 +32,11 @@ WO.playSong = function(song){
 };
 
 WO.recordNotes = function(note, time, velocity){
-    var notes;
-    notes = WO.song.settings.activeTrack.attributes.notes;
+    var notes, song;
+    song = WO.appView.songView.collection;
+    notes = song.settings.activeTrack.attributes.notes;
     notes.push([time, note, velocity]);
-    WO.song.settings.activeTrack.get('mRender').showTrack(notes);
+    song.settings.activeTrack.get('mRender').showTrack(notes);
 };
 
 $('#rewind').on('click', function(){
@@ -75,7 +76,7 @@ $('#play').on('click', function(){
 
     WO.playDrumPad();
     //TO DO: need to get the song!
-    WO.playSong(WO.song);
+    WO.playSong(WO.appView.songView.collection);
 });
 
 $('#record').on('click', function(){
