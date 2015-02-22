@@ -1,4 +1,3 @@
-/* global d3, Tone */
 //zoom is logarithmic - algebraically establish range?
 var WO = WO || {};
 
@@ -35,6 +34,7 @@ var midiRender = function(clas) {
       .tickPadding(10);
 
   this.drawGrid();
+  $(document).ready((function() {console.log("Moo");this.moveBar()}).bind(this));
 };
 
 midiRender.prototype.drawGrid = function() {
@@ -45,6 +45,28 @@ midiRender.prototype.drawGrid = function() {
   this.svg.append("g")
       .attr("class", "y axis")
       .call(this.yAxis);
+};
+
+midiRender.prototype.moveBar = function() {
+debugger;
+  var target = document.querySelector('#transportTime');
+  MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+  var observer = new MutationObserver(function(mutations, observer) {
+    // fired when a mutation occurs
+    console.log(mutations, observer);
+    // ...
+  });
+
+// define what element should be observed by the observer
+// and what types of mutations trigger the callback
+  observer.observe(target, {
+    characterData: true,
+    subtree: true,
+    attributes: true
+    //...
+  });
+
 };
 
 midiRender.prototype.octaveMap = function(o) {
