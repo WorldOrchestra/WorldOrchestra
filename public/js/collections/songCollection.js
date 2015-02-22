@@ -1,7 +1,7 @@
 var WO = WO || {};
 WO.Song = Backbone.Collection.extend({
   model: WO.Track,
-  
+
   settings : {
     tempo: 130,
     title: "untitled song",

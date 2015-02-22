@@ -9,7 +9,7 @@ WO.TrackView = Backbone.View.extend({
   },
 
   template: _.template(
-    '<div class="track-container">' +
+    '<div class="track-container active-track <%= cid %>">' +
       '<div class="track-controls">' +
         '<p class="track-title"> <%= attributes.title %> </p>' +
         '<button class="delete-track-button" id="delete"><i class="fa fa-trash-o"></i></button><br>' +
@@ -21,8 +21,8 @@ WO.TrackView = Backbone.View.extend({
             '<option value="Synth">Synth</option>'+
             '<option value="Drums">Drums</option>' +
           '</select>' +
-        // '</fieldset>' +  
-        '</form><br>' + 
+        // '</fieldset>' +
+        '</form><br>' +
         '<button class="solo-track-button" id="solo">S</button>' +
         '<button class="mute-track-button" id="mute" >M</button>' +
         '<div class="track-volume-slider-group">' +
@@ -31,7 +31,7 @@ WO.TrackView = Backbone.View.extend({
           '<i class="fa fa-volume-up"></i>' +
         '</div>' +
       '</div>' +
-      '<div class="track-notes" data-trackId="<%= cid %>"style="overflow:scroll"></div>' +
+      '<div class="track-notes" style="overflow:scroll"></div>' +
       '<script>' +
         'var mRender = new WO.midiRender("track-notes");' +
         // 'mRender.showTrack(<%= notes %>)</script>' +

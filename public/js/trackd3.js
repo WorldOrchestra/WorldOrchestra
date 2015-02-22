@@ -38,13 +38,13 @@ var midiRender = function(clas) {
 };
 
 midiRender.prototype.drawGrid = function() {
-    this.svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + this.h + ")")
-        .call(this.xAxis);
-    this.svg.append("g")
-        .attr("class", "y axis")
-        .call(this.yAxis);
+  this.svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + this.h + ")")
+      .call(this.xAxis);
+  this.svg.append("g")
+      .attr("class", "y axis")
+      .call(this.yAxis);
 };
 
 midiRender.prototype.octaveMap = function(o) {
@@ -84,29 +84,53 @@ midiRender.prototype.altPitch = function(p) {
   return altPitch[p];
 };
 
+midiRender.prototype.revAltPitch = function(p) {
+  var revAltPitch = {
+    90: 'C4',
+    85: 'Db4',
+    80: 'D4',
+    75: 'Eb4',
+    70: 'E4',
+    65: 'F4',
+    60: 'Gb4',
+    55: 'G4',
+    50: 'Ab4',
+    45: 'A4',
+    40: 'Bb4',
+    35: 'B4',
+    30: 'C5',
+    25: 'Db5',
+    20: 'D5',
+    15: 'Eb5',
+    10: 'E5',
+    5: 'F5'
+  };
+  return revAltPitch[p];
+};
+
 midiRender.prototype.parseTrack = function(track) {
   var result, start, waitingRoom;
   result = [];
-    if(track.length > 1) {
-      waitingRoom = {};
-      waitingRoom[track[0][1]] = track.shift();
-      while (track.length > 0) {
-        if (track[0][2] === 1) {
-          waitingRoom[track[0][1]] = track.shift();
-        } else {
-          start = waitingRoom[track[0][1]];
-          delete waitingRoom[track[0][1]];
-          result.push({
-            offset: Tone.prototype.toSeconds(start[0]) * 16,
-            duration: (Tone.prototype.toSeconds(track[0][0]) - Tone.prototype.toSeconds(start[0])) * this.factor,
-            pitch: this.altPitch(start[1]),
-            volume: 10,
-            octave: start[1].slice(-1)
-          });
-          track.shift();
-        }
+  if(track.length > 1) {
+    waitingRoom = {};
+    waitingRoom[track[0][1]] = track.shift();
+    while (track.length > 0) {
+      if (track[0][2] === 1) {
+        waitingRoom[track[0][1]] = track.shift();
+      } else {
+        start = waitingRoom[track[0][1]];
+        delete waitingRoom[track[0][1]];
+        result.push({
+          offset: Tone.prototype.toSeconds(start[0]) * 16,
+          duration: (Tone.prototype.toSeconds(track[0][0]) - Tone.prototype.toSeconds(start[0])) * this.factor,
+          pitch: this.altPitch(start[1]),
+          volume: 10,
+          octave: start[1].slice(-1)
+        });
+        track.shift();
       }
     }
+  }
   return result;
 };
 
@@ -115,8 +139,11 @@ midiRender.prototype.showTrack = function(track) {
   track = track ? track.slice() : [];
 
   dragmove = function(d) {
+      var pitch = Math.floor((d3.event.sourceEvent.offsetY - 5)/5) * 5;
     d3.select(this)
-      .attr("y", d.y = Math.floor((d3.event.sourceEvent.offsetY - 5)/5) * 5);//Math.max(radius, Math.min(h - radius, d3.event.y)));
+      .attr("y", d.y = pitch);//Math.max(radius, Math.min(h - radius, d3.event.y)));
+      // reverse convert height to note.
+
   };
   zoomFn = function(d) {
     var col = Math.min(255, Math.floor(Math.pow(10, d3.event.scale)));

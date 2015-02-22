@@ -10,8 +10,8 @@ WO.SongView = Backbone.View.extend({
   },
 
   addTrack: function(){
-    $('.active-track').removeClass('active-track');
     var newTrack = new WO.Track();
+    this.collection.settings.activeTrack = newTrack;
     this.collection.add(newTrack);
     // var trackView = new WO.TrackView({model: track});
     // this.$el.append(trackView.render());
@@ -20,7 +20,7 @@ WO.SongView = Backbone.View.extend({
 
   },
   render: function() {
-    this.$el.children().remove();
+    //this.$el.children().remove();
     this.collection.forEach(this.renderTrack, this);
     $('.appBody').prepend(this.el);
     return this;
@@ -28,5 +28,11 @@ WO.SongView = Backbone.View.extend({
   renderTrack: function(track){
     var trackView = new WO.TrackView({model: track});
     this.$el.append(trackView.render());
+    this.setActiveClass();
+  },
+  setActiveClass: function(){
+    $('.active-track').removeClass('active-track');
+    $('.' + this.collection.settings.activeTrack.cid).addClass('active-track');
   }
+
 });
