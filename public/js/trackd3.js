@@ -1,3 +1,4 @@
+/* global d3, Tone */
 //zoom is logarithmic - algebraically establish range?
 var WO = WO || {};
 
@@ -84,24 +85,28 @@ midiRender.prototype.altPitch = function(p) {
 };
 
 midiRender.prototype.parseTrack = function(track) {
-  var result, stack, i, start;
+  var result, start, waitingRoom;
   result = [];
-  stack = [track.shift()];
-  while (track.length > 0) {
-    if (track[0][2] === 1) {
-      stack.push(track.shift());
-    } else {
-      for (i = stack.length - 1; stack[i][1] !== track[0][1]; i -= 1) {
+    if(track.length > 1) {
+      waitingRoom = {};
+      waitingRoom[track[0][1]] = track.shift();
+      while (track.length > 0) {
+        if (track[0][2] === 1) {
+          waitingRoom[track[0][1]] = track.shift();
+        } else {
+          start = waitingRoom[track[0][1]];
+          delete waitingRoom[track[0][1]];
+          result.push({
+            offset: Tone.prototype.toSeconds(start[0]) * 16,
+            duration: (Tone.prototype.toSeconds(track[0][0]) - Tone.prototype.toSeconds(start[0])) * this.factor,
+            pitch: this.altPitch(start[1]),
+            volume: 10,
+            octave: start[1].slice(-1)
+          });
+          track.shift();
+        }
       }
-      start = stack.splice(i, 1)[0];
-      result.push({offset: Tone.prototype.toSeconds(start[0]) * 16,
-        duration: (Tone.prototype.toSeconds(track[0][0]) - Tone.prototype.toSeconds(start[0])) * this.factor,
-        pitch: this.altPitch(start[1]),
-        volume: 10,
-        octave: start[1].slice(-1)});
-      track.shift();
     }
-  }
   return result;
 };
 
