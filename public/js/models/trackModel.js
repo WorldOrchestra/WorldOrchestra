@@ -6,7 +6,8 @@ WO.Track = Backbone.Model.extend({
     isMuted: false,
     solo: false,
     octave: 4,
-    volume: 0.75
+    volume: 0.75,
+    instrument: ""
   },
 
   initialize : function(){
