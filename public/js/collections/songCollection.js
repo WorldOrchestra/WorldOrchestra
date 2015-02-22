@@ -11,8 +11,6 @@ WO.Song = Backbone.Collection.extend({
   },
 
   initialize : function(){
-
-    debugger;
     this.add( new WO.Track());
     this.settings.activeTrack = this.at(0);
     // WO.setTempo(this.settings.tempo);

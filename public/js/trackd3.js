@@ -1,7 +1,7 @@
 //zoom is logarithmic - algebraically establish range?
 var WO = WO || {};
 
-var midiRender = function(clas) {
+WO.midiRender = function(clas) {
   this.h = 95;
   this.w = 1000;
   this.factor = 10;
@@ -36,7 +36,7 @@ var midiRender = function(clas) {
   this.drawGrid();
 };
 
-midiRender.prototype.drawGrid = function() {
+WO.midiRender.prototype.drawGrid = function() {
   this.svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + this.h + ")")
@@ -46,7 +46,7 @@ midiRender.prototype.drawGrid = function() {
       .call(this.yAxis);
 };
 
-midiRender.prototype.octaveMap = function(o) {
+WO.midiRender.prototype.octaveMap = function(o) {
   var octave = {
     1: 'red',
     2: 'orange',
@@ -59,7 +59,7 @@ midiRender.prototype.octaveMap = function(o) {
   return octave[o];
 };
 
-midiRender.prototype.altPitch = function(p) {
+WO.midiRender.prototype.altPitch = function(p) {
   var altPitch = {
     C4: 90,
     Db4: 85,
@@ -83,7 +83,7 @@ midiRender.prototype.altPitch = function(p) {
   return altPitch[p];
 };
 
-midiRender.prototype.revAltPitch = function(p) {
+WO.midiRender.prototype.revAltPitch = function(p) {
   var revAltPitch = {
     90: 'C4',
     85: 'Db4',
@@ -107,7 +107,7 @@ midiRender.prototype.revAltPitch = function(p) {
   return revAltPitch[p];
 };
 
-midiRender.prototype.parseTrack = function(track) {
+WO.midiRender.prototype.parseTrack = function(track) {
   var result, start, waitingRoom;
   result = [];
   if(track.length > 1) {
@@ -133,7 +133,7 @@ midiRender.prototype.parseTrack = function(track) {
   return result;
 };
 
-midiRender.prototype.showTrack = function(track) {
+WO.midiRender.prototype.showTrack = function(track) {
   var dragmove, zoomFn, drag, zoom, that;
   track = track ? track.slice() : [];
 
@@ -179,6 +179,4 @@ midiRender.prototype.showTrack = function(track) {
     .call(zoom);
   return this.svg;
 };
-
-WO.midiRender = midiRender;
 
