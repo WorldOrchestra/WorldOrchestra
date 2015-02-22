@@ -10,8 +10,6 @@ WO.SongView = Backbone.View.extend({
 
   addTrack: function(){
     var newTrack = new WO.Track();
-    console.log(this);
-    // var newTrackView = new WO.TrackView();
     this.collection.add(newTrack);
   },
   removeTrack: function(){
@@ -28,8 +26,3 @@ WO.SongView = Backbone.View.extend({
     this.$el.append(trackView.render());
   }
 });
-//
-
-// this.collection.each(function(track){
-
-// })
