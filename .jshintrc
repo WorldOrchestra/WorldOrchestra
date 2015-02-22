@@ -1,16 +1,27 @@
 {
-  "node": true,
-    "browser": true,
-  "esnext": true,
-  "bitwise": true,
-  "eqeqeq": true,
-  "immed": true,
-  "latedef": "nofunc",
-  "newcap": true,
-  "noarg": true,
-  "regexp": true,
-  "undef": true,
-  "smarttabs": true,
-  "asi": true,
-  "debug": true
+  "node"          : true,
+    "browser"     : true,
+  "esnext"        : true,
+  "bitwise"       : true,
+  "eqeqeq"        : true,
+  "immed"         : true,
+  "latedef"       : "nofunc",
+  "newcap"        : true,
+  "noarg"         : true,
+  "regexp"        : true,
+  "undef"         : true,
+  "smarttabs"     : true,
+  "asi"           : false,
+  "debug"         : true,
+
+  "trailing"      : true,   // Prohibit trailing whitespaces.
+
+  "globals"       : {
+    "WO"          : true,   //World Orchestra namespace
+    "Tone"        : true,   //Tone.js library
+    "$"           : true,   //jquery
+    "_"           : true,   //underscore
+    "Backbone"    : true,   //Backbone
+    "d3"          : true   //d3
+  }
 }

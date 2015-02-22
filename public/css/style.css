@@ -69,6 +69,7 @@ a {
 }
 
 .track-title{
+  margin-top: 0;
   font-size: 18px;
   font-weight: bold;
 }
@@ -93,6 +94,9 @@ p.track-title {
   background-color: red;
 }
 
+.active-track {
+  border: 2px solid red;
+}
 /* Styling for grid lines */
 
 svg {

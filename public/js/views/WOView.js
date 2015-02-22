@@ -2,9 +2,6 @@ var WO = WO || {};
 WO.WOView = Backbone.View.extend({
 
   initialize: function(params){
-    WO.track = new WO.Track();
-    WO.trackView = new WO.TrackView({model: WO.track});
-    WO.song = new WO.Song([WO.track]);
     this.songView = new WO.SongView({collection: WO.song});
     this.transportView = new WO.TransportView();
     this.userInputView = new WO.userInputView();
@@ -16,10 +13,6 @@ WO.WOView = Backbone.View.extend({
     this.$el.append(this.userInputView.render());
     $('.appBody').append(this.$el);
     WO.drumPadHandler();
-    return this.$el;//.html([
-      //this.playerView.$el,
-      //this.libraryView.$el,
-      //this.songQueueView.$el
-    //]);
+    return this.$el;
   }
 });
