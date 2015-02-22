@@ -32,12 +32,10 @@ WO.playSong = function(song){
 };
 
 WO.recordNotes = function(note, time, velocity){
-    var notes = [];
+    var notes;
     notes = WO.song.settings.activeTrack.attributes.notes;
     notes.push([time, note, velocity]);
-    // TODO split showTrack into initialize and render rectangles.
-    //$('.track-notes').html("");
-    mRender.showTrack(notes);
+    WO.song.settings.activeTrack.get('mRender').showTrack(notes);
 };
 
 $('#rewind').on('click', function(){

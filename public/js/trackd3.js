@@ -1,4 +1,3 @@
-/* global d3, Tone */
 //zoom is logarithmic - algebraically establish range?
 var WO = WO || {};
 

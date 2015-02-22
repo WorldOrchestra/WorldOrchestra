@@ -13,6 +13,7 @@ WO.SongView = Backbone.View.extend({
     var newTrack = new WO.Track();
     this.collection.settings.activeTrack = newTrack;
     this.collection.add(newTrack);
+    debugger;
     // var trackView = new WO.TrackView({model: track});
     // this.$el.append(trackView.render());
   },
