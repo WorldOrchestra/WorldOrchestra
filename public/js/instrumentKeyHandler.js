@@ -1,30 +1,29 @@
-/* global WO, $, Tone */
-
 var WO = WO || {};
-var octave = 4;
-var down = {};
 
-(function(instrument){
+WO.down = {};
+
+WO.instrumentKeyHandler = function(instrument){
+
   $(document).on('keydown', function(e){
       var note = getKey(e);
 
       if( e.which === 88 || e.which === 90 ){
           setOctave(e.which);
-          down[e.which] = true;
+          WO.down[e.which] = true;
       }
 
       if( note !== null ){
-          if( down[note] === null || down[note] === undefined){
+          if( WO.down[note] === null || WO.down[note] === undefined){
               instrument.triggerAttack(note);
               if (WO.recording){
                   WO.recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
               }
-              down[note] = true;
+              WO.down[note] = true;
           }
+        // trigger pianoKeyOn on piano keyboard
+        $('body').trigger('pianoKeyOn', [note]);
       }
 
-      //trigger pianoKeyOn on piano keyboard
-      $('body').trigger('pianoKeyOn', [note]);
 
   });
 
@@ -33,19 +32,20 @@ var down = {};
       var note = getKey(e);
 
       if( e.which === 88 || e.which === 90 ){
-          down[e.which] = null;
+          WO.down[e.which] = null;
       }
 
-      if( note !== null ){
+      //if there's a note and the note has being pressed
+      if( note !== null && WO.down[note] ){
           instrument.triggerRelease(note);
           if (WO.recording){
               WO.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
           }
-          down[note] = null;
+          WO.down[note] = null;
+          //trigger pianoKeyOff on piano keyboard
+          $('body').trigger('pianoKeyOff', [note]);
       }
 
-      //trigger pianoKeyOff on piano keyboard
-      $('body').trigger('pianoKeyOff', [note]);
   });
 
   var keyMap = {
@@ -72,20 +72,23 @@ var down = {};
   var getKey = function(event){
       var note;
       if( keyMap[event.which] ){
-        note = keyMap[event.which][0] + (octave +keyMap[event.which][1]);
+        note = keyMap[event.which][0] + (instrument.octave + keyMap[event.which][1]);
       }else{
         note = null;
       }
+      // console.log(note);
       return note;
-  }
+  };
 
   var setOctave = function( key ){
-      if( down[key] === null || down[key] === undefined){
+      var octave = instrument.octave;
+      if( WO.down[key] === null || WO.down[key] === undefined){
           if( key === 90 ){
               octave === 0 ? octave : octave--;
           }else if(key === 88 ){
               octave >=7 ? octave: octave++;
           }
+          instrument.octave = octave;
           $('#octave').html(octave);
       }
   };
@@ -104,5 +107,5 @@ var down = {};
       if (WO.recording){
           WO.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
       }
-  })
-})(instrument)
+  });
+};
