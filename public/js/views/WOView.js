@@ -12,7 +12,6 @@ WO.WOView = Backbone.View.extend({
     this.$el.append(this.transportView.$el);
     this.$el.append(this.userInputView.render());
     $('.appBody').append(this.$el);
-    WO.drumPadHandler();
     return this.$el;
   }
 });
