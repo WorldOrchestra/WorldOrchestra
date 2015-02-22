@@ -3,14 +3,26 @@ WO.TrackView = Backbone.View.extend({
   events: {
     'click .delete-track-button' : 'deleteTrack',
     'change .track-volume-slider' : 'setTrackVolume',
-    'click .mute-track-button' : 'muteTrack'
+    'click .mute-track-button' : 'muteTrack',
+    'change .instrument-selector' : 'changeInstrument',
+    'click .track-container' : 'setActiveTrack'
   },
 
   template: _.template(
     '<div class="track-container">' +
       '<div class="track-controls">' +
-        '<p class="track-title"> <%= title %> </p>' +
+        '<p class="track-title"> <%= attributes.title %> </p>' +
         '<button class="delete-track-button" id="delete"><i class="fa fa-trash-o"></i></button><br>' +
+        '<form action="#">' +
+        // '<fieldset>' +
+          '<label for="instrument">Select instrument </label>' +
+          '<select name="instrument-selector" class="instrument-selector">' +
+            '<option selected="selected" value="Acoustic Piano">Acoustic Piano</option>'+
+            '<option value="Synth">Synth</option>'+
+            '<option value="Drums">Drums</option>' +
+          '</select>' +
+        // '</fieldset>' +  
+        '</form><br>' + 
         '<button class="solo-track-button" id="solo">S</button>' +
         '<button class="mute-track-button" id="mute" >M</button>' +
         '<div class="track-volume-slider-group">' +
@@ -19,21 +31,23 @@ WO.TrackView = Backbone.View.extend({
           '<i class="fa fa-volume-up"></i>' +
         '</div>' +
       '</div>' +
-      '<div class="track-notes"></div>' +
+      '<div class="track-notes" data-trackId="<%= cid %>"style="overflow:scroll"></div>' +
       '<script>' +
         'var mRender = new WO.midiRender("track-notes");' +
-        'mRender.showTrack(<%= notes %>)</script>' +
+        // 'mRender.showTrack(<%= notes %>)</script>' +
+        '</script>' +
       '</script>' +
     '</div>'
   ),
   initialize: function(){
     this.model.on('change:notes', function(model) {
-      $('.track-notes').html('');
-      WO.showTrack(this.model.get('notes'));
+      $('.active-track').html('');
+      // WO.showTrack(this.model.get('notes'));
+      mRender.showTrack(this.model.get('notes'));
     }, this);
   },
   render: function(){
-    this.$el.html( this.template(this.model.toJSON()));
+    this.$el.html( this.template(this.model));
     return this.$el;
   },
 
@@ -62,6 +76,26 @@ WO.TrackView = Backbone.View.extend({
     $('.mute-track-button').toggleClass('muted');
     this.model.set('volume', volume);
     this.model.get('instrument').setVolume(volume);
+  },
+
+  changeInstrument : function(e){
+    console.log($(e.currentTarget)[0].value);
+    this.model.set('instrument')
+    //get number of track
+    //use that number in variable - "WO.instrumentTrack" + number
+    //set the instrument name using the instrument from the dropdown
+  },
+
+  setActiveTrack: function(){
+    //know current active
+    $('.active-track').removeClass('active-track');
+    //remove active-track class
+    console.log("collection", this.model.collection);
+    console.log("model", this.model);
+    this.model.collection.settings.activeTrack = this.model;
+    //add active-track class
+    this.$el.find('.track-container').addClass('active-track');
+    console.log(this.$el);
   }
 
 });

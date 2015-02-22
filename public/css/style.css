@@ -94,6 +94,9 @@ p.track-title {
   background-color: red;
 }
 
+.active-track {
+  border: 2px solid red;
+}
 /* Styling for grid lines */
 
 svg {

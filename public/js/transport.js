@@ -1,18 +1,20 @@
-/* global _,$,Tone */
 var WO = WO || {};
 
-Tone.Transport.setBpm(120);
+WO.setTempo = function(bpm){
+    console.log("in setTempo");
+    Tone.Transport.setBpm(bpm);
+};
+
 // Tone.Transport.setLoopEnd("1:0");
 // Tone.Transport.loop = true;
-
-// Tone.Transport.setTransportTime("4:0:0");
 
 WO.recording = false;
 
 WO.playSong = function(song){
+    var notes = [];
     _.each(song.models, function(track){
-        var notes = track.get('notes');
-        var instrument = track.get('instrument');
+        notes = track.attributes.notes;
+        var instrument = track.attributes.instrument;
         _.each(notes, function(note){
             if ( note[2] === 0.00 || note[2] === "0.00"){
                 Tone.Transport.setTimeout(function(time){
@@ -30,18 +32,18 @@ WO.playSong = function(song){
 };
 
 WO.recordNotes = function(note, time, velocity){
-    //hard code for track 1
-    var notes = WO.track.get('notes');
+    var notes = [];
+    notes = WO.song.settings.activeTrack.attributes.notes;
     notes.push([time, note, velocity]);
     // TODO split showTrack into initialize and render rectangles.
     //$('.track-notes').html("");
-    mRender.showTrack(WO.track.get('notes'));
+    mRender.showTrack(notes);
 };
 
 $('#rewind').on('click', function(){
     Tone.Transport.setTransportTime("0:0:0");
     $('#transportTime').text(Tone.Transport.getTransportTime());
-})
+});
 
 $('#skipBack').on('click', function(){
     Tone.Transport.setTransportTime(Tone.Transport.getTransportTime() + "-1m");
@@ -70,13 +72,13 @@ $('#play').on('click', function(){
     $('#play').css("background-color", "green");
     Tone.Transport.setInterval(function(time){
         $('#transportTime').text(Tone.Transport.getTransportTime());
-        console.log(Tone.Transport.getTransportTime());
+        // console.log(Tone.Transport.getTransportTime());
     }, "16n");
 
     WO.playDrumPad();
     //TO DO: need to get the song!
     WO.playSong(WO.song);
-})
+});
 
 $('#record').on('click', function(){
     WO.recording = true;
@@ -87,4 +89,4 @@ $('#record').on('click', function(){
     }, "16n");
     // Tone.Transport.start();
     $('#play').click();
-})
+});

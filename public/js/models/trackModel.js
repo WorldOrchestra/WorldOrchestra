@@ -18,4 +18,3 @@ WO.Track = Backbone.Model.extend({
   }
 
 });
-

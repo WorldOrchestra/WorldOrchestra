@@ -7,13 +7,13 @@ WO.Song = Backbone.Collection.extend({
     title: "untitled song",
     timeSignature: 4,
     length: "16:0:0",
-    activeInstrument: ""
+    activeTrack: ""
   },
 
   initialize : function(){
 
     this.add( new WO.Track());
-    this.settings['activeInstrument'] = this.at(0);
+    this.settings.activeTrack = this.at(0);
     // WO.setTempo(this.settings.tempo);
   }
 
