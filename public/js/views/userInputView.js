@@ -60,10 +60,10 @@ WO.userInputView = Backbone.View.extend({
   initialize: function(params) {
     $('body').on('pianoKeyOn', function(e, note){
       var noteId = '#' + note;
-      console.log("note triggeredon", noteId.length);
+      // console.log("note triggeredon", noteId.length);
      if (noteId.length === 4){
        $('#piano').find(noteId).addClass("keyboardPressBlackKey");
-       console.log( $('#piano').find(noteId));
+       // console.log( $('#piano').find(noteId));
      } else {
        $('#piano').find(noteId).addClass("keyboardPress");
      }
@@ -71,7 +71,7 @@ WO.userInputView = Backbone.View.extend({
 
     $('body').on('pianoKeyOff', function(e, note){
       var noteId = '#' + note;
-      console.log("note triggeredoff", noteId.length);
+      // console.log("note triggeredoff", noteId.length);
       if (noteId.length === 4){
         $('#piano').find(noteId).removeClass("keyboardPressBlackKey");
       } else {
