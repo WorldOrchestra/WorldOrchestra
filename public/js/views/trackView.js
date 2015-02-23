@@ -24,7 +24,7 @@ WO.TrackView = Backbone.View.extend({
         // '</fieldset>' +
         '</form><br>' +
         '<button class="solo-track-button" id="solo">S</button>' +
-        '<button class="mute-track-button" id="mute" >M</button>' +
+        '<button class="mute-track-button" id="mute">M</button>' +
         '<div class="track-volume-slider-group">' +
           '<i class="fa fa-volume-down"></i>' +
           '<input class="track-volume-slider" type="range" min="0.00" max="1.00" step="0.01" value="0.75">' +
@@ -32,20 +32,14 @@ WO.TrackView = Backbone.View.extend({
         '</div>' +
       '</div>' +
       '<div class="track-notes" style="overflow:scroll"></div>' +
-      '<script>' +
-        'var mRender = new WO.midiRender("track-notes");' +
-        // 'mRender.showTrack(<%= notes %>)</script>' +
-        '</script>' +
-      '</script>' +
     '</div>'
   ),
   initialize: function(){
-    this.model.on('change:notes', function(model) {
-      $('.active-track').html('');
-      // WO.showTrack(this.model.get('notes'));
-      mRender.showTrack(this.model.get('notes'));
-    }, this);
+    $(document).ready((function(){
+      this.model.set('mRender', new WO.midiRender(this.model.cid+ ' .track-notes'));
+    }).bind(this));
   },
+
   render: function(){
     this.$el.html( this.template(this.model));
     return this.$el;
@@ -80,7 +74,7 @@ WO.TrackView = Backbone.View.extend({
 
   changeInstrument : function(e){
     console.log($(e.currentTarget)[0].value);
-    this.model.set('instrument')
+    this.model.set('instrument');
     //get number of track
     //use that number in variable - "WO.instrumentTrack" + number
     //set the instrument name using the instrument from the dropdown

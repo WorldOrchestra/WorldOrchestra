@@ -1,7 +1,7 @@
 //zoom is logarithmic - algebraically establish range?
 var WO = WO || {};
 
-var midiRender = function(clas) {
+WO.midiRender = function(clas) {
   this.h = 95;
   this.w = 1000;
   this.factor = 10;
@@ -37,7 +37,7 @@ var midiRender = function(clas) {
   $(document).ready((function() {console.log("Moo");this.moveBar()}).bind(this));
 };
 
-midiRender.prototype.drawGrid = function() {
+WO.midiRender.prototype.drawGrid = function() {
   this.svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + this.h + ")")
@@ -49,27 +49,53 @@ midiRender.prototype.drawGrid = function() {
 
 midiRender.prototype.moveBar = function() {
 debugger;
-  var target = document.querySelector('#transportTime');
-  MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+//  var target = document.querySelector('#transportTime');
+//  MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+//
+//  var observer = new MutationObserver(function(mutations, observer) {
+//    // fired when a mutation occurs
+//    console.log(mutations, observer);
+//    // ...
+//  });
+//
+//// define what element should be observed by the observer
+//// and what types of mutations trigger the callback
+//  observer.observe(target, {
+//    characterData: true,
+//    subtree: true,
+//    attributes: true
+//    //...
+//  });
 
-  var observer = new MutationObserver(function(mutations, observer) {
-    // fired when a mutation occurs
-    console.log(mutations, observer);
-    // ...
+  var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+  var list = document.querySelector('ol');
+
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList') {
+        var list_values = [].slice.call(list.children)
+          .map( function(node) { return node.innerHTML; })
+          .filter( function(s) {
+            if (s === '<br />') {
+              return false;
+            }
+            else {
+              return true;
+            }
+          });
+        console.log(list_values);
+      }
+    });
   });
 
-// define what element should be observed by the observer
-// and what types of mutations trigger the callback
-  observer.observe(target, {
-    characterData: true,
-    subtree: true,
-    attributes: true
-    //...
+  observer.observe(list, {
+    attributes: true,
+    childList: true,
+    characterData: true
   });
-
 };
 
-midiRender.prototype.octaveMap = function(o) {
+WO.midiRender.prototype.octaveMap = function(o) {
   var octave = {
     1: 'red',
     2: 'orange',
@@ -82,7 +108,7 @@ midiRender.prototype.octaveMap = function(o) {
   return octave[o];
 };
 
-midiRender.prototype.altPitch = function(p) {
+WO.midiRender.prototype.altPitch = function(p) {
   var altPitch = {
     C4: 90,
     Db4: 85,
@@ -106,7 +132,7 @@ midiRender.prototype.altPitch = function(p) {
   return altPitch[p];
 };
 
-midiRender.prototype.revAltPitch = function(p) {
+WO.midiRender.prototype.revAltPitch = function(p) {
   var revAltPitch = {
     90: 'C4',
     85: 'Db4',
@@ -130,7 +156,7 @@ midiRender.prototype.revAltPitch = function(p) {
   return revAltPitch[p];
 };
 
-midiRender.prototype.parseTrack = function(track) {
+WO.midiRender.prototype.parseTrack = function(track) {
   var result, start, waitingRoom;
   result = [];
   if(track.length > 1) {
@@ -156,16 +182,17 @@ midiRender.prototype.parseTrack = function(track) {
   return result;
 };
 
-midiRender.prototype.showTrack = function(track) {
+WO.midiRender.prototype.showTrack = function(track) {
   var dragmove, zoomFn, drag, zoom, that;
   track = track ? track.slice() : [];
 
   dragmove = function(d) {
-      var pitch = Math.floor((d3.event.sourceEvent.offsetY - 5)/5) * 5;
+    var pitch, actTrack;
+    actTrack = WO.appView.songView.collection.settings.activeTrack;
+    pitch = Math.floor((d3.event.sourceEvent.offsetY - 5)/5) * 5;
     d3.select(this)
       .attr("y", d.y = pitch);//Math.max(radius, Math.min(h - radius, d3.event.y)));
-      // reverse convert height to note.
-
+    actTrack.get('instrument').triggerAttackRelease(actTrack.get('mRender').revAltPitch(pitch), 0.01);
   };
   zoomFn = function(d) {
     var col = Math.min(255, Math.floor(Math.pow(10, d3.event.scale)));
@@ -202,6 +229,4 @@ midiRender.prototype.showTrack = function(track) {
     .call(zoom);
   return this.svg;
 };
-
-WO.midiRender = midiRender;
 
