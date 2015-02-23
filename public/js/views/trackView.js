@@ -35,9 +35,6 @@ WO.TrackView = Backbone.View.extend({
     '</div>'
   ),
   initialize: function(){
-    $(document).ready((function(){
-      this.model.set('mRender', new WO.MidiRender(this.model.cid+ ' .track-notes'));
-    }).bind(this));
   },
 
   render: function(){
@@ -90,6 +87,7 @@ WO.TrackView = Backbone.View.extend({
     //add active-track class
     this.$el.find('.track-container').addClass('active-track');
     console.log(this.$el);
+    WO.instrumentKeyHandler(this.model.collection.settings.activeTrack.attributes.instrument);
   }
 
 });
