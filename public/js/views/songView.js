@@ -13,6 +13,7 @@ WO.SongView = Backbone.View.extend({
     var newTrack = new WO.Track();
     this.collection.settings.activeTrack = newTrack;
     this.collection.add(newTrack);
+
     // var trackView = new WO.TrackView({model: track});
     // this.$el.append(trackView.render());
   },
@@ -21,14 +22,16 @@ WO.SongView = Backbone.View.extend({
   },
   render: function() {
     //this.$el.children().remove();
-    this.collection.forEach(this.renderTrack, this);
     $('.appBody').prepend(this.el);
+    this.collection.forEach(this.renderTrack, this);
     return this;
   },
   renderTrack: function(track){
     var trackView = new WO.TrackView({model: track});
-    this.$el.append(trackView.render());
+    $('#songView').append(trackView.render());
+    track.set('mRender', new WO.midiRender(track.cid+ ' .track-notes'));
     this.setActiveClass();
+
   },
   setActiveClass: function(){
     $('.active-track').removeClass('active-track');
