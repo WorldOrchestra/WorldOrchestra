@@ -138,11 +138,12 @@ WO.midiRender.prototype.showTrack = function(track) {
   track = track ? track.slice() : [];
 
   dragmove = function(d) {
-      var pitch = Math.floor((d3.event.sourceEvent.offsetY - 5)/5) * 5;
+    var pitch, actTrack;
+    actTrack = WO.appView.songView.collection.settings.activeTrack;
+    pitch = Math.floor((d3.event.sourceEvent.offsetY - 5)/5) * 5;
     d3.select(this)
       .attr("y", d.y = pitch);//Math.max(radius, Math.min(h - radius, d3.event.y)));
-      // reverse convert height to note.
-
+    actTrack.get('instrument').triggerAttackRelease(actTrack.get('mRender').revAltPitch(pitch), 0.01);
   };
   zoomFn = function(d) {
     var col = Math.min(255, Math.floor(Math.pow(10, d3.event.scale)));
