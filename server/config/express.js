@@ -56,7 +56,7 @@ module.exports = function(app) {
     // }));
     app.use(express.static(path.join(config.root, '.tmp')));
     app.use(express.static(path.join(config.root, 'public')));
-    app.set('appPath', 'public');
+    app.set('appPath', __dirname + '/public');
     app.use(morgan('dev'));
     app.use(errorHandler()); // Error handler - has to be last
   }
