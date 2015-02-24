@@ -17,10 +17,13 @@ module.exports = function(app) {
 
   app.route('/signup')
     .post(function(req, res) {
-      //call create()
-      console.log('on routes post');
       userController.create(req,res);
-/*      res.redirect('/');*/
+    });
+
+  app.route('/login')
+    .post(function(req, res) {
+      console.log('on routes login');
+      userController.me(req,res);
     });
 
   app.route('/specRunner')

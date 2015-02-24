@@ -5,7 +5,7 @@ WO.signupView = Backbone.View.extend({
   },
 
   events: {
-    'submit' : 'submit',
+    'submit .signupSubmit' : 'submitSignup',
     'click .open' : 'openModal'
   },
 
@@ -23,7 +23,7 @@ WO.signupView = Backbone.View.extend({
           '<div class="bbm-modal__section">'+
             '<p>Sign Up to join the WorldOrchestra.</p>'+
             '<div class="form-container site-width">'+
-              '<form action="submit" method="post">'+
+              '<form class="signupSubmit" action="submit" method="post">'+
                 '<div>'+
                   '<input class="auth-input" id="username" type="text" name="username" aria-labelledby="Username" placeholder="Your username">'+
                 '</div>'+
@@ -34,7 +34,7 @@ WO.signupView = Backbone.View.extend({
                   '<input class="auth-input" id="email" type="email" name="email" aria-labelledby="Email" placeholder="Your email address">'+
                 '</div>'+
                 '<div>'+
-                  '<input type="submit" method="post" value="Sign up">'+
+                  '<input class="signupSubmit" type="submit" method="post" value="Sign up">'+
                 '</div>'+
               '</form>'+
           '</div>'+
@@ -51,13 +51,13 @@ WO.signupView = Backbone.View.extend({
     return loginTemplate;
   },
 
-  submit: function (e) {
+  submitSignup: function (e) {
      e.preventDefault();
 
      var newUsername = $(e.currentTarget).find('#username').val();
      var newPassword = $(e.currentTarget).find('#password').val();
      var newEmail = $(e.currentTarget).find('#email').val();
-
+     
     $.ajax({
      type: 'POST',
      url: window.location + "signup",

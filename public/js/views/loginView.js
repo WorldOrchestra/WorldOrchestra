@@ -5,8 +5,8 @@ WO.loginView = Backbone.View.extend({
   },
 
   events: {
-    'submit' : 'loginUser',
-    'click .open-login' : 'openModal'
+    'submit .loginSubmit' : 'loginUser',
+    'click .open-login' : 'openLoginModal'
   },
 
     template: _.template(
@@ -23,15 +23,15 @@ WO.loginView = Backbone.View.extend({
           '<div class="bbm-modal__section">'+
             '<p>Login to access and save your songs.</p>'+
             '<div class="form-container site-width">'+
-              '<form action="/login" method="post">'+
+              '<form class="loginSubmit" action="/login" method="post">'+
                 '<div>'+
-                  '<input class="auth-input" type="text" id="username" name="username" placeholder="username">'+
+                  '<input class="auth-input" type="text" id="loginUsername" name="username" placeholder="username">'+
                 '</div>'+
                 '<div>'+
-                  '<input class="auth-input" type="password" id="password" name="password" placeholder="password">'+
+                  '<input class="auth-input" type="password" id="loginPassword" name="password" placeholder="password">'+
                 '</div>'+
                 '<div>'+
-                  '<input type="submit" value="Login">'+
+                  '<input class="loginSubmit" type="submit" value="Login">'+
                 '</div>'+
               '</form>'+
           '</div>'+
@@ -51,8 +51,8 @@ WO.loginView = Backbone.View.extend({
   loginUser: function (e) {
      e.preventDefault();
 
-     var checkUsername = $(e.currentTarget).find('#username').val();
-     var checkPassword = $(e.currentTarget).find('#password').val();
+     var checkUsername = $(e.currentTarget).find('#loginUsername').val();
+     var checkPassword = $(e.currentTarget).find('#loginPassword').val();
 
     $.ajax({
      type: 'POST',
@@ -69,7 +69,7 @@ WO.loginView = Backbone.View.extend({
     });
   },
 
-  openModal: function(){
+  openLoginModal: function(){
     var Modal = Backbone.Modal.extend({
       template: "#login-modal-template",
       cancelEl: ".bbm-button"
