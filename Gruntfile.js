@@ -350,7 +350,7 @@ module.exports = function (grunt) {
       //al Do we need jst?  Is anyone going to use .ejs?
       //'jst',
       'connect:test',
-      'karma',
+      'karma:ci',
       'casperjs'
     ];
 
