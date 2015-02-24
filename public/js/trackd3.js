@@ -11,45 +11,47 @@ WO.MidiRender = function(clas) {
       .attr('width', this.w + 'px')
       .attr('height', this.h + 'px');
 
-  this.xScale = d3.scale.linear()
-      .domain([0, this.w])
-      .range([0, this.w]);
-
-  this.yScale = d3.scale.linear()
-      .domain([0, this.h])
-      .range([this.h, 0]);
-
-  this.xAxis = d3.svg.axis()
-      .scale(this.xScale)
-      .orient("bottom")
-      .innerTickSize(-this.h)
-      .outerTickSize(0)
-      .tickPadding(10);
-
-  this.yAxis = d3.svg.axis()
-      .scale(this.yScale)
-      .orient("left")
-      .innerTickSize(-this.w)
-      .outerTickSize(0)
-      .tickPadding(10);
-
   this.drawGrid();
-  this.drawBar();
+  this.drawBar(0);
 };
 
 WO.MidiRender.prototype.drawGrid = function() {
+  var xScale, yScale, xAxis, yAxis;
+
+  xScale = d3.scale.linear()
+    .domain([0, this.w])
+    .range([0, this.w]);
+
+  yScale = d3.scale.linear()
+    .domain([0, this.h])
+    .range([this.h, 0]);
+
+  xAxis = d3.svg.axis()
+    .scale(xScale)
+    .orient("bottom")
+    .innerTickSize(-this.h)
+    .outerTickSize(0)
+    .tickPadding(10);
+
+  yAxis = d3.svg.axis()
+    .scale(yScale)
+    .orient("left")
+    .innerTickSize(-this.w)
+    .outerTickSize(0)
+    .tickPadding(10);
+
   this.svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + this.h + ")")
-      .call(this.xAxis);
+      .call(xAxis);
+
   this.svg.append("g")
       .attr("class", "y axis")
-      .call(this.yAxis);
+      .call(yAxis);
 };
 
 WO.MidiRender.prototype.drawBar = function(offset) {
   var lineFunc, lineData;
-  offset = offset || 0;
   lineData = [{
     x: offset,
     y: 0
@@ -150,9 +152,9 @@ WO.MidiRender.prototype.parseTrack = function(track) {
           duration: (Tone.prototype.toSeconds(track[0][0]) - Tone.prototype.toSeconds(start[0])) * this.factor,
           pitch: this.altPitch(start[1]),
           volume: 10,
-          octave: start[1].slice(-1)
+          octave: start[1].slice(-1),
+          source: [start, track.shift()]
         });
-        track.shift();
       }
     }
   }
@@ -164,12 +166,27 @@ WO.MidiRender.prototype.showTrack = function(track) {
   track = track ? track.slice() : [];
 
   dragmove = function(d) {
-    var pitch, actTrack;
+    var newPitch, actTrack, thisNote, currentPitch, originalNotes, index;
     actTrack = WO.appView.songView.collection.settings.activeTrack;
-    pitch = Math.floor((d3.event.sourceEvent.offsetY - 5)/5) * 5;
-    d3.select(this)
-      .attr("y", d.y = pitch);//Math.max(radius, Math.min(h - radius, d3.event.y)));
-    actTrack.get('instrument').triggerAttackRelease(actTrack.get('mRender').revAltPitch(pitch), 0.01);
+    newPitch = Math.floor((d3.event.sourceEvent.offsetY - 5)/5) * 5;
+    thisNote = d3.select(this);
+    thisNote.attr("y", d.y = newPitch);//Math.max(radius, Math.min(h - radius, d3.event.y)));
+    actTrack.get('instrument').triggerAttackRelease(actTrack.get('mRender').revAltPitch(newPitch), 0.01);
+    currentPitch = thisNote.data()[0].source;
+    originalNotes = actTrack.get('notes');
+    index = 0;
+    while ((originalNotes[index][0] !== currentPitch[0][0]) || (originalNotes[index][1] !== currentPitch[0][1])) {
+      index += 1;
+    }
+    originalNotes[index][1] = actTrack.get('mRender').revAltPitch(newPitch);
+    while ((originalNotes[index][0] !== currentPitch[1][0]) || (originalNotes[index][1] !== currentPitch[1][1])) {
+      index += 1;
+    }
+    originalNotes[index][1] = actTrack.get('mRender').revAltPitch(newPitch);
+
+    // on drag, need to:
+    // change them. - pitch only
+    // modify pair data.
   };
   zoomFn = function(d) {
     var col = Math.min(255, Math.floor(Math.pow(10, d3.event.scale)));
