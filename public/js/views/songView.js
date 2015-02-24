@@ -23,7 +23,7 @@ WO.SongView = Backbone.View.extend({
   removeTrack: function(){
 
   },
-  render: function() {  
+  render: function() {
   // this.$el.children().remove();
     $('.appBody').prepend(this.el);
     this.collection.forEach(this.renderTrack, this);
@@ -32,7 +32,10 @@ WO.SongView = Backbone.View.extend({
   renderTrack: function(track){
     var trackView = new WO.TrackView({model: track});
     $('#songView').append(trackView.render());
-    track.set('mRender', new WO.MidiRender(track.cid+ ' .track-notes'));
+    $(document).ready((function(){
+      track.set('mRender', new WO.MidiRender(track.cid+ ' .track-notes'));
+    }).bind(this));
+    //track.set('mRender', new WO.MidiRender(track.cid+ ' .track-notes'));
     this.setActiveClass();
 
   },
