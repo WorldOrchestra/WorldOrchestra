@@ -26,17 +26,20 @@ module.exports = function (grunt) {
     world: worldConfig,
     pkg: grunt.file.readJSON('package.json'),
     //al grunt-develop
+
     clean: {
       dist: ['.tmp', '<%= world.dist %>/*'],
       server: '.tmp',
       results: 'results/*'
     },
+
     concat: {
       dist: {
         src: ['<%= world.app %>/**/*.js'],
         dest: '.tmp/js/main.js'
       }
     },
+
     connect: {
       options: {
         port: grunt.option('port') || SERVER_PORT,
@@ -77,6 +80,14 @@ module.exports = function (grunt) {
         }
       }
     },
+
+    casperjs: {
+      files: [
+        'test/e2e/*.js'
+      ],
+      options: {}
+    },
+
     copy: {
       dist: {
         files: [{
@@ -95,6 +106,7 @@ module.exports = function (grunt) {
         }]
       }
     },
+
     cssmin: {
       dist: {
         files: {
@@ -105,6 +117,7 @@ module.exports = function (grunt) {
         }
       }
     },
+
     htmlmin: {
       dist: {
         options: {
@@ -126,6 +139,7 @@ module.exports = function (grunt) {
         }]
       }
     },
+
     imagemin: {
       dist: {
         files: [{
@@ -136,6 +150,7 @@ module.exports = function (grunt) {
         }]
       }
     },
+
     jshint: {
       options: {
         jshintrc: '.jshintrc',
@@ -149,6 +164,7 @@ module.exports = function (grunt) {
         '!test/unit/lib/**/*.js'
       ]
     },
+
     karma: {
       options: {
         configFile: 'karma.conf.js',
@@ -172,6 +188,7 @@ module.exports = function (grunt) {
         }
       }
     },
+
     open: {
       server: {
         path: 'http://localhost:<%= connect.options.port %>'
@@ -180,6 +197,7 @@ module.exports = function (grunt) {
         path: 'http://localhost:<%= connect.test.options.port %>'
       }
     },
+
     rev: {
       dist: {
         files: {
@@ -192,6 +210,7 @@ module.exports = function (grunt) {
         }
       }
     },
+
     uglify: {
       my_target: {
         files: {
@@ -199,12 +218,14 @@ module.exports = function (grunt) {
         }
       }
     },
+
     useminPrepare: {
       html: '<%= world.app %>/index.html',
       options: {
         dest: '<%= world.dist %>'
       }
     },
+
     usemin: {
       html: ['<%= world.dist %>/{,*/}*.html'],
       css: ['<%= world.dist %>/styles/{,*/}*.css'],
@@ -212,6 +233,7 @@ module.exports = function (grunt) {
         dirs: ['<%= world.dist %>']
       }
     },
+
     watch: {
       options: {
         nospawn: true,
@@ -253,7 +275,6 @@ module.exports = function (grunt) {
         files: 'Gruntfile.js',
         tasks: 'jshint:gruntfile'
       },
-      //al TODO finish task build,
       client: {
         files: [ 'client/**' ],
         tasks: [ 'build', 'karma:watch:run', 'casperjs' ]
