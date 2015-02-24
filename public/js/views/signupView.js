@@ -5,13 +5,14 @@ WO.signupView = Backbone.View.extend({
   },
 
   events: {
-    'submit' : 'submit'
+    'submit' : 'submit',
+    'click .open' : 'openModal'
   },
 
     template: _.template(
 
       '<div>'+
-        '<a href="#" class="open">Open modal</a>'+
+        '<button class="open">Sign Up</button>'+
 
         '<div class="app"></div>'+
 
@@ -42,7 +43,7 @@ WO.signupView = Backbone.View.extend({
           '</div>'+
         '</script>'+
 
-        '<script>'+
+/*        '<script>'+
         'jQuery(function($) {'+
 
           'var Modal = Backbone.Modal.extend({'+
@@ -59,7 +60,7 @@ WO.signupView = Backbone.View.extend({
 
           '$(".open").click()'+
         '});'+
-        '</script>'+
+        '</script>'+*/
 
       '</div>'
   ),
@@ -90,6 +91,21 @@ WO.signupView = Backbone.View.extend({
          alert("error");
        }
     });
+  },
+
+  openModal: function(){
+    var Modal = Backbone.Modal.extend({
+      template: "#modal-template",
+      cancelEl: ".bbm-button"
+    });
+
+    $(".open").on("click", function(){
+
+      var modalView = new Modal();
+      $(".app").html(modalView.render().el);
+
+    });
+
   }
 
 });
