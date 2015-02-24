@@ -184,7 +184,7 @@ WO.MidiRender.prototype.showTrack = function(track) {
     .on('zoom', zoomFn);
 
   that = this;
-  d3.select('svg')
+  this.svg
     .selectAll("rect")
     .data(this.parseTrack(track))
     .enter()
