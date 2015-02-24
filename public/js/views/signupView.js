@@ -34,7 +34,7 @@ WO.signupView = Backbone.View.extend({
                   '<input class="auth-input" id="email" type="email" name="email" aria-labelledby="Email" placeholder="Your email address">'+
                 '</div>'+
                 '<div>'+
-                  '<input type="submit" value="Sign up">'+
+                  '<input type="submit" method="post" value="Sign up">'+
                 '</div>'+
               '</form>'+
           '</div>'+
@@ -42,25 +42,6 @@ WO.signupView = Backbone.View.extend({
             '<a href="#" class="bbm-button">close</a>'+
           '</div>'+
         '</script>'+
-
-/*        '<script>'+
-        'jQuery(function($) {'+
-
-          'var Modal = Backbone.Modal.extend({'+
-            'template: "#modal-template",'+
-            'cancelEl: ".bbm-button"'+
-          '});'+
-
-          '$(".open").on("click", function(){'+
-
-            'var modalView = new Modal();'+
-            '$(".app").html(modalView.render().el);'+
-
-          '});'+
-
-          '$(".open").click()'+
-        '});'+
-        '</script>'+*/
 
       '</div>'
   ),

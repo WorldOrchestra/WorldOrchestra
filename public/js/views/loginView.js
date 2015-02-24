@@ -2,21 +2,21 @@ WO = WO || {};
 WO.loginView = Backbone.View.extend({
 
   initialize: function() {
-    this.render();
   },
 
   events: {
-    'submit' : 'loginUser'
+    'submit' : 'loginUser',
+    'click .open-login' : 'openModal'
   },
 
     template: _.template(
 
       '<div>'+
-        '<a href="#" class="open">Open modal</a>'+
+        '<button class="open-login">Login</button>'+
 
         '<div class="app"></div>'+
 
-        '<script type="text/template" id="modal-template">'+
+        '<script type="text/template" id="login-modal-template">'+
           '<div class="bbm-modal__topbar">'+
             '<h3 class="bbm-modal__title">Login</h3>'+
           '</div>'+
@@ -40,26 +40,6 @@ WO.loginView = Backbone.View.extend({
           '</div>'+
         '</script>'+
 
-        '<script>'+
-        'jQuery(function($) {'+
-
-          'var Modal = Backbone.Modal.extend({'+
-            'template: "#modal-template",'+
-            'cancelEl: ".bbm-button"'+
-          '});'+
-
-
-          '$(".open").on("click", function(){'+
-
-            'var modalView = new Modal();'+
-            '$(".app").html(modalView.render().el);'+
-
-          '});'+
-
-          '$(".open").click()'+
-        '});'+
-        '</script>'+
-
       '</div>'
   ),
 
@@ -68,13 +48,39 @@ WO.loginView = Backbone.View.extend({
     return signupTemplate;
   },
 
-  loginUser: function(e){
-    e && e.preventDefault();
-    var userData = {
-      username: this.$el.find('form #username').val(),
-      password: this.$el.find('form #password').val()
-    };
-    new User(userData).login(JSON.stringify(userData), this.router);
+  loginUser: function (e) {
+     e.preventDefault();
+
+     var checkUsername = $(e.currentTarget).find('#username').val();
+     var checkPassword = $(e.currentTarget).find('#password').val();
+
+    $.ajax({
+     type: 'POST',
+     url: window.location + "login",
+     data: {name: checkUsername,
+            password: checkPassword},
+     success: function(data) {
+      console.log(data + " Successful Login!");
+     },
+       error: function(data){
+        console.log(data);
+         alert("error");
+       }
+    });
+  },
+
+  openModal: function(){
+    var Modal = Backbone.Modal.extend({
+      template: "#login-modal-template",
+      cancelEl: ".bbm-button"
+    });
+
+    $(".open-login").on("click", function(){
+
+      var modalView = new Modal();
+      $(".app").html(modalView.render().el);
+
+    });
   }
 
 });
