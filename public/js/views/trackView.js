@@ -85,8 +85,11 @@ WO.TrackView = Backbone.View.extend({
     console.log("model", this.model);
     this.model.collection.settings.activeTrack = this.model;
     //add active-track class
+    $(document).unbind('keydown');
+    $(document).unbind('keyup');
     this.$el.find('.track-container').addClass('active-track');
     console.log(this.$el);
+
     WO.instrumentKeyHandler(this.model.collection.settings.activeTrack.attributes.instrument);
   }
 
