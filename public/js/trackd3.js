@@ -1,7 +1,7 @@
 //zoom is logarithmic - algebraically establish range?
 var WO = WO || {};
 
-WO.midiRender = function(clas) {
+WO.MidiRender = function(clas) {
   this.h = 95;
   this.w = 1000;
   this.factor = 10;
@@ -34,10 +34,10 @@ WO.midiRender = function(clas) {
       .tickPadding(10);
 
   this.drawGrid();
-  $(document).ready((function() {console.log("Moo");this.moveBar()}).bind(this));
+  $(document).ready(this.moveBar.bind(this));
 };
 
-WO.midiRender.prototype.drawGrid = function() {
+WO.MidiRender.prototype.drawGrid = function() {
   this.svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + this.h + ")")
@@ -47,55 +47,20 @@ WO.midiRender.prototype.drawGrid = function() {
       .call(this.yAxis);
 };
 
-midiRender.prototype.moveBar = function() {
-debugger;
-//  var target = document.querySelector('#transportTime');
-//  MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-//
-//  var observer = new MutationObserver(function(mutations, observer) {
-//    // fired when a mutation occurs
-//    console.log(mutations, observer);
-//    // ...
-//  });
-//
-//// define what element should be observed by the observer
-//// and what types of mutations trigger the callback
-//  observer.observe(target, {
-//    characterData: true,
-//    subtree: true,
-//    attributes: true
-//    //...
-//  });
-
+WO.MidiRender.prototype.moveBar = function() {
   var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-  var list = document.querySelector('ol');
+  var item = document.querySelector('#transportTime');
 
   var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.type === 'childList') {
-        var list_values = [].slice.call(list.children)
-          .map( function(node) { return node.innerHTML; })
-          .filter( function(s) {
-            if (s === '<br />') {
-              return false;
-            }
-            else {
-              return true;
-            }
-          });
-        console.log(list_values);
-      }
-    });
+    console.log(mutations[1].addedNodes[0].data);
   });
 
-  observer.observe(list, {
-    attributes: true,
-    childList: true,
-    characterData: true
+  observer.observe(item, {
+    childList: true
   });
 };
 
-WO.midiRender.prototype.octaveMap = function(o) {
+WO.MidiRender.prototype.octaveMap = function(o) {
   var octave = {
     1: 'red',
     2: 'orange',
@@ -108,7 +73,7 @@ WO.midiRender.prototype.octaveMap = function(o) {
   return octave[o];
 };
 
-WO.midiRender.prototype.altPitch = function(p) {
+WO.MidiRender.prototype.altPitch = function(p) {
   var altPitch = {
     C4: 90,
     Db4: 85,
@@ -132,7 +97,7 @@ WO.midiRender.prototype.altPitch = function(p) {
   return altPitch[p];
 };
 
-WO.midiRender.prototype.revAltPitch = function(p) {
+WO.MidiRender.prototype.revAltPitch = function(p) {
   var revAltPitch = {
     90: 'C4',
     85: 'Db4',
@@ -156,7 +121,7 @@ WO.midiRender.prototype.revAltPitch = function(p) {
   return revAltPitch[p];
 };
 
-WO.midiRender.prototype.parseTrack = function(track) {
+WO.MidiRender.prototype.parseTrack = function(track) {
   var result, start, waitingRoom;
   result = [];
   if(track.length > 1) {
@@ -182,7 +147,7 @@ WO.midiRender.prototype.parseTrack = function(track) {
   return result;
 };
 
-WO.midiRender.prototype.showTrack = function(track) {
+WO.MidiRender.prototype.showTrack = function(track) {
   var dragmove, zoomFn, drag, zoom, that;
   track = track ? track.slice() : [];
 
