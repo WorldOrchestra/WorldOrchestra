@@ -35,9 +35,7 @@ WO.SongView = Backbone.View.extend({
     $(document).ready((function(){
       track.set('mRender', new WO.MidiRender(track.cid+ ' .track-notes'));
     }).bind(this));
-    //track.set('mRender', new WO.MidiRender(track.cid+ ' .track-notes'));
     this.setActiveClass();
-
   },
   setActiveClass: function(){
     $('.active-track').removeClass('active-track');

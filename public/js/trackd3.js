@@ -34,7 +34,6 @@ WO.MidiRender = function(clas) {
       .tickPadding(10);
 
   this.drawGrid();
-  this.moveBar();
   this.drawBar();
 };
 
@@ -71,21 +70,6 @@ WO.MidiRender.prototype.drawBar = function(offset) {
     .attr('stroke', 'black')
     .attr('stroke-width', 2)
     .attr('fill', 'none');
-};
-
-WO.MidiRender.prototype.moveBar = function() {
-  var MutationObserver, item, observer;
-  MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-  item = document.querySelector('#transportTime');
-
-  observer = new MutationObserver((function(mutations) {
-    $('path').remove();
-    this.drawBar(Tone.prototype.toSeconds(mutations[1].addedNodes[0].data) * 16 * this.factor);
-  }).bind(this));
-
-  observer.observe(item, {
-    childList: true
-  });
 };
 
 WO.MidiRender.prototype.octaveMap = function(o) {

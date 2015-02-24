@@ -26,6 +26,24 @@ WO.TransportView = Backbone.View.extend({
   ),
   initialize: function(params) {
     this.render();
+    $(document).ready(function() {
+      var MutationObserver, item, observer;
+      MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+      item = document.querySelector('#transportTime');
+
+      observer = new MutationObserver(function(mutations) {
+        $('path').remove();
+        WO.appView.songView.collection.forEach(function(val) {
+          var tr;
+          tr = val.get('mRender');
+          tr.drawBar(Tone.prototype.toSeconds(mutations[1].addedNodes[0].data) * 16 * tr.factor);
+        });
+      });
+
+      observer.observe(item, {
+        childList: true
+      });
+    });
   },
   render: function() {
     return this.$el.append(this.template);
