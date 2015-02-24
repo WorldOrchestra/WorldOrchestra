@@ -28,7 +28,8 @@ WO.SynthFactory = function(){
         }
     };
 
-    var synth = new Tone.MonoSynth(synthOptions);
+    var synth = new Tone.PolySynth(6, Tone.MonoSynth);
+    synth.set(synthOptions);
 
     synth.octave = 4;
     synth.setVolume(-25);
