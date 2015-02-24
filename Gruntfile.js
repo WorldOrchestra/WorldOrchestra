@@ -113,7 +113,7 @@ module.exports = function (grunt) {
         files: {
           '<%= world.dist %>/styles/main.css': [
             '.tmp/styles/{,*/}*.css',
-            '<%= world.app %>/styles/{,*/}*.css'
+            '<%= world.app %>/css/{,*/}*.css'
           ]
         }
       }
@@ -373,7 +373,7 @@ module.exports = function (grunt) {
     'imagemin',
     'htmlmin',
     'concat',
-    'cssmin',
+    'cssmin:dist',
     'uglify',
     'copy',
     'rev',
