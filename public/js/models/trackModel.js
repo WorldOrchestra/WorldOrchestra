@@ -1,7 +1,7 @@
 var WO = WO || {};
 WO.Track = Backbone.Model.extend({
   defaults: {
-    notes: [],
+    notes: "",
     title: 'Acoustic Piano',
     isMuted: false,
     solo: false,
@@ -11,10 +11,11 @@ WO.Track = Backbone.Model.extend({
   },
 
   initialize : function(){
+    this.set('notes', []);
     //set default instrument on load
-    WO.instrumentTrack1 = WO.InstrumentFactory( "Acoustic Piano" );
-    WO.instrumentKeyHandler(WO.instrumentTrack1);
-    this.set('instrument', WO.instrumentTrack1);
+    var instrumentTrack1 = WO.InstrumentFactory( "Acoustic Piano" );
+    WO.instrumentKeyHandler(instrumentTrack1);
+    this.set('instrument', instrumentTrack1);
   }
 
 });
