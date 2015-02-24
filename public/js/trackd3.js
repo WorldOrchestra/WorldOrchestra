@@ -34,7 +34,8 @@ WO.MidiRender = function(clas) {
       .tickPadding(10);
 
   this.drawGrid();
-  $(document).ready(this.moveBar.bind(this));
+  this.moveBar();
+  this.drawBar();
 };
 
 WO.MidiRender.prototype.drawGrid = function() {
@@ -47,13 +48,40 @@ WO.MidiRender.prototype.drawGrid = function() {
       .call(this.yAxis);
 };
 
-WO.MidiRender.prototype.moveBar = function() {
-  var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-  var item = document.querySelector('#transportTime');
+WO.MidiRender.prototype.drawBar = function(offset) {
+  var lineFunc, lineData;
+  offset = offset || 0;
+  lineData = [{
+    x: offset,
+    y: 0
+  }, {
+    x: offset,
+    y: 95
+  }];
+  lineFunc = d3.svg.line()
+    .x(function(d) {
+      return d.x;
+    })
+    .y(function(d) {
+      return d.y;
+    })
+    .interpolate('linear');
+  this.svg.append('svg:path')
+    .attr('d', lineFunc(lineData))
+    .attr('stroke', 'black')
+    .attr('stroke-width', 2)
+    .attr('fill', 'none');
+};
 
-  var observer = new MutationObserver(function(mutations) {
-    console.log(mutations[1].addedNodes[0].data);
-  });
+WO.MidiRender.prototype.moveBar = function() {
+  var MutationObserver, item, observer;
+  MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+  item = document.querySelector('#transportTime');
+
+  observer = new MutationObserver((function(mutations) {
+    $('path').remove();
+    this.drawBar(Tone.prototype.toSeconds(mutations[1].addedNodes[0].data) * 16 * this.factor);
+  }).bind(this));
 
   observer.observe(item, {
     childList: true
