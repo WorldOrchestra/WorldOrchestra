@@ -166,27 +166,27 @@ WO.MidiRender.prototype.showTrack = function(track) {
   track = track ? track.slice() : [];
 
   dragmove = function(d) {
-    var newPitch, actTrack, thisNote, currentPitch, originalNotes, index;
+    var newPitch, actTrack, thisNote, originalNotes, index, revPitch, findIndex;
+
+    findIndex = function(offset) {
+      var currentPitch;
+      currentPitch = thisNote.data()[0].source;
+      while ((originalNotes[index][0] !== currentPitch[offset][0]) || (originalNotes[index][1] !== currentPitch[offset][1])) {
+        index += 1;
+      }
+      return index;
+    };
+
     actTrack = WO.appView.songView.collection.settings.activeTrack;
     newPitch = Math.floor((d3.event.sourceEvent.offsetY - 5)/5) * 5;
     thisNote = d3.select(this);
+    revPitch = actTrack.get('mRender').revAltPitch(newPitch);
     thisNote.attr("y", d.y = newPitch);//Math.max(radius, Math.min(h - radius, d3.event.y)));
-    actTrack.get('instrument').triggerAttackRelease(actTrack.get('mRender').revAltPitch(newPitch), 0.01);
-    currentPitch = thisNote.data()[0].source;
+    actTrack.get('instrument').triggerAttackRelease(revPitch);
     originalNotes = actTrack.get('notes');
     index = 0;
-    while ((originalNotes[index][0] !== currentPitch[0][0]) || (originalNotes[index][1] !== currentPitch[0][1])) {
-      index += 1;
-    }
-    originalNotes[index][1] = actTrack.get('mRender').revAltPitch(newPitch);
-    while ((originalNotes[index][0] !== currentPitch[1][0]) || (originalNotes[index][1] !== currentPitch[1][1])) {
-      index += 1;
-    }
-    originalNotes[index][1] = actTrack.get('mRender').revAltPitch(newPitch);
-
-    // on drag, need to:
-    // change them. - pitch only
-    // modify pair data.
+    originalNotes[findIndex(0)][1] = revPitch;
+    originalNotes[findIndex(1)][1] = revPitch;
   };
   zoomFn = function(d) {
     var col = Math.min(255, Math.floor(Math.pow(10, d3.event.scale)));
