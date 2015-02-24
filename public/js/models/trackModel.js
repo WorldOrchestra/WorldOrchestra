@@ -12,10 +12,16 @@ WO.Track = Backbone.Model.extend({
 
   initialize : function(){
     this.set('notes', []);
-    //set default instrument on load
-    var instrumentTrack1 = WO.InstrumentFactory( "Acoustic Piano" );
-    WO.instrumentKeyHandler(instrumentTrack1);
-    this.set('instrument', instrumentTrack1);
+    this.set('instrument', WO.InstrumentFactory( "Acoustic Piano" ));
+    WO.instrumentKeyHandler(this.get('instrument'));
+    this.on('changeInstrument', function(instrumentName){this.changeInstrument(instrumentName);}, this);
+  },
+
+  changeInstrument: function(instrumentName){
+    $(document).unbind('keydown');
+    $(document).unbind('keyup');
+    this.set('instrument', WO.InstrumentFactory(instrumentName));
+    WO.instrumentKeyHandler(this.get('instrument'));    
   }
 
 });
