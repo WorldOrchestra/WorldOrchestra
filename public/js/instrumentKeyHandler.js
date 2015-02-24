@@ -3,7 +3,7 @@ var WO = WO || {};
 WO.down = {};
 
 WO.instrumentKeyHandler = function(instrument){
-
+  
   $(document).on('keydown', function(e){
       var note = getKey(e);
 
@@ -15,7 +15,7 @@ WO.instrumentKeyHandler = function(instrument){
       if( note !== null ){
           if( WO.down[note] === null || WO.down[note] === undefined){
               instrument.triggerAttack(note);
-              if (WO.recording){
+              if (WO.recording && instrument === WO.appView.songView.collection.settings.activeTrack.get('instrument')){
                   WO.recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
               }
               WO.down[note] = true;
@@ -38,7 +38,7 @@ WO.instrumentKeyHandler = function(instrument){
       //if there's a note and the note has being pressed
       if( note !== null && WO.down[note] ){
           instrument.triggerRelease(note);
-          if (WO.recording){
+          if (WO.recording && instrument === WO.appView.songView.collection.settings.activeTrack.attributes.instrument){
               WO.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
           }
           WO.down[note] = null;
