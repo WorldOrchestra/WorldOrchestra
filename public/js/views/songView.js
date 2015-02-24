@@ -13,6 +13,9 @@ WO.SongView = Backbone.View.extend({
     var newTrack = new WO.Track();
     this.collection.settings.activeTrack = newTrack;
     this.collection.add(newTrack);
+    $(document).unbind('keydown');
+    $(document).unbind('keyup');
+    WO.instrumentKeyHandler(newTrack.attributes.instrument);
 
     // var trackView = new WO.TrackView({model: track});
     // this.$el.append(trackView.render());
@@ -20,8 +23,8 @@ WO.SongView = Backbone.View.extend({
   removeTrack: function(){
 
   },
-  render: function() {
-    //this.$el.children().remove();
+  render: function() {  
+  // this.$el.children().remove();
     $('.appBody').prepend(this.el);
     this.collection.forEach(this.renderTrack, this);
     return this;
