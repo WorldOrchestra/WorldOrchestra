@@ -8,9 +8,9 @@ WO.WOView = Backbone.View.extend({
     ),
 
   initialize: function(params){
-    this.songView = new WO.SongView({collection: new WO.Song()});
     this.transportView = new WO.TransportView();
     this.userInputView = new WO.userInputView();
+    this.songView = new WO.SongView({collection: new WO.Song()});
     this.render();
   },
 
