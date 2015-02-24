@@ -20,7 +20,7 @@ WO.WOView = Backbone.View.extend({
     this.$el.append(this.template);
     this.$el.append(this.transportView.$el);
     this.$el.append(this.userInputView.render());
-    // this.$el.append(this.loginView.render());
+    this.$el.append(this.loginView.render());
     this.$el.append(this.signupView.render());
     $('.appBody').append(this.$el);
     return this.$el;
