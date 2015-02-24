@@ -1,7 +1,7 @@
 //zoom is logarithmic - algebraically establish range?
 var WO = WO || {};
 
-WO.midiRender = function(clas) {
+WO.MidiRender = function(clas) {
   this.h = 95;
   this.w = 1000;
   this.factor = 10;
@@ -34,9 +34,11 @@ WO.midiRender = function(clas) {
       .tickPadding(10);
 
   this.drawGrid();
+  this.moveBar();
+  this.drawBar();
 };
 
-WO.midiRender.prototype.drawGrid = function() {
+WO.MidiRender.prototype.drawGrid = function() {
   this.svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + this.h + ")")
@@ -46,7 +48,47 @@ WO.midiRender.prototype.drawGrid = function() {
       .call(this.yAxis);
 };
 
-WO.midiRender.prototype.octaveMap = function(o) {
+WO.MidiRender.prototype.drawBar = function(offset) {
+  var lineFunc, lineData;
+  offset = offset || 0;
+  lineData = [{
+    x: offset,
+    y: 0
+  }, {
+    x: offset,
+    y: 95
+  }];
+  lineFunc = d3.svg.line()
+    .x(function(d) {
+      return d.x;
+    })
+    .y(function(d) {
+      return d.y;
+    })
+    .interpolate('linear');
+  this.svg.append('svg:path')
+    .attr('d', lineFunc(lineData))
+    .attr('stroke', 'black')
+    .attr('stroke-width', 2)
+    .attr('fill', 'none');
+};
+
+WO.MidiRender.prototype.moveBar = function() {
+  var MutationObserver, item, observer;
+  MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+  item = document.querySelector('#transportTime');
+
+  observer = new MutationObserver((function(mutations) {
+    $('path').remove();
+    this.drawBar(Tone.prototype.toSeconds(mutations[1].addedNodes[0].data) * 16 * this.factor);
+  }).bind(this));
+
+  observer.observe(item, {
+    childList: true
+  });
+};
+
+WO.MidiRender.prototype.octaveMap = function(o) {
   var octave = {
     1: 'red',
     2: 'orange',
@@ -59,7 +101,7 @@ WO.midiRender.prototype.octaveMap = function(o) {
   return octave[o];
 };
 
-WO.midiRender.prototype.altPitch = function(p) {
+WO.MidiRender.prototype.altPitch = function(p) {
   var altPitch = {
     C4: 90,
     Db4: 85,
@@ -83,7 +125,7 @@ WO.midiRender.prototype.altPitch = function(p) {
   return altPitch[p];
 };
 
-WO.midiRender.prototype.revAltPitch = function(p) {
+WO.MidiRender.prototype.revAltPitch = function(p) {
   var revAltPitch = {
     90: 'C4',
     85: 'Db4',
@@ -107,7 +149,7 @@ WO.midiRender.prototype.revAltPitch = function(p) {
   return revAltPitch[p];
 };
 
-WO.midiRender.prototype.parseTrack = function(track) {
+WO.MidiRender.prototype.parseTrack = function(track) {
   var result, start, waitingRoom;
   result = [];
   if(track.length > 1) {
@@ -133,7 +175,7 @@ WO.midiRender.prototype.parseTrack = function(track) {
   return result;
 };
 
-WO.midiRender.prototype.showTrack = function(track) {
+WO.MidiRender.prototype.showTrack = function(track) {
   var dragmove, zoomFn, drag, zoom, that;
   track = track ? track.slice() : [];
 
