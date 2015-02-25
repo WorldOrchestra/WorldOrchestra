@@ -271,3 +271,10 @@ ul#piano li a:active,ul#piano li div.anchor:active {
   margin: 10px 20px 10px 20px;
   text-decoration: none;
 }
+
+.enable-midi-button{
+  float:right;
+    display:block;
+    margin-right:0px;
+    clear:left;
+}
