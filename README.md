@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/worldorchestra/worldorchestra.png?label=ready&title=Ready)](https://waffle.io/worldorchestra/worldorchestra)
 # WorldOrchestra
 
 [ ![Codeship Status for WorldOrchestra/WorldOrchestra](https://codeship.com/projects/3eb4b8d0-9521-0132-ffbf-466960a0e7d2/status?branch=master)](https://codeship.com/projects/62739)
