@@ -1,5 +1,8 @@
 var WO = WO || {};
 WO.WOView = Backbone.View.extend({
+  events: {
+    'click': 'deactivateNote'
+  },
 
   template: _.template(
     '<div>' +
@@ -26,5 +29,14 @@ WO.WOView = Backbone.View.extend({
     this.$el.append(this.signupView.render());
     $('.appBody').append(this.$el);
     return this.$el;
+  },
+
+  deactivateNote: function() {
+    // To set up the user's ability to delete a note, the program add a class to it when
+    // the user clicks it.  The program uses the class to know what to remove when
+    // pressing the delete key.  Naturally, this class needs to be removed when no
+    // longer relevant, hence this click event.
+    d3.select('.activeNote')
+      .classed('activeNote', false);
   }
 });
