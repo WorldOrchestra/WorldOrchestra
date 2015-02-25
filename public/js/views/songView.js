@@ -21,8 +21,7 @@ WO.SongView = Backbone.View.extend({
   removeTrack: function(){
     var collectionLength = this.collection.length;
     this.collection.settings.activeTrack = collectionLength ?  this.collection.at(collectionLength - 1) : "";
-    $('.' + this.collection.settings.activeTrack.cid).addClass('active-track');    
-    this.render();
+    $('.' + this.collection.settings.activeTrack.cid).addClass('active-track');
   },
 
   render: function() {
@@ -37,7 +36,6 @@ WO.SongView = Backbone.View.extend({
     $('#songView').append(trackView.render());
     $(document).ready((function(){
       track.set('mRender', new WO.MidiRender(track.cid+ ' .track-notes'));
-      track.get('mRender').showTrack(track.get('notes'));
     }).bind(this));
     this.setActiveClass();
   },

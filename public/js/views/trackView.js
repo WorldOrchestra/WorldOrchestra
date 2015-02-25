@@ -44,7 +44,7 @@ WO.TrackView = Backbone.View.extend({
 
   deleteTrack: function(e){
     e.stopImmediatePropagation();
-    // debugger;
+    $('.' + this.model.cid).remove();
     this.model.collection.remove(this.model);
   },
 
