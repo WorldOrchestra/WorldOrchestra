@@ -26,6 +26,7 @@ WO.userInputView = Backbone.View.extend({
           '<div id="tabs-2">'+
             '<div id="keys">'+
             '<button class="octave"><span>Octave </span><span id="octave">4</span></button>' +
+            '<button class="enable-midi-button" onClick="WO.midi.enableMidiController();"><span>Enable External MIDI Controller</span></button>' +
               '<div id="p-wrapper">'+
                 '<ul id="piano">'+
                   '<li><div class="anchor" id="C3"></div></li>'+
