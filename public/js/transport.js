@@ -96,6 +96,7 @@ $('#play').on('click', function(){
     WO.playDrumPad();
     //TO DO: need to get the song!
     WO.playSong(WO.appView.songView.collection);
+    WO.wavesurfer.play();
 });
 
 $('#record').on('click', function(){

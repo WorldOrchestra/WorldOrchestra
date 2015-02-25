@@ -24,10 +24,13 @@
 
   <!-- The peg where we will attach our Backbone structure -->
   <div class="appBody">
+<button id="trigWave">Stop Audio</button>
   </div>
   <div>
     <pre id="log">  </pre>
   </div>
+
+
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 
   <!-- <script>
@@ -50,6 +53,7 @@
   <script type="text/javascript" src="bower_components/backbone-modal/backbone.modal.js"></script>
 <!-- endbuild -->
 <!-- build:js scripts/main.js -->
+  <script src="js/wavesurfer.js"></script>
   <script src="js/instruments/acousticPiano.js"></script>
   <script src="js/instruments/synth.js"></script>
   <script src="js/widgets.js"></script>
@@ -68,6 +72,8 @@
   <script src="js/views/signupView.js"></script>
   <script src="js/views/WOView.js"></script>
   <script src="js/instrumentKeyHandler.js"></script>
+  <script src="js/instruments/wavesurferAudio.js"></script>
+  <script src="js/instruments/wavesurferMic.js"></script>
   <script src="js/instruments/instrumentFactory.js"></script>
   <script src="js/index.js"></script>
   <script src="js/transport.js"></script>

@@ -20,6 +20,7 @@ WO.TrackView = Backbone.View.extend({
             '<option selected="selected" value="Acoustic Piano">Acoustic Piano</option>'+
             '<option value="Synth">Synth</option>'+
             '<option value="Drums">Drums</option>' +
+            '<option value="Audio">Audio</option>' +
           '</select>' +
         // '</fieldset>' +
         '</form><br>' +
