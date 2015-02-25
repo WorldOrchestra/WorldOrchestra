@@ -2,8 +2,11 @@ html{
   box-sizing: border-box;
 }
 body {
-  padding: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin-top: 0px;
 }
 
 a {

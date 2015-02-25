@@ -8,6 +8,7 @@ WO.WOView = Backbone.View.extend({
     ),
 
   initialize: function(params){
+    this.navbarView = new WO.navbarView();
     this.transportView = new WO.TransportView();
     this.userInputView = new WO.userInputView();
     this.songView = new WO.SongView({collection: new WO.Song()});
@@ -18,6 +19,7 @@ WO.WOView = Backbone.View.extend({
 
   render: function(){
     this.$el.append(this.template);
+    $('body').prepend(this.navbarView.render());
     this.$el.append(this.transportView.$el);
     this.$el.append(this.userInputView.render());
     this.$el.append(this.loginView.render());

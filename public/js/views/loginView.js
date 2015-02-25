@@ -57,7 +57,7 @@ WO.loginView = Backbone.View.extend({
     $.ajax({
      type: 'POST',
      url: window.location + "login",
-     data: {name: checkUsername,
+     data: {user: checkUsername,
             password: checkPassword},
      success: function(data) {
       console.log(data + " Successful Login!");
