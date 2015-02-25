@@ -1,6 +1,6 @@
 var WO = WO || {};
 WO.TrackView = Backbone.View.extend({
-  events: {
+  events: { 
     'click .delete-track-button' : 'deleteTrack',
     'change .track-volume-slider' : 'setTrackVolume',
     'click .mute-track-button' : 'muteTrack',
@@ -42,7 +42,9 @@ WO.TrackView = Backbone.View.extend({
     return this.$el;
   },
 
-  deleteTrack: function(){
+  deleteTrack: function(e){
+    e.stopImmediatePropagation();
+    $('.' + this.model.cid).remove();
     this.model.collection.remove(this.model);
   },
 
