@@ -19,7 +19,7 @@ WO.userInputView = Backbone.View.extend({
                 '<option value="WO.drumpPadPresetRock">Rock</option>' +
               '</select>' +
             '</div>' +
-            '<div id="Content">'+
+            '<div id="UIContent">'+
               '<div id="Sequencer"></div>'+
             '</div>'+
           '</div>'+

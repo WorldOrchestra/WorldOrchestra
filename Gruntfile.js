@@ -97,13 +97,16 @@ module.exports = function (grunt) {
           dest: '<%= world.dist %>',
           src: [
             '*.{ico,txt}',
-            'images/{,*/}*.{webp,gif}',
+            'img/{,*/}*.{webp,gif}',
             'styles/fonts/{,*/}*.*',
             'soundfont/**/*.*'
           ]
         }, {
-          src: 'node_modules/apache-server-configs/dist/.htaccess',
-          dest: '<%= world.dist %>/.htaccess'
+          expand: true,
+          dot: true,
+          cwd: '<%= world.app %>',
+          dest: '<%= world.dist %>/styles/public',
+          src: ['img/{,*/}*.png', 'bower_components/jquery-ui/themes/smoothness/images/*.{gif,png}']
         }]
       }
     },
@@ -113,7 +116,9 @@ module.exports = function (grunt) {
         files: {
           '<%= world.dist %>/styles/main.css': [
             '.tmp/styles/{,*/}*.css',
-            '<%= world.app %>/styles/{,*/}*.css'
+            '<%= world.app %>/bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css',
+            '<%= world.app %>/bower_components/jquery-ui/themes/smoothness/theme.css',
+            '<%= world.app %>/css/{,*/}*.css'
           ]
         }
       }
@@ -373,7 +378,7 @@ module.exports = function (grunt) {
     'imagemin',
     'htmlmin',
     'concat',
-    'cssmin',
+    'cssmin:dist',
     'uglify',
     'copy',
     'rev',
