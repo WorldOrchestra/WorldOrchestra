@@ -106,7 +106,7 @@ module.exports = function (grunt) {
           dot: true,
           cwd: '<%= world.app %>',
           dest: '<%= world.dist %>/styles/public',
-          src: ['img/{,*/}*.png']
+          src: ['img/{,*/}*.png', 'bower_components/jquery-ui/themes/smoothness/images/*.{gif,png}']
         }]
       }
     },
@@ -116,6 +116,8 @@ module.exports = function (grunt) {
         files: {
           '<%= world.dist %>/styles/main.css': [
             '.tmp/styles/{,*/}*.css',
+            '<%= world.app %>/bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css',
+            '<%= world.app %>/bower_components/jquery-ui/themes/smoothness/theme.css',
             '<%= world.app %>/css/{,*/}*.css'
           ]
         }
