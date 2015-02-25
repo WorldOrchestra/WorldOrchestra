@@ -30,11 +30,13 @@ WO.midi = {
       var note = WO.midi.midiHexToNote[ev.data[1]];
       if(ev.data[0]  === 144){ //note on
         WO.appView.songView.collection.settings.activeTrack.get('instrument').triggerAttack(note);
+        $('body').trigger('pianoKeyOn', note);
         if (WO.recording){
             WO.recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
         }
       }else{
         WO.appView.songView.collection.settings.activeTrack.get('instrument').triggerRelease(note);
+        $('body').trigger('pianoKeyOff', [note]);
         if (WO.recording){
             WO.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
         }
