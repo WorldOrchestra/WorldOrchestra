@@ -2,6 +2,7 @@ WO = WO || {};
 WO.loginView = Backbone.View.extend({
 
   initialize: function() {
+    this.render();
   },
 
   events: {
@@ -38,6 +39,26 @@ WO.loginView = Backbone.View.extend({
           '<div class="bbm-modal__bottombar">'+
             '<a href="#" class="bbm-button">close</a>'+
           '</div>'+
+        '</script>'+
+
+        '<script>'+
+        'jQuery(function($) {'+
+
+          'var Modal = Backbone.Modal.extend({'+
+            'template: "#modal-template",'+
+            'cancelEl: ".bbm-button"'+
+          '});'+
+
+
+          '$(".open").on("click", function(){'+
+
+            'var modalView = new Modal();'+
+            '$(".app").html(modalView.render().el);'+
+
+          '});'+
+
+          '$(".open").click()'+
+        '});'+
         '</script>'+
 
       '</div>'

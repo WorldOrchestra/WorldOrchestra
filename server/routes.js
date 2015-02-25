@@ -17,6 +17,8 @@ module.exports = function(app) {
 
   app.route('/signup')
     .post(function(req, res) {
+      //call create()
+      console.log('on routes post');
       userController.create(req,res);
     });
 
