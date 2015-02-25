@@ -130,6 +130,7 @@ WO.PianoFactory = function(){
   acousticPiano.set(acousticPianoOptions);
   acousticPiano.setVolume(0);
   acousticPiano.toMaster();
+  acousticPiano.title = "Acoustic Piano";
 
   return acousticPiano;
 };     
