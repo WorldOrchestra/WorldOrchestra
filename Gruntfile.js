@@ -97,13 +97,16 @@ module.exports = function (grunt) {
           dest: '<%= world.dist %>',
           src: [
             '*.{ico,txt}',
-            'images/{,*/}*.{webp,gif}',
+            'img/{,*/}*.{webp,gif}',
             'styles/fonts/{,*/}*.*',
             'soundfont/**/*.*'
           ]
         }, {
-          src: 'node_modules/apache-server-configs/dist/.htaccess',
-          dest: '<%= world.dist %>/.htaccess'
+          expand: true,
+          dot: true,
+          cwd: '<%= world.app %>',
+          dest: '<%= world.dist %>/styles/public',
+          src: ['img/{,*/}*.png']
         }]
       }
     },
