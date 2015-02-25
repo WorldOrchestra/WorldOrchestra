@@ -5,6 +5,7 @@
 'use strict';
 
 var errors = require('./components/errors');
+var userController = require('./api/user/user.controller.js');
 
 module.exports = function(app) {
 
@@ -13,6 +14,19 @@ module.exports = function(app) {
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth'));
+
+  app.route('/signup')
+    .post(function(req, res) {
+      //call create()
+      console.log('on routes post');
+      userController.create(req,res);
+    });
+
+  app.route('/login')
+    .post(function(req, res) {
+      console.log('on routes login');
+      userController.me(req,res);
+    });
 
   app.route('/specRunner')
     .get(function(req, res) {
