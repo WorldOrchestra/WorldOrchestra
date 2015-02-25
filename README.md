@@ -16,6 +16,7 @@ Bringing the world together - one track at a time.
   - __CDN__: Domen Vajavec
   - __Eastern European__: Domen Vajavec
   - __The Fonz__: Dave Fedele
+  - __The Zoomkeeper__: Dave Fedele
 
 ## Table of Contents
 

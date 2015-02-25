@@ -3,7 +3,7 @@ var WO = WO || {};
 WO.down = {};
 
 WO.instrumentKeyHandler = function(instrument){
-  
+
   $(document).on('keydown', function(e){
       var note = getKey(e);
 
@@ -29,7 +29,13 @@ WO.instrumentKeyHandler = function(instrument){
 
 
   $(document).on('keyup', function(e){
+    var currTrack;
       var note = getKey(e);
+
+      if (e.which === 46) {
+        currTrack = WO.appView.songView.collection.settings.activeTrack;
+        currTrack.get('mRender').deleteNote(currTrack);
+      }
 
       if( e.which === 88 || e.which === 90 ){
           WO.down[e.which] = null;

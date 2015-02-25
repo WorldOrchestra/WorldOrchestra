@@ -135,6 +135,18 @@ WO.MidiRender.prototype.revAltPitch = function(p) {
   return revAltPitch[p];
 };
 
+WO.MidiRender.prototype.deleteNote = function(track) {
+  var source, actTrack, notes, findIndex, mRender;
+  source = d3.select('.activeNote').data()[0].source;
+  actTrack = WO.appView.songView.collection.settings.activeTrack;
+  mRender = actTrack.get('mRender');
+  findIndex = mRender.findIndex;
+  notes = actTrack.get('notes');
+  notes.splice(findIndex(0, source, notes), 1);
+  notes.splice(findIndex(1, source, notes), 1);
+  mRender.svg.select('.activeNote').remove();
+};
+
 WO.MidiRender.prototype.parseTrack = function(track) {
   var result, start, waitingRoom;
   result = [];
@@ -161,32 +173,32 @@ WO.MidiRender.prototype.parseTrack = function(track) {
   return result;
 };
 
+WO.MidiRender.prototype.findIndex = function(offset, source, notes) {
+  var index;
+  index = 0;
+  while (!(notes[index][0] === source[offset][0] && notes[index][1] === source[offset][1])) {
+    index += 1;
+  }
+  return index;
+};
+
 WO.MidiRender.prototype.showTrack = function(track) {
   var dragmove, zoomFn, drag, zoom, that;
   track = track ? track.slice() : [];
 
   dragmove = function(d) {
-    var newPitch, actTrack, thisNote, originalNotes, index, revPitch, findIndex;
-
-    findIndex = function(offset) {
-      var currentPitch;
-      currentPitch = thisNote.data()[0].source;
-      while ((originalNotes[index][0] !== currentPitch[offset][0]) || (originalNotes[index][1] !== currentPitch[offset][1])) {
-        index += 1;
-      }
-      return index;
-    };
+    var newPitch, actTrack, thisNote, originalNotes, revPitch, mRender;
 
     actTrack = WO.appView.songView.collection.settings.activeTrack;
     newPitch = Math.floor((d3.event.sourceEvent.offsetY - 5)/5) * 5;
     thisNote = d3.select(this);
-    revPitch = actTrack.get('mRender').revAltPitch(newPitch);
+    mRender = actTrack.get('mRender');
+    revPitch = mRender.revAltPitch(newPitch);
     thisNote.attr("y", d.y = newPitch);//Math.max(radius, Math.min(h - radius, d3.event.y)));
     actTrack.get('instrument').triggerAttackRelease(revPitch);
     originalNotes = actTrack.get('notes');
-    index = 0;
-    originalNotes[findIndex(0)][1] = revPitch;
-    originalNotes[findIndex(1)][1] = revPitch;
+    originalNotes[mRender.findIndex(0, thisNote.data()[0].source, originalNotes)][1] = revPitch;
+    originalNotes[mRender.findIndex(1, thisNote.data()[0].source, originalNotes)][1] = revPitch;
   };
   zoomFn = function(d) {
     var col = Math.min(255, Math.floor(Math.pow(10, d3.event.scale)));
@@ -201,6 +213,7 @@ WO.MidiRender.prototype.showTrack = function(track) {
     .on('zoom', zoomFn);
 
   that = this;
+  $('rect').off('click');
   this.svg
     .selectAll("rect")
     .data(this.parseTrack(track))
@@ -220,7 +233,13 @@ WO.MidiRender.prototype.showTrack = function(track) {
       return that.octaveMap(d.octave);
     }, "stroke-width": "2px"})
     .call(drag)
-    .call(zoom);
+    .call(zoom)
+    .on('click', function(e, i) {
+      d3.select('.activeNote')
+        .classed('activeNote', false);
+      d3.select(this)
+        .classed('activeNote', true);
+    });
   return this.svg;
 };
 
