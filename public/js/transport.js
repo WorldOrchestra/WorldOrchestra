@@ -39,6 +39,19 @@ WO.recordNotes = function(note, time, velocity){
     song.settings.activeTrack.get('mRender').showTrack(notes);
 };
 
+WO.killNotes = function(activeInstrument){
+    var notes = activeInstrument.get('notes');
+    var currentTime = Tone.Transport.toSeconds(Tone.Transport.getTransportTime());
+    for(var i=0; i<notes.length; i++){
+        var noteTime = Tone.Transport.toSeconds(notes[i][0]);
+        if(noteTime <= currentTime ){
+            activeInstrument.get('instrument').triggerRelease(notes[i][1]);
+        }else if(noteTime > currentTime ){
+            break;
+        }
+    }
+}
+
 $('#rewind').on('click', function(){
     Tone.Transport.setTransportTime("0:0:0");
     $('#transportTime').text(Tone.Transport.getTransportTime());
@@ -65,6 +78,12 @@ $('#stop').on('click', function(){
     $('#record').css({"background-color": "white", "color" : "red"});
     Tone.Transport.stop();
     Tone.Transport.clearIntervals();
+    WO.appView.songView.collection.models.forEach(function(track){
+      var title = track.get('title');
+      if( title !== "Acoustic Piano" || title !== "Drums"){
+      WO.killNotes(track);
+      }
+    });
 });
 
 $('#play').on('click', function(){

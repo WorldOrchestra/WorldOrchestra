@@ -65,8 +65,7 @@ WO.TrackView = Backbone.View.extend({
       this.model.set('isMuted', true);
       color = "rgb(255,0,0)";
     }
-   
-    $('.mute-track-button').toggleClass('muted');
+    this.$el.find('.mute-track-button').toggleClass('muted');
     this.model.set('volume', volume);
     this.model.get('instrument').setVolume(volume);
   },
@@ -75,6 +74,7 @@ WO.TrackView = Backbone.View.extend({
     var instrumentName = $(e.currentTarget)[0].value;
     $(e.currentTarget)[0].blur();
     this.model.trigger('changeInstrument', instrumentName);
+    this.model.set('title', instrumentName);
     $(e.currentTarget).closest('.track-controls').find('.track-title').text(instrumentName);
   },
 
