@@ -1,6 +1,7 @@
 var WO = WO || {};
 
-WO.InstrumentFactory = function(instrumentName){
+WO.InstrumentFactory = function(instrumentName, cid){
+  
   var lookup = {
     "Acoustic Piano": "WO.PianoFactory",
     "Synth": "WO.SynthFactory",
@@ -9,7 +10,7 @@ WO.InstrumentFactory = function(instrumentName){
   
   var functionName = lookup[instrumentName];
   
-  var instrument = eval(functionName)();
+  var instrument = eval(functionName)(cid);
 
   return instrument;
 };

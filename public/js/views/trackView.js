@@ -77,6 +77,18 @@ WO.TrackView = Backbone.View.extend({
     this.model.trigger('changeInstrument', instrumentName);
     this.model.set('title', instrumentName);
     $(e.currentTarget).closest('.track-controls').find('.track-title').text(instrumentName);
+    var $svg;
+    if (this.model.get('type') === 'Audio'){
+      var $svg = this.$el.find('svg');
+      $svg.detach();
+      this.model.set('notes', []);
+    }else if(this.model.get('type') === 'MIDI'){
+      var classEl = ".wave-" + this.model.cid;
+      $(e.currentTarget).closest('.track-container').find(classEl).remove();
+
+      this.model.set('mRender', new WO.MidiRender(this.model.cid+ ' .track-notes'));
+      // $(e.currentTarget).closest('.track-notes').append($svg);
+    }
   },
 
   setActiveTrack: function(){
