@@ -28,10 +28,6 @@ WO.drumPadHandler = function() {
 	        for (var beat = 0; beat < 16; beat++){
 	            var checkbox = new GUI.Checkbox(sequencer, function(){}, "", "");
 	            WO.drumPadCheckboxes[row].push(checkbox);
-	            //randomly set some as checked initially
-	            if (Math.random() < 0.25){
-	                checkbox.check(true);
-	            }
 	        }
 	        sequencer.append("<div></div>");
 	    }
@@ -39,5 +35,7 @@ WO.drumPadHandler = function() {
 
 	/*makeIndicator();*/
 	makeCheckboxes();
+
+	WO.setDrumPadPreset(WO.drumPadPresetRock);
 	
 };

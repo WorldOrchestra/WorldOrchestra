@@ -99,19 +99,20 @@ WO.instrumentKeyHandler = function(instrument){
       }
   };
 
-  $('#Container').on('mousedown','.anchor', function(){
-      var note = $(this).attr("id");
-      instrument.triggerAttack(note);
-      if (WO.recording){
-          WO.recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
-      }
-  });
-
-  $('#Container').on('mouseup','.anchor', function(){
-      var note = $(this).attr("id");
-      instrument.triggerRelease(note);
-      if (WO.recording){
-          WO.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
-      }
+  $(document).ready(function() {
+    $('#Container').on('mousedown','.anchor', function(){
+        var note = $(this).attr("id");
+        instrument.triggerAttack(note);
+        if (WO.recording){
+            WO.recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
+        }
+    });
+    $('#Container').on('mouseup','.anchor', function(){
+        var note = $(this).attr("id");
+        instrument.triggerRelease(note);
+        if (WO.recording){
+            WO.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
+        }
+    });
   });
 };
