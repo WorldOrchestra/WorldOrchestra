@@ -209,7 +209,7 @@ GUI.LevelMeter.Channel.prototype.setMono = function(){
  */
 GUI.Value = function(container, initial, label, units){
 	this.element = $("<div>", {"class" : "Value"})
-		.appendTo(container);
+		.prependTo(container);
 	this.label = $("<div>", {"id" : "Label"})
 		.appendTo(this.element)
 		.text(label);
