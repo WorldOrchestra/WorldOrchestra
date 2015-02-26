@@ -79,10 +79,9 @@ $('#stop').on('click', function(){
     Tone.Transport.stop();
     Tone.Transport.clearIntervals();
     WO.appView.songView.collection.models.forEach(function(track){
-      debugger;
       var title = track.get('title');
       if( title !== "Acoustic Piano" || title !== "Drums"){
-        WO.killNotes(track);
+      WO.killNotes(track);
       }
     });
 });
