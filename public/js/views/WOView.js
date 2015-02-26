@@ -6,7 +6,7 @@ WO.WOView = Backbone.View.extend({
 
   template: _.template(
     '<div>' +
-      '<button class="add-track-button"><i class="fa fa-plus"></i></button>' +
+      '<button class="add-track-button">Add Track</button>' +
     '</div>'
     ),
 
