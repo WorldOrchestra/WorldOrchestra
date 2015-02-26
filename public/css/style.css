@@ -2,11 +2,15 @@ html{
   box-sizing: border-box;
 }
 body {
+  background-color: #eeeeee;
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin-top: 0px;
+}
+.appBody{
+  margin-top: 10px;
 }
 
 a {
@@ -46,11 +50,13 @@ a {
 /*------ Track view ------*/
 
 .track-container{
+  background-color: white;
   border: 1px solid grey;
-  padding: 10px;
-  height: 115px;
-  position: relative;
   border-radius: 4px;
+  height: 115px;
+  margin-bottom: 6px;
+  padding: 10px;
+  position: relative;
 }
 
 .track-controls {
@@ -98,7 +104,7 @@ p.track-title {
 }
 
 .active-track {
-  border: 2px solid red;
+  border: 2px solid #98FB98;
 }
 
 .activeNote {
@@ -282,4 +288,8 @@ ul#piano li a:active,ul#piano li div.anchor:active {
     display:block;
     margin-right:0px;
     clear:left;
+}
+
+.ui-tabs-anchor:focus{
+  outline-color: #98FB98;
 }
