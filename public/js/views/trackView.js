@@ -75,6 +75,7 @@ WO.TrackView = Backbone.View.extend({
     var instrumentName = $(e.currentTarget)[0].value;
     $(e.currentTarget)[0].blur();
     this.model.trigger('changeInstrument', instrumentName);
+    this.model.set('title', instrumentName);
     $(e.currentTarget).closest('.track-controls').find('.track-title').text(instrumentName);
   },
 
