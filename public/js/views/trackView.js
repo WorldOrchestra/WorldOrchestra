@@ -65,8 +65,8 @@ WO.TrackView = Backbone.View.extend({
       this.model.set('isMuted', true);
       color = "rgb(255,0,0)";
     }
-   
-    $('.mute-track-button').toggleClass('muted');
+   debugger;
+    this.$el.find('.mute-track-button').toggleClass('muted');
     this.model.set('volume', volume);
     this.model.get('instrument').setVolume(volume);
   },
