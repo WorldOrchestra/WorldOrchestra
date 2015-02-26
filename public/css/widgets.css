@@ -314,6 +314,7 @@ textarea {
 /* Slider */
 .Slider .Value {
 	margin-top: 5px;
+	margin-bottom: 7px;
 	display: block;
 }
 

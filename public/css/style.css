@@ -293,3 +293,16 @@ ul#piano li a:active,ul#piano li div.anchor:active {
 .ui-tabs-anchor:focus{
   outline-color: #98FB98;
 }
+
+.controlsContainer{
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+.transportView{
+  position: relative;
+  margin: auto;
+  width: 400px;
+}

@@ -44,14 +44,22 @@
     opacity: 1;
 }
 .Slider {
-    margin-top: 20px;
+    display: inline-block;
     margin-bottom: 20px;
-    width: 14%;
-    margin-left: 43%;
+    width: 192px;
 }
+
 #Sequencer{
     padding-top: 2.5%;
 }
 .Checkbox{
     border-color: transparent;
+}
+
+.open-login {
+    display: none;
+}
+
+.open {
+    display: none;
 }
