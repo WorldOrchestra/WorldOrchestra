@@ -1,14 +1,13 @@
 var WO = WO || {};
 
-WO.InstrumentFactory = function(instrumentName){
-  var lookup = {
-    "Acoustic Piano": "WO.PianoFactory",
-    "Synth": "WO.SynthFactory"
-  };
-  
-  var functionName = lookup[instrumentName];
-  
-  var instrument = eval(functionName)();
+WO.InstrumentFactory = function(instrumentName, cid){
 
-  return instrument;
+  var factory = {
+    "Acoustic Piano": WO.PianoFactory,
+    "Synth": WO.SynthFactory,
+    "Audio": WO.AudioFactory,
+    "Audio File": WO.AudioDropZoneFactory
+  };
+
+  return factory[instrumentName](cid);
 };

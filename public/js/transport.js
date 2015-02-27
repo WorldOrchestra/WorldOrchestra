@@ -78,12 +78,16 @@ $('#stop').on('click', function(){
     $('#record').css({"background-color": "white", "color" : "red"});
     Tone.Transport.stop();
     Tone.Transport.clearIntervals();
+
     WO.appView.songView.collection.models.forEach(function(track){
       var title = track.get('title');
       if( title !== "Acoustic Piano" || title !== "Drums"){
       WO.killNotes(track);
       }
     });
+
+    WO.vent.trigger("globalStop");
+
 });
 
 $('#play').on('click', function(){
@@ -96,6 +100,8 @@ $('#play').on('click', function(){
     WO.playDrumPad();
     //TO DO: need to get the song!
     WO.playSong(WO.appView.songView.collection);
+    // WO.wavesurfer.play();
+    WO.vent.trigger("globalPlay");
 });
 
 $('#record').on('click', function(){

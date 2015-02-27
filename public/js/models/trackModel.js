@@ -7,12 +7,13 @@ WO.Track = Backbone.Model.extend({
     solo: false,
     octave: 4,
     volume: 0.75,
-    instrument: ""
+    instrument: "",
+    type: 'MIDI'
   },
 
   initialize : function(){
     this.set('notes', []);
-    this.set('instrument', WO.InstrumentFactory( "Acoustic Piano" ));
+    this.set('instrument', WO.InstrumentFactory( "Acoustic Piano", this.cid));
     WO.instrumentKeyHandler(this.get('instrument'));
     this.on('changeInstrument', function(instrumentName){this.changeInstrument(instrumentName);}, this);
   },
@@ -20,8 +21,15 @@ WO.Track = Backbone.Model.extend({
   changeInstrument: function(instrumentName){
     $(document).unbind('keydown');
     $(document).unbind('keyup');
-    this.set('instrument', WO.InstrumentFactory(instrumentName));
-    WO.instrumentKeyHandler(this.get('instrument'));    
+    this.set('instrument', WO.InstrumentFactory(instrumentName, this.cid));
+    this.set('title', this.attributes.instrument.title);
+    //if audio or midi
+    if (instrumentName === 'Audio File'){
+      this.set('type', 'Audio');
+    } else {
+      this.set('type', 'MIDI');
+      WO.instrumentKeyHandler(this.get('instrument'));
+    }
   }
 
 });

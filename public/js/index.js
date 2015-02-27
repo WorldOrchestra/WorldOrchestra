@@ -7,3 +7,4 @@ WO.appView = new WO.WOView({model: WO.appModel});
 $('.add-track-button').on('click', function(){
   WO.vent.trigger('click:addTrack');
 });
+
