@@ -12,10 +12,11 @@ Bringing the world together - one track at a time.
   - __Scrum Master__: Albert Lee
   - __Development Team Members__: Domen Vajevec, Tyler Davis
   - __Key Master__: Tyler Davis
-  - __CDN__: Domen Vajavec
-  - __Eastern European__: Domen Vajavec
+  - __CDN__: Domen Vajevec
+  - __Eastern European__: Domen Vajevec
   - __The Fonz__: Dave Fedele
   - __The Zoomkeeper__: Dave Fedele
+  - __The Domenator__: Domen Vajevec
 
 ## Table of Contents
 
@@ -79,6 +80,7 @@ An example server component in `server/api`
 ### Roadmap
 
 View the project roadmap [here](https://github.com/WorldOrchestra/WorldOrchestra/issues)
+
 [![Stories in Ready](https://badge.waffle.io/worldorchestra/worldorchestra.png?label=ready&title=Ready)](https://waffle.io/worldorchestra/worldorchestra)
 
 ## Contributing

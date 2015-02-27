@@ -133,7 +133,7 @@ svg {
 }
 
 .tick text{
-    font-size: 12px;
+    font-size: 0px;
 }
 
 .tick line{
