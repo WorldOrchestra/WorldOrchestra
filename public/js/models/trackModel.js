@@ -24,11 +24,11 @@ WO.Track = Backbone.Model.extend({
     this.set('instrument', WO.InstrumentFactory(instrumentName, this.cid));
     this.set('title', this.attributes.instrument.title);
     //if audio or midi
-    if (instrumentName === 'Audio'){ 
+    if (instrumentName === 'Audio File'){
       this.set('type', 'Audio');
     } else {
       this.set('type', 'MIDI');
-      WO.instrumentKeyHandler(this.get('instrument'));  
+      WO.instrumentKeyHandler(this.get('instrument'));
     }
   }
 

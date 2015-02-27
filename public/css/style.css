@@ -133,13 +133,24 @@ svg {
 }
 
 .tick text{
-    font-size: 0px;
+    font-size: 12px;
 }
 
 .tick line{
     opacity: 0.2;
 }
 
+wave {
+  overflow-x: hidden;
+}
+
+.drop {
+  height: 100%;
+}
+
+.wavesurfer-dragover {
+  border: 1px solid red;
+}
 /*Piano Keyboard View*/
 
 button.octave {
@@ -294,6 +305,7 @@ ul#piano li a:active,ul#piano li div.anchor:active {
   outline-color: #98FB98;
 }
 
+
 .controlsContainer{
   vertical-align: top;
   display: inline-block;
@@ -306,3 +318,4 @@ ul#piano li a:active,ul#piano li div.anchor:active {
   margin: auto;
   width: 400px;
 }
+
