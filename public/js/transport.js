@@ -50,7 +50,7 @@ WO.killNotes = function(activeInstrument){
             break;
         }
     }
-}
+};
 
 $('#rewind').on('click', function(){
     Tone.Transport.setTransportTime("0:0:0");
