@@ -264,7 +264,7 @@ GUI.TopBar.prototype.makeDropDown = function(){
 	fileName = fileName[fileName.length - 1];
 	fileName = fileName.substr(0, fileName.indexOf("."));
 	var restOfUrl = window.location.href.substr(0, window.location.href.indexOf(fileName));
-	var dropdown = $("<div>", {"id" : "DropDown"})
+	var dropdown = $("<div>", {"id" : "DropDown"});
 /*		.appendTo(this.element);*/
 	var list = $("<select>");
 	for (var catName in ExampleList){
@@ -389,7 +389,7 @@ GUI.DropDown = function(container, options, callback){
 };
 
 GUI.DropDown.prototype.select = function(option){
-	this.element.find('option[value="'+option+'"]')[0].selected = true
+	this.element.find('option[value="'+option+'"]')[0].selected = true;
 	this.list.selectmenu("refresh");
 };
 

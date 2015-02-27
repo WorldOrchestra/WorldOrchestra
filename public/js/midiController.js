@@ -17,14 +17,14 @@ WO.midi = {
       navigator.requestMIDIAccess().then( WO.midi.success, WO.midi.failure );
     }else{
       WO.midi.failure();
-      return "Please enable web-midi by navigating here: chrome://flags/#enable-web-midi "
+      return "Please enable web-midi by navigating here: chrome://flags/#enable-web-midi";
     }
   },
 
   handleMIDIMessage : function( ev ) {
     // testing - just reflect.
     // log.innerHTML += "Message: " + ev.data.length + " bytes, timestamp: " + ev.timeStamp;
-    if (ev.data.length == 3)
+    if (ev.data.length === 3)
       // console.log(ev.data);
       // log.innerHTML += " 0x" + ev.data[0].toString(16) + " 0x" + ev.data[1].toString(16) + " 0x" + ev.data[2].toString(16);
       var note = WO.midi.midiHexToNote[ev.data[1]];
