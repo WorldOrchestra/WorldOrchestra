@@ -63,7 +63,23 @@ WO.audioIO = {
   },
 
   recordSongStart : function(){
-    WO.audioIO.songBuffer = new Recorder(Tone.Master);
+    var recorderWorkerUrl = 'bower_components/recorderjs/recorderWorker.js';
+    
+    //check to provide proper url
+    $.ajax({
+        url: recorderWorkerUrl,
+        type: 'GET',
+        error: function()
+        {
+            //file does not exist - change path
+            recorderWorkerUrl = 'scripts/b3fbf52f.vendor.js'
+        },
+        success: function()
+        {
+            // file exists - do nothing
+        }
+    });
+    WO.audioIO.songBuffer = new Recorder(Tone.Master, {'workerPath': recorderWorkerUrl});
     
     WO.audioIO.songBuffer.record();
   },
