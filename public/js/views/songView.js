@@ -9,26 +9,25 @@ WO.SongView = Backbone.View.extend({
     this.collection.on("remove", this.removeTrack, this);
   },
 
+  render: function() {
+    this.$el.children().remove();
+    $('.appBody').prepend(this.el);
+    this.collection.forEach(this.renderTrack, this);
+    return this;
+  },
+
   addTrack: function(){
     var newTrack = new WO.Track();
     this.collection.settings.activeTrack = newTrack;
     this.collection.add(newTrack);
-    $(document).unbind('keydown');
-    $(document).unbind('keyup');
-    WO.instrumentKeyHandler(newTrack.attributes.instrument);
+    WO.appView.unbindKeys();
+    WO.instrumentKeyHandler.create(newTrack.attributes.instrument);
   },
 
   removeTrack: function(){
     var collectionLength = this.collection.length;
     this.collection.settings.activeTrack = collectionLength ?  this.collection.at(collectionLength - 1) : "";
     $('.' + this.collection.settings.activeTrack.cid).addClass('active-track');
-  },
-
-  render: function() {
-    this.$el.children().remove();
-    $('.appBody').prepend(this.el);
-    this.collection.forEach(this.renderTrack, this);
-    return this;
   },
 
   renderTrack: function(track){
@@ -46,5 +45,4 @@ WO.SongView = Backbone.View.extend({
     $('.active-track').removeClass('active-track');
     $('.' + this.collection.settings.activeTrack.cid).addClass('active-track');
   }
-
 });

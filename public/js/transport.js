@@ -1,106 +1,67 @@
 var WO = WO || {};
 
-WO.setTempo = function(bpm){
-    console.log("in setTempo");
-    Tone.Transport.setBpm(bpm);
-};
+WO.transport = {
+  recording: false,
 
 // Tone.Transport.setLoopEnd("1:0");
 // Tone.Transport.loop = true;
 
-WO.recording = false;
-
-WO.playSong = function(song){
-    var notes, instrument;
-    notes = [];
-    _.each(song.models, function(track){
-        notes = track.get('notes');
-        instrument = track.get('instrument');
-        console.log(instrument);
-        //check what type of instrument wezza got
-        if (track.get('type') === "Audio"){
-          instrument.play && instrument.play();
-        } else {
-            _.each(notes, function(note){
-                if ( note[2] === 0.00 || note[2] === "0.00"){
-                    Tone.Transport.setTimeout(function(time){
-                        instrument.triggerRelease(note[1]);
-                    }, note[0]);
-                }else{
-                    Tone.Transport.setTimeout(function(time){
-                        instrument.triggerAttack(note[1]);
-                    }, note[0]);
-                }
-            });
-        }
-    });
-
-    Tone.Transport.start();
-};
-
-WO.recordNotes = function(note, time, velocity){
-    var notes, song;
-    song = WO.appView.songView.collection;
-    notes = song.settings.activeTrack.attributes.notes;
-    notes.push([time, note, velocity]);
-    song.settings.activeTrack.get('mRender').showTrack(notes);
-};
-
-WO.killNotes = function(activeInstrument){
+  killNotes: function(activeInstrument){
     var notes = activeInstrument.get('notes');
     var currentTime = Tone.Transport.toSeconds(Tone.Transport.getTransportTime());
     for(var i=0; i<notes.length; i++){
-        var noteTime = Tone.Transport.toSeconds(notes[i][0]);
-        if(noteTime <= currentTime ){
-            activeInstrument.get('instrument').triggerRelease(notes[i][1]);
-        }else if(noteTime > currentTime ){
-            break;
-        }
+      var noteTime = Tone.Transport.toSeconds(notes[i][0]);
+      if(noteTime <= currentTime ){
+        activeInstrument.get('instrument').triggerRelease(notes[i][1]);
+      }else if(noteTime > currentTime ){
+        break;
+      }
     }
-};
+  },
 
-$('#rewind').on('click', function(){
-    Tone.Transport.setTransportTime("0:0:0");
-    $('#transportTime').text(Tone.Transport.getTransportTime());
-});
+  playSong: function(song){
+      var notes, instrument;
+      notes = [];
+      _.each(song.models, function(track){
+          notes = track.get('notes');
+          instrument = track.get('instrument');
+          //check what type of instrument wezza got
+          if (track.get('type') === "Audio"){
+            instrument.play && instrument.play();
+          } else {
+              _.each(notes, function(note){
+                  if ( note[2] === 0.00 || note[2] === "0.00"){
+                      Tone.Transport.setTimeout(function(time){
+                          instrument.triggerRelease(note[1]);
+                      }, note[0]);
+                  }else{
+                      Tone.Transport.setTimeout(function(time){
+                          instrument.triggerAttack(note[1]);
+                      }, note[0]);
+                  }
+              });
+          }
+      });
 
-$('#skipBack').on('click', function(){
-    Tone.Transport.setTransportTime(Tone.Transport.getTransportTime() + "-1m");
-    $('#transportTime').text(Tone.Transport.getTransportTime());
-});
+      Tone.Transport.start();
+  },
 
-$('#skipForward').on('click', function(){
-    Tone.Transport.setTransportTime(Tone.Transport.getTransportTime() + "+1m");
-    $('#transportTime').text(Tone.Transport.getTransportTime());
-});
-
-$('#forward').on('click', function(){
-    Tone.Transport.setTransportTime(Tone.Transport.getTransportTime() + "+8m");
-    $('#transportTime').text(Tone.Transport.getTransportTime());
-});
-
-$('#stop').on('click', function(){
-    WO.recording = false;
-    $('#play').removeClass('play');
-    $('#record').css({"background-color": "white", "color" : "red"});
+  stopTracks: function() {
+    this.recording = false;
     Tone.Transport.stop();
     Tone.Transport.clearIntervals();
-
     WO.appView.songView.collection.models.forEach(function(track){
       var title = track.get('title');
-      if( title !== "Acoustic Piano" || title !== "Drums"){
-      WO.killNotes(track);
+      // TODO accommodate all types of instruments.
+      if (title === 'Synth') {
+        WO.transport.killNotes(track);
+      } else if (title === 'Audio File') {
+        track.get('instrument').stop();
       }
     });
-});
+  },
 
-$('#record').on('click', function(){
-    WO.recording = true;
-    $(this).css({"background-color": "red", "color" : "white"});
-    Tone.Transport.setTransportTime("0:0:0");
-    Tone.Transport.setInterval(function(time){
-        $('#transportTime').text(Tone.Transport.getTransportTime());
-    }, "16n");
-    // Tone.Transport.start();
-    $('#play').click();
-});
+  setTempo: function(bpm){
+    Tone.Transport.setBpm(bpm);
+  }
+};

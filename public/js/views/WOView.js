@@ -18,18 +18,7 @@ WO.WOView = Backbone.View.extend({
     this.loginView = new WO.loginView();
     this.signupView = new WO.signupView();
     this.render();
-
-    //instantiate global play event listener
-    this.transportView.on('play', function(){
-      WO.playDrumPad();
-      WO.playSong(WO.appView.songView.collection);
-
-      $('#play').addClass('play');
-      Tone.Transport.setInterval(function(time){
-        $('#transportTime').text(Tone.Transport.getTransportTime());
-        // console.log(Tone.Transport.getTransportTime());
-      }, "16n");
-    }.bind(this));
+    this.startListeners();
   },
 
   render: function(){
@@ -50,5 +39,23 @@ WO.WOView = Backbone.View.extend({
     // longer relevant, hence this click event.
     d3.select('.activeNote')
       .classed('activeNote', false);
+  },
+
+  startListeners: function() {
+    //instantiate global play event listener
+    this.transportView.on('play', function(){
+      WO.playDrumPad();
+      WO.transport.playSong(WO.appView.songView.collection);
+    });
+    this.transportView.on('stop', function(){
+      WO.transport.stopTracks();
+    });
+    //this.songView.on('unbind', this.unbindKeys);
+    //this.songView.collection.on('unbind', this.unbindKeys);
+  },
+
+  unbindKeys: function() {
+    $(document).unbind('keydown');
+    $(document).unbind('keyup');
   }
 });

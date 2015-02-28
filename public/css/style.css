@@ -96,6 +96,11 @@ a {
   background-color: green;
 }
 
+.recordOn {
+  background-color: white,
+  color : red
+}
+
 /*------ Track view ------*/
 
 .active-track {
