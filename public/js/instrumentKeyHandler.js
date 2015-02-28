@@ -2,7 +2,7 @@ var WO = WO || {};
 
 WO.down = {};
 
-WO.instrumentKeyHandler = function(instrument){
+WO.methods.instrumentKeyHandler = function(instrument){
 
   $(document).on('keydown', function(e){
       var note = getKey(e);
@@ -16,7 +16,7 @@ WO.instrumentKeyHandler = function(instrument){
           if( WO.down[note] === null || WO.down[note] === undefined){
               instrument.triggerAttack(note);
               if (WO.recording && instrument === WO.appView.songView.collection.settings.activeTrack.get('instrument')){
-                  WO.recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
+                  WO.methods.recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
               }
               WO.down[note] = true;
           }
@@ -45,7 +45,7 @@ WO.instrumentKeyHandler = function(instrument){
       if( note !== null && WO.down[note] ){
           instrument.triggerRelease(note);
           if (WO.recording && instrument === WO.appView.songView.collection.settings.activeTrack.attributes.instrument){
-              WO.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
+              WO.methods.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
           }
           WO.down[note] = null;
           //trigger pianoKeyOff on piano keyboard
@@ -104,14 +104,14 @@ WO.instrumentKeyHandler = function(instrument){
         var note = $(this).attr("id");
         instrument.triggerAttack(note);
         if (WO.recording){
-            WO.recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
+            WO.methods.recordNotes(note, Tone.Transport.getTransportTime(), 1.00);
         }
     });
     $('#Container').on('mouseup','.anchor', function(){
         var note = $(this).attr("id");
         instrument.triggerRelease(note);
         if (WO.recording){
-            WO.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
+            WO.methods.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
         }
     });
   });

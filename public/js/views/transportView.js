@@ -4,7 +4,10 @@ WO.TransportView = Backbone.View.extend({
   className: 'transportView',
 
   events: {
-    'click #play': 'triggerPlay'
+    'click #play': 'triggerPlay',
+    'click #stop': 'triggerStop',
+    'click #rewind, #skipBack, #skipForward, #forward': 'moveTransport',
+    'click #record': 'triggerRecord'
   },
 
   template: _.template(
@@ -56,5 +59,42 @@ WO.TransportView = Backbone.View.extend({
 
   triggerPlay: function(){
     this.trigger('play', this);
+    $('#play').addClass('play');
+    this.startTransportCounter();
+  },
+
+  triggerStop: function(){
+    this.trigger('stop', this);
+    $('#play').removeClass('play');
+    $('#record').removeClass('recordOn');
+    WO.recording = false;
+    Tone.Transport.stop();
+    Tone.Transport.clearIntervals();
+
+    WO.appView.songView.collection.models.forEach(function(track){
+      var title = track.get('title');
+      if( title !== "Acoustic Piano" || title !== "Drums"){
+        WO.methods.killNotes(track);
+      }
+    });
+  },
+
+  moveTransport: function(e){
+    var method = {'skipBack': '-1m', 'skipForward': '+1m', 'forward': '+8m'};
+    Tone.Transport.setTransportTime(e.currentTarget.id === 'rewind' ? "0:0:0" : Tone.Transport.getTransportTime() + method[e.currentTarget.id]);
+    $('#transportTime').text(Tone.Transport.getTransportTime());
+  },
+
+  triggerRecord: function(e) {
+    WO.recording = true;
+    $(this).addClass('recordOn');
+    Tone.Transport.setTransportTime("0:0:0");
+    this.triggerPlay();
+  },
+
+  startTransportCounter: function() {
+    Tone.Transport.setInterval(function(time){
+      $('#transportTime').text(Tone.Transport.getTransportTime());
+    }, "16n");
   }
 });
