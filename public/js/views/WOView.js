@@ -18,6 +18,18 @@ WO.WOView = Backbone.View.extend({
     this.loginView = new WO.loginView();
     this.signupView = new WO.signupView();
     this.render();
+
+    //instantiate global play event listener
+    this.transportView.on('play', function(){
+      WO.playDrumPad();
+      WO.playSong(WO.appView.songView.collection);
+
+      $('#play').addClass('play');
+      Tone.Transport.setInterval(function(time){
+        $('#transportTime').text(Tone.Transport.getTransportTime());
+        // console.log(Tone.Transport.getTransportTime());
+      }, "16n");
+    }.bind(this));
   },
 
   render: function(){
