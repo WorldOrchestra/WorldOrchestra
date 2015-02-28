@@ -18,33 +18,27 @@ WO.Track = Backbone.Model.extend({
     this.on('changeInstrument', function(instrumentName){this.changeInstrument(instrumentName);}, this);
   },
 
-  changeInstrument: function(instrumentName){
-    WO.appView.unbindKeys();
-    this.set('title', instrumentName);
-    switch(instrumentName){
-      case 'Audio File':
-        this.set('type', 'Audio');
-        this.set('notes', []);
-        $('.active-track .track-notes').html('');
-        this.set('instrument', WO.InstrumentFactory(instrumentName, this));
-        break;
-      case 'Microphone':
-        this.set('type', 'Microphone');
-        this.set('notes', []);
-        $('.active-track .track-notes').html('');
-        this.set('instrument', WO.InstrumentFactory(instrumentName, this));
-        break;
-      default:
-        var previousInstrumentType = this.get('type');
-        this.set('type', 'MIDI');
-        this.set('instrument', WO.InstrumentFactory(instrumentName, this));
-        WO.instrumentKeyHandler.create(this.get('instrument'));
+  changeInstrument: function(instrumentName) {
+    var instType = {'Acoustic Piano': 'MIDI', 'Audio File': 'Audio', 'Microphone': 'Microphone', 'Synth': 'MIDI'};
+    var previousInstrumentType = this.get('type');
 
-        if (previousInstrumentType !== 'MIDI') {
-          $('.active-track .track-notes').html('');
-          this.set('mRender', new WO.MidiRender(this.cid + ' .track-notes'));
-        }
-        break;
+    WO.appView.unbindKeys();
+
+    this.set('type', instType[instrumentName]);
+    this.set('title', instrumentName);
+
+    if (this.get('type') === 'MIDI') {
+      this.set('instrument', WO.InstrumentFactory(instrumentName, this));
+      WO.instrumentKeyHandler.create(this.get('instrument'));
+
+      if (previousInstrumentType !== 'MIDI') {
+        $('.active-track .track-notes').html('');
+        this.set('mRender', new WO.MidiRender(this.cid + ' .track-notes'));
+      }
+    } else {
+      this.set('notes', []);
+      $('.active-track .track-notes').html('');
+      this.set('instrument', WO.InstrumentFactory(instrumentName, this));
     }
   }
 });
