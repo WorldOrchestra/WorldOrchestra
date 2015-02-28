@@ -64,6 +64,7 @@ WO.audioIO = {
 
   recordSongStart : function(){
     var recorderWorkerUrl = 'bower_components/recorderjs/recorderWorker.js';
+    var recordLength = WO.appView.songView.collection.settings.length;
     
     // //check to provide proper url
     // $.ajax({
@@ -82,11 +83,43 @@ WO.audioIO = {
     WO.audioIO.songBuffer = new Recorder(Tone.Master, {'workerPath': recorderWorkerUrl});
     
     WO.audioIO.songBuffer.record();
+
+    $('#play').css("background-color", "green");
+    Tone.Transport.setInterval(function(time){
+        $('#transportTime').text(Tone.Transport.getTransportTime());
+        // console.log(Tone.Transport.getTransportTime());
+    }, "16n");
+
+    if(recordLength)
+
+    WO.playDrumPad();
+    //TO DO: need to get the song!
+    WO.playSong(WO.appView.songView.collection);
+    // WO.wavesurfer.play();
+    WO.vent.trigger("globalPlay");
+
   },
 
   recordSongStop : function(){
 
     WO.audioIO.songBuffer.stop();
+
+    WO.recording = false;
+    $('#play').css("background-color", "white");
+    $('#record').css({"background-color": "white", "color" : "red"});
+    if(Tone.Transport.getTransportTime())
+    Tone.Transport.stop();
+    Tone.Transport.clearIntervals();
+
+    WO.appView.songView.collection.models.forEach(function(track){
+      var title = track.get('title');
+      if( title !== "Acoustic Piano" || title !== "Drums"){
+      WO.killNotes(track);
+      }
+    });
+
+    WO.vent.trigger("globalStop");
+
   },
 
   playSongBuffer : function(){
