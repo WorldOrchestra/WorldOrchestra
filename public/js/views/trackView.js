@@ -98,7 +98,7 @@ WO.TrackView = Backbone.View.extend({
     this.model.collection.settings.activeTrack = this.model;
     WO.methods.unbindKeys();
     this.$el.find('.track-container').addClass('active-track');
-    WO.methods.instrumentKeyHandler(this.model.collection.settings.activeTrack.attributes.instrument);
+    WO.instrumentKeyHandler.create(this.model.collection.settings.activeTrack.attributes.instrument);
   }
 
 });

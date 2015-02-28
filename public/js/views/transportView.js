@@ -67,7 +67,7 @@ WO.TransportView = Backbone.View.extend({
     this.trigger('stop', this);
     $('#play').removeClass('play');
     $('#record').removeClass('recordOn');
-    WO.recording = false;
+    WO.transport.recording = false;
     Tone.Transport.stop();
     Tone.Transport.clearIntervals();
 
@@ -86,7 +86,7 @@ WO.TransportView = Backbone.View.extend({
   },
 
   triggerRecord: function(e) {
-    WO.recording = true;
+    WO.transport.recording = true;
     $(this).addClass('recordOn');
     Tone.Transport.setTransportTime("0:0:0");
     this.triggerPlay();

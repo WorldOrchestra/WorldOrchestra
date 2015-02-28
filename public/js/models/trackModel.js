@@ -14,7 +14,7 @@ WO.Track = Backbone.Model.extend({
   initialize : function(){
     this.set('notes', []);
     this.set('instrument', WO.InstrumentFactory( "Acoustic Piano", this.cid));
-    WO.methods.instrumentKeyHandler(this.get('instrument'));
+    WO.instrumentKeyHandler.create(this.get('instrument'));
     this.on('changeInstrument', function(instrumentName){this.changeInstrument(instrumentName);}, this);
   },
 
@@ -27,7 +27,7 @@ WO.Track = Backbone.Model.extend({
       this.set('type', 'Audio');
     } else {
       this.set('type', 'MIDI');
-      WO.methods.instrumentKeyHandler(this.get('instrument'));
+      WO.instrumentKeyHandler.create(this.get('instrument'));
     }
   }
 

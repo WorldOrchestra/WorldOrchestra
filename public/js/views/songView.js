@@ -14,7 +14,7 @@ WO.SongView = Backbone.View.extend({
     this.collection.settings.activeTrack = newTrack;
     this.collection.add(newTrack);
     WO.methods.unbindKeys();
-    WO.methods.instrumentKeyHandler(newTrack.attributes.instrument);
+    WO.instrumentKeyHandler.create(newTrack.attributes.instrument);
   },
 
   removeTrack: function(){
