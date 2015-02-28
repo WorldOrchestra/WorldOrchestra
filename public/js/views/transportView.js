@@ -4,14 +4,13 @@ WO.TransportView = Backbone.View.extend({
   className: 'transportView',
 
   events: {
-    'click #export': 'exportWav'
+    'click #export': 'exportWav',
     'click #play': 'triggerPlay',
     'click #stop': 'triggerStop',
     'click #rewind, #skipBack, #skipForward, #forward': 'moveTransport',
     'click #record': 'triggerRecord'
   },
 
->>>>>>> improve exportWav functionality.
   template: _.template(
     '<div class="controlsContainer">' +
     '<div class="transportEl"><span>Transport Time </span><span id="transportTime"><span class="tBar">0</span>:<span class="tBeats">0</span>:<span class="tSixt">0</span></span></div>' +
@@ -98,7 +97,8 @@ WO.TransportView = Backbone.View.extend({
   startTransportCounter: function() {
     Tone.Transport.setInterval(function(time){
       $('#transportTime').text(Tone.Transport.getTransportTime());
-    }, "16n");
+    }, "16n")
+  },
 
   exportWav: function() {
 
