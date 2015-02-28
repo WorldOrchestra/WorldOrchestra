@@ -20,20 +20,19 @@ WO.TransportView = Backbone.View.extend({
         '<button id="skipForward"><i class="fa fa-forward"></i></button>' +
         '<button id="forward"><i class="fa fa-fast-forward"></i></button>' +
       '</div>' +
-    '</div>' +
-    '<script>' +
-      'var slider = new GUI.Slider($(".transportView"), function(val){' +
-          'var scaled = parseInt(val * 30 + 100).toFixed(0);' +
-          'Tone.Transport.setBpm(scaled);' +
-          'return scaled;' +
-      '}, 120, "tempo");' +
-      'slider.render(20/30);' +
-    '</script>'
+    '</div>'
   ),
   initialize: function(params) {
     this.render();
     $(document).ready(function() {
       var MutationObserver, item, observer;
+      var slider = new GUI.Slider($(".transportView"), function(val){
+        var scaled = parseInt(val * 30 + 100).toFixed(0);
+        Tone.Transport.setBpm(scaled);
+        return scaled;
+      }, 120, "Tempo");
+      slider.render(20/30);
+
       MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
       item = document.querySelector('#transportTime');
 

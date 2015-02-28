@@ -2,13 +2,28 @@ html{
   box-sizing: border-box;
 }
 body {
-  background-color: #eeeeee;
+  /*background-color: #eeeeee;*/
+  /*background-image: url('http://www.carvellswoodworks.com/img/bg-top.jpg');*/
+  background-image: url('http://wallpaperest.com/wallpapers/black-wooden-panel_095750.jpg');
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin-top: 0px;
 }
+
+body, .Value #Label, .Value #Value, button, .ui-widget {
+  /*font: 14px "Marck Script";*/
+  font: 14px "Playfair Display SC";
+  /*font: 14px "Josefin Slab";*/
+  /*font: 14px "Architects Daughter";*/
+  /*font: 14px "Poiret One", cursive;*/
+  /*font: 14px "Josefin Sans", "Lucida Grande", Helvetica, Arial, sans-serif;*/
+}
+
+button {
+  font-size: 11px;
+}
+
 .appBody{
   margin-top: 10px;
 }
@@ -30,21 +45,51 @@ a {
     width: 64px;
 }*/
 
+.controlsContainer{
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 5px;
+  vertical-align: top;
+}
+
+.Value #Label, .Value #Value {
+  font-size: 14px;
+}
+
 .transportEl, .transportControls {
   margin: 0 auto;
   width: 182px;
 }
 
 .transportEl {
-  border: 1px solid darkgray;
+  padding: 4px 0px;
+}
+
+.transportEl, .Value {
+  background-color: #eeeeee;
+  border: 0px;
   border-radius: 14px;
-  box-shadow: inset 2px 2px 12px 3px lightgray;
-  padding: 4px;
+  /*box-shadow: inset 2px 2px 12px 3px lightgray;*/
   text-align: center;
 }
 
 .transportControls {
-  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+.transportView{
+  margin: auto;
+  position: relative;
+  width: 400px;
+}
+
+.Value #Value {
+  background-color: transparent;
+  color: black;
+}
+
+.Value {
+  padding: 3px 0px;
 }
 
 .play {
@@ -52,6 +97,15 @@ a {
 }
 
 /*------ Track view ------*/
+
+.active-track {
+  border: 2px solid #98FB98;
+}
+
+.activeNote {
+  fill: yellow;
+  stroke: yellow;
+}
 
 .track-container{
   background-color: white;
@@ -99,6 +153,7 @@ p.track-title {
 .track-volume-slider {
   padding-top: 2px;
 }
+
 .delete-track-button{
   float:right;
 }
@@ -107,14 +162,6 @@ p.track-title {
   background-color: red;
 }
 
-.active-track {
-  border: 2px solid #98FB98;
-}
-
-.activeNote {
-  fill: yellow;
-  stroke: yellow;
-}
 /* Styling for grid lines */
 
 svg {
@@ -307,19 +354,5 @@ ul#piano li a:active,ul#piano li div.anchor:active {
 
 .ui-tabs-anchor:focus{
   outline-color: #98FB98;
-}
-
-
-.controlsContainer{
-  vertical-align: top;
-  display: inline-block;
-  margin-right: 10px;
-  margin-top: 3px;
-}
-
-.transportView{
-  position: relative;
-  margin: auto;
-  width: 400px;
 }
 
