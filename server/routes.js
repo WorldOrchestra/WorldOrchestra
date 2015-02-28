@@ -15,41 +15,40 @@ module.exports = function(app) {
 
   app.use('/auth', require('./auth'));
 
-  app.route('/signup')
-    .post(function(req, res) {
-      userController.create(req,res);
-    });
+  // app.route('/signup')
+  //   .post(function(req, res) {
+  //     userController.create(req,res);
+  //   });
 
-  app.route('/login')
-    .post(function(req, res) {
-      console.log('on routes login');
-      userController.me(req,res);
-    });
+  // app.route('/login')
+  //   .post(function(req, res) {
+  //     userController.me(req,res);
+    // });
 
-  app.route('/specRunner')
-    .get(function(req, res) {
-      res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test/unit/specRunner.html');
-    });
-  app.route('/lib/*')
-    .get(function(req, res) {
-      res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test/unit' + req.originalUrl);
-    });
-  app.route('/public/*')
-    .get(function(req, res) {
-      res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra' + req.originalUrl);
-    });
-  app.route('/bower_components/*')
-    .get(function(req, res) {
-      res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test' + req.originalUrl);
-    });
-  app.route('/spec.js')
-    .get(function(req, res) {
-      res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test/unit/spec.js');
-    });
-  app.route('/transportSpec.js')
-    .get(function(req, res) {
-      res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test/unit/transportSpec.js');
-    });
+  // app.route('/specRunner')
+  //   .get(function(req, res) {
+  //     res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test/unit/specRunner.html');
+  //   });
+  // app.route('/lib/*')
+  //   .get(function(req, res) {
+  //     res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test/unit' + req.originalUrl);
+  //   });
+  // app.route('/public/*')
+  //   .get(function(req, res) {
+  //     res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra' + req.originalUrl);
+  //   });
+  // app.route('/bower_components/*')
+  //   .get(function(req, res) {
+  //     res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test' + req.originalUrl);
+  //   });
+  // app.route('/spec.js')
+  //   .get(function(req, res) {
+  //     res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test/unit/spec.js');
+  //   });
+  // app.route('/transportSpec.js')
+  //   .get(function(req, res) {
+  //     res.sendFile('/Users/albertlee/HackReactor/WorldOrchestra/test/unit/transportSpec.js');
+  //   });
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
