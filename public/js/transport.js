@@ -11,21 +11,28 @@ WO.setTempo = function(bpm){
 WO.recording = false;
 
 WO.playSong = function(song){
-    var notes = [];
+    var notes, instrument;
+    notes = [];
     _.each(song.models, function(track){
-        notes = track.attributes.notes;
-        var instrument = track.attributes.instrument;
-        _.each(notes, function(note){
-            if ( note[2] === 0.00 || note[2] === "0.00"){
-                Tone.Transport.setTimeout(function(time){
-                    instrument.triggerRelease(note[1]);
-                }, note[0]);
-            }else{
-                Tone.Transport.setTimeout(function(time){
-                    instrument.triggerAttack(note[1]);
-                }, note[0]);
-            }
-        });
+        notes = track.get('notes');
+        instrument = track.get('instrument');
+        console.log(instrument);
+        //check what type of instrument wezza got
+        if (track.get('type') === "Audio"){
+          instrument.play && instrument.play();
+        } else {
+            _.each(notes, function(note){
+                if ( note[2] === 0.00 || note[2] === "0.00"){
+                    Tone.Transport.setTimeout(function(time){
+                        instrument.triggerRelease(note[1]);
+                    }, note[0]);
+                }else{
+                    Tone.Transport.setTimeout(function(time){
+                        instrument.triggerAttack(note[1]);
+                    }, note[0]);
+                }
+            });
+        }
     });
 
     Tone.Transport.start();
@@ -50,7 +57,7 @@ WO.killNotes = function(activeInstrument){
             break;
         }
     }
-}
+};
 
 $('#rewind').on('click', function(){
     Tone.Transport.setTransportTime("0:0:0");
@@ -74,7 +81,7 @@ $('#forward').on('click', function(){
 
 $('#stop').on('click', function(){
     WO.recording = false;
-    $('#play').css("background-color", "white");
+    $('#play').removeClass('play');
     $('#record').css({"background-color": "white", "color" : "red"});
     Tone.Transport.stop();
     Tone.Transport.clearIntervals();
@@ -85,23 +92,6 @@ $('#stop').on('click', function(){
       WO.killNotes(track);
       }
     });
-
-    WO.vent.trigger("globalStop");
-
-});
-
-$('#play').on('click', function(){
-    $('#play').css("background-color", "green");
-    Tone.Transport.setInterval(function(time){
-        $('#transportTime').text(Tone.Transport.getTransportTime());
-        // console.log(Tone.Transport.getTransportTime());
-    }, "16n");
-
-    WO.playDrumPad();
-    //TO DO: need to get the song!
-    WO.playSong(WO.appView.songView.collection);
-    // WO.wavesurfer.play();
-    WO.vent.trigger("globalPlay");
 });
 
 $('#record').on('click', function(){

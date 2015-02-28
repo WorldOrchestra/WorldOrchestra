@@ -21,7 +21,7 @@ WO.Track = Backbone.Model.extend({
   changeInstrument: function(instrumentName){
     $(document).unbind('keydown');
     $(document).unbind('keyup');
-    this.set('instrument', WO.InstrumentFactory(instrumentName, this.cid));
+    this.set('instrument', WO.InstrumentFactory(instrumentName, this));
     this.set('title', this.attributes.instrument.title);
     //if audio or midi
     if (instrumentName === 'Audio File'){

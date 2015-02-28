@@ -35,7 +35,7 @@ module.exports = function (grunt) {
 
     concat: {
       dist: {
-        src: ['<%= world.app %>/**/*.js'],
+        src: ['<%= world.app %>/**/*.js', '!<%= world.app %>/bower_components/recorderjs/recorderWorker.js'],
         dest: '.tmp/js/main.js'
       }
     },
@@ -99,7 +99,8 @@ module.exports = function (grunt) {
             '*.{ico,txt}',
             'img/{,*/}*.{webp,gif}',
             'styles/fonts/{,*/}*.*',
-            'soundfont/**/*.*'
+            'soundfont/**/*.*',
+            'bower_components/recorderjs/recorderWorker.js'
           ]
         }, {
           expand: true,

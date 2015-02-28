@@ -90,9 +90,9 @@ WO.instrumentKeyHandler = function(instrument){
       var octave = instrument.octave;
       if( WO.down[key] === null || WO.down[key] === undefined){
           if( key === 90 ){
-              octave === 0 ? octave : octave--;
-          }else if(key === 88 ){
-              octave >=7 ? octave: octave++;
+              octave || octave--;
+          } else {
+              octave >=7 || octave++;
           }
           instrument.octave = octave;
           $('#octave').html(octave);

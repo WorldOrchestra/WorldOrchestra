@@ -92,6 +92,10 @@ a {
   padding: 3px 0px;
 }
 
+.play {
+  background-color: green;
+}
+
 /*------ Track view ------*/
 
 .active-track {
