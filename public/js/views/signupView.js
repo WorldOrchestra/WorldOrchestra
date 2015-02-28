@@ -39,7 +39,7 @@ WO.signupView = Backbone.View.extend({
               '</form>'+
           '</div>'+
           '<div class="bbm-modal__bottombar">'+
-            '<a href="#" class="bbm-button">close</a>'+
+            '<a href="#" class="bbm-button close-signup">close</a>'+
           '</div>'+
         '</script>'+
 
@@ -47,30 +47,34 @@ WO.signupView = Backbone.View.extend({
   ),
 
   render: function() {
-    loginTemplate = this.$el.append(this.template());
-    return loginTemplate;
+    signupTemplate = this.$el.append(this.template());
+    return signupTemplate;
   },
 
   submitSignup: function (e) {
-     e.preventDefault();
+    e.preventDefault();
 
-     var newUsername = $(e.currentTarget).find('#username').val();
-     var newPassword = $(e.currentTarget).find('#password').val();
-     var newEmail = $(e.currentTarget).find('#email').val();
+    var newUsername = $(e.currentTarget).find('#username').val();
+    var newPassword = $(e.currentTarget).find('#password').val();
+    var newEmail = $(e.currentTarget).find('#email').val();
      
     $.ajax({
-     type: 'POST',
-     url: window.location + "signup",
-     data: {name: newUsername,
-            password: newPassword,
-            email: newEmail},
-     success: function(data) {
-      console.log(data + " successful POST! YAY");
-     },
-       error: function(data){
-        console.log(data);
-         alert("error");
-       }
+      type: 'POST',
+      url: window.location + "api/users/",
+      data: {
+              name: newUsername,
+              password: newPassword,
+              email: newEmail
+            },
+      success: function(data) {
+        console.log("successfully signed up");
+        window.sessionStorage.token = data.token;
+        $(".close-signup").click();
+        $(".open-login").click();
+      },
+      error: function(data){
+        alert("error signing up!");
+      }
     });
   },
 
@@ -80,13 +84,8 @@ WO.signupView = Backbone.View.extend({
       cancelEl: ".bbm-button"
     });
 
-    $(".open").on("click", function(){
-
-      var modalView = new Modal();
-      $(".app").html(modalView.render().el);
-
-    });
-
+    var modalView = new Modal();
+    $(".app").html(modalView.render().el);
   }
 
 });

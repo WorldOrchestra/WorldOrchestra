@@ -5,7 +5,7 @@ WO.loginView = Backbone.View.extend({
   },
 
   events: {
-    'submit .loginSubmit' : 'loginUser',
+    'click .loginSubmit' : 'loginUser',
     'click .open-login' : 'openLoginModal'
   },
 
@@ -23,7 +23,7 @@ WO.loginView = Backbone.View.extend({
           '<div class="bbm-modal__section">'+
             '<p>Login to access and save your songs.</p>'+
             '<div class="form-container site-width">'+
-              '<form class="loginSubmit" action="/login" method="post">'+
+              '<form class="loginSubmit" action="submit" method="post">'+
                 '<div>'+
                   '<input class="auth-input" type="text" id="loginUsername" name="username" placeholder="username">'+
                 '</div>'+
@@ -31,41 +31,52 @@ WO.loginView = Backbone.View.extend({
                   '<input class="auth-input" type="password" id="loginPassword" name="password" placeholder="password">'+
                 '</div>'+
                 '<div>'+
-                  '<input class="loginSubmit" type="submit" value="Login">'+
+                  '<input class="loginSubmit" type="submit" method="post" value="Login">'+
                 '</div>'+
               '</form>'+
           '</div>'+
           '<div class="bbm-modal__bottombar">'+
-            '<a href="#" class="bbm-button">close</a>'+
+            '<a href="#" class="bbm-button close-login">close</a>'+
           '</div>'+
         '</script>'+
-
       '</div>'
   ),
 
   render: function() {
-    signupTemplate = this.$el.append(this.template());
-    return signupTemplate;
+    loginTemplate = this.$el.append(this.template());
+    return loginTemplate;
   },
 
   loginUser: function (e) {
      e.preventDefault();
+    console.log("calling function loginUser");
+    debugger;
 
      var checkUsername = $(e.currentTarget).find('#loginUsername').val();
      var checkPassword = $(e.currentTarget).find('#loginPassword').val();
 
     $.ajax({
-     type: 'POST',
-     url: window.location + "login",
-     data: {user: checkUsername,
-            password: checkPassword},
-     success: function(data) {
-      console.log(data + " Successful Login!");
-     },
-       error: function(data){
+      type: 'GET',
+      url: window.location + "api/users/me",
+      data: {user: checkUsername,
+            password: checkPassword
+          },
+      beforeSend : function(xhr) {
+            // set header if JWT is set
+            if (window.sessionStorage.token) {
+                xhr.setRequestHeader("Authorization", "Bearer " +  window.sessionStorage.token);
+            }
+      },
+      success: function(data) {
         console.log(data);
-         alert("error");
-       }
+        console.log("Successful Login!");
+        $(".close-login").click;
+
+      },
+      error: function(data){
+        console.log(data);
+        alert("error");
+      }
     });
   },
 
@@ -75,12 +86,8 @@ WO.loginView = Backbone.View.extend({
       cancelEl: ".bbm-button"
     });
 
-    $(".open-login").on("click", function(){
-
-      var modalView = new Modal();
-      $(".app").html(modalView.render().el);
-
-    });
+    var modalView = new Modal();
+    $(".app").html(modalView.render().el);
   }
 
 });
