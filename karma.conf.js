@@ -11,13 +11,13 @@ module.exports = function(config) {
     files: require('./include.conf.js').concat([
       //'test/bower_components/**/*.js',
       //'test/unit/**/*.js',
-      {
-        pattern: '/soundfont/**/*.mp3',
-        watched: false,
-        included: false,
-        served: true
-      }]),
-
+      //{
+      //  pattern: '/soundfont/**/*.mp3',
+      //  watched: false,
+      //  included: false,
+      //  served: true
+      //}]),
+]),
     // list of files to exclude
     exclude: [
       'karma.conf.js'
