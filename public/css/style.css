@@ -47,6 +47,10 @@ a {
   margin-bottom: 10px;
 }
 
+.play {
+  background-color: green;
+}
+
 /*------ Track view ------*/
 
 .track-container{

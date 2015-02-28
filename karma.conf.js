@@ -11,13 +11,21 @@ module.exports = function(config) {
     files: require('./include.conf.js').concat([
       //'test/bower_components/**/*.js',
       //'test/unit/**/*.js',
-      'test/integration/**/*.js'
-    ]),
+      {
+        pattern: '/soundfont/**/*.mp3',
+        watched: false,
+        included: false,
+        served: true
+      }]),
 
     // list of files to exclude
     exclude: [
       'karma.conf.js'
     ],
+    //
+    //proxies: {
+    //  '/soundfont/': 'http://localhost:9000/base/soundfont/'
+    //},
 
     // progress reporter: lists each test run and whether they pass/fail
     // coverage reporter: creates coverage reports for every tested browser
