@@ -75,22 +75,8 @@ WO.TrackView = Backbone.View.extend({
     var instrumentName = $(e.currentTarget)[0].value;
     $(e.currentTarget)[0].blur();
     this.model.trigger('changeInstrument', instrumentName);
-    this.model.set('title', instrumentName);
     // set Track name to instrument name on change
     $(e.currentTarget).closest('.track-controls').find('.track-title').text(instrumentName);
-    var $svg;
-    if (this.model.get('type') === 'Audio'){
-      $svg = this.$el.find('svg');
-      $svg.detach();
-      // question: do we want to blow away all the recorded notes on change?
-      this.model.set('notes', []);
-    }else if(this.model.get('type') === 'MIDI'){
-      var classEl = ".wave-" + this.model.cid;
-      $(e.currentTarget).closest('.track-container').find(classEl).remove();
-
-      this.model.set('mRender', new WO.MidiRender(this.model.cid+ ' .track-notes'));
-      // $(e.currentTarget).closest('.track-notes').append($svg);
-    }
   },
 
   setActiveTrack: function(){

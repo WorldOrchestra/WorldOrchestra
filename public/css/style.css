@@ -1,6 +1,7 @@
-html{
+html {
   box-sizing: border-box;
 }
+
 body {
   /*background-color: #eeeeee;*/
   /*background-image: url('http://www.carvellswoodworks.com/img/bg-top.jpg');*/
@@ -26,6 +27,7 @@ button {
 
 .appBody{
   margin-top: 10px;
+  min-width: 1186px;
 }
 
 a {
@@ -103,15 +105,6 @@ a {
 
 /*------ Track view ------*/
 
-.active-track {
-  border: 2px solid #98FB98;
-}
-
-.activeNote {
-  fill: yellow;
-  stroke: yellow;
-}
-
 .track-container{
   background-color: white;
   border: 1px solid grey;
@@ -167,6 +160,15 @@ p.track-title {
   background-color: red;
 }
 
+.active-track {
+  border: 2px solid #98FB98;
+}
+
+.activeNote {
+  fill: yellow;
+  stroke: yellow;
+}
+
 /* Styling for grid lines */
 
 svg {
@@ -202,6 +204,15 @@ wave {
 
 .drop {
   height: 100%;
+  position: relative;
+}
+.drop:before {
+  content: "Drop your audio file in here!";
+  position: absolute;
+  top: 50%;
+  left:50%;
+  margin-top: -7px;
+  margin-left: -120px;
 }
 
 .wavesurfer-dragover {
