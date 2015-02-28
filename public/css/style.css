@@ -1,20 +1,32 @@
 html {
   box-sizing: border-box;
+  /*background: url('http://www.carvellswoodworks.com/img/bg-top.jpg') no-repeat center center fixed;*/
+  /*background-image: url('http://wallpaperest.com/wallpapers/black-wooden-panel_095750.jpg');*/
+  /*background: url('http://www.wallpapersidol.com/wp-content/uploads/2014/09/rainbow-abstract-wallpaper.jpg') no-repeat center center fixed;*/
+  /*background: url('http://www.playbackrecording.com/wp-content/gallery/playback-recording-studio/pb_studio_008_web_0.jpg') no-repeat center center fixed;*/
+  /*background: url('http://www.secretsociety.net/files/2013/05/recording-studio.jpg') no-repeat center center fixed;*/
+  background: url('http://www.beatsuite.com/assets/filemanager/uploaded-files/Recording%20Studio/Main%20Images/beatsuite.com_01.jpg') no-repeat center center fixed;
+  /*background: url('http://beadheadband.com/wp-content/uploads/2015/02/NJ-Recording-Studio.jpg') no-repeat center center fixed;*/
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 body {
   /*background-color: #eeeeee;*/
-  /*background-image: url('http://www.carvellswoodworks.com/img/bg-top.jpg');*/
-  background-image: url('http://wallpaperest.com/wallpapers/black-wooden-panel_095750.jpg');
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 50px;
   margin-top: 0px;
 }
 
-body, .Value #Label, .Value #Value, button, .ui-widget {
+body, .Value #Label, .Value #Value, button, .ui-widget, li a span, button.clear-drumPad-button {
+  font: 14px "Julius Sans One";
+  /*font: 14px "Fontdiner Swanky";*/
   /*font: 14px "Marck Script";*/
-  font: 14px "Playfair Display SC";
+  /*font: 14px "Playfair Display SC";*/
   /*font: 14px "Josefin Slab";*/
   /*font: 14px "Architects Daughter";*/
   /*font: 14px "Poiret One", cursive;*/
@@ -23,6 +35,18 @@ body, .Value #Label, .Value #Value, button, .ui-widget {
 
 button {
   font-size: 11px;
+}
+
+.filterLayer {
+  background-color: white;
+  height: 100%;
+  left: 0px;
+  margin: 0px auto;
+  opacity: 0.75;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: -100;
 }
 
 .appBody{
