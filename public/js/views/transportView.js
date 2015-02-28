@@ -2,7 +2,11 @@ var WO = WO || {};
 WO.TransportView = Backbone.View.extend({
   //tagname: "",
   className: 'transportView',
-  //events: {},
+
+  events: {
+    'click #play': 'triggerPlay'
+  },
+
   template: _.template(
     '<div class="controlsContainer">' +
     '<div class="transportEl"><span>Transport Time </span><span id="transportTime"><span class="tBar">0</span>:<span class="tBeats">0</span>:<span class="tSixt">0</span></span></div>' +
@@ -49,5 +53,9 @@ WO.TransportView = Backbone.View.extend({
   },
   render: function() {
     return this.$el.append(this.template);
+  },
+
+  triggerPlay: function(){
+    this.trigger('play', this);
   }
 });

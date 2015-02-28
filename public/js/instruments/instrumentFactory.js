@@ -1,6 +1,6 @@
 var WO = WO || {};
 
-WO.InstrumentFactory = function(instrumentName, cid){
+WO.InstrumentFactory = function(instrumentName, model){
 
   var factory = {
     "Acoustic Piano": WO.PianoFactory,
@@ -9,5 +9,5 @@ WO.InstrumentFactory = function(instrumentName, cid){
     "Audio File": WO.AudioDropZoneFactory
   };
 
-  return factory[instrumentName](cid);
+  return factory[instrumentName](model);
 };
