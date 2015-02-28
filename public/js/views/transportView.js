@@ -67,16 +67,6 @@ WO.TransportView = Backbone.View.extend({
     this.trigger('stop', this);
     $('#play').removeClass('play');
     $('#record').removeClass('recordOn');
-    WO.transport.recording = false;
-    Tone.Transport.stop();
-    Tone.Transport.clearIntervals();
-
-    WO.appView.songView.collection.models.forEach(function(track){
-      var title = track.get('title');
-      if( title !== "Acoustic Piano" || title !== "Drums"){
-        WO.methods.killNotes(track);
-      }
-    });
   },
 
   moveTransport: function(e){

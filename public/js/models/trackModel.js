@@ -19,7 +19,7 @@ WO.Track = Backbone.Model.extend({
   },
 
   changeInstrument: function(instrumentName){
-    WO.methods.unbindKeys();
+    WO.appView.unbindKeys();
     this.set('instrument', WO.InstrumentFactory(instrumentName, this));
     this.set('title', this.attributes.instrument.title);
     //if audio or midi
@@ -30,5 +30,4 @@ WO.Track = Backbone.Model.extend({
       WO.instrumentKeyHandler.create(this.get('instrument'));
     }
   }
-
 });

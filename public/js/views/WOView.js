@@ -47,5 +47,15 @@ WO.WOView = Backbone.View.extend({
       WO.playDrumPad();
       WO.transport.playSong(WO.appView.songView.collection);
     });
+    this.transportView.on('stop', function(){
+      WO.transport.stopTracks();
+    });
+    //this.songView.on('unbind', this.unbindKeys);
+    //this.songView.collection.on('unbind', this.unbindKeys);
+  },
+
+  unbindKeys: function() {
+    $(document).unbind('keydown');
+    $(document).unbind('keyup');
   }
 });

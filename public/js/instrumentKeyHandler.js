@@ -23,7 +23,7 @@ WO.instrumentKeyHandler = {
         // trigger pianoKeyOn on piano keyboard
         $('body').trigger('pianoKeyOn', [note]);
       }
-    });
+    }.bind(this));
 
     $(document).on('keyup', function(e){
       var currTrack;
@@ -48,7 +48,7 @@ WO.instrumentKeyHandler = {
             //trigger pianoKeyOff on piano keyboard
             $('body').trigger('pianoKeyOff', [note]);
         }
-    });
+    }.bind(this));
 
     var keyMap = {
        65 : ["C",  0],
