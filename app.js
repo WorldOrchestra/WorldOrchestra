@@ -93,6 +93,7 @@ app.post('/signup', function(req, res) {
             util.createSession(req, res, newUser);
           });
         console.log('User successfully created');
+        // res.json({user_id: newUser._id});
       } else {
         console.log('Account already exists');
         res.redirect('/');
