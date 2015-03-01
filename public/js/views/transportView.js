@@ -91,6 +91,7 @@ WO.TransportView = Backbone.View.extend({
     WO.transport.recording = true;
     $(this).addClass('recordOn');
     Tone.Transport.setTransportTime("0:0:0");
+    this.recordWav();
     this.triggerPlay();
   },
 
@@ -100,8 +101,7 @@ WO.TransportView = Backbone.View.extend({
     }, "16n")
   },
 
-  exportWav: function() {
-
+  recordWav: function() {
     WO.recording = WO.recording || false;
 
     WO.recInterval = setInterval(this.checkTransportTime.bind(), 2000);
@@ -113,15 +113,19 @@ WO.TransportView = Backbone.View.extend({
       WO.audioIO.recordSongStop();
 
       console.log("song stopped recording");
+
+      clearInterval(WO.recInterval);
+      WO.recording = false;
+    }
+  },
+
+  exportWav: function() {
+
       songName = prompt("Please name your .wav file", "songname") + ".wav";
 
       if(songName !== "null.wav"){
         WO.audioIO.exportSongWav(songName);
       }
-      clearInterval(WO.recInterval);
-      WO.recording = false;
-    }
-
   },
 
   checkTransportTime: function() {
@@ -139,10 +143,10 @@ WO.TransportView = Backbone.View.extend({
     console.log(currentMeasures + " should be <= " + recordLengthMeasures);
 
     // If the current measure > our record length, stop recording and export.
-    if(currentMeasures >= recordLengthMeasures){
+    if(currentMeasures >= 4){
       console.log("TransportTime is greater than recordLength here.");
       clearInterval(WO.recInterval);
-      WO.TransportView.prototype.exportWav();
+      WO.TransportView.prototype.recordWav();
     }
   }
 

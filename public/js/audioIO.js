@@ -94,7 +94,7 @@ WO.audioIO = {
 
     WO.playDrumPad();
     //TO DO: need to get the song!
-    WO.playSong(WO.appView.songView.collection);
+    WO.appView.transportView.triggerPlay();
     // WO.wavesurfer.play();
     WO.vent.trigger("globalPlay");
 
@@ -114,7 +114,7 @@ WO.audioIO = {
     WO.appView.songView.collection.models.forEach(function(track){
       var title = track.get('title');
       if( title !== "Acoustic Piano" || title !== "Drums"){
-      WO.killNotes(track);
+      WO.transport.killNotes(track);
       }
     });
 
