@@ -25,6 +25,7 @@ app.use(session({
 }));
 
 app.use('/api/songs', require('./server/api/song'));
+app.use('/api/tracks', require('./server/api/track'));
 
 //serve up index on root
 app.get('/', function(req, res) {
