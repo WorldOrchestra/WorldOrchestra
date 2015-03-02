@@ -6,13 +6,13 @@ WO.signupView = Backbone.View.extend({
 
   events: {
     'submit .signupSubmit' : 'submitSignup',
-    'click .open' : 'openModal'
+    'click .open-signup' : 'openModal'
   },
 
     template: _.template(
 
       '<div>'+
-        '<button class="open">Sign Up</button>'+
+        '<button class="open-signup">Sign Up</button>'+
 
         '<div class="app"></div>'+
 
@@ -60,15 +60,15 @@ WO.signupView = Backbone.View.extend({
      
     $.ajax({
       type: 'POST',
-      url: window.location + "api/users/",
+      url: window.location + "signup",
       data: {
-              name: newUsername,
+              username: newUsername,
               password: newPassword,
               email: newEmail
             },
       success: function(data) {
         console.log("successfully signed up");
-        window.sessionStorage.token = data.token;
+        window.sessionStorage.user_id = data.user_id;
         $(".close-signup").click();
         $(".open-login").click();
       },

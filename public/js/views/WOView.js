@@ -17,6 +17,7 @@ WO.WOView = Backbone.View.extend({
     this.songView = new WO.SongView({collection: new WO.Song()});
     this.loginView = new WO.loginView();
     this.signupView = new WO.signupView();
+    // this.tabView = new WO.tabView();
     this.render();
     this.startListeners();
   },
@@ -28,6 +29,7 @@ WO.WOView = Backbone.View.extend({
     this.$el.append(this.userInputView.render());
     this.$el.append(this.loginView.render());
     this.$el.append(this.signupView.render());
+    // this.$el.append(this.tabView.render());
     $('.appBody').append(this.$el);
     return this.$el;
   },

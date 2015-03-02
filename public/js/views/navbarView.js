@@ -12,14 +12,12 @@ WO.navbarView = Backbone.View.extend({
           $("#user-song-dropdown-list").append("<option >My Songs</option>");
           for( var key in data){
             $("#user-song-dropdown-list").append("<option value='" + data[key].title +"'>" + data[key].title + "</option>");
-            console.log(data[key].title);
           }
         });
     });
   },
 
   events: {
-
   },
 
     template: _.template(
@@ -28,7 +26,7 @@ WO.navbarView = Backbone.View.extend({
       '<ul>'+
         '<li class="active"><a href="index.html"><span>WorldOrchestra</span></a></li>'+
         '<li><a href="#"><span>Songs</span></a></li>'+
-        '<li><a href="#"><span>Sign Up</span></a></li>'+
+        '<li class="open-signup"><a href="#"><span>Sign Up</span></a></li>'+
         '<li class="last"><a href="#"><span>Login</span></a></li>'+
         '<li>'+
           '<div id=userSongDropdown">'+

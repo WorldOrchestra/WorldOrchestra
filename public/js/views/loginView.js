@@ -23,7 +23,7 @@ WO.loginView = Backbone.View.extend({
           '<div class="bbm-modal__section">'+
             '<p>Login to access and save your songs.</p>'+
             '<div class="form-container site-width">'+
-              '<form class="loginSubmit" action="submit" method="post">'+
+              '<form class="loginSubmit"'+
                 '<div>'+
                   '<input class="auth-input" type="text" id="loginUsername" name="username" placeholder="username">'+
                 '</div>'+
@@ -56,16 +56,11 @@ WO.loginView = Backbone.View.extend({
      var checkPassword = $(e.currentTarget).find('#loginPassword').val();
 
     $.ajax({
-      type: 'GET',
-      url: window.location + "api/users/me",
-      data: {user: checkUsername,
+      type: 'POST',
+      url: window.location + "login",
+      data: {
+            username: checkUsername,
             password: checkPassword
-          },
-      beforeSend : function(xhr) {
-            // set header if JWT is set
-            if (window.sessionStorage.token) {
-                xhr.setRequestHeader("Authorization", "Bearer " +  window.sessionStorage.token);
-            }
       },
       success: function(data) {
         console.log(data);
