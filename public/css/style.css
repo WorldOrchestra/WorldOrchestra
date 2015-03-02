@@ -85,6 +85,12 @@ a {
   width: 400px;
 }
 
+.transportBar {
+  fill: none;
+  stroke: black;
+  stroke-width: 2;
+}
+
 .Value #Value {
   background-color: transparent;
   color: black;

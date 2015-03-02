@@ -12,55 +12,13 @@ WO.MidiRender = function(clas) {
       .attr('width', this.w + 'px')
       .attr('height', this.h + 'px');
 
-  this.drawGrid();
   this.drawBar(0);
   $('.track-notes').scrollTop(190);
 };
 
-WO.MidiRender.prototype.drawGrid = function() {
-  var xScale, yScale, xAxis, yAxis;
-
-  xScale = d3.scale.linear()
-    .domain([0, this.w])
-    .range([0, this.w]);
-
-  yScale = d3.scale.linear()
-    .domain([0, this.h])
-    .range([this.h, 0]);
-
-  xAxis = d3.svg.axis()
-    .scale(xScale)
-    .orient("bottom")
-    .innerTickSize(-this.h)
-    .outerTickSize(0)
-    .tickPadding(10);
-
-  yAxis = d3.svg.axis()
-    .scale(yScale)
-    .orient("left")
-    .innerTickSize(-this.w)
-    .outerTickSize(0)
-    .tickPadding(10);
-
-  this.svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + this.h + ")")
-      .call(xAxis);
-
-  this.svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis);
-};
-
 WO.MidiRender.prototype.drawBar = function(offset) {
-  var lineFunc, lineData;
-  lineData = [{
-    x: offset,
-    y: 0
-  }, {
-    x: offset,
-    y: this.h
-  }];
+  var lineFunc, i;
+
   lineFunc = d3.svg.line()
     .x(function(d) {
       return d.x;
@@ -69,11 +27,20 @@ WO.MidiRender.prototype.drawBar = function(offset) {
       return d.y;
     })
     .interpolate('linear');
+
+  for (i = this.w; i >= 0; i -= 32 * this.factor) {
+    this.svg.append('svg:path')
+      .attr('d', lineFunc([{x: i, y: 0}, {x: i, y: this.h}]))
+      .classed('line', true);
+  }
+  for (i = this.h - 3; i >= 0; i -= 12) {
+    this.svg.append('svg:path')
+      .attr('d', lineFunc([{x: 0, y: i}, {x: this.w, y: i}]))
+      .classed('line', true);
+  }
   this.svg.append('svg:path')
-    .attr('d', lineFunc(lineData))
-    .attr('stroke', 'black')
-    .attr('stroke-width', 2)
-    .attr('fill', 'none');
+    .attr('d', lineFunc([{x: offset, y:0}, {x: offset, y: this.h}]))
+    .classed('transportBar', true);
 };
 
 WO.MidiRender.prototype.octaveMap = function(o) {
