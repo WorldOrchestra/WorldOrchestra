@@ -9,13 +9,26 @@ var SongSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  title: {
-    type: String,
-    required: true,
-    trim: true
-  },
   user_id: {
     type: String
+  },
+  tempo: {
+    type: Number,
+  },
+  title: {
+    type: String,
+  },
+  timeSignature: {
+    type: Number,
+  },
+  length: {
+    type: String,
+  },
+  activeTrack: {
+    type: String,
+  },
+  tracks: {
+    type: Array
   }
 
 });
