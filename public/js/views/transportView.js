@@ -4,6 +4,7 @@ WO.TransportView = Backbone.View.extend({
   className: 'transportView',
 
   events: {
+    'click #metronome': 'triggerMetronome',
     'click #play': 'triggerPlay',
     'click #stop': 'triggerStop',
     'click #rewind, #skipBack, #skipForward, #forward': 'moveTransport',
@@ -12,9 +13,9 @@ WO.TransportView = Backbone.View.extend({
 
   template: _.template(
     '<div class="controlsContainer">' +
-    '<div class="transportEl"><span>Transport Time </span><span id="transportTime"><span class="tBar">0</span>:<span class="tBeats">0</span>:<span class="tSixt">0</span></span></div>' +
-    //'<button id="metronome"><i class="fa fa-heartbeat"></i></button>' +
+      '<div class="transportEl"><span>Transport Time </span><span id="transportTime"><span class="tBar">0</span>:<span class="tBeats">0</span>:<span class="tSixt">0</span></span></div>' +
       '<div class="transportControls">' +
+        '<button id="metronome"><i class="fa fa-heartbeat"></i></button>' +
         '<button id="rewind"><i class="fa fa-fast-backward"></i></button>' +
         '<button id="skipBack"><i class="fa fa-backward"></i></button>' +
         '<button id="stop"><i class="fa fa-stop"></i></button>' +
@@ -25,6 +26,7 @@ WO.TransportView = Backbone.View.extend({
       '</div>' +
     '</div>'
   ),
+
   initialize: function(params) {
     this.render();
     $(document).ready(function() {
@@ -53,8 +55,13 @@ WO.TransportView = Backbone.View.extend({
       });
     });
   },
+
   render: function() {
     return this.$el.append(this.template);
+  },
+
+  triggerMetronome: function() {
+    this.trigger('metronome', this);
   },
 
   triggerPlay: function(){

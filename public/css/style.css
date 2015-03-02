@@ -86,9 +86,8 @@ a {
   font-size: 14px;
 }
 
-.transportEl, .transportControls {
-  margin: 0 auto;
-  width: 182px;
+.transportEl, .transportControls, .Slider {
+  width: 209px;
 }
 
 .transportEl, .Value {
@@ -106,7 +105,7 @@ a {
 .transportView{
   margin: auto;
   position: relative;
-  width: 400px;
+  width: 428px;
 }
 
 .transportBar {
@@ -135,12 +134,8 @@ a {
 }
 
 .recordOn {
-  background-color: white,
-  color : red
-}
-
-.Slider {
-  width: 182px;
+  background-color: white;
+  color : red;
 }
 
 .fa {
