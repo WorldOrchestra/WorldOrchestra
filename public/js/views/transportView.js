@@ -25,14 +25,6 @@ WO.TransportView = Backbone.View.extend({
         '<button id="forward"><i class="fa fa-fast-forward"></i></button>' +
       '</div>' +
     '</div>' +
-    '<script>' +
-      'var slider = new GUI.Slider($(".transportView"), function(val){' +
-          'var scaled = parseInt(val * 30 + 100).toFixed(0);' +
-          'Tone.Transport.setBpm(scaled);' +
-          'return scaled;' +
-      '}, 120, "tempo");' +
-      'slider.render(20/30);' +
-    '</script>' +
     '<div class="exportContainer">' +
       '<button id="export">Export Song <i class="fa fa-eject"></i></button>' +
     '</div>'
@@ -130,12 +122,12 @@ WO.TransportView = Backbone.View.extend({
 
   checkTransportTime: function() {
 
-    // Figure the song length for how long to record.
+    // Figure out the song length for how long to record.
     var recordLength = WO.appView.songView.collection.settings.length;
     var splitRecordLength = recordLength.split(':');
     var recordLengthMeasures = Number(splitRecordLength[0]);
 
-    // Figure the current measure of the Transport.
+    // Figure out the current measure of the Transport.
     var transportTime = Tone.Transport.getTransportTime();
     var splitTransportTime = transportTime.split(':');
     var currentMeasures = Number(splitTransportTime[0]);
