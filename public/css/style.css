@@ -111,7 +111,13 @@ a {
 
 .transportBar {
   fill: none;
-  stroke: black;
+  stroke: #98FB98;
+  stroke-width: 2;
+}
+
+.transportBar.recordOn {
+  fill: none;
+  stroke: red;
   stroke-width: 2;
 }
 
