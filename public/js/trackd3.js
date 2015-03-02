@@ -90,9 +90,10 @@ WO.MidiRender.prototype.octaveMap = function(o) {
 };
 
 WO.MidiRender.prototype.altPitch = function(p) {
-  var octave = p.slice(-1);
-  var pitch = p.slice(0, -1);
-  var altPitch = {
+  var octave, pitch, altPitch;
+  octave = p.slice(-1);
+  pitch = p.slice(0, -1);
+  altPitch = {
     C: 0,
     Db: this.noteHeight,
     D: this.noteHeight * 2,
@@ -106,19 +107,16 @@ WO.MidiRender.prototype.altPitch = function(p) {
     Bb: this.noteHeight * 10,
     B: this.noteHeight * 11
   };
-  console.log(574 - 1 - altPitch[pitch]-octave*72);
   return 574 - 1 - altPitch[pitch] - octave * this.noteHeight * 12;
 };
 
 WO.MidiRender.prototype.revAltPitch = function(p) {
-  //var pitch + octave * 72 = 574 - 1 - p
-  var base = 574 - 1 - p;
-  var scale = this.noteHeight * 12;
-  var octave = Math.floor(base / scale);
-  var pitch = base - octave * scale;
-  console.log(pitch);
-
-  var revAltPitch = {
+  var base, scale, octave, pitch, revAltPitch;
+  base = 574 - 1 - p;
+  scale = this.noteHeight * 12;
+  octave = Math.floor(base / scale);
+  pitch = base - octave * scale;
+  revAltPitch = {
     0: 'C',
     6: 'Db',
     12: 'D',
@@ -186,11 +184,12 @@ WO.MidiRender.prototype.showTrack = function(track) {
   var dragmove, zoomFn, drag, zoom, that;
   track = track ? track.slice() : [];
 
+  that = this;
   dragmove = function(d) {
     var newPitch, actTrack, thisNote, originalNotes, revPitch, mRender;
 
     actTrack = WO.appView.songView.collection.settings.activeTrack;
-    newPitch = this.noteHeight / 2 + Math.floor((d3.event.sourceEvent.offsetY - this.noteHeight) / this.noteHeight) * this.noteHeight;
+    newPitch = that.noteHeight / 2 + Math.floor((d3.event.sourceEvent.offsetY - that.noteHeight) / that.noteHeight) * that.noteHeight;
     thisNote = d3.select(this);
     mRender = actTrack.get('mRender');
     revPitch = mRender.revAltPitch(newPitch);
@@ -199,7 +198,7 @@ WO.MidiRender.prototype.showTrack = function(track) {
     originalNotes = actTrack.get('notes');
     originalNotes[mRender.findIndex(0, thisNote.data()[0].source, originalNotes)][1] = revPitch;
     originalNotes[mRender.findIndex(1, thisNote.data()[0].source, originalNotes)][1] = revPitch;
-  }.bind(this);
+  };
   zoomFn = function(d) {
     var col = Math.min(255, Math.floor(Math.pow(10, d3.event.scale)));
     d.volume = col;
@@ -212,7 +211,6 @@ WO.MidiRender.prototype.showTrack = function(track) {
     // TODO How to make zoom behave linearly?  .scaleExtent([0, 255])
     .on('zoom', zoomFn);
 
-  that = this;
   $('rect').off('click');
   this.svg
     .selectAll("rect")
