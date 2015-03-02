@@ -2,9 +2,10 @@
 var WO = WO || {};
 
 WO.MidiRender = function(clas) {
-  this.factor = 5;
-  this.h = 95;
-  this.w = 160 * this.factor;
+  this.factor = 10;
+  this.noteHeight = 6;
+  this.h = this.noteHeight * 95 + 2;
+  this.w = 512 * this.factor;
 
   this.svg = d3.select('.' + clas)
       .append('svg')
@@ -13,6 +14,7 @@ WO.MidiRender = function(clas) {
 
   this.drawGrid();
   this.drawBar(0);
+  $('.track-notes').scrollTop(190);
 };
 
 WO.MidiRender.prototype.drawGrid = function() {
@@ -57,7 +59,7 @@ WO.MidiRender.prototype.drawBar = function(offset) {
     y: 0
   }, {
     x: offset,
-    y: 95
+    y: this.h
   }];
   lineFunc = d3.svg.line()
     .x(function(d) {
@@ -88,51 +90,49 @@ WO.MidiRender.prototype.octaveMap = function(o) {
 };
 
 WO.MidiRender.prototype.altPitch = function(p) {
+  var octave = p.slice(-1);
+  var pitch = p.slice(0, -1);
   var altPitch = {
-    C4: 90,
-    Db4: 85,
-    D4: 80,
-    Eb4: 75,
-    E4: 70,
-    F4: 65,
-    Gb4: 60,
-    G4: 55,
-    Ab4: 50,
-    A4: 45,
-    Bb4: 40,
-    B4: 35,
-    C5: 30,
-    Db5: 25,
-    D5: 20,
-    Eb5: 15,
-    E5: 10,
-    F5: 5
+    C: 0,
+    Db: this.noteHeight,
+    D: this.noteHeight * 2,
+    Eb: this.noteHeight * 3,
+    E: this.noteHeight * 4,
+    F: this.noteHeight * 5,
+    Gb: this.noteHeight * 6,
+    G: this.noteHeight * 7,
+    Ab: this.noteHeight * 8,
+    A: this.noteHeight * 9,
+    Bb: this.noteHeight * 10,
+    B: this.noteHeight * 11
   };
-  return altPitch[p];
+  console.log(574 - 1 - altPitch[pitch]-octave*72);
+  return 574 - 1 - altPitch[pitch] - octave * this.noteHeight * 12;
 };
 
 WO.MidiRender.prototype.revAltPitch = function(p) {
+  //var pitch + octave * 72 = 574 - 1 - p
+  var base = 574 - 1 - p;
+  var scale = this.noteHeight * 12;
+  var octave = Math.floor(base / scale);
+  var pitch = base - octave * scale;
+  console.log(pitch);
+
   var revAltPitch = {
-    90: 'C4',
-    85: 'Db4',
-    80: 'D4',
-    75: 'Eb4',
-    70: 'E4',
-    65: 'F4',
-    60: 'Gb4',
-    55: 'G4',
-    50: 'Ab4',
-    45: 'A4',
-    40: 'Bb4',
-    35: 'B4',
-    30: 'C5',
-    25: 'Db5',
-    20: 'D5',
-    15: 'Eb5',
-    10: 'E5',
-    5: 'F5'
+    0: 'C',
+    6: 'Db',
+    12: 'D',
+    18: 'Eb',
+    24: 'E',
+    30: 'F',
+    36: 'Gb',
+    42: 'G',
+    48: 'Ab',
+    54: 'A',
+    60: 'Bb',
+    66: 'B'
   };
-  return revAltPitch[p];
+  return revAltPitch[pitch] + octave;
 };
 
 WO.MidiRender.prototype.deleteNote = function(track) {
@@ -190,7 +190,7 @@ WO.MidiRender.prototype.showTrack = function(track) {
     var newPitch, actTrack, thisNote, originalNotes, revPitch, mRender;
 
     actTrack = WO.appView.songView.collection.settings.activeTrack;
-    newPitch = Math.floor((d3.event.sourceEvent.offsetY - 5)/5) * 5;
+    newPitch = this.noteHeight / 2 + Math.floor((d3.event.sourceEvent.offsetY - this.noteHeight) / this.noteHeight) * this.noteHeight;
     thisNote = d3.select(this);
     mRender = actTrack.get('mRender');
     revPitch = mRender.revAltPitch(newPitch);
@@ -199,7 +199,7 @@ WO.MidiRender.prototype.showTrack = function(track) {
     originalNotes = actTrack.get('notes');
     originalNotes[mRender.findIndex(0, thisNote.data()[0].source, originalNotes)][1] = revPitch;
     originalNotes[mRender.findIndex(1, thisNote.data()[0].source, originalNotes)][1] = revPitch;
-  };
+  }.bind(this);
   zoomFn = function(d) {
     var col = Math.min(255, Math.floor(Math.pow(10, d3.event.scale)));
     d.volume = col;
@@ -228,7 +228,7 @@ WO.MidiRender.prototype.showTrack = function(track) {
       return d;
     }).attr({"width": function(d){
       return d.duration * that.factor;
-    }, "height": 10})
+    }, "height": that.noteHeight})
     .attr({"stroke": function(d) {
       return that.octaveMap(d.octave);
     }, "stroke-width": "2px"})
