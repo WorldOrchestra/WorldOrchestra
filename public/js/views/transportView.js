@@ -99,12 +99,9 @@ WO.TransportView = Backbone.View.extend({
     WO.recInterval = setInterval(this.checkTransportTime.bind(), 2000);
     if(WO.recording === false){
       WO.audioIO.recordSongStart();
-      console.log("song is recording");
       WO.recording = true;
     } else {
       WO.audioIO.recordSongStop();
-
-      console.log("song stopped recording");
 
       clearInterval(WO.recInterval);
       WO.recording = false;
@@ -132,11 +129,9 @@ WO.TransportView = Backbone.View.extend({
     var splitTransportTime = transportTime.split(':');
     var currentMeasures = Number(splitTransportTime[0]);
 
-    console.log(currentMeasures + " should be <= " + recordLengthMeasures);
-
     // If the current measure > our record length, stop recording and export.
+    // (track record length is hardcoded as '4' right now.)
     if(currentMeasures >= 4){
-      console.log("TransportTime is greater than recordLength here.");
       clearInterval(WO.recInterval);
       WO.TransportView.prototype.recordWav();
     }

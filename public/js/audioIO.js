@@ -66,20 +66,6 @@ WO.audioIO = {
     var recorderWorkerUrl = 'bower_components/recorderjs/recorderWorker.js';
     var recordLength = WO.appView.songView.collection.settings.length;
     
-    // //check to provide proper url
-    // $.ajax({
-    //     url: recorderWorkerUrl,
-    //     type: 'GET',
-    //     error: function()
-    //     {
-    //         //file does not exist - change path
-    //         recorderWorkerUrl = 'scripts/b3fbf52f.vendor.js'
-    //     },
-    //     success: function()
-    //     {
-    //         // file exists - do nothing
-    //     }
-    // });
     WO.audioIO.songBuffer = new Recorder(Tone.Master, {'workerPath': recorderWorkerUrl});
     
     WO.audioIO.songBuffer.record();
@@ -87,7 +73,6 @@ WO.audioIO = {
     $('#play').css("background-color", "green");
     Tone.Transport.setInterval(function(time){
         $('#transportTime').text(Tone.Transport.getTransportTime());
-        // console.log(Tone.Transport.getTransportTime());
     }, "16n");
 
     if(recordLength)
