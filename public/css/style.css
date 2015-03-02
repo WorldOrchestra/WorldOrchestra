@@ -3,9 +3,9 @@ html {
   /*background: url('http://www.carvellswoodworks.com/img/bg-top.jpg') no-repeat center center fixed;*/
   /*background-image: url('http://wallpaperest.com/wallpapers/black-wooden-panel_095750.jpg');*/
   /*background: url('http://www.wallpapersidol.com/wp-content/uploads/2014/09/rainbow-abstract-wallpaper.jpg') no-repeat center center fixed;*/
-  /*background: url('http://www.playbackrecording.com/wp-content/gallery/playback-recording-studio/pb_studio_008_web_0.jpg') no-repeat center center fixed;*/
+  background: url('http://www.playbackrecording.com/wp-content/gallery/playback-recording-studio/pb_studio_008_web_0.jpg') no-repeat center center fixed;
   /*background: url('http://www.secretsociety.net/files/2013/05/recording-studio.jpg') no-repeat center center fixed;*/
-  background: url('http://www.beatsuite.com/assets/filemanager/uploaded-files/Recording%20Studio/Main%20Images/beatsuite.com_01.jpg') no-repeat center center fixed;
+  /*background: url('http://www.beatsuite.com/assets/filemanager/uploaded-files/Recording%20Studio/Main%20Images/beatsuite.com_01.jpg') no-repeat center center fixed;*/
   /*background: url('http://beadheadband.com/wp-content/uploads/2015/02/NJ-Recording-Studio.jpg') no-repeat center center fixed;*/
   background-attachment: fixed;
   -webkit-background-size: cover;
@@ -37,7 +37,11 @@ button {
   font-size: 11px;
 }
 
-.filterLayer {
+.add-track-button, .solo-track-button, .mute-track-button {
+  padding-top: 4px;
+}
+
+.filterLayerz {
   background-color: white;
   height: 100%;
   left: 0px;
@@ -87,20 +91,16 @@ a {
   width: 182px;
 }
 
-.transportEl {
-  padding: 4px 0px;
-}
-
 .transportEl, .Value {
   background-color: #eeeeee;
   border: 0px;
   border-radius: 14px;
-  /*box-shadow: inset 2px 2px 12px 3px lightgray;*/
+  padding: 4px 0px 2px 0px;
   text-align: center;
 }
 
 .transportControls {
-  margin-top: 5px;
+  margin-top: 3px;
 }
 
 .transportView{
@@ -115,7 +115,7 @@ a {
 }
 
 .Value {
-  padding: 3px 0px;
+  height: 15px;
 }
 
 .play {
@@ -125,6 +125,14 @@ a {
 .recordOn {
   background-color: white,
   color : red
+}
+
+.Slider {
+  width: 182px;
+}
+
+.fa {
+  padding-top: 3px;
 }
 
 /*------ Track view ------*/
@@ -236,7 +244,7 @@ wave {
   top: 50%;
   left:50%;
   margin-top: -7px;
-  margin-left: -120px;
+  margin-left: -112px;
 }
 
 .wavesurfer-dragover {

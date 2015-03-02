@@ -4,7 +4,7 @@ var WO = WO || {};
 WO.MidiRender = function(clas) {
   this.factor = 5;
   this.h = 95;
-  this.w = 160 * this.factor;
+  this.w = 512 * this.factor;
 
   this.svg = d3.select('.' + clas)
       .append('svg')
