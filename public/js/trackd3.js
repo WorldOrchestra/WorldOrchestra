@@ -2,63 +2,23 @@
 var WO = WO || {};
 
 WO.MidiRender = function(clas) {
-  this.factor = 5;
-  this.h = 95;
-  this.w = 160 * this.factor;
+  this.factor = 10;
+  this.noteHeight = 6;
+  this.h = this.noteHeight * 95 + 2;
+  this.w = 512 * this.factor;
 
   this.svg = d3.select('.' + clas)
       .append('svg')
       .attr('width', this.w + 'px')
       .attr('height', this.h + 'px');
 
-  this.drawGrid();
   this.drawBar(0);
-};
-
-WO.MidiRender.prototype.drawGrid = function() {
-  var xScale, yScale, xAxis, yAxis;
-
-  xScale = d3.scale.linear()
-    .domain([0, this.w])
-    .range([0, this.w]);
-
-  yScale = d3.scale.linear()
-    .domain([0, this.h])
-    .range([this.h, 0]);
-
-  xAxis = d3.svg.axis()
-    .scale(xScale)
-    .orient("bottom")
-    .innerTickSize(-this.h)
-    .outerTickSize(0)
-    .tickPadding(10);
-
-  yAxis = d3.svg.axis()
-    .scale(yScale)
-    .orient("left")
-    .innerTickSize(-this.w)
-    .outerTickSize(0)
-    .tickPadding(10);
-
-  this.svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + this.h + ")")
-      .call(xAxis);
-
-  this.svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis);
+  $('.track-notes').scrollTop(190);
 };
 
 WO.MidiRender.prototype.drawBar = function(offset) {
-  var lineFunc, lineData;
-  lineData = [{
-    x: offset,
-    y: 0
-  }, {
-    x: offset,
-    y: 95
-  }];
+  var lineFunc, i;
+
   lineFunc = d3.svg.line()
     .x(function(d) {
       return d.x;
@@ -67,11 +27,20 @@ WO.MidiRender.prototype.drawBar = function(offset) {
       return d.y;
     })
     .interpolate('linear');
+
+  for (i = this.w; i >= 0; i -= 32 * this.factor) {
+    this.svg.append('svg:path')
+      .attr('d', lineFunc([{x: i, y: 0}, {x: i, y: this.h}]))
+      .classed('line', true);
+  }
+  for (i = this.h - 3; i >= 0; i -= 12) {
+    this.svg.append('svg:path')
+      .attr('d', lineFunc([{x: 0, y: i}, {x: this.w, y: i}]))
+      .classed('line', true);
+  }
   this.svg.append('svg:path')
-    .attr('d', lineFunc(lineData))
-    .attr('stroke', 'black')
-    .attr('stroke-width', 2)
-    .attr('fill', 'none');
+    .attr('d', lineFunc([{x: offset, y:0}, {x: offset, y: this.h}]))
+    .classed('transportBar', true);
 };
 
 WO.MidiRender.prototype.octaveMap = function(o) {
@@ -88,51 +57,47 @@ WO.MidiRender.prototype.octaveMap = function(o) {
 };
 
 WO.MidiRender.prototype.altPitch = function(p) {
-  var altPitch = {
-    C4: 90,
-    Db4: 85,
-    D4: 80,
-    Eb4: 75,
-    E4: 70,
-    F4: 65,
-    Gb4: 60,
-    G4: 55,
-    Ab4: 50,
-    A4: 45,
-    Bb4: 40,
-    B4: 35,
-    C5: 30,
-    Db5: 25,
-    D5: 20,
-    Eb5: 15,
-    E5: 10,
-    F5: 5
+  var octave, pitch, altPitch;
+  octave = p.slice(-1);
+  pitch = p.slice(0, -1);
+  altPitch = {
+    C: 0,
+    Db: this.noteHeight,
+    D: this.noteHeight * 2,
+    Eb: this.noteHeight * 3,
+    E: this.noteHeight * 4,
+    F: this.noteHeight * 5,
+    Gb: this.noteHeight * 6,
+    G: this.noteHeight * 7,
+    Ab: this.noteHeight * 8,
+    A: this.noteHeight * 9,
+    Bb: this.noteHeight * 10,
+    B: this.noteHeight * 11
   };
-  return altPitch[p];
+  return 574 - 1 - altPitch[pitch] - octave * this.noteHeight * 12;
 };
 
 WO.MidiRender.prototype.revAltPitch = function(p) {
-  var revAltPitch = {
-    90: 'C4',
-    85: 'Db4',
-    80: 'D4',
-    75: 'Eb4',
-    70: 'E4',
-    65: 'F4',
-    60: 'Gb4',
-    55: 'G4',
-    50: 'Ab4',
-    45: 'A4',
-    40: 'Bb4',
-    35: 'B4',
-    30: 'C5',
-    25: 'Db5',
-    20: 'D5',
-    15: 'Eb5',
-    10: 'E5',
-    5: 'F5'
+  var base, scale, octave, pitch, revAltPitch;
+  base = 574 - 1 - p;
+  scale = this.noteHeight * 12;
+  octave = Math.floor(base / scale);
+  pitch = base - octave * scale;
+  revAltPitch = {
+    0: 'C',
+    6: 'Db',
+    12: 'D',
+    18: 'Eb',
+    24: 'E',
+    30: 'F',
+    36: 'Gb',
+    42: 'G',
+    48: 'Ab',
+    54: 'A',
+    60: 'Bb',
+    66: 'B'
   };
-  return revAltPitch[p];
+  return revAltPitch[pitch] + octave;
 };
 
 WO.MidiRender.prototype.deleteNote = function(track) {
@@ -186,11 +151,12 @@ WO.MidiRender.prototype.showTrack = function(track) {
   var dragmove, zoomFn, drag, zoom, that;
   track = track ? track.slice() : [];
 
+  that = this;
   dragmove = function(d) {
     var newPitch, actTrack, thisNote, originalNotes, revPitch, mRender;
 
     actTrack = WO.appView.songView.collection.settings.activeTrack;
-    newPitch = Math.floor((d3.event.sourceEvent.offsetY - 5)/5) * 5;
+    newPitch = that.noteHeight / 2 + Math.floor((d3.event.sourceEvent.offsetY - that.noteHeight) / that.noteHeight) * that.noteHeight;
     thisNote = d3.select(this);
     mRender = actTrack.get('mRender');
     revPitch = mRender.revAltPitch(newPitch);
@@ -212,7 +178,6 @@ WO.MidiRender.prototype.showTrack = function(track) {
     // TODO How to make zoom behave linearly?  .scaleExtent([0, 255])
     .on('zoom', zoomFn);
 
-  that = this;
   $('rect').off('click');
   this.svg
     .selectAll("rect")
@@ -228,7 +193,7 @@ WO.MidiRender.prototype.showTrack = function(track) {
       return d;
     }).attr({"width": function(d){
       return d.duration * that.factor;
-    }, "height": 10})
+    }, "height": that.noteHeight})
     .attr({"stroke": function(d) {
       return that.octaveMap(d.octave);
     }, "stroke-width": "2px"})
