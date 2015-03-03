@@ -61,7 +61,7 @@ WO.TransportView = Backbone.View.extend({
   },
 
   triggerMetronome: function() {
-    this.trigger('metronome', this);
+    $('#metronome').toggleClass('metronomeOn');
   },
 
   triggerPlay: function(){

@@ -1,6 +1,8 @@
 var WO = WO || {};
 
 WO.Metronome = {
+  metronome: null,
+
   notes: {
     "Gb4": "soundfont/acoustic-kit/hihat.wav",
     "D4" : "soundfont/acoustic-kit/snare.wav",
@@ -16,7 +18,7 @@ WO.Metronome = {
       [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
       [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
       [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
-      [true,false,true,false,true,false,true,false,true,false,true,false,true,false,true,false],
+      [true,false,false,false,true,false,false,false,true,false,false,false,true,false,false,false],
       [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
     ];
     var stepNumber = 0;
@@ -31,14 +33,10 @@ WO.Metronome = {
       }
       stepNumber++;
     }.bind(this), "16n");
-  },
-
-  metronome: {}
+  }
 };
 
-debugger;
 WO.Metronome.metronome = new Tone.MultiSampler(WO.Metronome.notes, function(){
-    console.log("You are here.");
   });
 WO.Metronome.metronome.setVolume(-15);
 WO.Metronome.metronome.toMaster();
