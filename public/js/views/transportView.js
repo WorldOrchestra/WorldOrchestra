@@ -103,14 +103,14 @@ WO.TransportView = Backbone.View.extend({
   recordWav: function() {
     WO.audioIO.recording = WO.audioIO.recording || false;
 
-    WO.recInterval = setInterval(WO.audioIO.checkTransportTime.bind(), 2000);
+    WO.audioIO.recInterval = setInterval(WO.audioIO.checkTransportTime, 2000);
     if(WO.audioIO.recording === false){
       WO.audioIO.recordSongStart();
       WO.audioIO.recording = true;
     } else {
       WO.audioIO.recordSongStop();
 
-      clearInterval(WO.recInterval);
+      clearInterval(WO.audioIO.recInterval);
       WO.audioIO.recording = false;
     }
   },

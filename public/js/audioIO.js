@@ -22,7 +22,7 @@ WO.audioIO = {
 
     var Context = window.AudioContext || window.webkitAudioContext;
     var context = new Context();
-    
+
     // ask for permission and start recording
     navigator.getUserMedia({audio: true}, function(localMediaStream){
       console.log('localMediaStream', localMediaStream);
@@ -69,38 +69,17 @@ WO.audioIO = {
   recordSongStart : function(){
     var recorderWorkerUrl = 'bower_components/recorderjs/recorderWorker.js';
     var recordLength = WO.appView.songView.collection.settings.length;
-    
-    WO.audioIO.songBuffer = new Recorder(Tone.Master, {'workerPath': recorderWorkerUrl});
-    
-    WO.audioIO.songBuffer.record();
 
-    WO.playDrumPad();
+    WO.audioIO.songBuffer = new Recorder(Tone.Master, {'workerPath': recorderWorkerUrl});
+    WO.audioIO.songBuffer.record();
     //TO DO: need to get the song!
     WO.appView.transportView.triggerPlay();
-    // WO.wavesurfer.play();
-    WO.vent.trigger("globalPlay");
-
   },
 
   recordSongStop : function(){
-
     WO.audioIO.songBuffer.stop();
-
     WO.audioIO.recording = false;
-
-    if(Tone.Transport.getTransportTime())
-    Tone.Transport.stop();
-    Tone.Transport.clearIntervals();
-
-    WO.appView.songView.collection.models.forEach(function(track){
-      var title = track.get('title');
-      if( title !== "Acoustic Piano" || title !== "Drums"){
-      WO.transport.killNotes(track);
-      }
-    });
-
-    WO.vent.trigger("globalStop");
-
+    WO.transportView.triggerStop();
   },
 
   playSongBuffer : function(){
@@ -150,5 +129,5 @@ WO.audioIO = {
       WO.TransportView.prototype.recordWav();
     }
   }
-    
+
 };
