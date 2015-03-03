@@ -19,7 +19,7 @@ WO.PianoFactory = function(){
     "B5" : "soundfont/acoustic_grand_piano-mp3/B5.mp3",
     "B6" : "soundfont/acoustic_grand_piano-mp3/B6.mp3",
     "B7" : "soundfont/acoustic_grand_piano-mp3/B7.mp3",
-    // "C0" : "soundfont/acoustic_grand_piano-mp3/C0.mp3",
+    //"C0" : "soundfont/acoustic_grand_piano-mp3/C0.mp3",
     "C1" : "soundfont/acoustic_grand_piano-mp3/C1.mp3",
     "C2" : "soundfont/acoustic_grand_piano-mp3/C2.mp3",
     "C3" : "soundfont/acoustic_grand_piano-mp3/C3.mp3",
@@ -28,7 +28,7 @@ WO.PianoFactory = function(){
     "C6" : "soundfont/acoustic_grand_piano-mp3/C6.mp3",
     "C7" : "soundfont/acoustic_grand_piano-mp3/C7.mp3",
     "C8" : "soundfont/acoustic_grand_piano-mp3/C8.mp3",
-    // "D0" : "soundfont/acoustic_grand_piano-mp3/D0.mp3",
+    //"D0" : "soundfont/acoustic_grand_piano-mp3/D0.mp3",
     "D1" : "soundfont/acoustic_grand_piano-mp3/D1.mp3",
     "D2" : "soundfont/acoustic_grand_piano-mp3/D2.mp3",
     "D3" : "soundfont/acoustic_grand_piano-mp3/D3.mp3",
@@ -36,7 +36,7 @@ WO.PianoFactory = function(){
     "D5" : "soundfont/acoustic_grand_piano-mp3/D5.mp3",
     "D6" : "soundfont/acoustic_grand_piano-mp3/D6.mp3",
     "D7" : "soundfont/acoustic_grand_piano-mp3/D7.mp3",
-    // "E0" : "soundfont/acoustic_grand_piano-mp3/E0.mp3",
+    //"E0" : "soundfont/acoustic_grand_piano-mp3/E0.mp3",
     "E1" : "soundfont/acoustic_grand_piano-mp3/E1.mp3",
     "E2" : "soundfont/acoustic_grand_piano-mp3/E2.mp3",
     "E3" : "soundfont/acoustic_grand_piano-mp3/E3.mp3",
@@ -44,7 +44,7 @@ WO.PianoFactory = function(){
     "E5" : "soundfont/acoustic_grand_piano-mp3/E5.mp3",
     "E6" : "soundfont/acoustic_grand_piano-mp3/E6.mp3",
     "E7" : "soundfont/acoustic_grand_piano-mp3/E7.mp3",
-    // "F0" : "soundfont/acoustic_grand_piano-mp3/F0.mp3",
+    //"F0" : "soundfont/acoustic_grand_piano-mp3/F0.mp3",
     "F1" : "soundfont/acoustic_grand_piano-mp3/F1.mp3",
     "F2" : "soundfont/acoustic_grand_piano-mp3/F2.mp3",
     "F3" : "soundfont/acoustic_grand_piano-mp3/F3.mp3",
@@ -52,7 +52,7 @@ WO.PianoFactory = function(){
     "F5" : "soundfont/acoustic_grand_piano-mp3/F5.mp3",
     "F6" : "soundfont/acoustic_grand_piano-mp3/F6.mp3",
     "F7" : "soundfont/acoustic_grand_piano-mp3/F7.mp3",
-    // "G0" : "soundfont/acoustic_grand_piano-mp3/G0.mp3",
+    //"G0" : "soundfont/acoustic_grand_piano-mp3/G0.mp3",
     "G1" : "soundfont/acoustic_grand_piano-mp3/G1.mp3",
     "G2" : "soundfont/acoustic_grand_piano-mp3/G2.mp3",
     "G3" : "soundfont/acoustic_grand_piano-mp3/G3.mp3",
@@ -88,7 +88,7 @@ WO.PianoFactory = function(){
     "Eb4" : "soundfont/acoustic_grand_piano-mp3/Eb4.mp3",
     "Eb5" : "soundfont/acoustic_grand_piano-mp3/Eb5.mp3",
     "Eb6" : "soundfont/acoustic_grand_piano-mp3/Eb6.mp3",
-    "F#7" : "soundfont/acoustic_grand_piano-mp3/Eb7.mp3",
+    "Eb7" : "soundfont/acoustic_grand_piano-mp3/Eb7.mp3",
     "F#1" : "soundfont/acoustic_grand_piano-mp3/Gb1.mp3",
     "F#2" : "soundfont/acoustic_grand_piano-mp3/Gb2.mp3",
     "F#3" : "soundfont/acoustic_grand_piano-mp3/Gb3.mp3",
@@ -96,9 +96,9 @@ WO.PianoFactory = function(){
     "F#5" : "soundfont/acoustic_grand_piano-mp3/Gb5.mp3",
     "F#6" : "soundfont/acoustic_grand_piano-mp3/Gb6.mp3",
     "F#7" : "soundfont/acoustic_grand_piano-mp3/Gb7.mp3"
-    }, function(){
-        console.log('piano loaded');
-    });
+  }, function(){
+    console.log('piano loaded');
+  });
 
   var acousticPianoOptions = {
         "portamento" : 0.0,
@@ -108,7 +108,7 @@ WO.PianoFactory = function(){
         // "filter" : {
         //       "Q" : 6,
         //       "type" : "lowpass",
-        //       "rolloff" : -24 
+        //       "rolloff" : -24
         // },
         "envelope" : {
               "attack" : 0.005,
@@ -133,4 +133,4 @@ WO.PianoFactory = function(){
   acousticPiano.title = "Acoustic Piano";
 
   return acousticPiano;
-};     
+};

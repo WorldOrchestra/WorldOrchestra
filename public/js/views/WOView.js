@@ -45,6 +45,9 @@ WO.WOView = Backbone.View.extend({
     //instantiate global play event listener
     this.transportView.on('play', function(){
       WO.playDrumPad();
+      if ($('.metronomeOn').length > 0) {
+        WO.Metronome.playMetronome();
+      }
       WO.transport.playSong(WO.appView.songView.collection);
     });
     this.transportView.on('stop', function(){
