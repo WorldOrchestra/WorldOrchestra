@@ -38,6 +38,7 @@ exports.show = function(req, res) {
 
 // Creates a new track in the DB.
 exports.create = function(req, res) {
+  console.log('create track req.body ', req.body);
   req.body.user_id = req.session.user._id;
   Track.create(req.body, function(err, track) {
     if(err) {
@@ -52,6 +53,7 @@ exports.update = function(req, res) {
   if(req.body._id) {
     delete req.body._id;
   }
+  console.log('update track req.params ', req.params);
   Track.findById(req.params.id, function (err, track) {
     if (err) {
       return handleError(res, err);
@@ -95,5 +97,5 @@ exports.destroy = function(req, res) {
 };
 
 function handleError(res, err) {
-  return res.send(500, err);
+  return res.status(500).json(err);
 }

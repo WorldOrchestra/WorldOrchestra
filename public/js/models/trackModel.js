@@ -1,6 +1,9 @@
 var WO = WO || {};
 WO.Track = Backbone.Model.extend({
+  urlRoot: '/api/tracks',
+
   defaults: {
+    _id : "",
     notes: "",
     title: 'Acoustic Piano',
     isMuted: false,
@@ -13,19 +16,40 @@ WO.Track = Backbone.Model.extend({
 
   initialize : function(){
     this.set('notes', []);
+    this.set('_id', this.genObjectId());
     this.set('instrument', WO.InstrumentFactory( "Acoustic Piano", this.cid));
     WO.instrumentKeyHandler.create(this.get('instrument'));
     this.on('changeInstrument', function(instrumentName){this.changeInstrument(instrumentName);}, this);
+
   },
+
+  genObjectId: (function() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return function() {
+      return s4() + s4() + s4();
+    };
+  })(),
 
   changeInstrument: function(instrumentName) {
     var instType = {'Acoustic Piano': 'MIDI', 'Audio File': 'Audio', 'Microphone': 'Microphone', 'Synth': 'MIDI'};
     var previousInstrumentType = this.get('type');
+    }
+  },
 
     WO.appView.unbindKeys();
+  //             console.log("===== FETCH FIRED LOADING SERVER STORAGE ====");
+  //             debugger;
+  //         },
 
     this.set('type', instType[instrumentName]);
+  //             console.log("===== CHANGE FIRED SAVING SERVER STORAGE ====");
+  //           debugger;
     this.set('title', instrumentName);
+  //         },
 
     if (this.get('type') === 'MIDI') {
       this.set('instrument', WO.InstrumentFactory(instrumentName, this));

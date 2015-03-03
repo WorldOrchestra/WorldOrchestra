@@ -4,9 +4,19 @@ var bcrypt = require('bcrypt-nodejs');
 // var Promise = require('bluebird');
 
 var userSchema = new mongoose.Schema({
-  username: {type: String, index: {unique: true}},
-  password: String,
-  email: String
+  username: {
+    type: String, 
+    index: {unique: true},
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  }
 });
 
 userSchema.pre('save', function(next){

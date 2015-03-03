@@ -38,6 +38,7 @@ exports.show = function(req, res) {
 
 // Creates a new song in the DB.
 exports.create = function(req, res) {
+  console.log('create song req.body ', req.body);
   req.body.user_id = req.session.user._id;
   Song.create(req.body, function(err, song) {
     if(err) {

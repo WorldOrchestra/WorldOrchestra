@@ -24,6 +24,14 @@ app.use(session({
   saveUninitialized: true
 }));
 
+var logIt = function(req,res,next){
+  console.log(req.method);
+  next();
+};
+
+app.all("*", logIt);
+
+
 app.use('/api/songs', require('./server/api/song'));
 app.use('/api/tracks', require('./server/api/track'));
 
@@ -76,6 +84,7 @@ app.get('/logout', function(req, res) {
 app.post('/signup', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
+  var email = req.body.email;
   console.log(req.body);
   User.findOne({ username: username })
     .exec(function(err, user) {
@@ -85,15 +94,17 @@ app.post('/signup', function(req, res) {
       if (!user) {
         var newUser = new User({
           username: username,
-          password: password
+          password: password,
+          email: email
         });
         newUser.save(function(err, newUser) {
             if (err) {
-              res.send(400, err);
+              console.log('Error creating user!');
+              res.status(400).json(err);
             }
+            console.log('User successfully created');
             util.createSession(req, res, newUser);
           });
-        console.log('User successfully created');
         // res.json({user_id: newUser._id});
       } else {
         console.log('Account already exists');
