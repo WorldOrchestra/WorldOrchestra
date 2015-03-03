@@ -90,6 +90,13 @@ a {
   width: 209px;
 }
 
+.exportContainer {
+  display: inline-block;
+  position: relative;
+  bottom: 35px;
+  margin-right: 10px;
+}
+
 .transportEl, .Value {
   background-color: #eeeeee;
   border: 0px;
@@ -105,7 +112,7 @@ a {
 .transportView{
   margin: auto;
   position: relative;
-  width: 428px;
+  width: 490px;
 }
 
 .transportBar {
@@ -138,8 +145,8 @@ a {
 }
 
 .recordOn {
-  background-color: white;
-  color : red;
+  background-color: red;
+  color : white;
 }
 
 .fa {
