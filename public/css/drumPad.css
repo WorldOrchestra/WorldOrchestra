@@ -10,6 +10,7 @@
 #UIContent {
     width: 1120px;
     height: 405px;
+    margin: 0 auto;
     background-image: url("../img/drumpad001.png");
     -webkit-animation:taufik 2s;
     -moz-animation:taufik 2s;
