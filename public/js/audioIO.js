@@ -8,6 +8,8 @@ WO.audioIO = {
 
   'songBuffer': "",
 
+  /****** Microphone Recording/Exporting ******/
+
   //pass in our WO namespaced Recorder instance
   recordMic : function(){
     var navigator = window.navigator;
@@ -62,6 +64,8 @@ WO.audioIO = {
     });
   },
 
+  /****** Song Recording/Exporting ******/
+
   recordSongStart : function(){
     var recorderWorkerUrl = 'bower_components/recorderjs/recorderWorker.js';
     var recordLength = WO.appView.songView.collection.settings.length;
@@ -69,13 +73,6 @@ WO.audioIO = {
     WO.audioIO.songBuffer = new Recorder(Tone.Master, {'workerPath': recorderWorkerUrl});
     
     WO.audioIO.songBuffer.record();
-
-    $('#play').css("background-color", "green");
-    Tone.Transport.setInterval(function(time){
-        $('#transportTime').text(Tone.Transport.getTransportTime());
-    }, "16n");
-
-    if(recordLength)
 
     WO.playDrumPad();
     //TO DO: need to get the song!
@@ -89,9 +86,8 @@ WO.audioIO = {
 
     WO.audioIO.songBuffer.stop();
 
-    WO.recording = false;
-    $('#play').css("background-color", "white");
-    $('#record').css({"background-color": "white", "color" : "red"});
+    WO.audioIO.recording = false;
+
     if(Tone.Transport.getTransportTime())
     Tone.Transport.stop();
     Tone.Transport.clearIntervals();
@@ -117,7 +113,7 @@ WO.audioIO = {
 
       newSource.connect( audioContext.destination );
       newSource.start(0);
-    };
+    }
 
     var audioContext = Tone.Master.context;
 
@@ -131,6 +127,26 @@ WO.audioIO = {
       WO.audioIO.songBuffer.clear();
       Recorder.forceDownload(data, filename);
     });
+  },
+
+  checkTransportTime : function() {
+
+    // Figure out the song length for how long to record.
+    var recordLength = WO.appView.songView.collection.settings.length;
+    var splitRecordLength = recordLength.split(':');
+    var recordLengthMeasures = Number(splitRecordLength[0]);
+
+    // Figure out the current measure of the Transport.
+    var transportTime = Tone.Transport.getTransportTime();
+    var splitTransportTime = transportTime.split(':');
+    var currentMeasures = Number(splitTransportTime[0]);
+
+    // If the current measure > our record length, stop recording and export.
+    // (track record length is hardcoded as '4' right now.)
+    if(currentMeasures >= 4){
+      clearInterval(WO.recInterval);
+      WO.TransportView.prototype.recordWav();
+    }
   }
     
 };

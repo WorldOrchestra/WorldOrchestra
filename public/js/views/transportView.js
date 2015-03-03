@@ -81,7 +81,7 @@ WO.TransportView = Backbone.View.extend({
 
   triggerRecord: function(e) {
     WO.transport.recording = true;
-    $(this).addClass('recordOn');
+    $('#record').addClass('recordOn');
     Tone.Transport.setTransportTime("0:0:0");
     this.recordWav();
     this.triggerPlay();
@@ -90,51 +90,35 @@ WO.TransportView = Backbone.View.extend({
   startTransportCounter: function() {
     Tone.Transport.setInterval(function(time){
       $('#transportTime').text(Tone.Transport.getTransportTime());
-    }, "16n")
+    }, "16n");
   },
 
   recordWav: function() {
-    WO.recording = WO.recording || false;
+    WO.audioIO.recording = WO.audioIO.recording || false;
 
-    WO.recInterval = setInterval(this.checkTransportTime.bind(), 2000);
-    if(WO.recording === false){
+    WO.recInterval = setInterval(WO.audioIO.checkTransportTime.bind(), 2000);
+    if(WO.audioIO.recording === false){
       WO.audioIO.recordSongStart();
-      WO.recording = true;
+      WO.audioIO.recording = true;
     } else {
       WO.audioIO.recordSongStop();
 
       clearInterval(WO.recInterval);
-      WO.recording = false;
+      WO.audioIO.recording = false;
     }
   },
 
   exportWav: function() {
 
-      songName = prompt("Please name your .wav file", "songname") + ".wav";
+      var songName = prompt("Please name your .wav file", "songname") + ".wav";
 
       if(songName !== "null.wav"){
         WO.audioIO.exportSongWav(songName);
       }
   },
 
-  checkTransportTime: function() {
-
-    // Figure out the song length for how long to record.
-    var recordLength = WO.appView.songView.collection.settings.length;
-    var splitRecordLength = recordLength.split(':');
-    var recordLengthMeasures = Number(splitRecordLength[0]);
-
-    // Figure out the current measure of the Transport.
-    var transportTime = Tone.Transport.getTransportTime();
-    var splitTransportTime = transportTime.split(':');
-    var currentMeasures = Number(splitTransportTime[0]);
-
-    // If the current measure > our record length, stop recording and export.
-    // (track record length is hardcoded as '4' right now.)
-    if(currentMeasures >= 4){
-      clearInterval(WO.recInterval);
-      WO.TransportView.prototype.recordWav();
-    }
+  triggerCheckTime: function(){
+    WO.audioIO.checkTransportTime();
   }
 
 });
