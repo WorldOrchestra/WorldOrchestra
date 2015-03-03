@@ -143,6 +143,8 @@ WO.audioIO = {
 
     // If the current measure > our record length, stop recording and export.
     // (track record length is hardcoded as '4' right now.)
+    //Todo
+    console.log("Current song length Hardcoded to 4! TODO");
     if(currentMeasures >= 4){
       clearInterval(WO.recInterval);
       WO.TransportView.prototype.recordWav();
