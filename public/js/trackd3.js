@@ -40,9 +40,10 @@ WO.MidiRender.prototype.drawBar = function(offset) {
   }
   this.svg.append('svg:path')
     .attr('d', lineFunc([{x: offset, y:0}, {x: offset, y: this.h}]))
-    .classed( WO.transport.recording ? 
+    .classed( WO.transport.recording ?
         'transportBar recordOn' : 'transportBar'
       , true);
+  $('.track-notes').scrollLeft(offset - ($('.track-notes').css('width').slice(0, -2)) / 3);
 };
 
 WO.MidiRender.prototype.octaveMap = function(o) {
