@@ -5,6 +5,7 @@ WO.TransportView = Backbone.View.extend({
 
   events: {
     'click #metronome': 'triggerMetronome',
+    'click #export': 'exportWav',
     'click #play': 'triggerPlay',
     'click #stop': 'triggerStop',
     'click #rewind, #skipBack, #skipForward, #forward': 'moveTransport',
@@ -24,6 +25,9 @@ WO.TransportView = Backbone.View.extend({
         '<button id="skipForward"><i class="fa fa-forward"></i></button>' +
         '<button id="forward"><i class="fa fa-fast-forward"></i></button>' +
       '</div>' +
+    '</div>' +
+    '<div class="exportContainer">' +
+      '<button id="export">Export Song <i class="fa fa-eject"></i></button>' +
     '</div>'
   ),
 
@@ -84,8 +88,9 @@ WO.TransportView = Backbone.View.extend({
 
   triggerRecord: function(e) {
     WO.transport.recording = true;
-    $(this).addClass('recordOn');
+    $('#record').addClass('recordOn');
     Tone.Transport.setTransportTime("0:0:0");
+    this.recordWav();
     this.triggerPlay();
   },
 
@@ -93,5 +98,34 @@ WO.TransportView = Backbone.View.extend({
     Tone.Transport.setInterval(function(time){
       $('#transportTime').text(Tone.Transport.getTransportTime());
     }, "16n");
+  },
+
+  recordWav: function() {
+    WO.audioIO.recording = WO.audioIO.recording || false;
+
+    WO.audioIO.recInterval = setInterval(WO.audioIO.checkTransportTime, 2000);
+    if(WO.audioIO.recording === false){
+      WO.audioIO.recordSongStart();
+      WO.audioIO.recording = true;
+    } else {
+      WO.audioIO.recordSongStop();
+
+      clearInterval(WO.audioIO.recInterval);
+      WO.audioIO.recording = false;
+    }
+  },
+
+  exportWav: function() {
+
+      var songName = prompt("Please name your .wav file", "songname") + ".wav";
+
+      if(songName !== "null.wav"){
+        WO.audioIO.exportSongWav(songName);
+      }
+  },
+
+  triggerCheckTime: function(){
+    WO.audioIO.checkTransportTime();
   }
 });
+

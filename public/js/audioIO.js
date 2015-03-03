@@ -8,6 +8,8 @@ WO.audioIO = {
 
   'songBuffer': "",
 
+  /****** Microphone Recording/Exporting ******/
+
   //pass in our WO namespaced Recorder instance
   recordMic : function(){
     var navigator = window.navigator;
@@ -20,7 +22,7 @@ WO.audioIO = {
 
     var Context = window.AudioContext || window.webkitAudioContext;
     var context = new Context();
-    
+
     // ask for permission and start recording
     navigator.getUserMedia({audio: true}, function(localMediaStream){
       console.log('localMediaStream', localMediaStream);
@@ -62,31 +64,22 @@ WO.audioIO = {
     });
   },
 
+  /****** Song Recording/Exporting ******/
+
   recordSongStart : function(){
     var recorderWorkerUrl = 'bower_components/recorderjs/recorderWorker.js';
-    
-    // //check to provide proper url
-    // $.ajax({
-    //     url: recorderWorkerUrl,
-    //     type: 'GET',
-    //     error: function()
-    //     {
-    //         //file does not exist - change path
-    //         recorderWorkerUrl = 'scripts/b3fbf52f.vendor.js'
-    //     },
-    //     success: function()
-    //     {
-    //         // file exists - do nothing
-    //     }
-    // });
+    var recordLength = WO.appView.songView.collection.settings.length;
+
     WO.audioIO.songBuffer = new Recorder(Tone.Master, {'workerPath': recorderWorkerUrl});
-    
     WO.audioIO.songBuffer.record();
+    //TO DO: need to get the song!
+    WO.appView.transportView.triggerPlay();
   },
 
   recordSongStop : function(){
-
     WO.audioIO.songBuffer.stop();
+    WO.audioIO.recording = false;
+    WO.transportView.triggerStop();
   },
 
   playSongBuffer : function(){
@@ -99,7 +92,7 @@ WO.audioIO = {
 
       newSource.connect( audioContext.destination );
       newSource.start(0);
-    };
+    }
 
     var audioContext = Tone.Master.context;
 
@@ -113,6 +106,28 @@ WO.audioIO = {
       WO.audioIO.songBuffer.clear();
       Recorder.forceDownload(data, filename);
     });
+  },
+
+  checkTransportTime : function() {
+
+    // Figure out the song length for how long to record.
+    var recordLength = WO.appView.songView.collection.settings.length;
+    var splitRecordLength = recordLength.split(':');
+    var recordLengthMeasures = Number(splitRecordLength[0]);
+
+    // Figure out the current measure of the Transport.
+    var transportTime = Tone.Transport.getTransportTime();
+    var splitTransportTime = transportTime.split(':');
+    var currentMeasures = Number(splitTransportTime[0]);
+
+    // If the current measure > our record length, stop recording and export.
+    // (track record length is hardcoded as '4' right now.)
+    //Todo
+    console.log("Current song length Hardcoded to 4! TODO");
+    if(currentMeasures >= 4){
+      clearInterval(WO.recInterval);
+      WO.TransportView.prototype.recordWav();
+    }
   }
-    
+
 };
