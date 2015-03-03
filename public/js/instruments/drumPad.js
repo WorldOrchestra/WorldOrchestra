@@ -24,7 +24,6 @@ WO.playDrumPad = function(){
       $(".Lit").removeClass("Lit");
       //light up the new one
       // indicators[stepNumber].addClass("Lit");
-      stepNumber++;
       stepNumber = stepNumber % 16;
       //get the current column
       for (var i = 0; i < WO.drumPadCheckboxes.length; i++){
@@ -33,6 +32,7 @@ WO.playDrumPad = function(){
               WO.drumPad.triggerAttack(WO.drumPadNoteNames[i], time);
           }
       }
+    stepNumber++;
   }, "16n");
 };
 

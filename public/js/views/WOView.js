@@ -43,11 +43,11 @@ WO.WOView = Backbone.View.extend({
 
   startListeners: function() {
     //instantiate global play event listener
-    this.transportview.on('metronome', function() {
-
-    });
     this.transportView.on('play', function(){
       WO.playDrumPad();
+      if ($('.metronomeOn').length > 0) {
+        WO.Metronome.playMetronome();
+      }
       WO.transport.playSong(WO.appView.songView.collection);
     });
     this.transportView.on('stop', function(){
