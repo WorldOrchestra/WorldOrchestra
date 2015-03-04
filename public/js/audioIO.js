@@ -112,8 +112,6 @@ WO.audioIO = {
 
     // Figure out the song length for how long to record.
     var recordLength = WO.appView.songView.collection.settings.length;
-    var splitRecordLength = recordLength.split(':');
-    var recordLengthMeasures = Number(splitRecordLength[0]);
 
     // Figure out the current measure of the Transport.
     var transportTime = Tone.Transport.getTransportTime();
@@ -121,12 +119,10 @@ WO.audioIO = {
     var currentMeasures = Number(splitTransportTime[0]);
 
     // If the current measure > our record length, stop recording and export.
-    // (track record length is hardcoded as '4' right now.)
-    //Todo
-    console.log("Current song length Hardcoded to 4! TODO");
-    if(currentMeasures >= 4){
-      clearInterval(WO.recInterval);
+    if(currentMeasures >= recordLength){
+      clearInterval(WO.audioIO.recInterval);
       WO.TransportView.prototype.recordWav();
+      WO.audioIO.recording = false;
     }
   }
 
