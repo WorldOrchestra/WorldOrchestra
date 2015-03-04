@@ -1,9 +1,9 @@
 var WO = WO || {};
 WO.Track = Backbone.Model.extend({
   urlRoot: '/api/tracks',
-
+  idAttribute: '_id',
+  
   defaults: {
-    _id : "",
     notes: "",
     title: 'Acoustic Piano',
     isMuted: false,
@@ -16,7 +16,6 @@ WO.Track = Backbone.Model.extend({
 
   initialize : function(){
     this.set('notes', []);
-    this.set('_id', this.genObjectId());
     this.set('instrument', WO.InstrumentFactory( "Acoustic Piano", this.cid));
     WO.instrumentKeyHandler.create(this.get('instrument'));
     this.on('changeInstrument', function(instrumentName){this.changeInstrument(instrumentName);}, this);
