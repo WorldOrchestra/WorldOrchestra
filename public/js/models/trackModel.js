@@ -19,7 +19,6 @@ WO.Track = Backbone.Model.extend({
     this.set('instrument', WO.InstrumentFactory( "Acoustic Piano", this.cid));
     WO.instrumentKeyHandler.create(this.get('instrument'));
     this.on('changeInstrument', function(instrumentName){this.changeInstrument(instrumentName);}, this);
-
   },
 
   genObjectId: (function() {
@@ -63,6 +62,15 @@ WO.Track = Backbone.Model.extend({
       $('.active-track .track-notes').html('');
       this.set('instrument', WO.InstrumentFactory(instrumentName, this));
     }
+  },
+
+  saveTrack: function(){
+    var temp = this;
+    temp.set('instrument', '');
+    temp.set('mRender', '');
+    this.save();
+    this.set('instrument', temp.get('instrument'));
+    this.set('mRender', temp.get('mRender'));
   }
 });
 
