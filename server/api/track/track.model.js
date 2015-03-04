@@ -5,9 +5,6 @@ var mongoose = require('mongoose'),
 
 var TrackSchema = new Schema({
 
-  _id: {
-    type: String
-  },
   modified: {
     type: Date,
     default: Date.now
