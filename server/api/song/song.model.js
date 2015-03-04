@@ -5,9 +5,6 @@ var mongoose = require('mongoose'),
 
 var SongSchema = new Schema({
 
-  _id: {
-    type: String
-  },
   modified: {
     type: Date,
     default: Date.now
@@ -25,7 +22,7 @@ var SongSchema = new Schema({
     type: Number,
   },
   length: {
-    type: String,
+    type: Number,
   },
   activeTrack: {
     type: String,
