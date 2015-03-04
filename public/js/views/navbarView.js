@@ -11,13 +11,14 @@ WO.navbarView = Backbone.View.extend({
           $("#user-song-dropdown-list").html("");
           $("#user-song-dropdown-list").append("<option >My Songs</option>");
           for( var key in data){
-            $("#user-song-dropdown-list").append("<option value='" + data[key].title +"'>" + data[key].title + "</option>");
+            $("#user-song-dropdown-list").append("<option value='" + data[key]._id +"'>" + data[key].title + "</option>");
           }
         });
     });
   },
 
   events: {
+    'change #user-song-dropdown-list' : 'loadSong'
   },
 
     template: _.template(
@@ -42,5 +43,12 @@ WO.navbarView = Backbone.View.extend({
     navbarTemplate = this.$el.append(this.template());
     return navbarTemplate;
   },
+
+  loadSong: function(e){
+    var songId = $(e.currentTarget)[0].value;
+    $(e.currentTarget)[0].blur();
+    WO.appView.songView.collection.fetch(songId);
+    setTimeout(WO.appView.songView.collection.createTrackInstruments.bind(WO.appView.songView.collection), 1250);
+  }
 
 });
