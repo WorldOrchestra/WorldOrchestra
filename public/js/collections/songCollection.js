@@ -29,6 +29,7 @@ WO.Song = Backbone.Collection.extend({
 
     var ajax_tracks = [];
     this.models.forEach(function(track){
+      track.saveTrack();
       ajax_tracks.push(track.get('_id'));
     });
     
