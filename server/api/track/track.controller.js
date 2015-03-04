@@ -11,7 +11,6 @@
 
 var _ = require('lodash');
 var Track = require('./track.model');
-var util = require('util');
 
 // Get list of tracks
 exports.index = function(req, res) {
@@ -25,6 +24,7 @@ exports.index = function(req, res) {
 
 // Get a single track
 exports.show = function(req, res) {
+  console.log('show track req.params.id ', req.params.id);
   Track.findById(req.params.id, function (err, track) {
     if(err) {
       return handleError(res, err);
@@ -40,6 +40,7 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   console.log('create track req.body ', req.body);
   req.body.user_id = req.session.user._id;
+  console.log('req.body = ', req.body);
   Track.create(req.body, function(err, track) {
     if(err) {
       return handleError(res, err);

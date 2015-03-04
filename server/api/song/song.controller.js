@@ -11,7 +11,6 @@
 
 var _ = require('lodash');
 var Song = require('./song.model');
-var util = require('util');
 
 // Get list of songs
 exports.index = function(req, res) {
