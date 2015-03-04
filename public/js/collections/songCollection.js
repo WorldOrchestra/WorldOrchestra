@@ -6,7 +6,7 @@ WO.Song = Backbone.Collection.extend({
     tempo: 130,
     title: "untitled song",
     timeSignature: 4,
-    length: "16:0:0",
+    length: 8,
     activeTrack: ""
   },
 
