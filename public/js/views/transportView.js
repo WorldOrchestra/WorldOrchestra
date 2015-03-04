@@ -41,7 +41,7 @@ WO.TransportView = Backbone.View.extend({
         Tone.Transport.setBpm(scaled);
         return scaled;
       }, 120, "Tempo");
-      slider.render(20/30);
+      slider.render(80/200);
 
       MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
       item = document.querySelector('#transportTime');
