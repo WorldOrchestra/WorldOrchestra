@@ -148,8 +148,8 @@ WO.Song = Backbone.Collection.extend({
 
   createTrackInstruments: function(){
     this.models.forEach(function(model){
-      console.log( 'title ', model.get('title'));
-      console.log( 'cid ', model.cid);
+      // console.log( 'title ', model.get('title'));
+      // console.log( 'cid ', model.cid);
       model.set('instrument', WO.InstrumentFactory(model.get('title'), model.cid));
       model.get('mRender').showTrack(model.get('notes'));
     });
