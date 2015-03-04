@@ -25,7 +25,7 @@ app.use(session({
 }));
 
 var logIt = function(req,res,next){
-  console.log(req.method);
+  console.log(req.method + " to " + req.url);
   next();
 };
 
