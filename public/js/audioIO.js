@@ -79,7 +79,7 @@ WO.audioIO = {
   recordSongStop : function(){
     WO.audioIO.songBuffer.stop();
     WO.audioIO.recording = false;
-    WO.transportView.triggerStop();
+    WO.appView.transportView.triggerStop();
   },
 
   playSongBuffer : function(){
