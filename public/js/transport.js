@@ -23,13 +23,14 @@ WO.transport = {
       var notes;
       notes = [];
       _.each(song.models, function(track){
-          var instrument;
+        var instrument;
           notes = track.get('notes');
           instrument = track.get('instrument');
           //check what type of instrument wezza got
           if (track.get('type') === "Audio"){
             instrument.play && instrument.play();
           } else {
+            console.log(instrument);
               _.each(notes, function(note){
                   if ( note[2] === 0.00 || note[2] === "0.00"){
                       Tone.Transport.setTimeout(function(time){
