@@ -20,9 +20,10 @@ WO.transport = {
   },
 
   playSong: function(song){
-      var notes, instrument;
+      var notes;
       notes = [];
       _.each(song.models, function(track){
+          var instrument;
           notes = track.get('notes');
           instrument = track.get('instrument');
           //check what type of instrument wezza got
@@ -50,6 +51,7 @@ WO.transport = {
     this.recording = false;
     Tone.Transport.stop();
     Tone.Transport.clearIntervals();
+    WO.audioIO.recordSongStop();
     WO.appView.songView.collection.models.forEach(function(track){
       var title = track.get('title');
       // TODO accommodate all types of instruments.
