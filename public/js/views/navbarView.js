@@ -48,7 +48,6 @@ WO.navbarView = Backbone.View.extend({
     var songId = $(e.currentTarget)[0].value;
     $(e.currentTarget)[0].blur();
     WO.appView.songView.collection.fetch(songId);
-    setTimeout(WO.appView.songView.collection.createTrackInstruments.bind(WO.appView.songView.collection), 1250);
   }
 
 });

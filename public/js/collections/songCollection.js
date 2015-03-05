@@ -134,17 +134,20 @@ WO.Song = Backbone.Collection.extend({
         this.remove(this.at(i));
       }
       that = this;
-      var counter = 0;
-      this.settings.tracks.forEach(function(track){
-        that.add( new WO.Track({'_id' : track}) );
-        that.at(counter).fetch();
-        // that.at(counter).set('instrument', WO.InstrumentFactory(title, modelCid));
-        // that.at(counter).get('mRender').showTrack(that.at(counter).get('notes'));
-        counter+=1;
-      });
+      curModels = that.length;
+      for( var j=0; j<=curModels; j++){  
+        console.log('created new empty track ' + j);    
+        that.add( new WO.Track({'_id' : that.settings.tracks[j]}) );
+        $.when(that.at(j).fetch()).done(function(){
+          that.models.forEach(function(track){
+            var title = track.get('title');
+            var modelCid = track.cid;
+            track.set('instrument', WO.InstrumentFactory(title, modelCid));
+            track.get('mRender').showTrack(track.get('notes'));
+          });
+        });
+      }
     }
-
-    // this.createTrackInstruments();
   },
 
   createTrackInstruments: function(){
