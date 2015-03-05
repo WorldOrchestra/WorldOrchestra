@@ -19,33 +19,46 @@
     </script>
 
     <!-- include source files here... -->
+
+    <script src="bower_components/modernizr/modernizr.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
-    <script src="bower_components/tone/build/Tone.js"></script>
+    <script src="bower_components/d3/d3.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="bower_components/backbone-modal/backbone.modal.js"></script>
+    <script src="bower_components/recorderjs/recorder.js"></script>
+    <script src="bower_components/recorderjs/recorderWorker.js"></script>
+    <script src="js/tone/build/Tone.js"></script>
+    <script src="js/wavesurfer.js"></script>
+    <script src="js/WO.settings.js"></script>
+    <script src="js/WO.methods.js"></script>
     <script src="js/instruments/acousticPiano.js"></script>
-    <script>
-        var instrument = acousticPiano;
-        mocha.setup('bdd');
-    </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"> </script>
+    <script src="js/instruments/synth.js"></script>
     <script src="js/widgets.js"></script>
     <script src="js/drumPadHandler.js"></script>
+    <script src="js/instruments/drumPad.js"></script>
+    <script src="js/instruments/metronome.js"></script>
+    <script src="js/trackd3.js"></script>
     <script src="js/models/trackModel.js"></script>
     <script src="js/models/WOModel.js"></script>
     <script src="js/collections/songCollection.js"></script>
+    <script src="js/views/navbarView.js"></script>
     <script src="js/views/songView.js"></script>
     <script src="js/views/transportView.js"></script>
     <script src="js/views/userInputView.js"></script>
+    <script src="js/views/trackView.js"></script>
+    <script src="js/views/loginView.js"></script>
+    <script src="js/views/signupView.js"></script>
     <script src="js/views/WOView.js"></script>
-    <script src="js/trackd3.js"></script>
+    <script src="js/instrumentKeyHandler.js"></script>
+    <script src="js/wavesurferMic.js"></script>
+    <script src="js/instruments/audioFactory.js"></script>
+    <script src="js/instruments/instrumentFactory.js"></script>
     <script src="js/index.js"></script>
-
-    <script src="js/instruments/synth.js"></script>
-    <script src="js/pianoKeyHandler.js"></script>
     <script src="js/transport.js"></script>
-
+    <script src="js/midiController.js"></script>
+    <script src="js/audioIO.js"></script>
 
     <!-- include unit files here... -->
     <script src="unit/models/trackModelSpec.js"></script>
@@ -55,6 +68,7 @@
 
     <script>
         // Mocha expects a global onload var here and automagically executes it on pageload
+        mocha.setup('bdd');
         onload = function(){
             var runner = window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
         };
