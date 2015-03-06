@@ -15,7 +15,7 @@ module.exports = [
   //'public/components/requirejs/require.js',
   //'public/bower_components/backbone/backbone.js',
   //'public/js/**/*.js',
-  'test/integration/**/*.js'
+  //'test/integration/**/*.js'
   //'public/js/models/*.js',
   //'public/js/collections/*.js'
 ];

@@ -1,9 +1,13 @@
 /* globals casper, document */
-casper.test.begin('App is setup correctly', 1, function suite(test) {
-  casper.start('http://localhost:3000/', function() {
-    //test.assertExists('.todo-list', 'List should exist');
-    //test.assertExists('.todo-form', 'Form should exist');
-      test.assert(true);
+casper.test.begin('App is setup correctly', 2, function suite(test) {
+  casper.start('http://localhost:9001/', function(response) {
+    require('utils').dump(response);
+    //test.assertExists('svg', 'Track render view should exist');
+    console.log(document.getElementsByTagName('body')[0]);
+  });
+
+  casper.then(function() {
+    test.assertExists('#tabs', 'Instrument tabs should exist');
   });
 
   casper.run(function() {

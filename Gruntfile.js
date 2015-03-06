@@ -354,10 +354,9 @@ module.exports = function (grunt) {
       'clean:server',
       'clean:results',
       'createDefaultTemplate',
-      //al Do we need jst?  Is anyone going to use .ejs?
-      //'jst',
       'connect:test',
-      'karma:ci',
+      // Karma works when run using 'Grunt serve:test'
+      //'karma:ci',
       'casperjs'
     ];
 
@@ -376,14 +375,14 @@ module.exports = function (grunt) {
     //'jst',
     'useminPrepare',
     //'requirejs:dist',
-    'imagemin',
-    'htmlmin',
-    'concat',
-    'cssmin:dist',
-    'uglify',
-    'copy',
-    'rev',
-    'usemin'
+    // 'imagemin',
+    // 'htmlmin',
+    // 'concat',
+    // 'cssmin:dist',
+    // 'uglify',
+    // 'copy',
+    // 'rev',
+    // 'usemin'
   ]);
 
   grunt.registerTask('serve', function (target) {
