@@ -1,5 +1,7 @@
   describe('The transport', function () {
     describe('Transport Controls', function () {
+
+
       beforeEach(function () {
         appView = new WO.WOView();
         appView.songView.collection.add(new WO.Track());
@@ -10,7 +12,6 @@
       });
 
       afterEach(function () {
-        // spy1.restore();
         spyStartTransportCounter.restore();
         spyPlayDrumPad.restore();
         spyPlaySong.restore();
@@ -20,16 +21,19 @@
       it('Pressing play will start the transport counter', function () {
         $("#play").click();
         expect(spyStartTransportCounter.calledOnce).to.be.true;
+        $("#stop").click();
       });
 
       it('Pressing play will start the drumPad', function () {
         $("#play").click();
         expect(spyPlayDrumPad.calledOnce).to.be.true;
+        $("#stop").click();
       });
 
       it('Pressing play will play the song', function () {
         $("#play").click();
-        expect(spyPlaySong.calledOnce).to.be.true;
+        expect(spyPlaySong.calledOnce).to.be_true;
+        $("#stop").click();
       });
 
       it('Play can only be pressed once', function () {
@@ -45,10 +49,27 @@
         $("#record").click();
         $("#play").click();
         expect(spyPlaySong.called).to.be.false;
+        $("#stop").click();
       });
 
-      it('todo.setup receives an array of todos when todo.init is called', function () {
-        expect(true).to.be.true;
+      xit('Any notes not released will be killed', function (done) {
+          var notes = [ ["0:0:1", "C4", 1.00] ];
+          var track = new WO.Track({notes: notes});
+          var synth = WO.InstrumentFactory("Synth", track.cid);
+          track.set('instrument', synth);
+          var song = new WO.Song([track]);
+          var spyKillNotes = sinon.spy(WO.transport, 'killNotes');
+          var spyAttack = sinon.spy(track.get("instrument"), 'triggerAttack');
+          WO.transport.playSong(song);
+          expect(spyAttack.calledOnce).to.be.true;
+          expect(spyKillNotes.calledOnce).to.be.true;
+          // $("#stop").click();
+          song.remove(track);
+
+          spyKillNotes.restore();
+          instrument.triggerAttack.restore();
+          done();
       });
+
     });
   });

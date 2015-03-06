@@ -1,7 +1,7 @@
 /* globals casper, document */
 casper.test.begin('App is setup correctly', 2, function suite(test) {
-  casper.start('http://localhost:9001/', function(response) {
-    require('utils').dump(response);
+  casper.start('127.0.0.1:9001/', function(response) {
+    //require('utils').dump(document.getElementsByTagName('body')[0]);
     //test.assertExists('svg', 'Track render view should exist');
     console.log(document.getElementsByTagName('body')[0]);
   });

@@ -23,7 +23,14 @@ describe('The train', function() {
   });
 });
 
+describe('Karma Chameleon', function() {
+  it('should come and go', function() {
+    ;;
+  })
+});
+
 describe("The 80's", function(){
+  $('come').on('Eileen');
   it("the volume can go above 10", function(){
     var volume = 11;
     expect(volume).to.be.above(10);
