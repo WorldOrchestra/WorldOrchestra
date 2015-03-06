@@ -21,12 +21,6 @@ Bringing the world together - one track at a time.
   - __Product Owner__: Dave Fedele
   - __Scrum Master__: Albert Lee
   - __Development Team Members__: Domen Vajevec, Tyler Davis
-  - __Key Master__: Tyler Davis
-  - __CDN__: Domen Vajevec
-  - __Eastern European__: Domen Vajevec
-  - __The Fonz__: Dave Fedele
-  - __The Zoomkeeper__: Dave Fedele
-  - __The Domenator__: Domen Vajevec
 
 ## Requirements
 
