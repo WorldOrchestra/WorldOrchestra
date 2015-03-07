@@ -3,8 +3,9 @@
 (function () {
   'use strict';
   describe('Track Model', function () {
-      var notes;
+    var notes;
     describe('track', function(){
+
       notes = [ ["0:0:0", "C4", 1.00], ["0:0:1", "C4", 0.00] ];
       var track = new WO.Track();
       track.set('notes', notes);
@@ -21,24 +22,19 @@
         track.set('instrument', 'acousticDrums');
         expect(track.get('instrument')).to.equal('acousticDrums');
       });
+
       it("should have an isMuted attribute", function() {
         expect(track.get('isMuted')).to.equal(false);
         track.set("isMuted", true);
         expect(track.get('isMuted')).to.equal(true);
       });
+
       it("should have a solo attribute", function() {
         expect(track.get('solo')).to.equal(false);
         track.set("solo", true);
         expect(track.get('solo')).to.equal(true);
       });
 
-    });
-
-
-    describe('playback', function(){
-      xit("should record played notes", function(){
-        expect(false).to.equal(true);
-      });
     });
   });
 })();

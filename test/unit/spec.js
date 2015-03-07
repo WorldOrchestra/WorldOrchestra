@@ -72,22 +72,5 @@
         expect($('.octave').prop('tagName')).to.equal('BUTTON');
       });
     });
-
-    // describe('Song collection', function () {
-    //   it('should be a Backbone collection', function () {
-    //     expect(typeof WO.Song).to.be('function');
-    //   });
-    //   it('should be able to add a track', function () {
-    //     var song = new WO.Song();
-    //     song.add(new WO.Track());
-    //     expect(song.at(0) instanceof WO.Track).to.equal(true);
-    //   });
-    // });
-
-    // describe('Track model', function () {
-    //   it('should be a Backbone model', function () {
-    //     expect(typeof WO.Track).to.be('function');
-    //   });
-    // });
   });
 })();
