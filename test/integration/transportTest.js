@@ -58,6 +58,71 @@
         $("#stop").click();
       });
 
+      describe("skip forward", function() {
+        beforeEach(function() {
+          Tone.Transport.setTransportTime("0:0:0");
+        });
+
+        it('should move the transport forward by one measure', function() {
+          $("#skipForward").click();
+          expect(Tone.Transport.getTransportTime()).to.equal("1:0:0");
+        });
+
+        afterEach(function() {
+          Tone.Transport.setTransportTime("0:0:0");
+        });
+      });
+
+      describe("forward", function() {
+        beforeEach(function() {
+          Tone.Transport.setTransportTime("0:0:0");
+        });
+
+        it('should move the transport forward by eight measures', function() {
+          $("#forward").click();
+          expect(Tone.Transport.getTransportTime()).to.equal("8:0:0");
+        });
+
+        afterEach(function() {
+          Tone.Transport.setTransportTime("0:0:0");
+        });
+      });
+
+      describe("skip back", function() {
+        beforeEach(function() {
+          Tone.Transport.setTransportTime("0:0:0");
+        });
+
+        it("should move the transport back by one measure", function() {
+          $("#skipBack").click();
+          expect(Tone.Transport.getTransportTime()).to.equal("0:0:0");
+          $("#forward").click();
+          $("#skipBack").click();
+          expect(Tone.Transport.getTransportTime()).to.equal("7:0:0");
+        });
+
+        afterEach(function() {
+          Tone.Transport.setTransportTime("0:0:0");
+        });
+      });
+
+      describe("rewind", function() {
+        beforeEach(function() {
+          Tone.Transport.setTransportTime("0:0:0");
+        });
+
+        it("should move the transport to 0:0:0", function() {
+          $("#forward").click();
+          $("#forward").click();
+          $("#rewind").click();
+          expect(Tone.Transport.getTransportTime()).to.equal("0:0:0");
+        });
+
+        afterEach(function() {
+          Tone.Transport.setTransportTime("0:0:0");
+        });
+      });
+
       xit('Any notes not released will be killed', function (done) {
           var notes = [ ["0:0:1", "C4", 1.00] ];
           var track = new WO.Track({notes: notes});

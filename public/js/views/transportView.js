@@ -84,8 +84,9 @@ WO.TransportView = Backbone.View.extend({
   },
 
   moveTransport: function(e){
-    var method = {'skipBack': '-1m', 'skipForward': '+1m', 'forward': '+8m'};
-    Tone.Transport.setTransportTime(e.currentTarget.id === 'rewind' ? "0:0:0" : Tone.Transport.getTransportTime() + method[e.currentTarget.id]);
+    var method = {'rewind': '', 'skipBack': '-1m', 'skipForward': '+1m', 'forward': '+8m'};
+    var newTime = e.currentTarget.id === "rewind" ? 0 : Math.max(0, Tone.Transport.toSeconds(Tone.Transport.getTransportTime() + method[e.currentTarget.id]));
+    Tone.Transport.setTransportTime(newTime);
     $('#transportTime').text(Tone.Transport.getTransportTime());
   },
 
