@@ -18,25 +18,29 @@ WO.navbarView = Backbone.View.extend({
   },
 
   events: {
-    'change #user-song-dropdown-list' : 'loadSong'
+    'change #user-song-dropdown-list' : 'loadSong',
+    'click .open-login'   : 'triggerLogin',
+    'click .open-signup'  : 'triggerSignup',
+    'click .open-landing' : 'triggerLanding'
   },
 
-    template: _.template(
+  template: _.template(
 
-      '<div id="navbar">'+
-      '<ul>'+
-        '<li class="active"><a href="index.html"><span>WorldOrchestra</span></a></li>'+
-        '<li><a href="#"><span>Songs</span></a></li>'+
-        '<li class="open-signup"><a href="#"><span>Sign Up</span></a></li>'+
-        '<li class="last"><a href="#"><span>Login</span></a></li>'+
-        '<li>'+
-          '<div id=userSongDropdown">'+
-            '<select id="user-song-dropdown-list">'+
-            '</select>'+
-          '</div>'+
-        '</li>'+
-      '</ul>'+
-      '</div>'
+    '<div id="navbar">'+
+    '<ul>'+
+      '<li class="active"><a href="index.html"><span>WorldOrchestra</span></a></li>'+
+      '<li><a href=""><span>Songs</span></a></li>'+
+      '<li class="open-signup"><a><span>Sign Up</span></a></li>'+
+      '<li class="open-login"><a><span>Login</span></a></li>'+
+      '<li>'+
+        '<div id=userSongDropdown">'+
+          '<select id="user-song-dropdown-list">'+
+          '</select>'+
+        '</div>'+
+      '</li>'+
+      '<li style="float:right"><a class="open-landing">help</a></li>'+
+    '</ul>'+
+    '</div>'
   ),
 
   render: function() {
@@ -48,6 +52,18 @@ WO.navbarView = Backbone.View.extend({
     var songId = $(e.currentTarget)[0].value;
     $(e.currentTarget)[0].blur();
     WO.appView.songView.collection.fetch(songId);
+  },
+
+  triggerLogin: function(){
+    WO.vent.trigger('openLoginModal');
+  },
+
+  triggerSignup: function(){
+    WO.vent.trigger('openSignupModal');
+  },
+
+  triggerLanding: function(){
+    WO.vent.trigger('openLandingModal');
   }
 
 });

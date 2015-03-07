@@ -1,22 +1,19 @@
 WO = WO || {};
-WO.signupView = Backbone.View.extend({
+WO.SignupView = Backbone.View.extend({
 
   initialize: function() {
+    WO.vent.on('openSignupModal', this.openSignupModal, this);
   },
 
   events: {
-    'submit .signupSubmit' : 'submitSignup',
-    'click .open-signup' : 'openModal'
+    'submit .signupSubmit' : 'submitSignup'
   },
 
     template: _.template(
 
       '<div>'+
-        '<button class="open-signup">Sign Up</button>'+
-
-        '<div class="app"></div>'+
-
-        '<script type="text/template" id="modal-template">'+
+        '<div class="signupViewApp"></div>'+
+        '<script type="text/template" id="signup-modal-template">'+
           '<div class="bbm-modal__topbar">'+
             '<h3 class="bbm-modal__title">Sign Up</h3>'+
           '</div>'+
@@ -39,10 +36,9 @@ WO.signupView = Backbone.View.extend({
               '</form>'+
           '</div>'+
           '<div class="bbm-modal__bottombar">'+
-            '<a href="#" class="bbm-button close-signup">close</a>'+
+            '<a href="" class="bbm-button close-signup">close</a>'+
           '</div>'+
         '</script>'+
-
       '</div>'
   ),
 
@@ -60,7 +56,7 @@ WO.signupView = Backbone.View.extend({
      
     $.ajax({
       type: 'POST',
-      url: window.location + "signup",
+      url: window.location + "api/users",
       data: {
               username: newUsername,
               password: newPassword,
@@ -70,7 +66,6 @@ WO.signupView = Backbone.View.extend({
         console.log("successfully signed up");
         window.sessionStorage.user_id = data.user_id;
         $(".close-signup").click();
-        $(".open-login").click();
       },
       error: function(data){
         alert("error signing up!");
@@ -78,14 +73,14 @@ WO.signupView = Backbone.View.extend({
     });
   },
 
-  openModal: function(){
-    var Modal = Backbone.Modal.extend({
-      template: "#modal-template",
-      cancelEl: ".bbm-button"
+  openSignupModal: function(){
+    var signupModal = Backbone.Modal.extend({
+      template: "#signup-modal-template",
+      cancelEl: ".close-signup"
     });
 
-    var modalView = new Modal();
-    $(".app").html(modalView.render().el);
+    var signupModalView = new signupModal();
+    $(".signupViewApp").html(signupModalView.render().el);
   }
 
 });
