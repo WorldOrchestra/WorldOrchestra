@@ -7,7 +7,13 @@
 </head>
 <body>
     <div id="mocha"></div>
-    <div class="appBody" style="display: none; visibility: hidden"></div>
+    <div class="appBody"></div>
+    <style>
+      .appBody, #navbar {
+        display: none;
+        visibility: hidden;
+      }
+    </style>
     <script src="bower_components/mocha/mocha.js"></script>
     <script>mocha.setup('bdd')</script>
     <script src="bower_components/chai/chai.js"></script>
@@ -61,6 +67,8 @@
     <script src="js/audioIO.js"></script>
 
     <!-- include unit files here... -->
+    <script src="integration/audioFactoryTest.js"></script>
+    <script src="integration/transportTest.js"></script>
     <script src="unit/models/trackModelSpec.js"></script>
     <script src="unit/collections/songCollectionSpec.js"></script>
     <script src="unit/spec.js"></script>
