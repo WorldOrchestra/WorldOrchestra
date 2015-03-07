@@ -6,7 +6,9 @@ WO.audioIO = {
 
   'source': "",
 
-  'songBuffer': "",
+  'songBuffer': {
+    stop: function() {}
+  },
 
   /****** Microphone Recording/Exporting ******/
 
