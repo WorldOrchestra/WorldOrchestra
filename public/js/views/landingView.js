@@ -1,134 +1,118 @@
 WO = WO || {};
-WO.tabView = Backbone.View.extend({
-
-  initialize: function() {
-  },
+WO.LandingView = Backbone.View.extend({
 
   events: {
-    'submit .signupSubmit' : 'submitSignup',
-    'click .open' : 'openModal'
+    'click .open' : 'openModal',
+    'click .previous': 'previousStep',
+    'click .next': 'nextStep'
   },
 
-    template: _.template(
-
-      '<a href="#" class="open">Open modal</a>'+
-
-        '<div class="app"></div>'+
-
-        '<!-- The modal structure, with an container element that will contain all tabs -->'+
-        '<script type="text/template" id="modal-template">'+
-          '<div class="bbm-modal__topbar">'+
-            '<ul>'+
-              '<li class="bbm-modal__tab"><a href="#" id="tab1" class="active">Login</a></li>'+
-              '<li class="bbm-modal__tab"><a href="#" id="tab2">Sign Up</a></li>'+
-            '</ul>'+
-          '</div>'+
-
-          '<div class="my-container"></div>'+
-          '<div class="bbm-modal__bottombar">'+
-            '<a href="#" class="bbm-button">Done</a>'+
-          '</div>'+
-        '</script>'+
-
-        '<!-- Tab 1 -->'+
-        '<script type="text/template" id="modal-view1-template">'+
-          '<div class="bbm-modal__section">'+
-            '<h3>Tab based example</h3>'+
-            '<p>It\'s also really easy to create a modal with seperate views that you can control using tabs.</p>'+
-            '<p>We\'re also using a default style, but you can overwrite anything you want.</p>'+
-          '</div>'+
-        '</script>'+
-
-        '<!-- Tab 2 -->'+
-        '<script type="text/template" id="modal-view2-template">'+
-          '<div class="bbm-modal__section">'+
-            'Your account details'+
-          '</div>'+
-        '</script>'+
-
-        '<script>'+
-          'jQuery(function($) {'+
-            '// Create a modal view class'+
-            'var Modal = Backbone.Modal.extend({'+
-              'template: _.template($("#modal-template").html()),'+
-              'viewContainer: ".my-container",'+
-              'submitEl: ".bbm-button",'+
-              'views: {'+
-                '"click #tab1": {'+
-                  'name: "tab1",'+
-                  'view: _.template($("#modal-view1-template").html()),'+
-                  'onActive: "setActive"'+
-                '},'+
-                '"click #tab2": {'+
-                  'name: "tab2",'+
-                  'view: _.template($("#modal-view2-template").html()),'+
-                  'onActive: "setActive"'+
-                '}'+
-              '},'+
-              '// views: [{'+
-              '//   name: "tab1",'+
-              '//   view: _.template($("#modal-view1-template").html()),'+
-              '//   onActive: "setActive"'+
-              '// },{'+
-              '//   name: "tab2",'+
-              '//   view: _.template($("#modal-view2-template").html()),'+
-              '//   onActive: "setActive"'+
-              '// }],'+
-              'setActive: function(options) {'+
-                'this.$(".bbm-modal__tab a").removeClass("active");'+
-                'this.$("#"+options.name).addClass("active");'+
-              '}'+
-            '});'+
-            '$(".open").on("click", function(){'+
-              '// Render an instance of your modal'+
-              'var modalView = new Modal({name: "tab2"});'+
-              '$(".app").html(modalView.render().el);'+
-            '});'+
-            '$(".open").click()'+
-          '});'+
-        '</script>'
+  template: _.template(
+    '<a href="#" class="open landingPage">show help</a>'+
+      '<div class="app"></div>'+
+      '<!-- The modal structure, with an container element that will contain all tabs -->'+
+      '<script type="text/template" id="modal-template">'+
+        '<div class="my-container"></div>'+
+      '</script>'+
+      '<!-- Step 1 -->'+
+      '<script type="text/template" id="modal-view1-template">'+
+        '<div class="bbm-modal__topbar">'+
+          '<h3 class="bbm-modal__title">Welcome to the band!</h3>'+
+        '</div>'+
+        '<div class="bbm-modal__section">'+
+          '<a href="" id="step4">Directly go to the last step</a>'+
+        '</div>'+
+        '<div class="bbm-modal__bottombar">'+
+          '<a href="" class="bbm-button previous inactive">Previous</a>'+
+          '<a href="" class="bbm-button next">Next</a>'+
+        '</div>'+
+      '</script>'+
+      '<!-- Step 2 -->'+
+      '<script type="text/template" id="modal-view2-template">'+
+        '<div class="bbm-modal__topbar">'+
+          '<h3 class="bbm-modal__title">Let us show you around...</h3>'+
+        '</div>'+
+        '<div class="bbm-modal__section">'+
+          '<p>This is the second step of the wizard.</p>'+
+        '</div>'+
+        '<div class="bbm-modal__bottombar">'+
+          '<a href="" class="bbm-button previous">Previous</a>'+
+          '<a href="" class="bbm-button next">Next</a>'+
+        '</div>'+
+      '</script>'+
+      '<!-- Step 3 -->'+
+      '<script type="text/template" id="modal-view3-template">'+
+        '<div class="bbm-modal__topbar">'+
+          '<h3 class="bbm-modal__title">Check out the instruments...</h3>'+
+        '</div>'+
+        '<div class="bbm-modal__section">'+
+          '<p>This is the third step of the wizard.</p>'+
+        '</div>'+
+        '<div class="bbm-modal__bottombar">'+
+          '<a href="" class="bbm-button previous">Previous</a>'+
+          '<a href="" class="bbm-button next">Next</a>'+
+        '</div>'+
+      '</script>'+
+      '<!-- Step 4 -->'+
+      '<script type="text/template" id="modal-view4-template">'+
+        '<div class="bbm-modal__topbar">'+
+          '<h3 class="bbm-modal__title">Share your song!</h3>'+
+        '</div>'+
+        '<div class="bbm-modal__section">'+
+          '<p>And finally, the last step!</p>'+
+        '</div>'+
+        '<div class="bbm-modal__bottombar">'+
+          '<a href="" class="bbm-button previous">Previous</a>'+
+          '<a href="" class="bbm-button done">Done</a>'+
+        '</div>'+
+      '</script>'
   ),
 
   render: function() {
-    tabTemplate = this.$el.append(this.template());
-    return tabTemplate;
+    var tabViewTemplate = this.$el.append(this.template());
+    return tabViewTemplate;
   },
 
-  submitSignup: function (e) {
+  previousStep: function(e) {
     e.preventDefault();
+    WO.modalView.previous();
+  },
 
-    var newUsername = $(e.currentTarget).find('#username').val();
-    var newPassword = $(e.currentTarget).find('#password').val();
-    var newEmail = $(e.currentTarget).find('#email').val();
-     
-    $.ajax({
-      type: 'POST',
-      url: window.location + "signup",
-      data: {
-              username: newUsername,
-              password: newPassword,
-              email: newEmail
-            },
-      success: function(data) {
-        console.log("successfully signed up");
-        window.sessionStorage.user_id = data.user_id;
-        $(".close-signup").click();
-        $(".open-login").click();
-      },
-      error: function(data){
-        alert("error signing up!");
+  nextStep: function(e) {
+    e.preventDefault();
+    WO.modalView.next();
+  },
+
+  render: function() {
+    tabViewTemplate = this.$el.append(this.template());
+    return tabViewTemplate;
+  },
+
+  openModal: function() {
+
+    var Modal = Backbone.Modal.extend({
+      template: '#modal-template',
+      viewContainer: '.my-container',
+      submitEl: '.done',
+      cancelEl: '.cancel',
+      views: {
+        'click #step1': {
+          view: _.template($('#modal-view1-template').html())
+        },
+        'click #step2': {
+          view: _.template($('#modal-view2-template').html())
+        },
+        'click #step3': {
+          view: _.template($('#modal-view3-template').html())
+        },
+        'click #step4': {
+          view: _.template($('#modal-view4-template').html())
+        }
       }
     });
-  },
-
-  openModal: function(){
-    var Modal = Backbone.Modal.extend({
-      template: "#modal-template",
-      cancelEl: ".bbm-button"
-    });
-
-    var modalView = new Modal();
-    $(".app").html(modalView.render().el);
+    
+    WO.modalView = new Modal();
+    $('.app').html(WO.modalView.render().el);
   }
 
 });
