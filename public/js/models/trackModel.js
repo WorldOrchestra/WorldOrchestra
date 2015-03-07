@@ -65,12 +65,17 @@ WO.Track = Backbone.Model.extend({
   },
 
   saveTrack: function(){
-    var temp = this;
-    temp.set('instrument', '');
-    temp.set('mRender', '');
-    this.save();
-    this.set('instrument', temp.get('instrument'));
-    this.set('mRender', temp.get('mRender'));
+    var instrument = this.get('instrument');
+    var mRender = this.get('mRender');
+    this.set('instrument', '');
+    this.set('mRender', '');
+    var that = this;
+    var newlySaveTrack = $.when(that.save()).done(function(){
+      that.set('instrument', instrument);
+      that.set('mRender', mRender);
+      return that;
+    });
+    return newlySaveTrack;
   }
 });
 
