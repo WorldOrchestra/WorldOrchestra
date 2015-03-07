@@ -6,7 +6,9 @@ WO.audioIO = {
 
   'source': "",
 
-  'songBuffer': "",
+  'songBuffer': {
+    stop: function() {}
+  },
 
   /****** Microphone Recording/Exporting ******/
 
@@ -73,7 +75,6 @@ WO.audioIO = {
     WO.audioIO.songBuffer = new Recorder(Tone.Master, {'workerPath': recorderWorkerUrl});
     WO.audioIO.songBuffer.record();
     //TO DO: need to get the song!
-    WO.appView.transportView.triggerPlay();
   },
 
   recordSongStop : function(){

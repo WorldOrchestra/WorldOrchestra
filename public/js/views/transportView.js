@@ -70,7 +70,7 @@ WO.TransportView = Backbone.View.extend({
   },
 
   triggerPlay: function(e){
-    if (e.currentTarget.className !== "play") {
+    if (e.currentTarget.className !== "play" && !WO.transport.recording) {
       this.trigger('play', this);
       $('#play').addClass('play');
       this.startTransportCounter();
@@ -84,17 +84,18 @@ WO.TransportView = Backbone.View.extend({
   },
 
   moveTransport: function(e){
-    var method = {'skipBack': '-1m', 'skipForward': '+1m', 'forward': '+8m'};
-    Tone.Transport.setTransportTime(e.currentTarget.id === 'rewind' ? "0:0:0" : Tone.Transport.getTransportTime() + method[e.currentTarget.id]);
+    var method = {'rewind': '', 'skipBack': '-1m', 'skipForward': '+1m', 'forward': '+8m'};
+    var newTime = e.currentTarget.id === "rewind" ? 0 : Math.max(0, Tone.Transport.toSeconds(Tone.Transport.getTransportTime() + method[e.currentTarget.id]));
+    Tone.Transport.setTransportTime(newTime);
     $('#transportTime').text(Tone.Transport.getTransportTime());
   },
 
   triggerRecord: function(e) {
-    WO.transport.recording = true;
     $('#record').addClass('recordOn');
     Tone.Transport.setTransportTime("0:0:0");
     this.recordWav();
-    this.triggerPlay();
+    this.triggerPlay(e);
+    WO.transport.recording = true;
   },
 
   startTransportCounter: function() {
