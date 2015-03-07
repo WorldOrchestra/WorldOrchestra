@@ -7,8 +7,6 @@ var util = require('./server/lib/utility');
 
 var mongoose = require('mongoose');
 var db = require('./server/config');
-//User model
-var User = require('./server/models/user.js');
 
 var app = express();
 
@@ -31,9 +29,9 @@ var logIt = function(req,res,next){
 
 app.all("*", logIt);
 
-
 app.use('/api/songs', require('./server/api/song'));
 app.use('/api/tracks', require('./server/api/track'));
+app.use('/api/users', require('./server/api/user'));
 
 //serve up index on root
 app.get('/', function(req, res) {
@@ -43,74 +41,6 @@ app.get('/', function(req, res) {
 //test authentication with a route
 app.get('/secret', util.checkUser, function(req, res){
   res.json({message: "super secret place"});
-});
-/************************************************************/
-// Write your authentication routes here
-/************************************************************/
-
-app.post('/login', function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-
-  User.findOne({ username: username })
-    .exec(function(err, user) {
-      if (err){
-        res.send(401, err);
-      }
-      if (!user) {
-        console.log("User does not exist");
-        res.redirect('/');
-      } else {
-        user.comparePassword(password, function(match) {
-          if (match) {
-            util.createSession(req, res, user);
-            console.log("successfully logged in");
-          } else {
-            console.log("incorrect pasword");
-            res.redirect('/');
-          }
-        })
-      }
-  });
-});
-
-app.get('/logout', function(req, res) {
-  req.session.destroy(function(){
-    console.log("logged out");
-    res.redirect('/');
-  });
-});
-
-app.post('/signup', function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-  var email = req.body.email;
-  console.log(req.body);
-  User.findOne({ username: username })
-    .exec(function(err, user) {
-      if (err) {
-        res.send(400, err);
-      }
-      if (!user) {
-        var newUser = new User({
-          username: username,
-          password: password,
-          email: email
-        });
-        newUser.save(function(err, newUser) {
-            if (err) {
-              console.log('Error creating user!');
-              res.status(400).json(err);
-            }
-            console.log('User successfully created');
-            util.createSession(req, res, newUser);
-          });
-        // res.json({user_id: newUser._id});
-      } else {
-        console.log('Account already exists');
-        res.redirect('/');
-      }
-    })
 });
 
 /************************************************************/
@@ -122,6 +52,9 @@ app.get('/*', function(req, res) {
   res.redirect('/');
 });
 
+var port = process.env.OPENSHIFT_NODEJS_PORT ||
+           process.env.PORT ||
+           9000;
 
-console.log('listening on port 9000');
-app.listen(9000);
+console.log('listening on port ' + port);
+app.listen(port);
