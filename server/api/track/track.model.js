@@ -33,9 +33,9 @@ var TrackSchema = new Schema({
   volume: {
     type: Number
   },
-  instrument: {
-    type: String
-  },
+  // instrument: {
+  //   type: String
+  // },
   type: {
     type: String
   }
