@@ -1,10 +1,10 @@
 /**
 /**
- * GET     /things              ->  index
- * POST    /things              ->  create
- * GET     /things/:id          ->  show
- * PUT     /things/:id          ->  update
- * DELETE  /things/:id          ->  destroy
+ * GET     /song              ->  index
+ * POST    /song              ->  create
+ * GET     /song/:id          ->  show
+ * PUT     /song/:id          ->  update
+ * DELETE  /song/:id          ->  destroy
  */
 
 'use strict';
