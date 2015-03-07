@@ -1,4 +1,4 @@
-describe('API integration', function(){
+xdescribe('API integration', function(){
   var setupStub, JSONresponse, list, setupSpy, promise;
   //beforeEach(function () {
   //  this.server = sinon.fakeServer.create();

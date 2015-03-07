@@ -1,4 +1,4 @@
-describe('AudioFactory', function(){
+xdescribe('AudioFactory', function(){
   var appView, waveSurfer, spy1;
   describe('Play Audio File', function() {
     beforeEach(function () {

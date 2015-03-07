@@ -1,4 +1,4 @@
-/* global describe, it, transport */
+/* global describe, expect, it, transport */
 
 (function () {
   'use strict';
@@ -6,7 +6,8 @@
       var notes;
     describe('track', function(){
       notes = [ ["0:0:0", "C4", 1.00], ["0:0:1", "C4", 0.00] ];
-      var track = new WO.Track({notes: notes});
+      var track = new WO.Track();
+      track.set('notes', notes);
 
       it("should save note data", function(){
         expect(track.get("notes")).to.equal(notes);
@@ -34,8 +35,8 @@
     });
 
 
-    xdescribe('playback', function(){
-      it("should record played notes", function(){
+    describe('playback', function(){
+      xit("should record played notes", function(){
         expect(false).to.equal(true);
       });
     });
