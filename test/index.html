@@ -7,7 +7,13 @@
 </head>
 <body>
     <div id="mocha"></div>
-    <div class="appBody" style="display: none; visibility: hidden"></div>
+    <div class="appBody"></div>
+    <style>
+      .appBody, #navbar {
+        display: none;
+        visibility: hidden;
+      }
+    </style>
     <script src="bower_components/mocha/mocha.js"></script>
     <script>mocha.setup('bdd')</script>
     <script src="bower_components/chai/chai.js"></script>
