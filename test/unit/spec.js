@@ -47,7 +47,7 @@
         
       });
       it('should have 2 default tabs for drumpad and piano', function () {
-        expect($('#container ul a')).to.have.length(2);
+        expect($('#Container ul a')).to.have.length(2);
 
       });
       it('should display drumpad presets', function () {
