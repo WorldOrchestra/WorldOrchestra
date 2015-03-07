@@ -11,7 +11,6 @@ module.exports = function (grunt) {
   // show elapsed time at the end
   require('time-grunt')(grunt);
   // load all grunt tasks
-  //al Library - replaces grunt.loadNpmTasks()
   require('load-grunt-tasks')(grunt);
 
   var worldConfig = {
@@ -22,10 +21,8 @@ module.exports = function (grunt) {
   var reloadPort = 35729, files;
 
   grunt.initConfig({
-    //al ? how to set variables in package.json
     world: worldConfig,
     pkg: grunt.file.readJSON('package.json'),
-    //al grunt-develop
 
     clean: {
       dist: ['.tmp', '<%= world.dist %>/*'],
@@ -372,17 +369,15 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'createDefaultTemplate',
-    //'jst',
     'useminPrepare',
-    //'requirejs:dist',
-    // 'imagemin',
-    // 'htmlmin',
-    // 'concat',
-    // 'cssmin:dist',
-    // 'uglify',
-    // 'copy',
-    // 'rev',
-    // 'usemin'
+    'imagemin',
+    'htmlmin',
+    'concat',
+    'cssmin:dist',
+    'uglify',
+    'copy',
+    'rev',
+    'usemin'
   ]);
 
   grunt.registerTask('serve', function (target) {
@@ -413,6 +408,5 @@ module.exports = function (grunt) {
     'jshint',
     'test',
     'build'
-      //al TODO add develop and watch tasks?
   ]);
 };
