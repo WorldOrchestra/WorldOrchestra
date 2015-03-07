@@ -10,95 +10,72 @@ WO.Song = Backbone.Collection.extend({
     title: "untitled song",
     timeSignature: 4,
     length: 8,
-    activeTrack: ""
+    activeTrack: "",
+    tracks: ""
   },
 
   initialize : function(){
-    this.add( new WO.Track());
+    this.add( new WO.Track() );
     this.settings.activeTrack = this.at(0);
     // WO.setTempo(this.settings.tempo);
   },
 
   save: function(){
-    // var ajax_song_id = this.settings._id,
-    ajax_tempo = this.settings.tempo,
+    var ajax_tempo = this.settings.tempo,
     ajax_title = this.settings.title,
     ajax_timeSignature = this.settings.timeSignature,
     ajax_length = this.settings.length,
-    ajax_activeTrack = "";
+    ajax_activeTrack = "",
+    ajax_tracks = [];
+    
+    var numberOfModels = this.models.length;
 
-    var ajax_tracks = [];
     this.models.forEach(function(track){
-      track.saveTrack();
-      ajax_tracks.push(track.get('_id'));
+      $.when(track.saveTrack()).done(function(trackId){
+        // console.log('trackId return = ', trackId._id)
+        // console.log('saved track');
+        ajax_tracks.push(trackId._id);
+      });
     });
     
     var ajax_method = this.settings._id ? "PUT" : "POST";
     var ajax_path = (ajax_method === "POST") ? "api/songs" : ("api/songs/" + this.settings._id);
-    console.log('ajax_method ', ajax_method);
-    console.log('ajax_path ' , ajax_path);
+    // console.log('ajax_method ', ajax_method);
+    // console.log('ajax_path ' , ajax_path);
     var that = this;
     
-    var serverCollection = $.ajax({
-      type: ajax_method,
-      url: window.location + ajax_path,
-      data: {
-            // _id: ajax_song_id,
-            tempo: ajax_tempo,  
-            title: ajax_title,  
-            timeSignature: ajax_timeSignature,  
-            length: ajax_length,  
-            activeTrack: ajax_activeTrack,
-            tracks: ajax_tracks
-      },
-      success: function(data) {
-        console.log(data);
-        console.log("Successfully saved song model!");
-        that.settings._id = data._id;
-      },
-      error: function(data){
-        console.log(data);
-        alert("error");
+    var serverCollection = function(){
+      // console.log('saving song to server');
+      $.ajax({
+        type: ajax_method,
+        url: window.location + ajax_path,
+        data: {
+              tempo: ajax_tempo,  
+              title: ajax_title,  
+              timeSignature: ajax_timeSignature,  
+              length: ajax_length,  
+              activeTrack: ajax_activeTrack,
+              tracks: ajax_tracks
+        },
+        success: function(data) {
+          // console.log(data);
+          console.log("Successfully saved song model!");
+          that.settings._id = data._id;
+        },
+        error: function(data){
+          // console.log(data);
+          alert("error");
+        }
+      });
+    };
+
+    var ajaxInterval = setInterval(function(){
+      if(ajax_tracks.length === numberOfModels){
+        serverCollection();
+        clearInterval(ajaxInterval);
       }
-    });
-
-  //   this.models.forEach(function(track){
-  //     var ajax_id = track.get('_id'),
-  //     ajax_notes = track.get('notes'),
-  //     ajax_title = track.get('title'),
-  //     ajax_isMuted = Boolean(track.get('isMuted')),
-  //     ajax_solo = Boolean(track.get('solo')),
-  //     ajax_octave = track.get('octave'),
-  //     ajax_volume = track.get('volume'),
-  //     // ajax_instrument = track.get('instrument'),
-  //     ajax_type = track.get('type');
-
-  //     $.ajax({
-  //       type: 'POST',
-  //       url: window.location+ "api/tracks",
-  //       data: {
-  //             _id : ajax_id,
-  //             song_id: ajax_song_id,
-  //             notes : ajax_notes,
-  //             title : ajax_title,
-  //             isMuted : ajax_isMuted,
-  //             solo : ajax_solo,
-  //             octave : ajax_octave,
-  //             volume : ajax_volume,
-  //             // instrument : ajax_instrument,
-  //             type : ajax_type
-  //       },
-  //       success: function(data) {
-  //         console.log(data);
-  //         console.log("Successfully saved song tracks!");
-  //       },
-  //       error: function(data){
-  //         console.log(data);
-  //         alert("error");
-  //       }
-  //     });
-  //   });
-
+    }
+      ,100);
   },
 
   fetch : function(song_id){
@@ -134,15 +111,20 @@ WO.Song = Backbone.Collection.extend({
         this.remove(this.at(i));
       }
       that = this;
-      curModels = that.length;
-      for( var j=0; j<=curModels; j++){  
-        console.log('created new empty track ' + j);    
+      numTracks = that.settings.tracks.length;
+      // console.log('current number of tracks = ' + numTracks);
+      for( var j=0; j<numTracks; j++){  
+        // console.log('created new empty track ' + j);    
         that.add( new WO.Track({'_id' : that.settings.tracks[j]}) );
+        // console.log('fetching ' + that.at(j));
         $.when(that.at(j).fetch()).done(function(){
           that.models.forEach(function(track){
             var title = track.get('title');
             var modelCid = track.cid;
-            track.set('instrument', WO.InstrumentFactory(title, modelCid));
+            var instrument = track.get('instrument');
+            if(title !== "Acoustic Piano"){
+              track.set('instrument', WO.InstrumentFactory(title, modelCid));
+            }
             track.get('mRender').showTrack(track.get('notes'));
           });
         });
@@ -158,28 +140,5 @@ WO.Song = Backbone.Collection.extend({
       model.get('mRender').showTrack(model.get('notes'));
     });
   }
-
-  // setFetchedTracks : function(fetchedTrack){
-  //     var that = this;
-  //     var result = {};
-  //     $.ajax({
-  //       type: 'GET',
-  //       url: window.location + "api/tracks/" + fetchedTrack,
-  //       success: function(data) {
-  //         result = data;
-  //         console.log('fetch song = ', result);
-  //         console.log("Successfully fetched track!");
-  //         that.add(new WO.Track());
-  //         for( var key in result){
-  //           console.log(key);
-  //           if( that.at(0).get(key) )              
-  //             that.at(0).set(key, result[key]);
-  //         }
-  //       },
-  //       error: function(data){
-  //         alert("error fetching track data");
-  //       }
-  //     });
-  // }
 
 });
