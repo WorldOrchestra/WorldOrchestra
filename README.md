@@ -6,6 +6,7 @@
 
 Bringing the world together - one track at a time.
 
+![screenshot](WO_screenshot.png)
 ## Table of Contents
 
 1. [Team](#team)
