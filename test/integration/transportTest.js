@@ -2,11 +2,12 @@
     var appView;
     appView = new WO.WOView();
     appView.songView.collection.add(new WO.Track());
+    WO.audioIO.songBuffer = {stop: function() {}};
+
     describe('Transport Controls', function () {
       var spyStartTransportCounter, spyPlayDrumPad, spyPlaySong, spySongBuffer;
 
       beforeEach(function () {
-        WO.audioIO.songBuffer = {stop: function() {}};
         spySongBuffer = sinon.spy(WO.audioIO.songBuffer, "stop");
         spyStartTransportCounter = sinon.spy(WO.appView.transportView, "startTransportCounter");
         spyPlayDrumPad = sinon.spy(WO, "playDrumPad");
@@ -53,7 +54,7 @@
       it('Play cannot be pressed while recording', function () {
         $("#record").click();
         $("#play").click();
-        expect(spyPlaySong.called).to.be.false;
+        expect(spyPlaySong.calledTwice).to.be.false;
         $("#stop").click();
       });
 

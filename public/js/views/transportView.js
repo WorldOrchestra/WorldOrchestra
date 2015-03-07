@@ -70,7 +70,7 @@ WO.TransportView = Backbone.View.extend({
   },
 
   triggerPlay: function(e){
-    if (e.currentTarget.className !== "play") {
+    if (e.currentTarget.className !== "play" && !WO.transport.recording) {
       this.trigger('play', this);
       $('#play').addClass('play');
       this.startTransportCounter();
@@ -90,11 +90,11 @@ WO.TransportView = Backbone.View.extend({
   },
 
   triggerRecord: function(e) {
-    WO.transport.recording = true;
     $('#record').addClass('recordOn');
     Tone.Transport.setTransportTime("0:0:0");
     this.recordWav();
-    this.triggerPlay();
+    this.triggerPlay(e);
+    WO.transport.recording = true;
   },
 
   startTransportCounter: function() {
