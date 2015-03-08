@@ -1,24 +1,10 @@
 html {
-  /*background: url('http://www.carvellswoodworks.com/img/bg-top.jpg') no-repeat center center fixed;*/
-  /*background-image: url('http://wallpaperest.com/wallpapers/black-wooden-panel_095750.jpg');*/
-  /*background: url('http://www.wallpapersidol.com/wp-content/uploads/2014/09/rainbow-abstract-wallpaper.jpg') no-repeat center center fixed;*/
-  /*background: url('http://www.playbackrecording.com/wp-content/gallery/playback-recording-studio/pb_studio_008_web_0.jpg') no-repeat center center fixed;*/
-  /*background: url('http://www.secretsociety.net/files/2013/05/recording-studio.jpg') no-repeat center center fixed;*/
-  /*background: url('http://www.beatsuite.com/assets/filemanager/uploaded-files/Recording%20Studio/Main%20Images/beatsuite.com_01.jpg') no-repeat center center fixed;*/
-/*  background: url('http://beadheadband.com/wp-content/uploads/2015/02/NJ-Recording-Studio.jpg') no-repeat center center fixed;
-  background-attachment: fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;*/
-  
   background-color: rgba(44,62,80,1);
-  /*background-size: auto; */
   position: relative;
 }
 html:after {
   content: "";
-  background: url('../img/random_grey_variations_%402X.png'); 
+  background: url('../img/random_grey_variations.png'); 
   background-repeat: repeat;
   background-size: auto auto; 
   opacity: 0.5;
@@ -40,13 +26,6 @@ body {
 
 body, .Value #Label, .Value #Value, button, .ui-widget, li a span, button.clear-drumPad-button {
   font: 14px "Julius Sans One";
-  /*font: 14px "Fontdiner Swanky";*/
-  /*font: 14px "Marck Script";*/
-  /*font: 14px "Playfair Display SC";*/
-  /*font: 14px "Josefin Slab";*/
-  /*font: 14px "Architects Daughter";*/
-  /*font: 14px "Poiret One", cursive;*/
-  /*font: 14px "Josefin Sans", "Lucida Grande", Helvetica, Arial, sans-serif;*/
 }
 
 
@@ -301,6 +280,7 @@ wave {
   -moz-animation:taufik 2s;
   animation:taufik 2s;
 }
+
 /*Piano Keyboard View*/
 
 button.octave {
@@ -453,5 +433,9 @@ ul#piano li a:active,ul#piano li div.anchor:active {
 
 .ui-tabs-anchor:focus{
   outline-color: #98FB98;
+}
+
+#tabs {
+  background: url('../img/paper_fibers.png');
 }
 

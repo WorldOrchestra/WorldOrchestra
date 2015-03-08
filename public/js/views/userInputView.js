@@ -20,7 +20,16 @@ WO.userInputView = Backbone.View.extend({
               '</select>' +
             '</div>' +
             '<div id="UIContent">'+
-              '<div id="Sequencer"></div>'+
+              '<div id="drumpad-icons">'+
+                '<img src="../img/drumpad-hihat.jpg">'+
+                '<img src="../img/drumpad-snare.jpg">'+
+                '<img src="../img/drumpad-tom.jpg">'+
+                '<img src="../img/drumpad-tom2.jpg">'+
+                '<img src="../img/drumpad-tom3.jpg">'+
+                '<img src="../img/drumpad-kick.jpg">'+
+              '</div>'+
+              '<div id="Sequencer">'+
+              '</div>'+
             '</div>'+
           '</div>'+
           '<div id="tabs-2">'+

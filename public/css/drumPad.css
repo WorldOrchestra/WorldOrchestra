@@ -1,5 +1,4 @@
 #userInput{
-/*    background-image: url("../img/drummachinecompressed.png");*/
     height: 500px;
     width: 1400px;
     position: relative;
@@ -11,18 +10,17 @@
     width: 1120px;
     height: 405px;
     margin: 0 auto;
-    background-image: url("../img/drumpad001.png");
     -webkit-animation:taufik 2s;
     -moz-animation:taufik 2s;
     animation:taufik 2s;
 }
 #UIContent #Sequencer .Checkbox{
-    margin-top: 0px;
-    padding: 3px;
-    left: 56px;
-    top: 32px;
-    width: 55.5px;
-    height: 47px;
+    margin-top: 1px;
+    padding: 3.69px;
+    left: 52px;
+    top: 29.5px;
+    width: 48.5px;
+    height: 40px;
     background-color: transparent;
 }
 #UIContent #Sequencer .Checkbox .ui-button-text {
@@ -51,8 +49,29 @@
 }
 
 #Sequencer{
-    padding-top: 2.5%;
+  background-image: url("../img/drumpad001.png");
+  padding-top: 2.3%;
+  height: 360px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 5%;
 }
 .Checkbox{
     border-color: transparent;
+}
+
+/* Drumpad Icons */
+#drumpad-icons {
+  position: absolute;
+  margin-top: 46px;
+}
+
+#drumpad-icons img {
+  box-sizing: border-box;
+  display: block;
+  width: 41px;
+  margin: 11px;
+  border: 1px solid rgba(141, 114, 114, 0.61);
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px #aaa;
 }
