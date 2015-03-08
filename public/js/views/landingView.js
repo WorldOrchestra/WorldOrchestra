@@ -23,6 +23,9 @@ WO.LandingView = Backbone.View.extend({
         '<h3 class="bbm-modal__title">Welcome to the band!</h3>'+
       '</div>'+
       '<div class="bbm-modal__section">'+
+        '<img src="../../img/help/drumpad-icons.jpg id="help-pg1">'+
+        '<p>Here is our Drum Pad. Each horizontal square represents one sixteenth note. Vertically, each square represents a different drum. From the bottom up we have: Kick, Tom3, Tom2, Tom1, Snare, Hi-Hat. The slider on the left side is just for looks ;)</p>'+
+
         '<a href="" id="step4">Directly go to the last step</a>'+
       '</div>'+
       '<div class="bbm-modal__bottombar">'+
