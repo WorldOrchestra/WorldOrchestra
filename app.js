@@ -1,21 +1,60 @@
-var express = require('express'),
-  config = require('./config/config'),
-  glob = require('glob'),
-  mongoose = require('mongoose');
+var express = require('express');
+var partials = require('express-partials');
+var bodyParser = require('body-parser');
+var session = require('express-session');
 
-mongoose.connect(config.db);
-var db = mongoose.connection;
-db.on('error', function () {
-  throw new Error('unable to connect to database at ' + config.db);
-});
+var util = require('./server/lib/utility');
 
-var models = glob.sync(config.root + '/serverAlt/models/*.js');
-models.forEach(function (model) {
-  require(model);
-});
+var mongoose = require('mongoose');
+var db = require('./server/config');
+
 var app = express();
 
-require('./config/express')(app, config);
+// Parse JSON (uniform resource locators)
+app.use(bodyParser.json());
+// Parse forms (signup/login)
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
 
-app.listen(config.port);
+app.use(session({
+  secret: 'we\'re making music together',
+  resave: false,
+  saveUninitialized: true
+}));
 
+var logIt = function(req,res,next){
+  console.log(req.method + " to " + req.url);
+  next();
+};
+
+app.all("*", logIt);
+
+app.use('/api/songs', require('./server/api/song'));
+app.use('/api/tracks', require('./server/api/track'));
+app.use('/api/users', require('./server/api/user'));
+
+//serve up index on root
+app.get('/', function(req, res) {
+  res.sendFile('index.html');
+});
+
+//test authentication with a route
+app.get('/secret', util.checkUser, function(req, res){
+  res.json({message: "super secret place"});
+});
+
+/************************************************************/
+// Handle the wildcard route last - if all other routes fail
+// send the user to '/'
+/************************************************************/
+
+app.get('/*', function(req, res) {
+  res.redirect('/');
+});
+
+var port = process.env.OPENSHIFT_NODEJS_PORT ||
+           process.env.PORT ||
+           9000;
+
+console.log('listening on port ' + port);
+app.listen(port);

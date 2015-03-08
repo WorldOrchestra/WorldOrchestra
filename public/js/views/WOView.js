@@ -15,10 +15,14 @@ WO.WOView = Backbone.View.extend({
     this.transportView = new WO.TransportView();
     this.userInputView = new WO.userInputView();
     this.songView = new WO.SongView({collection: new WO.Song()});
-    this.loginView = new WO.loginView();
-    this.signupView = new WO.signupView();
+    this.loginView = new WO.LoginView();
+    this.signupView = new WO.SignupView();
+    this.landingView = new WO.LandingView();
     this.render();
     this.startListeners();
+    $(function(){
+      $('.open-landing').click();
+    })
   },
 
   render: function(){
@@ -28,6 +32,7 @@ WO.WOView = Backbone.View.extend({
     this.$el.append(this.userInputView.render());
     this.$el.append(this.loginView.render());
     this.$el.append(this.signupView.render());
+    this.$el.append(this.landingView.render());
     $('.appBody').append(this.$el);
     return this.$el;
   },

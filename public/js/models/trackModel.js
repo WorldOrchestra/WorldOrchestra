@@ -1,5 +1,8 @@
 var WO = WO || {};
 WO.Track = Backbone.Model.extend({
+  urlRoot: '/api/tracks',
+  idAttribute: '_id',
+  
   defaults: {
     notes: "",
     title: 'Acoustic Piano',
@@ -17,6 +20,17 @@ WO.Track = Backbone.Model.extend({
     WO.instrumentKeyHandler.create(this.get('instrument'));
     this.on('changeInstrument', function(instrumentName){this.changeInstrument(instrumentName);}, this);
   },
+
+  genObjectId: (function() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return function() {
+      return s4() + s4() + s4();
+    };
+  })(),
 
   changeInstrument: function(instrumentName) {
     var instType = {'Acoustic Piano': 'MIDI', 'Audio File': 'Audio', 'Microphone': 'Microphone', 'Synth': 'MIDI'};
@@ -40,6 +54,20 @@ WO.Track = Backbone.Model.extend({
       $('.active-track .track-notes').html('');
       this.set('instrument', WO.InstrumentFactory(instrumentName, this));
     }
+  },
+
+  saveTrack: function(){
+    var instrument = this.get('instrument');
+    var mRender = this.get('mRender');
+    this.set('instrument', '');
+    this.set('mRender', '');
+    var that = this;
+    var newlySaveTrack = $.when(that.save()).done(function(){
+      that.set('instrument', instrument);
+      that.set('mRender', mRender);
+      return that;
+    });
+    return newlySaveTrack;
   }
 });
 
