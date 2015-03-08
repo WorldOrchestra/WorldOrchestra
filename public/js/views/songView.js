@@ -33,7 +33,6 @@ WO.SongView = Backbone.View.extend({
   renderTrack: function(track){
     var trackView = new WO.TrackView({model: track});
     $('#songView').append(trackView.render());
-    // console.log(track);
 
     $(document).ready((function(){
       track.set('mRender', new WO.MidiRender(track.cid+ ' .track-notes'));
