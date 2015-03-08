@@ -33,7 +33,27 @@ WO.Track = Backbone.Model.extend({
   })(),
 
   changeInstrument: function(instrumentName) {
-    var instType = {'Acoustic Piano': 'MIDI', 'Audio File': 'Audio', 'Microphone': 'Microphone', 'Synth': 'MIDI'};
+    var instType = {
+      'Acoustic Piano': 'MIDI', 
+      'Audio File': 'Audio', 
+      'Microphone': 'Microphone', 
+      'Acoustic Guitar Steel': 'MIDI',
+      'Alto Sax': 'MIDI',
+      'Church Organ': 'MIDI',
+      'Distortion Guitar': 'MIDI',
+      'Electric Piano 1': 'MIDI',
+      'Flute': 'MIDI',
+      'Muted Trumpet': 'MIDI',
+      'Oboe': 'MIDI',
+      'Overdriven Guitar': 'MIDI',
+      'Pad 3 Polysynth': 'MIDI',
+      'Synth': 'MIDI', 
+      'Synth Bass 1': 'MIDI',
+      'Synth Strings 2': 'MIDI',
+      'Viola': 'MIDI',
+      'Violin': 'MIDI',
+      'Xylophone': 'MIDI'
+    };
     var previousInstrumentType = this.get('type');
 
     WO.appView.unbindKeys();
