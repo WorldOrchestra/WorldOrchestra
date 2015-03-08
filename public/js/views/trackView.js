@@ -14,7 +14,6 @@ WO.TrackView = Backbone.View.extend({
         '<p class="track-title"> <%= attributes.title %> </p>' +
         '<button class="delete-track-button" id="delete"><i class="fa fa-trash-o"></i></button><br>' +
         '<form action="#">' +
-        // '<fieldset>' +
           '<label for="instrument">Select instrument </label>' +
           '<select name="instrument-selector" class="instrument-selector">' +
             '<option selected="selected" value="Acoustic Piano">Acoustic Piano</option>'+
@@ -22,7 +21,6 @@ WO.TrackView = Backbone.View.extend({
             '<option value="Drums">Drums</option>' +
             '<option value="Audio File">Audio File</option>' +
           '</select>' +
-        // '</fieldset>' +
         '</form><br>' +
         '<button class="solo-track-button" id="solo">S</button>' +
         '<button class="mute-track-button" id="mute">M</button>' +
@@ -56,15 +54,13 @@ WO.TrackView = Backbone.View.extend({
   },
 
   muteTrack: function(){
-    var volume, color;
+    var volume;
     if( this.model.get('isMuted') ){
       volume = 0;
       this.model.set('isMuted', false);
-      color = "rgb(255,255,255)";
     }else{
       volume = -50;
       this.model.set('isMuted', true);
-      color = "rgb(255,0,0)";
     }
     this.$el.find('.mute-track-button').toggleClass('muted');
     this.model.set('volume', volume);
