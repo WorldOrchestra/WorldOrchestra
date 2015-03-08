@@ -14,7 +14,14 @@ var app = express();
 app.use(bodyParser.json());
 // Parse forms (signup/login)
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/public'));
+
+var env = app.get('env');
+if ('production' === env) {
+  app.use(express.static(__dirname + '/dist'));
+}
+if ('development' === env || 'test' === env) {
+  app.use(express.static(__dirname + '/public'));
+}
 
 app.use(session({
   secret: 'we\'re making music together',
