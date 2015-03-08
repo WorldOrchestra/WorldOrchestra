@@ -109,7 +109,7 @@ WO.Song = Backbone.Collection.extend({
     if(fetchedSong.tracks.length > 0){
       this.settings.tracks = fetchedSong.tracks;
       var curModels = this.length;
-      for( var i=0; i<curModels; i++ ){
+      for( var i=curModels-1; i>=0; i-- ){
         $('.' + this.at(i).cid).remove();
         this.remove(this.at(i));
       }
@@ -133,15 +133,9 @@ WO.Song = Backbone.Collection.extend({
         });
       }
     }
-  },
-
-  createTrackInstruments: function(){
-    this.models.forEach(function(model){
-      // console.log( 'title ', model.get('title'));
-      // console.log( 'cid ', model.cid);
-      model.set('instrument', WO.InstrumentFactory(model.get('title'), model.cid));
-      model.get('mRender').showTrack(model.get('notes'));
-    });
+    //set first track to activeTrack
+    var firstTrack = 'track-container, .' + WO.appView.songView.collection.at(0).cid; 
+    $(firstTrack).click();
   }
 
 });
