@@ -21,6 +21,9 @@ WO.Song = Backbone.Collection.extend({
   },
 
   save: function(){
+    var promptName = prompt("Please name your song", "songname");
+    this.settings.title = promptName || "untitled song";
+
     var ajax_tempo = this.settings.tempo,
     ajax_title = this.settings.title,
     ajax_timeSignature = this.settings.timeSignature,
