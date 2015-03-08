@@ -3,8 +3,8 @@
 var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
-var Plan = require('./plan.model');
-var User = require('../user/user.model');
+var Track = require('./track.model');
+var User = require('../user/track.model');
 var util = require("util");
 
 var user = new User({
@@ -14,46 +14,37 @@ var user = new User({
   password: 'password'
 });
 
-var plan = new Plan({
-  title: 'Learn Angular',
-  synopsis: 'These are bookmarks to learn angular',
-  links: [{
-    url: 'https://thinkster.io/angulartutorial/a-better-way-to-learn-angularjs/',
-    description: "A better way to learn angular"
-  }, {
-    url: 'http://www.engrish.com',
-    description: 'Brogs of many fravor'
-  },
-  ],
+var track = new Track({
+  title: 'Riff',
   user: user._id
 });
 
-describe('Plan Model', function() {
+describe('Track Model', function() {
 
   before(function(done) {
-    // Clear plans before testing
-    Plan.remove().exec().then(function() {
+    // Clear tracks before testing
+    Track.remove().exec().then(function() {
       done();
     });
   });
 
   afterEach(function(done) {
-    Plan.remove().exec().then(function() {
+    Track.remove().exec().then(function() {
       done();
     });
   });
 
-  describe('GET /api/plan', function() {
-    it('should begin with no plans', function(done) {
-      Plan.find({}, function(err, plans) {
-        plans.should.have.length(0);
+  describe('GET /api/tracks', function() {
+    it('should begin with no tracks', function(done) {
+      Track.find({}, function(err, tracks) {
+        tracks.should.have.length(0);
         done();
       });
     });
 
     it('should respond with JSON array', function(done) {
       request(app)
-        .get('/api/plans')
+        .get('/api/tracks')
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
@@ -66,12 +57,12 @@ describe('Plan Model', function() {
 
   });
 
-  describe("POST /api/plans", function() {
+  describe("POST /api/tracks", function() {
 
-    it('should save a plan', function(done) {
+    it('should save a track', function(done) {
       request(app)
-      .post('/api/plans')
-      .send(plan)
+      .post('/api/tracks')
+      .send(track)
       .expect(201)
       .expect('Content-Type', /json/)
       .end(function(err, res) {
@@ -79,17 +70,17 @@ describe('Plan Model', function() {
           console.log(err);
           return done(err);
         }
-        res.body.title.should.equal(plan.title);
+        res.body.title.should.equal(track.title);
         done();
       });
     });
 
-    it('should fail when saving a duplicate plan', function(done) {
-      plan.save(function() {
-        var planDup = new Plan(plan);
-        planDup.save(function(err) {
-          Plan.find({}, function(err, plans){
-            plans.should.have.length(1);
+    it('should fail when saving a duplicate track', function(done) {
+      track.save(function() {
+        var trackDup = new Track(track);
+        trackDup.save(function(err) {
+          Track.find({}, function(err, tracks){
+            tracks.should.have.length(1);
           });  
           should.exist(err);
           done();

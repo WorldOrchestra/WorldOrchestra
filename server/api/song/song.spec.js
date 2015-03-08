@@ -3,7 +3,7 @@
 var should = require('should');
 var app = require('../../app');
 var request = require('supertest');
-var Plan = require('./plan.model');
+var Song = require('./song.model');
 var User = require('../user/user.model');
 var util = require("util");
 
@@ -14,46 +14,37 @@ var user = new User({
   password: 'password'
 });
 
-var plan = new Plan({
-  title: 'Learn Angular',
-  synopsis: 'These are bookmarks to learn angular',
-  links: [{
-    url: 'https://thinkster.io/angulartutorial/a-better-way-to-learn-angularjs/',
-    description: "A better way to learn angular"
-  }, {
-    url: 'http://www.engrish.com',
-    description: 'Brogs of many fravor'
-  },
-  ],
+var song = new Song({
+  title: 'Play Music',
   user: user._id
 });
 
-describe('Plan Model', function() {
+describe('Song Model', function() {
 
   before(function(done) {
-    // Clear plans before testing
-    Plan.remove().exec().then(function() {
+    // Clear songs before testing
+    Song.remove().exec().then(function() {
       done();
     });
   });
 
   afterEach(function(done) {
-    Plan.remove().exec().then(function() {
+    Song.remove().exec().then(function() {
       done();
     });
   });
 
-  describe('GET /api/plan', function() {
-    it('should begin with no plans', function(done) {
-      Plan.find({}, function(err, plans) {
-        plans.should.have.length(0);
+  describe('GET /api/songs', function() {
+    it('should begin with no songs', function(done) {
+      Song.find({}, function(err, songs) {
+        songs.should.have.length(0);
         done();
       });
     });
 
     it('should respond with JSON array', function(done) {
       request(app)
-        .get('/api/plans')
+        .get('/api/songs')
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
@@ -66,12 +57,12 @@ describe('Plan Model', function() {
 
   });
 
-  describe("POST /api/plans", function() {
+  describe("POST /api/songs", function() {
 
-    it('should save a plan', function(done) {
+    it('should save a song', function(done) {
       request(app)
-      .post('/api/plans')
-      .send(plan)
+      .post('/api/songs')
+      .send(song)
       .expect(201)
       .expect('Content-Type', /json/)
       .end(function(err, res) {
@@ -79,17 +70,17 @@ describe('Plan Model', function() {
           console.log(err);
           return done(err);
         }
-        res.body.title.should.equal(plan.title);
+        res.body.title.should.equal(song.title);
         done();
       });
     });
 
-    it('should fail when saving a duplicate plan', function(done) {
-      plan.save(function() {
-        var planDup = new Plan(plan);
-        planDup.save(function(err) {
-          Plan.find({}, function(err, plans){
-            plans.should.have.length(1);
+    it('should fail when saving a duplicate song', function(done) {
+      song.save(function() {
+        var songDup = new Song(song);
+        songDup.save(function(err) {
+          Song.find({}, function(err, songs){
+            songs.should.have.length(1);
           });  
           should.exist(err);
           done();

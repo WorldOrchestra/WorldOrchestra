@@ -24,7 +24,7 @@ exports.index = function(req, res) {
 
 // Get a single track
 exports.show = function(req, res) {
-  console.log('show track req.params.id ', req.params.id);
+  // console.log('show track req.params.id ', req.params.id);
   Track.findById(req.params.id, function (err, track) {
     if(err) {
       return handleError(res, err);
@@ -38,9 +38,9 @@ exports.show = function(req, res) {
 
 // Creates a new track in the DB.
 exports.create = function(req, res) {
-  console.log('create track req.body ', req.body);
+  // console.log('create track req.body ', req.body);
   req.body.user_id = req.session.user._id;
-  console.log('req.body = ', req.body);
+  // console.log('req.body = ', req.body);
   Track.create(req.body, function(err, track) {
     if(err) {
       return handleError(res, err);
@@ -54,7 +54,7 @@ exports.update = function(req, res) {
   if(req.body._id) {
     delete req.body._id;
   }
-  console.log('update track req.params ', req.params);
+  // console.log('update track req.params ', req.params);
   Track.findById(req.params.id, function (err, track) {
     if (err) {
       return handleError(res, err);
@@ -64,10 +64,10 @@ exports.update = function(req, res) {
     }
 
     var updated = _.merge(track, req.body);
-    console.log(req.body);
-    // Needed because merge does not affect the links array.
-    if (req.body.links) {
-      updated.links = req.body.links;
+    // console.log(req.body);
+    // Needed because merge does not affect the tracks array.
+    if (req.body.tracks) {
+      updated.tracks = req.body.tracks;
     }
 
     updated.save(function (err) {
