@@ -35,19 +35,11 @@ WO.Track = Backbone.Model.extend({
   changeInstrument: function(instrumentName) {
     var instType = {'Acoustic Piano': 'MIDI', 'Audio File': 'Audio', 'Microphone': 'Microphone', 'Synth': 'MIDI'};
     var previousInstrumentType = this.get('type');
-    }
-  },
 
     WO.appView.unbindKeys();
-  //             console.log("===== FETCH FIRED LOADING SERVER STORAGE ====");
-  //             debugger;
-  //         },
 
     this.set('type', instType[instrumentName]);
-  //             console.log("===== CHANGE FIRED SAVING SERVER STORAGE ====");
-  //           debugger;
     this.set('title', instrumentName);
-  //         },
 
     if (this.get('type') === 'MIDI') {
       this.set('instrument', WO.InstrumentFactory(instrumentName, this));
