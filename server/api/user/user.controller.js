@@ -64,7 +64,7 @@ exports.logout = function(req, res) {
 
 // Get a single user
 exports.show = function(req, res) {
-  console.log(req.params);
+  // console.log(req.params);
   User.findById(req.params.id, function (err, user) {
     if(err) {
       return handleError(res, err);
@@ -81,7 +81,7 @@ exports.create = function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
   var email = req.body.email;
-  console.log(req.body);
+  // console.log(req.body);
   User.findOne({ username: username })
     .exec(function(err, user) {
       if (err) {
@@ -122,7 +122,7 @@ exports.update = function(req, res) {
     }
 
     var updated = _.merge(user, req.body);
-    console.log(req.body);
+    // console.log(req.body);
     // Needed because merge does not affect the links array.
     if (req.body.links) {
       updated.links = req.body.links;
