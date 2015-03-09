@@ -17,9 +17,23 @@ WO.TrackView = Backbone.View.extend({
           '<label for="instrument">Select instrument </label>' +
           '<select name="instrument-selector" class="instrument-selector">' +
             '<option selected="selected" value="Acoustic Piano">Acoustic Piano</option>'+
-            '<option value="Synth">Synth</option>'+
-            '<option value="Drums">Drums</option>' +
+            '<option value="Acoustic Guitar Steel">Acoustic Guitar Steel</option>' +
             '<option value="Audio File">Audio File</option>' +
+            '<option value="Alto Sax">Alto Sax</option>' +
+            '<option value="Church Organ">Church Organ</option>' +
+            '<option value="Distortion Guitar">Distortion Guitar</option>' +
+            '<option value="Electric Piano 1">Electric Piano 1</option>'+
+            '<option value="Flute">Flute</option>'+
+            '<option value="Muted Trumpet">Muted Trumpet</option>'+
+            '<option value="Oboe">Oboe</option>'+
+            '<option value="Overdriven Guitar">Overdriven Guitar</option>'+
+            '<option value="Pad 3 Polysynth">Pad 3 Polysynth</option>'+
+            '<option value="Synth">Synth</option>'+
+            '<option value="Synth Bass 1">Synth Bass 1</option>' +
+            '<option value="Synth Strings 2">Synth Strings 2</option>' +
+            '<option value="Viola">Viola</option>'+
+            '<option value="Violin">Violin</option>'+
+            '<option value="Xylophone">Xylophone</option>'+
           '</select>' +
         '</form><br>' +
         '<button class="solo-track-button" id="solo">S</button>' +
