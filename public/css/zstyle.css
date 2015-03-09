@@ -439,3 +439,10 @@ ul#piano li a:active,ul#piano li div.anchor:active {
   background: url('../img/paper_fibers.png');
 }
 
+.signup-error-div p {
+  color: #FF643C;
+}
+
+.login-error-div p {
+  color: #FF643C;
+}
