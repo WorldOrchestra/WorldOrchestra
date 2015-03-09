@@ -21,8 +21,25 @@ WO.Song = Backbone.Collection.extend({
   },
 
   save: function(){
-    var promptName = prompt("Please name your song", "songname");
+
+    var exit = false;
+
+    $.when(this.userAuthenticated()).done(function(){
+      if(window.localStorage.WO_isLoggedIn !== "true"){
+        alert('You must be logged in!');
+        exit = true;
+      }
+    });
+
+    if(exit){
+      return;
+    }
+
+    var promptName = prompt("Please name your song", WO.appView.songView.collection.settings.title);
     this.settings.title = promptName || "untitled song";
+
+    //update song title in ui
+    $('.song-title').text(WO.appView.songView.collection.settings.title);
 
     var ajax_tempo = this.settings.tempo,
     ajax_title = this.settings.title,
@@ -33,13 +50,14 @@ WO.Song = Backbone.Collection.extend({
     
     var numberOfModels = this.models.length;
 
-    this.models.forEach(function(track){
-      $.when(track.saveTrack()).done(function(trackId){
+    // this.models.forEach(function(track){
+    for(var i=this.models.length-1; i>= 0; i--){
+      $.when(this.at(i).saveTrack()).done(function(trackId){
         // console.log('trackId return = ', trackId._id)
         // console.log('saved track');
         ajax_tracks.push(trackId._id);
       });
-    });
+    };
     
     var ajax_method = this.settings._id ? "PUT" : "POST";
     var ajax_path = (ajax_method === "POST") ? "api/songs" : ("api/songs/" + this.settings._id);
@@ -61,7 +79,7 @@ WO.Song = Backbone.Collection.extend({
               tracks: ajax_tracks
         },
         success: function(data) {
-          // console.log(data);
+          // console.log(data);          
           console.log("Successfully saved song model!");
           that.settings._id = data._id;
         },
@@ -136,6 +154,26 @@ WO.Song = Backbone.Collection.extend({
     //set first track to activeTrack
     var firstTrack = 'track-container, .' + WO.appView.songView.collection.at(0).cid; 
     $(firstTrack).click();
-  }
+    //update song title in ui
+    $('.song-title').text(WO.appView.songView.collection.settings.title);
+  },
 
+  userAuthenticated: function(){
+    var result = {};
+    $.ajax({
+      type: 'GET',
+      url: window.location+ "secret",
+      success: function(data) {
+        result = data;
+        if(result.hasOwnProperty('message')){
+          window.localStorage.WO_isLoggedIn = true;
+        }else{
+          delete window.localStorage.WO_isLoggedIn;
+        }
+      },
+      error: function(err){
+        console.log(err);
+      }
+    });
+  }
 });
