@@ -1,6 +1,7 @@
 html {
   background-color: rgba(44,62,80,1);
   position: relative;
+  min-height: 1000px;
 }
 html:after {
   content: "";
@@ -439,6 +440,7 @@ ul#piano li a:active,ul#piano li div.anchor:active {
   background: url('../img/paper_fibers.png');
 }
 
+
 .signup-error-div p {
   color: #FF643C;
 }
@@ -446,3 +448,18 @@ ul#piano li a:active,ul#piano li div.anchor:active {
 .login-error-div p {
   color: #FF643C;
 }
+
+/* Help modals*/
+
+.bbm-modal__section img {
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #aaa;
+}
+
+#help-pg1 {
+  float: left;
+  margin-right: 10px;
+}
+
+
