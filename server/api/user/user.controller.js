@@ -34,16 +34,17 @@ exports.login = function(req, res) {
         res.send(401, err);
       }
       if (!user) {
-        console.log("User does not exist");
-        res.redirect('/');
+        console.log("user does not exist");
+        res.json({error: "user does not exist"});
       } else {
         user.comparePassword(password, function(match) {
           if (match) {
             util.createSession(req, res, user);
             console.log("successfully logged in");
+            // res.json({user_id: user._id});
           } else {
             console.log("incorrect password");
-            res.redirect('/');
+            res.json({error: "incorrect password"});
           }
         })
       }
@@ -104,7 +105,7 @@ exports.create = function(req, res) {
         // res.json({user_id: newUser._id});
       } else {
         console.log('Account already exists');
-        res.redirect('/');
+        res.json({error: "Account already exists"})
       }
     })
 };
