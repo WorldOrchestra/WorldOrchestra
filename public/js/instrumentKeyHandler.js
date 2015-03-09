@@ -8,7 +8,7 @@ WO.instrumentKeyHandler = {
       var note = getKey(e);
 
       if( e.which === 88 || e.which === 90 ){
-        setOctave(e.which);
+        setOctave(e.which, this);
         this.keyDown[e.which] = true;
       }
 
@@ -81,11 +81,11 @@ WO.instrumentKeyHandler = {
         return note;
     };
 
-    var setOctave = function( key ){
+    var setOctave = function( key, context ){
       var octave = instrument.octave;
-      if( this.keyDown[key] === null || this.keyDown[key] === undefined){
+      if( context.keyDown[key] === null || context.keyDown[key] === undefined){
         if( key === 90 ){
-          octave || octave--;
+          octave <=0 || octave--;
         } else {
           octave >=7 || octave++;
         }
