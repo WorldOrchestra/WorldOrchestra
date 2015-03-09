@@ -73,5 +73,7 @@ WO.WOView = Backbone.View.extend({
   unbindKeys: function() {
     $(document).unbind('keydown');
     $(document).unbind('keyup');
+    $('#Container').off('mousedown');
+    $('#Container').off('mouseup');
   }
 });
