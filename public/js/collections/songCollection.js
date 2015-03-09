@@ -80,7 +80,8 @@ WO.Song = Backbone.Collection.extend({
         },
         success: function(data) {
           // console.log(data);          
-          console.log("Successfully saved song model!");
+          // console.log("Successfully saved song model!");
+          alert("Successfully saved song!");
           that.settings._id = data._id;
         },
         error: function(data){
