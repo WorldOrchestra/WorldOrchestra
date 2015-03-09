@@ -116,6 +116,8 @@ module.exports = function (grunt) {
             '.tmp/styles/{,*/}*.css',
             '<%= world.app %>/bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css',
             '<%= world.app %>/bower_components/jquery-ui/themes/smoothness/theme.css',
+            '<%= world.app %>/bower_components/backbone-modal/backbone.modal.css',
+            '<%= world.app %>/bower_components/backbone-modal/backbone.modal.theme.css',
             '<%= world.app %>/css/{,*/}*.css'
           ]
         }

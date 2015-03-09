@@ -9,7 +9,8 @@ WO.TransportView = Backbone.View.extend({
     'click #play': 'triggerPlay',
     'click #stop': 'triggerStop',
     'click #rewind, #skipBack, #skipForward, #forward': 'moveTransport',
-    'click #record': 'triggerRecord'
+    'click #record': 'triggerRecord',
+    'click #save-song': 'saveSong'
   },
 
   template: _.template(
@@ -17,7 +18,6 @@ WO.TransportView = Backbone.View.extend({
       '<div class="transportEl"><span>Transport Time </span><span id="transportTime"><span class="tBar">0</span>:<span class="tBeats">0</span>:<span class="tSixt">0</span></span></div>' +
       '<div class="transportControls">' +
         '<button id="metronome"><i class="fa fa-heartbeat"></i></button>' +
-        // '<button id="metronome"></button>' +
         '<button id="rewind"><i class="fa fa-fast-backward"></i></button>' +
         '<button id="skipBack"><i class="fa fa-backward"></i></button>' +
         '<button id="stop"><i class="fa fa-stop"></i></button>' +
@@ -29,6 +29,7 @@ WO.TransportView = Backbone.View.extend({
     '</div>' +
     '<div class="exportContainer">' +
       '<button id="export">Export Song <i class="fa fa-eject"></i></button>' +
+      '<button id="save-song">Save Song <i class="fa fa-floppy-o"></i></button>' +
     '</div>'
   ),
 
@@ -126,6 +127,10 @@ WO.TransportView = Backbone.View.extend({
       if(songName !== "null.wav"){
         WO.audioIO.exportSongWav(songName);
       }
+  },
+
+  saveSong: function(){
+    WO.appView.songView.collection.save();
   },
 
   triggerCheckTime: function(){
