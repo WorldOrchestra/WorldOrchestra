@@ -24,6 +24,12 @@ WO.WOView = Backbone.View.extend({
       if(window.localStorage.WO_isLoggedIn !== "true"){
         $('.open-landing').click();
       }
+
+      $(document).bind("drop dragover", function(e){
+          if($(e.target).hasClass("drop") !== true){
+              e.preventDefault();
+          }
+      });
     })
   },
 
