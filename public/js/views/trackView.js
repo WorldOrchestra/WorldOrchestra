@@ -62,23 +62,34 @@ WO.TrackView = Backbone.View.extend({
   },
 
   setTrackVolume: function(){
-    var volume = this.$el.find('.track-volume-slider').val();
-    this.model.set('volume', volume);
-    this.model.get('instrument').setVolume(volume*20);
+    var volumeSlider = this.$el.find('.track-volume-slider').val();
+    this.model.set('volume', volumeSlider);
+    this.model.get('instrument').setVolume( 20 * Math.log10(volumeSlider) );
   },
 
   muteTrack: function(){
-    var volume;
+    var volumeSlider = this.$el.find('.track-volume-slider').val();
+    var volume, dbVolume;
     if( this.model.get('isMuted') ){
-      volume = 0;
+      if(this.model.get('instrument').title === "Synth"){
+        volume = -30;
+      }else{
+        volume = 20 * Math.log10(volumeSlider);
+      }
+      databaseVolume = volumeSlider;
       this.model.set('isMuted', false);
     }else{
-      volume = -50;
+      volume = 20 * Math.log10(0);
+      databaseVolume = 0;
       this.model.set('isMuted', true);
     }
     this.$el.find('.mute-track-button').toggleClass('muted');
-    this.model.set('volume', volume);
-    this.model.get('instrument').setVolume(volume);
+    if(this.model.get('type') === "Audio"){
+        this.model.get('instrument').toggleMute();
+      }else{
+        this.model.set('volume', databaseVolume);
+        this.model.get('instrument').setVolume(volume);
+      }
   },
 
   changeInstrumentTrigger : function(e){
