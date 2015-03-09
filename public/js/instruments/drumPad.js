@@ -12,7 +12,7 @@ WO.drumPad = new Tone.MultiSampler({
     // startCheckbox.enable();
 });
 
-WO.drumPad.setVolume(-15);
+WO.drumPad.setVolume(-20);
 WO.drumPad.toMaster();
 
 WO.playDrumPad = function(){

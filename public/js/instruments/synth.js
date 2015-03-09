@@ -32,7 +32,7 @@ WO.SynthFactory = function(){
     synth.set(synthOptions);
 
     synth.octave = 4;
-    synth.setVolume(-25);
+    synth.setVolume(-30);
     synth.title = "Synth";
     synth.toMaster();
     synth.title = "Synth";
