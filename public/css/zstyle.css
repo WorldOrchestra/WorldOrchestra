@@ -88,8 +88,19 @@ a {
 .exportContainer {
   display: inline-block;
   position: relative;
-  bottom: 35px;
+  bottom: 22px;
   margin-right: 10px;
+  width: 112px;
+}
+
+.exportContainer button {
+  display: block;
+  height: 21px;
+}
+
+#save-song{
+  width: 100%;
+  margin-top: 3px;
 }
 
 .transportEl, .Value {
@@ -155,6 +166,8 @@ a {
   padding-top: 3px;
 }
 
+
+
 /*------ Track view ------*/
 
 .track-container{
@@ -174,7 +187,7 @@ a {
   border: 1px solid grey;
   height: 82%;
   padding: 10px;
-  width: 22%;
+  width: 25%;
   float: left;
   border-radius: 4px;
 }
