@@ -41,7 +41,7 @@ WO.midi = {
             WO.methods.recordNotes(note, Tone.Transport.getTransportTime(), 0.00);
         }
       }
-    WO.midi.log.innerHTML += "\n";
+    // WO.midi.log.innerHTML += "\n";
     if (WO.midi.output)
       WO.midi.output.send( ev.data );
   },
