@@ -94,7 +94,7 @@ module.exports = function (grunt) {
           dest: '<%= world.dist %>',
           src: [
             '*.{ico,txt}',
-            'img/{,*/}*.{webp,gif}',
+            // 'img/{,*/}*.*',
             'styles/fonts/{,*/}*.*',
             'soundfont/**/*.*',
             'bower_components/recorderjs/recorderWorker.js'
@@ -105,6 +105,12 @@ module.exports = function (grunt) {
           cwd: '<%= world.app %>',
           dest: '<%= world.dist %>/styles/public',
           src: ['img/{,*/}*.png', 'bower_components/jquery-ui/themes/smoothness/images/*.{gif,png}']
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= world.app %>',
+          dest: '<%= world.dist %>',
+          src: ['img/{,*/}*.jpg']
         }]
       }
     },
