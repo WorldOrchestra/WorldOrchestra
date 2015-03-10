@@ -26,7 +26,7 @@ WO.LandingView = Backbone.View.extend({
         '<img src="../img/help/drumpad-icons.jpg" id="help-pg1">'+
         '<p>Here is our Drum Pad. Horizontally, each square represents one sixteenth note. Vertically, each square represents a different drum. From the bottom up we have: Kick, Tom3, Tom2, Tom1, Snare, Hi-Hat. The slider on the left side is just for looks ;)</p>'+
         '<p>When you click Play in the transport controls a drum beat will automatically play and loop every measure. A black square means the drum will play at that particular time in the loop.</p>'+
-        '<a href="" id>Click anywhere outside this box to exit anytime</a>'+
+        '<a href="">Click anywhere outside this box to exit anytime</a>'+
       '</div>'+
       '<div class="bbm-modal__bottombar">'+
         '<a href="" class="bbm-button previous inactive">Previous</a>'+
