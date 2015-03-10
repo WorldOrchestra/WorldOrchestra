@@ -1,7 +1,7 @@
 html {
   background-color: rgba(44,62,80,1);
   position: relative;
-  min-height: 1000px;
+  min-height: 1100px;
 }
 html:after {
   content: "";
@@ -18,7 +18,6 @@ html:after {
 }
 
 body {
-  /*background-color: #2C3E50;*/
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 50px;
@@ -28,7 +27,6 @@ body {
 body, .Value #Label, .Value #Value, button, .ui-widget, li a span, button.clear-drumPad-button {
   font: 14px "Julius Sans One";
 }
-
 
 button {
   font-size: 12px;
@@ -46,7 +44,6 @@ button {
   z-index: -100;
 }
 
-
 .appBody{
   margin-top: 64px;
   min-width: 1186px;
@@ -59,17 +56,6 @@ a {
 
 /*------ Transport view ------*/
 
-/*#keys {
-    margin: 0 auto;
-    padding-right: 69px;
-    width: 546px;
-}*/
-
-/*.octave {
-    margin-right: 5px;
-    width: 64px;
-}*/
-
 .controlsContainer{
   display: inline-block;
   margin-right: 10px;
@@ -79,10 +65,6 @@ a {
 
 .Value #Label, .Value #Value {
   font-size: 14px;
-}
-
-.transportEl, .transportControls, .Slider {
-  /*width: 209px;*/
 }
 
 .exportContainer {
@@ -142,24 +124,26 @@ a {
   height: 15px;
 }
 
-#metronome {
-/*  background-color: transparent;
-  background-image: url('../img/IconMetronome.png');
-  width: 48px;
-  height: 48px;*/
-}
-
 .metronomeOn {
   background-color: green;
 }
 
 .play {
   background-color: green;
+  padding-top: 0;
+}
+
+#record {
+  color: red;
 }
 
 .recordOn {
   background-color: red;
-  color : white;
+  padding-top: 0;
+}
+
+.recordOn .fa-play-circle{
+  color:white;
 }
 
 .fa {
@@ -249,26 +233,26 @@ svg {
 }
 
 .axis path{
-    fill: none;
-    stroke: none;
+  fill: none;
+  stroke: none;
 }
 .axis line{
-    fill: none;
-    stroke: black;
+  fill: none;
+  stroke: black;
 }
 
 .line{
-    fill: none;
-    stroke: black;
-    opacity: 0.2;
+  fill: none;
+  stroke: black;
+  opacity: 0.2;
 }
 
 .tick text{
-    font-size: 0px;
+  font-size: 0px;
 }
 
 .tick line{
-    opacity: 0.2;
+  opacity: 0.2;
 }
 
 wave {
@@ -279,6 +263,7 @@ wave {
   height: 100%;
   position: relative;
 }
+
 .drop:before {
   content: "Drop your audio file in here!";
   position: absolute;
@@ -290,7 +275,7 @@ wave {
 
 .wavesurfer-dragover {
   border: 2px solid red;
-    -webkit-animation:taufik 2s;
+  -webkit-animation:taufik 2s;
   -moz-animation:taufik 2s;
   animation:taufik 2s;
 }
@@ -323,7 +308,7 @@ button.octave {
 
 ul#piano {
   display:block;
-  /*width:100%; */
+
   height:240px;
   border-top:2px solid #222;
 }
@@ -385,7 +370,7 @@ ul#piano li a:active,ul#piano li div.anchor:active {
   top:0px;
 }
 
-/* Black Tuts */
+/* Black Keys */
 #piano li span {
   position:absolute;
   top:0px;
@@ -440,9 +425,9 @@ ul#piano li a:active,ul#piano li div.anchor:active {
 
 .enable-midi-button{
   float:right;
-    display:block;
-    margin-right:0px;
-    clear:left;
+  display:block;
+  margin-right:0px;
+  clear:left;
 }
 
 .ui-tabs-anchor:focus{

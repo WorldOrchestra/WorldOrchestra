@@ -22,7 +22,7 @@ WO.TransportView = Backbone.View.extend({
         '<button id="skipBack"><i class="fa fa-backward"></i></button>' +
         '<button id="stop"><i class="fa fa-stop"></i></button>' +
         '<button id="play"><i class="fa fa-play"></i></button>' +
-        '<button id="record"><i class="fa fa-play-circle" style="color:red"></i></button>' +
+        '<button id="record"><i class="fa fa-play-circle"></i></button>' +
         '<button id="skipForward"><i class="fa fa-forward"></i></button>' +
         '<button id="forward"><i class="fa fa-fast-forward"></i></button>' +
       '</div>' +
