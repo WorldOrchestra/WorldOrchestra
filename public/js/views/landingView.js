@@ -26,8 +26,7 @@ WO.LandingView = Backbone.View.extend({
         '<img src="../img/help/drumpad-icons.jpg" id="help-pg1">'+
         '<p>Here is our Drum Pad. Horizontally, each square represents one sixteenth note. Vertically, each square represents a different drum. From the bottom up we have: Kick, Tom3, Tom2, Tom1, Snare, Hi-Hat. The slider on the left side is just for looks ;)</p>'+
         '<p>When you click Play in the transport controls a drum beat will automatically play and loop every measure. A black square means the drum will play at that particular time in the loop.</p>'+
-
-        '<a href="" id="step4">Directly go to the last step</a>'+
+        '<a href="">Click anywhere outside this box to exit anytime</a>'+
       '</div>'+
       '<div class="bbm-modal__bottombar">'+
         '<a href="" class="bbm-button previous inactive">Previous</a>'+
@@ -181,8 +180,22 @@ WO.LandingView = Backbone.View.extend({
         '<h3 class="bbm-modal__title">Export Song</h3>'+
       '</div>'+
       '<div class="bbm-modal__section">'+
-        '<p> When you’re ready to save your song to your computer, click on the Export Song button. Choose a name for your song and click OK.</p>'+
+        '<p> When you’re ready to export your song as a .wav file, export your song to your computer, click on the Export Song button. Choose a name for your song and click OK.</p>'+
         '<img src="../img/help/export.jpg" id="help-pg12">'+
+      '</div>'+
+      '<div class="bbm-modal__bottombar">'+
+        '<a href="" class="bbm-button previous">Previous</a>'+
+        '<a href="" class="bbm-button next">Next</a>'+
+      '</div>'+
+    '</script>'+
+    '<!-- Step 13 -->'+
+    '<script type="text/template" id="modal-view13-template">'+
+      '<div class="bbm-modal__topbar">'+
+        '<h3 class="bbm-modal__title">Save your song</h3>'+
+      '</div>'+
+      '<div class="bbm-modal__section">'+
+        '<p> When you’re ready to save your song and share it with people, click on the Save Song button. Choose a name for your song and click OK.</p>'+
+        '<img src="../img/help/save-song.jpg" id="help-pg13">'+
       '</div>'+
       '<div class="bbm-modal__bottombar">'+
         '<a href="" class="bbm-button previous">Previous</a>'+
@@ -254,8 +267,8 @@ WO.LandingView = Backbone.View.extend({
         'click #step12': {
           view: _.template($('#modal-view12-template').html())
         },
-        'click #step8': {
-          view: _.template($('#modal-view8-template').html())
+        'click #step13': {
+          view: _.template($('#modal-view13-template').html())
         }
       }
     });
