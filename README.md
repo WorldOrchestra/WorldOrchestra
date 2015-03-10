@@ -68,5 +68,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## Resources
 
+[Tone.js](https://github.com/TONEnoTONE/Tone.js/)<br/> 
+[midi-js-soundfonts](https://github.com/gleitz/midi-js-soundfonts)<br/> 
+[Recorderjs](https://github.com/mattdiamond/Recorderjs)<br>
+[wavesurfer.js](https://github.com/katspaugh/wavesurfer.js)<br>
+[backbone.modal](https://github.com/awkward/backbone.modal)<br>
+
 http://blog.dirk-eisenberg.de/2014/12/21/deploy-angularjs-apps-to-azure-websites-with-codeship/
 http://bl.ocks.org/hunzy/11110940
