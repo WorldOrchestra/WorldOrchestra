@@ -4,7 +4,6 @@
   left: 0;
   width: 100%;
 }
-
 #navbar ul,
 #navbar li,
 #navbar span,
@@ -41,10 +40,9 @@
   background: -o-linear-gradient(top, #d9d9d9 0%, #bfbfbf 100%);
   background: -ms-linear-gradient(top, #d9d9d9 0%, #bfbfbf 100%);
   background: linear-gradient(to bottom, #d9d9d9 0%, #bfbfbf 100%);
-  box-shadow: inset 0 0 10px #979797, inset 0 10px 10px #979797;
   -moz-box-shadow: inset 0 0 10px #979797, inset 0 10px 10px #979797;
   -webkit-box-shadow: inset 0 0 10px #979797, inset 0 10px 10px #979797;
-  filter: none;
+  box-shadow: inset 0 0 10px #979797, inset 0 10px 10px #979797;
 }
 #navbar > ul > li.active a:hover {
   background: -moz-linear-gradient(top, #d9d9d9 0%, #bfbfbf 100%);
@@ -55,9 +53,9 @@
   background: linear-gradient(to bottom, #d9d9d9 0%, #bfbfbf 100%);
 }
 #navbar > ul > li a {
-  box-shadow: inset 0 0 0 1px #ffffff;
   -moz-box-shadow: inset 0 0 0 1px #ffffff;
   -webkit-box-shadow: inset 0 0 0 1px #ffffff;
+  box-shadow: inset 0 0 0 1px #ffffff;
   background: #bfbfbf url(grad_light.png) repeat-x left top;
   background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 50%, #d7d7d7 51%, #ededed 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(50%, #e5e5e5), color-stop(51%, #d7d7d7), color-stop(100%, #ededed));
@@ -73,13 +71,13 @@
   filter: none;
 }
 #navbar > ul > li a:hover {
-  background: #ffffff url(grad_light.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #d9d9d9 0%, #bfbfbf 50%, #b0b0b0 51%, #c7c7c7 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #d9d9d9), color-stop(50%, #bfbfbf), color-stop(51%, #b0b0b0), color-stop(100%, #c7c7c7));
   background: -webkit-linear-gradient(top, #d9d9d9 0%, #bfbfbf 50%, #b0b0b0 51%, #c7c7c7 100%);
   background: -o-linear-gradient(top, #d9d9d9 0%, #bfbfbf 50%, #b0b0b0 51%, #c7c7c7 100%);
   background: -ms-linear-gradient(top, #d9d9d9 0%, #bfbfbf 50%, #b0b0b0 51%, #c7c7c7 100%);
   background: linear-gradient(to bottom, #d9d9d9 0%, #bfbfbf 50%, #b0b0b0 51%, #c7c7c7 100%);
+  background: #ffffff url(grad_light.png) repeat-x left bottom;
 }
 #navbar > ul > li:first-child a {
   border-radius: 5px 0 0 5px;
@@ -88,9 +86,9 @@
   border-left: 1px solid #d2d2d2;
 }
 #navbar > ul > li:last-child a {
-  border-radius: 0 5px 5px 0;
   -moz-border-radius: 0 5px 5px 0;
   -webkit-border-radius: 0 5px 5px 0;
+  border-radius: 0 5px 5px 0;
   float: right;
 }
 #navbar .has-sub:hover ul {
@@ -103,7 +101,7 @@
   left: -1px;
   min-width: 100%;
   text-align: center;
-  *width: 100%;
+  width: 100%;
 }
 #navbar .has-sub ul li {
   text-align: center;
@@ -117,11 +115,10 @@
   padding: 9px 5px;
   text-align: center;
 }
-
 #navbar {
-    box-shadow: inset 0 0 0 1px #ffffff;
     -moz-box-shadow: inset 0 0 0 1px #ffffff;
     -webkit-box-shadow: inset 0 0 0 1px #ffffff;
+    box-shadow: inset 0 0 0 1px #ffffff;
     background: #bfbfbf url(grad_light.png) repeat-x left top;
     background: -moz-linear-gradient(top, #ffffff 0%, #e5e5e5 50%, #d7d7d7 51%, #ededed 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(50%, #e5e5e5), color-stop(51%, #d7d7d7), color-stop(100%, #ededed));
@@ -134,5 +131,5 @@
     border-right: 1px solid #d2d2d2;
     border-left: 1px solid #d2d2d2;
     line-height: 34px;
-  }
+
 }
