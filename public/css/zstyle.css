@@ -30,6 +30,7 @@ body, .Value #Label, .Value #Value, button, .ui-widget, li a span, button.clear-
 
 button {
   font-size: 12px;
+  margin: 0;
 }
 
 .filterLayerz {
