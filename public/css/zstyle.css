@@ -30,6 +30,7 @@ body, .Value #Label, .Value #Value, button, .ui-widget, li a span, button.clear-
 
 button {
   font-size: 12px;
+  margin: 0;
 }
 
 .filterLayerz {
@@ -97,7 +98,7 @@ a {
   margin-top: 3px;
 }
 
-.transportView{
+.transportView {
   margin: auto;
   position: relative;
   width: 570px;
@@ -155,7 +156,7 @@ a {
 /*------ Track view ------*/
 
 .track-container{
-  background: linear-gradient(to bottom, #d9d9d9 0%, #bfbfbf 100%);;
+  background: linear-gradient(to bottom, #d9d9d9 0%, #bfbfbf 100%);
   border: 1px solid grey;
   border-radius: 4px;
   height: 140px;
